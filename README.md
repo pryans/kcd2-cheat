@@ -1,16 +1,9 @@
---[[
-    Opening paks in mods/Cheat2/data/*.pak
-    Loading lua init script for mod cheat2 ...
-    Loading and executing script file 'scripts/mods/cheat2.lua'...
+## KCD2 Cheat Mod
+https://www.nexusmods.com/kingdomcomedeliverance2/mods/114
 
-    Script.DumpLoadedScripts()
-    Script.LoadScript("scripts/Cheat2.lua")
-    Script.ReloadScript("scripts/systems/cheat.lua")
-    System.LogAlways(cheat.versionMajor)
-    for _, item in ipairs(System.ScanDirectory('scripts/', SCANDIR_ALL)) do System.LogAlways(item) end
-
-    for k,v in pairs(System) do System.LogAlways(k) end
-
-    function cheat.test()
-    System.LogAlways("test")
-]]
+Build Process
+- Edit `release.ps1`
+    - Set version number `$MOD_VERSION`
+    - Set mod directory `$KCD_MODS_DIR`
+- Run powershell script `.\release.ps1` to build and auto install the mod.
+- Mod zip will be in `build/mods/` folder for upload.
