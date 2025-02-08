@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="barbora" xsi:noNamespaceSchemaLocation="../database.xsd">
+	<buffs version="1">
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="a218b534-b2a5-11ed-afa1-0242ac120002" buff_lifetime_id="0" buff_name="cheat_invisibility" buff_params="con=-100,evi=-100,lpv=-100,nbi=-10,noi=-100,ors=-10" duration="-1" icon_id="0" implementation="Cpp:Constant" is_persistent="true" />
+	</buffs>
+</database>

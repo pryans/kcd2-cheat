@@ -1,0 +1,20 @@
+
+
+Run the game with -devmode
+
+
+
+cheat_save
+
+cheat_find_buffs
+
+cheat_add_buff
+cheat_add_potion_buff
+cheat_add_buff_heal
+cheat_add_buff_immortal
+cheat_add_buff_invisible
+
+cheat_remove_buff
+cheat_remove_all_buffs
+cheat_remove_buff_immortal
+cheat_remove_buff_invisible
