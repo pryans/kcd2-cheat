@@ -1,6 +1,6 @@
 ---@meta kcd2def
 
---- definition file containing LuaCATS annotations for the lua state after all typical packages of Kingdom Come Deliverance II have loaded
+--- definition file containing LuaCATS annotations for the lua state (except builtins) after all typical packages of Kingdom Come Deliverance II have loaded
 --- if a parameter is annotated starting with 'unk_', the purpose or type of that parameter is merely being guessed
 
 
@@ -21,7 +21,7 @@
 ---@class kcd2def*Database.TableLine: table
 
 
---- Actual Classes (have a metatable)
+--- Actual Classes (structure of something with a metatable or is a global metatable)
 
 
 ---@class kcd2def*Actor
