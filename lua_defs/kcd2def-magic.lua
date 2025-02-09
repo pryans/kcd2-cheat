@@ -182,6 +182,16 @@ mat_water = {
 	}
 }
 
+twister = {
+	__presets__ = {
+		['recognition:instant'] = {
+			RecognitionTimeKNegativeCoef = 0;
+			RecognitionTimeKPositiveCoef = 0;
+			RecognitionTimePCoef = 0;
+		}
+	}
+}
+
 
 --- Constant Values (magic numbers, mainly dumped so might be unstable)
 
