@@ -2,6 +2,182 @@
 
 --- this file holds the numerous global values to avoid polluting the other files (there's so many...)
 
+
+--- Structured Values (unsure how to group these)
+
+g_HitTable = {}
+
+g_PhysicsCollisionClass = {
+	bT_collision_class_articulated = 8;
+	bT_collision_class_living = 4;
+	bT_collision_class_particle = 64;
+	bT_collision_class_soft = 16;
+	bT_collision_class_terrain = 1;
+	bT_collision_class_wheeled = 2;
+	bT_gcc_ai = 131072;
+	bT_gcc_animal = 8.38861e+06;
+	bT_gcc_decoy_projectile = 6.71089e+07;
+	bT_gcc_horse = 65536;
+	bT_gcc_horse_bridle = 1.67772e+07;
+	bT_gcc_ignore_z_correction = 8192;
+	bT_gcc_interactive = 262144;
+	bT_gcc_item = 1.34218e+08;
+	bT_gcc_ledge = 4.1943e+06;
+	bT_gcc_npc_ignored_type = 2.09715e+06;
+	bT_gcc_npc_reported_type = 524288;
+	bT_gcc_player_body = 2048;
+	bT_gcc_player_capsule = 1024;
+	bT_gcc_player_ghostable_type = 3.35544e+07;
+	bT_gcc_player_type = 1.04858e+06;
+	bT_gcc_ragdoll = 16384;
+	bT_gcc_rigid = 32768;
+	bT_gcc_vehicle = 4096;
+}
+
+g_SignalData = {
+	ObjectName = '';
+	fValue = 0;
+	iValue = 0;
+	iValue2 = 0;
+    ---@type kcd2def*Vector
+	point = {
+		x = 0;
+		y = 0;
+		z = 0;
+	};
+    ---@type kcd2def*Vector
+	point2 = {
+		x = 0;
+		y = 0;
+		z = 0;
+	};
+};
+
+---@type table<string,kcd2def*Vector>
+g_Vectors = {
+	down = {
+		x = 0;
+		y = 0;
+		z = -1;
+	};
+	temp = {
+		x = 0;
+		y = 0;
+		z = 0;
+	};
+	tempColor = {
+		x = 0;
+		y = 0;
+		z = 0;
+	};
+	temp_v1 = {
+		x = 0;
+		y = 0;
+		z = 0;
+	};
+	temp_v2 = {
+		x = 0;
+		y = 0;
+		z = 0;
+	};
+	temp_v3 = {
+		x = 0;
+		y = 0;
+		z = 0;
+	};
+	temp_v4 = {
+		x = 0;
+		y = 0;
+		z = 0;
+	};
+	temp_v5 = {
+		x = 0;
+		y = 0;
+		z = 0;
+	};
+	temp_v6 = {
+		x = 0;
+		y = 0;
+		z = 0;
+	};
+	up = {
+		x = 0;
+		y = 0;
+		z = 1;
+	};
+	v000 = {
+		x = 0;
+		y = 0;
+		z = 0;
+	};
+	v001 = {
+		x = 0;
+		y = 0;
+		z = 1;
+	};
+	v010 = {
+		x = 0;
+		y = 1;
+		z = 0;
+	};
+	v011 = {
+		x = 0;
+		y = 1;
+		z = 1;
+	};
+	v100 = {
+		x = 1;
+		y = 0;
+		z = 0;
+	};
+	v101 = {
+		x = 1;
+		y = 0;
+		z = 1;
+	};
+	v110 = {
+		x = 1;
+		y = 1;
+		z = 0;
+	};
+	v111 = {
+		x = 1;
+		y = 1;
+		z = 1;
+	};
+	vecMathTemp1 = {
+		x = 0;
+		y = 0;
+		z = 0;
+	};
+	vecMathTemp2 = {
+		x = 0;
+		y = 0;
+		z = 0;
+	};
+}
+
+mat_default = {
+	AI = {
+		crouchMult = 0.5;
+		fFootStepRadius = 15;
+		fImpactRadius = 5;
+		movingMult = 1;
+		proneMult = 0.2;
+	}
+}
+
+mat_water = {
+	AI = {
+		crouchMult = 0.5;
+		fFootStepRadius = 15;
+		fImpactRadius = 5;
+		movingMult = 1;
+		proneMult = 0.2;
+	}
+}
+
+
 --- Constant Values (magic numbers, mainly dumped so might be unstable)
 
 

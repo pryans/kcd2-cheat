@@ -61,6 +61,7 @@
 
 --- Global Annotations
 
+
 ---@type kcd2def*Actor-player
 player = ...
 
