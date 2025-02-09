@@ -4,6 +4,10 @@
 --- if a parameter is annotated starting with 'unk_', the purpose or type of that parameter is merely being guessed
 
 
+---@module "kcd2def-magic"
+---@module "kcd2def-enums"
+
+
 --- Common Structures (no metatable, but common fields)
 
 
