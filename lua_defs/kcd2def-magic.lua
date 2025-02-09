@@ -5,6 +5,11 @@
 
 --- Structured Values (unsure how to group these)
 
+__version = {
+	current = 0;
+	loaded = 0;
+}
+
 g_HitTable = {}
 
 g_PhysicsCollisionClass = {
@@ -999,20 +1004,24 @@ particle_no_roll = 4
 particle_no_spin = 16
 particle_single_contact = 1
 particle_traceable = 1024
-pef_always_notify_on_deletion = '1.04858e+06'
-pef_always_shoot_ray_down = '5.36871e+08'
-pef_cannot_squash_players = '2.68435e+08'
+pef_always_notify_on_deletion = 1.04858e+06
+pef_always_shoot_ray_down = 5.36871e+08
+pef_cannot_squash_players = 2.68435e+08
 pef_disabled = 32
 pef_fixed_damping = 262144
-pef_ignore_areas = '8.38861e+06'
+pef_ignore_areas = 8.38861e+06
 pef_monitor_state_changes = 4096
 pef_never_affect_triggers = 32768
 pef_never_break = 64
-pef_override_impulse_scale = '2.09715e+06'
+pef_override_impulse_scale = 2.09715e+06
 pef_pushable_by_players = 512
 pef_traceable = 1024
 perfume = 28
 photo_mode = 27
+ref_use_simple_solver = 1
+rope_collides = 2.09715e+06
+rope_subdivide_segs = 256
+rope_traceable = 1024
 sharpener = 4
 smell = 9
 speech = 17
