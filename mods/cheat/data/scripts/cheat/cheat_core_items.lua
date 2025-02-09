@@ -106,6 +106,9 @@ function Cheat:initItemDatabase()
     Cheat:xmlLoadDatabase("libs/tables/item/item__horse.xml", p_func)
     Cheat:xmlLoadDatabase("libs/tables/item/item__aux.xml", p_func)
     Cheat:xmlLoadDatabase("libs/tables/item/item__alchemy.xml", p_func)
+    Cheat:xmlLoadDatabase("libs/tables/item/item__autotests.xml", p_func)
+    Cheat:xmlLoadDatabase("libs/tables/item/item__test.xml", p_func)
+    Cheat:xmlLoadDatabase("libs/tables/item/item__unique.xml", p_func)
 
     if Cheat.g_item_database_errors == 0 then
         Cheat:logDebug("Done loading XML item databases.")
