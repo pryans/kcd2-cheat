@@ -3,7 +3,27 @@ $MOD_DESC = "KCD2 Cheat Mod https://www.nexusmods.com/kingdomcomedeliverance2/mo
 $MOD_AUTHOR = "Othiden"
 $MOD_VERSION = "2.5"
 $BUILD_DIR = "build"
-$KCD_MODS_DIR = "E:/Games/SteamLibrary/steamapps/common/KingdomComeDeliverance2/Mods"
+$PROPERTIES_FILE = "release.properties"
+$DEFAULT_KCD_MODS_DIR = "E:/Games/SteamLibrary/steamapps/common/KingdomComeDeliverance2/Mods"
+
+# Check if release.properties exists, create with default if not
+if (!(Test-Path -Path $PROPERTIES_FILE)) {
+  Write-Warning "Warning: '$PROPERTIES_FILE' not found. Creating it with default KCD_MODS_DIR."
+  New-Item -ItemType File -Path $PROPERTIES_FILE -Force | Out-Null
+  @"
+KCD_MODS_DIR=$DEFAULT_KCD_MODS_DIR
+"@ | Set-Content -Path $PROPERTIES_FILE -Encoding UTF8
+}
+
+# Read KCD_MODS_DIR from release.properties
+$Properties = Get-Content -Path $PROPERTIES_FILE | ConvertFrom-StringData
+if ($Properties.KCD_MODS_DIR) {
+  $KCD_MODS_DIR = $Properties.KCD_MODS_DIR
+}
+else {
+  Write-Warning "Warning: KCD_MODS_DIR property not found in '$PROPERTIES_FILE'. Using default."
+  $KCD_MODS_DIR = $DEFAULT_KCD_MODS_DIR
+}
 $KCD_MOD_DIR = "${KCD_MODS_DIR}/${MOD_NAME}"
 
 # remake build/
