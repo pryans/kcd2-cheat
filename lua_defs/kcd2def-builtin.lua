@@ -159,6 +159,7 @@ table = {
 	insert = table.insert;
 	maxn = table.maxn;
 	remove = table.remove;
+	---@type kcd2def*unknown_function
 	setn = ...;
 	sort = table.sort;
 }

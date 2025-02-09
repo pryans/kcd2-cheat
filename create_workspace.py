@@ -15,7 +15,8 @@ def create_workspace_data(source_path, source_is_library):
 	"settings": {
 		"powershell.cwd": "kcd2-cheat",
 		"Lua.diagnostics.libraryFiles": "Disable",
-		"Lua.runtime.plugin": ""
+		"Lua.runtime.plugin": "",
+                "Lua.runtime.version": "Lua 5.1"
 	}
     }
     if source_is_library:
