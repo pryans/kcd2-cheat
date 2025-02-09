@@ -35,11 +35,12 @@ function Cheat:findRows(database, searchKey, rowIdKey, rowNameKey)
             local foundRow = {}
             foundRow.id = tostring(row[rowIdKey])
             foundRow.name = tostring(row[rowNameKey])
-            foundRow.data = {}
+            --foundRow.data = {}
 
             for k, v in pairs(row) do
                 if k and v and k ~= rowIdKey and k ~= rowNameKey and not Cheat:isBlank(v) then
-                    foundRow.data[k] = v
+                    --foundRow.data[k] = v
+                    foundRow[k] = v
                 end
             end
 
@@ -56,7 +57,7 @@ function Cheat:findRow(database, searchKey, rowIdKey, rowNameKey)
     local row = nil
     if rows and #rows > 0 then
         row = rows[#rows]
-        Cheat:logDebug("Found row [%s] with id [%s].", row[rowIdKey], row[rowNameKey])
+        Cheat:logDebug("Found row [%s] with id [%s].", row[rowNameKey], row[rowIdKey])
     end
     return row
 end
@@ -116,6 +117,9 @@ end
 function Cheat:xmlLoadDatabase(xmlFile, onTagFunction)
     -- function onTagFunction(str:tag, table:attributes)
     -- libs/tables/item/item.xml
+
+    Cheat:logDebug("Loading XML database file [%s]", xmlFile)
+
     if not xmlFile or not onTagFunction then
         return false
     end
@@ -279,6 +283,14 @@ function Cheat:min(x, y)
     end
 end
 
+function Cheat:max(x, y)
+    if x > y then
+        return x
+    else
+        return y
+    end
+end
+
 function Cheat:truncate(number)
     if number >= 0 then
         return math.floor(number)
@@ -288,6 +300,11 @@ function Cheat:truncate(number)
 end
 
 function Cheat:clamp(value, min, max)
+    -- can't clamp nil
+    if not value then
+        return nil
+    end
+
     if value < min then
         return min
     end
