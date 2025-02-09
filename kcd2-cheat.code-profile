@@ -1,0 +1,4 @@
+{
+    "name": "kcd2",
+    "extensions": "[{\"identifier\":{\"id\":\"ms-vscode.powershell\",\"uuid\":\"40d39ce9-c381-47a0-80c8-a6661f731eab\"},\"displayName\":\"PowerShell\",\"applicationScoped\":false},{\"identifier\":{\"id\":\"sumneko.lua\",\"uuid\":\"3a15b5a7-be12-47e3-8445-88ee3eabc8b2\"},\"displayName\":\"Lua\",\"applicationScoped\":false}]"
+}
