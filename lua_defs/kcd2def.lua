@@ -131,17 +131,17 @@
 ---@field private HideTutorial kcd2def*unknown_function
 ---@field private InventoryModeOnlyCodex kcd2def*unknown_function
 ---@field private IsDemo kcd2def*unknown_function
----@field private IsLoadingEngineSaveGame kcd2def*unknown_function
+---@field public IsLoadingEngineSaveGame fun(): boolean
 ---@field private IsPlayer kcd2def*unknown_function
 ---@field private KeybindsRebindInput kcd2def*unknown_function
 ---@field private LogGameEvent kcd2def*unknown_function
 ---@field private MovePrefab kcd2def*unknown_function
 ---@field private QuickLoad kcd2def*unknown_function
 ---@field private QuickSave kcd2def*unknown_function
----@field private RemoveSaveLock kcd2def*unknown_function
+---@field public RemoveSaveLock fun(lockName: string?): nil
 ---@field private ResetEntity kcd2def*unknown_function
 ---@field private ResetTutorial kcd2def*unknown_function
----@field private SaveGameViaResting kcd2def*unknown_function
+---@field public SaveGameViaResting fun(): nil
 ---@field private SendInfoText kcd2def*unknown_function
 ---@field private SetPrefabPhase kcd2def*unknown_function
 ---@field private SetPrefabPhaseById kcd2def*unknown_function
@@ -153,6 +153,20 @@
 ---@field private ShowTutorial kcd2def*unknown_function
 ---@field private SpawnPrefab kcd2def*unknown_function
 
+---@class kcd2def*RPG
+---@field private AddLocationPoint kcd2def*unknown_function
+---@field private AddStatXP kcd2def*unknown_function
+---@field private CaptionObjectUsed kcd2def*unknown_function
+---@field private GetFactionById kcd2def*unknown_function
+---@field private GetFactions kcd2def*unknown_function
+---@field private GetIndulgencePrice kcd2def*unknown_function
+---@field private GetLocationById kcd2def*unknown_function
+---@field private GetLocationByName kcd2def*unknown_function
+---@field private GetLocations kcd2def*unknown_function
+---@field private IsPublicEnemy kcd2def*unknown_function
+---@field private NotifyLevelXpGain kcd2def*unknown_function
+---@field private ReconcileWithPublicFriends kcd2def*unknown_function
+---@field private _GetConstant kcd2def*unknown_function
 
 
 --- Global Annotations
@@ -167,6 +181,9 @@ DatabaseUtils = ...
 
 ---@type kcd2def*Game
 Game = ...
+
+---@type kcd2def*RPG
+RPG = ...
 
 ---@deprecated
 ---@type kcd2def*unknown_function

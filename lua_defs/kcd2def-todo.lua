@@ -16692,21 +16692,6 @@ do local todo = { -- hide globals in case it is present in the workspace
             ['__validated'] = false;
         };
     };
-    RPG = {
-        ['AddLocationPoint'] = function (...) end;
-        ['AddStatXP'] = function (...) end;
-        ['CaptionObjectUsed'] = function (...) end;
-        ['GetFactionById'] = function (...) end;
-        ['GetFactions'] = function (...) end;
-        ['GetIndulgencePrice'] = function (...) end;
-        ['GetLocationById'] = function (...) end;
-        ['GetLocationByName'] = function (...) end;
-        ['GetLocations'] = function (...) end;
-        ['IsPublicEnemy'] = function (...) end;
-        ['NotifyLevelXpGain'] = function (...) end;
-        ['ReconcileWithPublicFriends'] = function (...) end;
-        ['_GetConstant'] = function (...) end;
-    };
     Rain = {
         ['Editor'] = {
             ['Icon'] = 'shake.bmp';
