@@ -9,7 +9,7 @@ Cheat.g_cheat_hover_timer_period_millis = 50
 function Cheat:onHover(nTimerId)
   if Cheat.g_cheat_hover_enabled then
     local pos = { x = 0, y = 0, z = 0 }
-    CopyVector(pos, player:GetWorldPos());
+    VectorUtils.Copy(pos, player:GetWorldPos());
     player:AwakePhysics(1);
     player:AddImpulse(-1, pos, g_Vectors.v001, player:GetPhysicalStats().mass * Cheat.g_cheat_hover_force);
     Cheat.g_cheat_hover_timer_id = Script.SetTimer(Cheat.g_cheat_hover_timer_period_millis,
@@ -47,8 +47,8 @@ function Cheat:onPush(nTimerId)
   if Cheat.g_cheat_push_enabled then
     local pos = { x = 0, y = 0, z = 0 }
     local dir = { x = 0, y = 0, z = 0 }
-    CopyVector(pos, player:GetWorldPos());
-    CopyVector(dir, player:GetWorldDir());
+    VectorUtils.Copy(pos, player:GetWorldPos());
+    VectorUtils.Copy(dir, player:GetWorldDir());
     player:AwakePhysics(1);
     player:AddImpulse(-1, pos, dir, player:GetPhysicalStats().mass * Cheat.g_cheat_push_force);
     Cheat.g_cheat_push_timer_id = Script.SetTimer(Cheat.g_cheat_push_timer_period_millis,
@@ -85,8 +85,8 @@ function Cheat:onSprint(nTimerId)
   if Cheat.g_cheat_sprint_enabled then
     local pos = { x = 0, y = 0, z = 0 }
     local dir = { x = 0, y = 0, z = 0 }
-    CopyVector(pos, player:GetWorldPos());
-    CopyVector(dir, player:GetWorldDir());
+    VectorUtils.Copy(pos, player:GetWorldPos());
+    VectorUtils.Copy(dir, player:GetWorldDir());
     player:AwakePhysics(1);
     -- push player down into the ground for friction
     -- if the player leaves the ground things get crazy
