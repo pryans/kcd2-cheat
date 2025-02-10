@@ -69,14 +69,6 @@
 --- Type Coercions (must use ---@type at consumer)
 
 
----@class kcd2def*Database.TableLine-quest: kcd2def*Database.TableLine
----@field public quest_id ...
----@field public quest_name string
-
----@class kcd2def*Database.TableLine-quest_objective: kcd2def*Database.TableLine
----@field public quest_id ...
----@field public objective_id ...
----@field public objective_name string
 
 
 --- Singleton Types (mainly for the fields of nested global tables)
@@ -124,6 +116,62 @@
 ---@nodiscard
 ---@field public RemapSingleColumn kcd2def*DatabaseUtils.RemapSingleColumn
 
+---@class kcd2def*BasicAIActions
+---@field private ActorCanTalk kcd2def*unknown_function
+---@field private AddLootAction kcd2def*unknown_function
+---@field private ForceUsable kcd2def*unknown_function
+---@field private GetActions kcd2def*unknown_function
+---@field private GetCanTalkHintType kcd2def*unknown_function
+---@field private GetChatActions kcd2def*unknown_function
+---@field private OnChat kcd2def*unknown_function
+---@field private OnChatOpen kcd2def*unknown_function
+---@field private OnChatRequestAccepted kcd2def*unknown_function
+---@field private OnChatWithFocus kcd2def*unknown_function
+---@field private OnFollow kcd2def*unknown_function
+---@field private OnGrabCorpse kcd2def*unknown_function
+---@field private OnHorsePullDown kcd2def*unknown_function
+---@field private OnKnockout kcd2def*unknown_function
+---@field private OnLoot kcd2def*unknown_function
+---@field private OnMercyKill kcd2def*unknown_function
+---@field private OnPickpocketing kcd2def*unknown_function
+---@field private OnStealthKill kcd2def*unknown_function
+---@field private OnTalk kcd2def*unknown_function
+
+---@class kcd2def*Calendar
+---@field private GetGameTime kcd2def*unknown_function
+---@field private GetWorldDay kcd2def*unknown_function
+---@field private GetWorldDayOfWeek kcd2def*unknown_function
+---@field private GetWorldHourOfDay kcd2def*unknown_function
+---@field private GetWorldTime kcd2def*unknown_function
+---@field private GetWorldTimeRatio kcd2def*unknown_function
+---@field private IsFakedTimeOfDay kcd2def*unknown_function
+---@field private IsNightTimeOfDay kcd2def*unknown_function
+---@field private IsWorldTimePaused kcd2def*unknown_function
+---@field private SetFakeTimeOfDay kcd2def*unknown_function
+---@field private SetWorldTime kcd2def*unknown_function
+---@field private SetWorldTimeRatio kcd2def*unknown_function
+---@field private UnfakeTimeOfDay kcd2def*unknown_function
+
+---@class kcd2def*EntityModule
+---@field private AnimCharCopyVisual kcd2def*unknown_function
+---@field private CanUseInventory kcd2def*unknown_function
+---@field private GetEntityScriptMisc kcd2def*unknown_function
+---@field private GetInventoryOwner kcd2def*unknown_function
+---@field private GetSlotItemClassId kcd2def*unknown_function
+---@field private IsInventoryReadOnly kcd2def*unknown_function
+---@field private MakeParticleEffectActive kcd2def*unknown_function
+---@field private MakeParticleEffectIdle kcd2def*unknown_function
+---@field private SequenceEntitiesCopyVisual kcd2def*unknown_function
+---@field private WillSleepingOnThisBedSave kcd2def*unknown_function
+
+---@class kcd2def*EnvironmentModule
+---@field private BlendTimeOfDay kcd2def*unknown_function
+---@field private CoverHole kcd2def*unknown_function
+---@field private ForceImmediateWeatherUpdate kcd2def*unknown_function
+---@field private GetRainIntensity kcd2def*unknown_function
+---@field private MakeHole kcd2def*unknown_function
+---@field private RebuildClouds kcd2def*unknown_function
+
 ---@class kcd2def*Game
 ---@field private AddSaveLock kcd2def*unknown_function
 ---@field private AllowTutorials kcd2def*unknown_function
@@ -159,6 +207,31 @@
 ---@field private ShowTutorial kcd2def*unknown_function
 ---@field private SpawnPrefab kcd2def*unknown_function
 
+---@class kcd2def*Horsetraders
+---@field private RemoveHaggleMetarole kcd2def*unknown_function
+---@field private SetupHaggle kcd2def*unknown_function
+
+---@class kcd2def*ItemManager
+---@field private AddOnEquipBuff kcd2def*unknown_function
+---@field private GetItem kcd2def*unknown_function
+---@field private GetItemName kcd2def*unknown_function
+---@field private GetItemOwner kcd2def*unknown_function
+---@field private GetItemUIName kcd2def*unknown_function
+---@field private IsItemOversized kcd2def*unknown_function
+---@field private RemoveItem kcd2def*unknown_function
+
+---@class kcd2def*Minigame
+---@field private CanStartReadingMinigame kcd2def*unknown_function
+---@field private CanUseMinigame kcd2def*unknown_function
+---@field private GetBookStudyProgress kcd2def*unknown_function
+---@field private StartDice kcd2def*unknown_function
+---@field private StartDiceByName kcd2def*unknown_function
+---@field private StartDiceWithScore kcd2def*unknown_function
+---@field private StartHerbGathering kcd2def*unknown_function
+---@field private StartHoleDigging kcd2def*unknown_function
+---@field private StartLockPicking kcd2def*unknown_function
+---@field private WasBookOpened kcd2def*unknown_function
+
 ---@class kcd2def*RPG
 ---@field private AddLocationPoint kcd2def*unknown_function
 ---@field private AddStatXP kcd2def*unknown_function
@@ -174,10 +247,57 @@
 ---@field private ReconcileWithPublicFriends kcd2def*unknown_function
 ---@field private _GetConstant kcd2def*unknown_function
 
+---@class kcd2def*XGenAIModule
+---@field private AddLink kcd2def*unknown_function
+---@field private AddRecordedIntellectForFaderProfiling kcd2def*unknown_function
+---@field private DespawnPerceptibleVolume kcd2def*unknown_function
+---@field private FindLinks kcd2def*unknown_function
+---@field private GetBrainVariable kcd2def*unknown_function
+---@field private GetEntityByWUID kcd2def*unknown_function
+---@field private GetEntityIdByWUID kcd2def*unknown_function
+---@field private GetMyWUID kcd2def*unknown_function
+---@field private GetOwner kcd2def*unknown_function
+---@field private GetWuidDebugString kcd2def*unknown_function
+---@field private HasClothingLink kcd2def*unknown_function
+---@field private IgnorePerception kcd2def*unknown_function
+---@field private IsOneshotAvailable kcd2def*unknown_function
+---@field private IsOneshotBlocked kcd2def*unknown_function
+---@field private IsPointInAreaWithLabel kcd2def*unknown_function
+---@field private IsPointInAreaWithLabelWUID kcd2def*unknown_function
+---@field private IsStanceAvailable kcd2def*unknown_function
+---@field private IsStanceBlocked kcd2def*unknown_function
+---@field private IsUnstanceAvailable kcd2def*unknown_function
+---@field private IsUnstanceBlocked kcd2def*unknown_function
+---@field private LootEnd kcd2def*unknown_function
+---@field private LootInventoryBegin kcd2def*unknown_function
+---@field private MakeTableFromType kcd2def*unknown_function
+---@field private OnDestroy kcd2def*unknown_function
+---@field private OnPropertyChange kcd2def*unknown_function
+---@field private OnSpawn kcd2def*unknown_function
+---@field private OnStart kcd2def*unknown_function
+---@field private PlaceToSlotFromInventory kcd2def*unknown_function
+---@field private ProduceSound kcd2def*unknown_function
+---@field private ProduceSoundWUID kcd2def*unknown_function
+---@field private SendMessageToEntity kcd2def*unknown_function
+---@field private SendMessageToEntityArray kcd2def*unknown_function
+---@field private SendMessageToEntityData kcd2def*unknown_function
+---@field private SetBrainVariable kcd2def*unknown_function
+---@field private SetPlayerDogMode kcd2def*unknown_function
+---@field private SpawnPerceptibleVolume kcd2def*unknown_function
+---@field private SpawnPerceptibleVolumeOnWUID kcd2def*unknown_function
+---@field private _GetDataVariable kcd2def*unknown_function
+---@field private _SetDataVariable kcd2def*unknown_function
+
+
 
 --- Global Annotations
 
 
+---@type kcd2def*BasicAIActions
+BasicAIActions = ...
+
+---@type kcd2def*Calendar
+Calendar = ...
 
 ---@type kcd2def*Database
 Database = ...
@@ -185,11 +305,258 @@ Database = ...
 ---@type kcd2def*DatabaseUtils
 DatabaseUtils = ...
 
+---@type kcd2def*EntityModule
+EntityModule = ...
+
+---@type kcd2def*EnvironmentModule
+EnvironmentModule = ...
+
 ---@type kcd2def*Game
 Game = ...
 
+---@type kcd2def*Horsetraders
+Horsetraders = ...
+
+---@type kcd2def*ItemManager
+ItemManager = ...
+
+---@type kcd2def*Minigame
+Minigame = ...
+
 ---@type kcd2def*RPG
 RPG = ...
+
+SocialClass = {
+	---@deprecated
+	---@type kcd2def*unknown_function
+	GetEntitySocialClassData = ...;
+	---@deprecated
+	---@type kcd2def*unknown_function
+	GetSocialClassData = ...;
+	data = {
+		apothecary = {
+			dirtMultiplier = 0;
+			persuadeToTalkWithLowReputationPriceMultiplier = 5;
+			wealthyCustomer = true;
+		};
+		armorer = {
+			crimePunishmentMultiplier = 1.5;
+			dirtMultiplier = 0.7;
+			persuadeToTalkWithLowReputationPriceMultiplier = 4;
+			wealthyCustomer = true;
+		};
+		bailiff = {
+			crimePunishmentMultiplier = 5;
+			dirtMultiplier = 0;
+			persuadeToTalkWithLowReputationPriceMultiplier = 5;
+			wealthyCustomer = true;
+		};
+		baker = {
+			dirtMultiplier = 0.3;
+			persuadeToTalkWithLowReputationPriceMultiplier = 2;
+		};
+		bandit = {
+			persuadeToTalkWithLowReputationPriceMultiplier = 2;
+		};
+		bartender = {
+			dirtMultiplier = 0.3;
+			persuadeToTalkWithLowReputationPriceMultiplier = 3;
+		};
+		bathhouseAbbess = {
+			dirtMultiplier = 0;
+			persuadeToTalkWithLowReputationPriceMultiplier = 3;
+		};
+		bathhouseMaid = {
+			dirtMultiplier = 0;
+			persuadeToTalkWithLowReputationPriceMultiplier = 2;
+		};
+		beggar = {
+			persuadeToTalkWithLowReputationPriceMultiplier = 0.5;
+		};
+		blacksmith = {
+			crimePunishmentMultiplier = 1.5;
+			dirtMultiplier = 0.7;
+			persuadeToTalkWithLowReputationPriceMultiplier = 3;
+			wealthyCustomer = true;
+		};
+		blacksmithApprentice = {
+			dirtMultiplier = 0.7;
+			persuadeToTalkWithLowReputationPriceMultiplier = 2;
+		};
+		butcher = {
+			dirtMultiplier = 0.5;
+			persuadeToTalkWithLowReputationPriceMultiplier = 2;
+		};
+		circator = {
+			crimePunishmentMultiplier = 2;
+			dirtMultiplier = 0;
+			persuadeToTalkWithLowReputationPriceMultiplier = 5;
+		};
+		collier = {
+			persuadeToTalkWithLowReputationPriceMultiplier = 1;
+		};
+		craftsman = {
+			dirtMultiplier = 0.5;
+			persuadeToTalkWithLowReputationPriceMultiplier = 2;
+		};
+		cuman = {
+			isCuman = true;
+			persuadeToTalkWithLowReputationPriceMultiplier = 2;
+		};
+		fake_soldier = {
+			dirtMultiplier = 0.5;
+			persuadeToTalkWithLowReputationPriceMultiplier = 3;
+		};
+		fightClubFighter = {
+			persuadeToTalkWithLowReputationPriceMultiplier = 2;
+		};
+		fortuneTeller = {
+			dirtMultiplier = 0.3;
+			persuadeToTalkWithLowReputationPriceMultiplier = 1;
+		};
+		herbalist = {
+			dirtMultiplier = 0.5;
+			persuadeToTalkWithLowReputationPriceMultiplier = 1;
+		};
+		innkeeper = {
+			dirtMultiplier = 0.3;
+			persuadeToTalkWithLowReputationPriceMultiplier = 3;
+		};
+		lumberjack = {
+			persuadeToTalkWithLowReputationPriceMultiplier = 1;
+		};
+		mason = {
+			dirtMultiplier = 0.7;
+			persuadeToTalkWithLowReputationPriceMultiplier = 1;
+		};
+		mercenary = {
+			persuadeToTalkWithLowReputationPriceMultiplier = 3;
+		};
+		merchant = {
+			crimePunishmentMultiplier = 1.5;
+			dirtMultiplier = 0;
+			persuadeToTalkWithLowReputationPriceMultiplier = 3;
+			wealthyCustomer = true;
+		};
+		miller = {
+			dirtMultiplier = 0.5;
+			persuadeToTalkWithLowReputationPriceMultiplier = 2;
+		};
+		miner = {
+			persuadeToTalkWithLowReputationPriceMultiplier = 1;
+		};
+		monk = {
+			dirtMultiplier = 0;
+			persuadeToTalkWithLowReputationPriceMultiplier = 2;
+		};
+		nobleman = {
+			crimePunishmentMultiplier = 12.5;
+			dirtMultiplier = 0;
+			greetMeWithWave = false;
+			lunchInPub = false;
+			persuadeToTalkWithLowReputationPriceMultiplier = 10;
+			wealthyCustomer = true;
+		};
+		officer = {
+			crimePunishmentMultiplier = 2.5;
+			dirtMultiplier = 0;
+			lunchInPub = false;
+			persuadeToTalkWithLowReputationPriceMultiplier = 6;
+			suppressWatchCorpse = true;
+			wealthyCustomer = true;
+		};
+		poacher = {
+			persuadeToTalkWithLowReputationPriceMultiplier = 1;
+		};
+		priest = {
+			crimePunishmentMultiplier = 1.5;
+			dirtMultiplier = 0;
+			persuadeToTalkWithLowReputationPriceMultiplier = 5;
+		};
+		quarryman = {
+			persuadeToTalkWithLowReputationPriceMultiplier = 1;
+		};
+		refugee = {
+			persuadeToTalkWithLowReputationPriceMultiplier = 0.5;
+		};
+		renegade = {
+			neverAcceptsSurrender = true;
+		};
+		ruffian = {
+			persuadeToTalkWithLowReputationPriceMultiplier = 1;
+		};
+		scribe = {
+			dirtMultiplier = 0;
+			persuadeToTalkWithLowReputationPriceMultiplier = 4;
+			wealthyCustomer = true;
+		};
+		security = {
+			dirtMultiplier = 0.5;
+			neverAcceptsSurrender = true;
+			persuadeToTalkWithLowReputationPriceMultiplier = 5;
+		};
+		shoemaker = {
+			dirtMultiplier = 0.3;
+			persuadeToTalkWithLowReputationPriceMultiplier = 3;
+		};
+		shootmaster = {
+			dirtMultiplier = 0.5;
+			persuadeToTalkWithLowReputationPriceMultiplier = 3;
+		};
+		soldier = {
+			crimePunishmentMultiplier = 2.5;
+			dirtMultiplier = 0.5;
+			persuadeToTalkWithLowReputationPriceMultiplier = 3;
+		};
+		tailor = {
+			dirtMultiplier = 0.3;
+			persuadeToTalkWithLowReputationPriceMultiplier = 3;
+		};
+		tanner = {
+			dirtMultiplier = 0.7;
+			persuadeToTalkWithLowReputationPriceMultiplier = 2;
+		};
+		townsman = {
+			dirtMultiplier = 0;
+			persuadeToTalkWithLowReputationPriceMultiplier = 3;
+		};
+		villager = {
+			dirtMultiplier = 0.7;
+			persuadeToTalkWithLowReputationPriceMultiplier = 1;
+		};
+		wanderer = {
+			persuadeToTalkWithLowReputationPriceMultiplier = 1;
+		};
+		watchman = {
+			crimePunishmentMultiplier = 2.5;
+			dirtMultiplier = 0.5;
+			persuadeToTalkWithLowReputationPriceMultiplier = 3;
+		};
+		weaponsmith = {
+			crimePunishmentMultiplier = 1.5;
+			dirtMultiplier = 0.7;
+			persuadeToTalkWithLowReputationPriceMultiplier = 4;
+			wealthyCustomer = true;
+		};
+	};
+	defaultValues = {
+		crimePunishmentMultiplier = 1;
+		dealsWithStolenItems = false;
+		diceMaximumBet = 1000;
+		diceMinimumBet = 10;
+		dirtMultiplier = 1;
+		greetMeWithWave = true;
+		isCuman = false;
+		lunchInPub = true;
+		neverAcceptsSurrender = false;
+		persuadeToTalkWithLowReputationPriceMultiplier = 1;
+		suppressWatchCorpse = false;
+		wealthyCustomer = false;
+	};
+};
+
+---@type kcd2def*XGenAIModule
+XGenAIModule = ...
 
 ---@deprecated
 ---@type kcd2def*unknown_function

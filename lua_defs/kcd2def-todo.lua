@@ -1800,27 +1800,6 @@ do local todo = { -- hide globals in case it is present in the workspace
         };
         ['ai'] = 1;
     };
-    BasicAIActions = {
-        ['ActorCanTalk'] = function (...) end;
-        ['AddLootAction'] = function (...) end;
-        ['ForceUsable'] = function (...) end;
-        ['GetActions'] = function (...) end;
-        ['GetCanTalkHintType'] = function (...) end;
-        ['GetChatActions'] = function (...) end;
-        ['OnChat'] = function (...) end;
-        ['OnChatOpen'] = function (...) end;
-        ['OnChatRequestAccepted'] = function (...) end;
-        ['OnChatWithFocus'] = function (...) end;
-        ['OnFollow'] = function (...) end;
-        ['OnGrabCorpse'] = function (...) end;
-        ['OnHorsePullDown'] = function (...) end;
-        ['OnKnockout'] = function (...) end;
-        ['OnLoot'] = function (...) end;
-        ['OnMercyKill'] = function (...) end;
-        ['OnPickpocketing'] = function (...) end;
-        ['OnStealthKill'] = function (...) end;
-        ['OnTalk'] = function (...) end;
-    };
     BasicAITable = {
         ['AIMovementAbility'] = {
             ['avoidanceRadius'] = 1.5;
@@ -3471,21 +3450,6 @@ do local todo = { -- hide globals in case it is present in the workspace
     COVER_UNHIDE = 1;
     CRYPARTICLE_ONE_TIME_SPAWN = 2;
     CRYPARTICLE_RAIN_MODE = 1;
-    Calendar = {
-        ['GetGameTime'] = function (...) end;
-        ['GetWorldDay'] = function (...) end;
-        ['GetWorldDayOfWeek'] = function (...) end;
-        ['GetWorldHourOfDay'] = function (...) end;
-        ['GetWorldTime'] = function (...) end;
-        ['GetWorldTimeRatio'] = function (...) end;
-        ['IsFakedTimeOfDay'] = function (...) end;
-        ['IsNightTimeOfDay'] = function (...) end;
-        ['IsWorldTimePaused'] = function (...) end;
-        ['SetFakeTimeOfDay'] = function (...) end;
-        ['SetWorldTime'] = function (...) end;
-        ['SetWorldTimeRatio'] = function (...) end;
-        ['UnfakeTimeOfDay'] = function (...) end;
-    };
     CameraShake = {
         ['Editor'] = {
             ['Icon'] = 'shake.bmp';
@@ -8108,18 +8072,6 @@ do local todo = { -- hide globals in case it is present in the workspace
             ['max_time_step'] = 0.02;
         };
     };
-    EntityModule = {
-        ['AnimCharCopyVisual'] = function (...) end;
-        ['CanUseInventory'] = function (...) end;
-        ['GetEntityScriptMisc'] = function (...) end;
-        ['GetInventoryOwner'] = function (...) end;
-        ['GetSlotItemClassId'] = function (...) end;
-        ['IsInventoryReadOnly'] = function (...) end;
-        ['MakeParticleEffectActive'] = function (...) end;
-        ['MakeParticleEffectIdle'] = function (...) end;
-        ['SequenceEntitiesCopyVisual'] = function (...) end;
-        ['WillSleepingOnThisBedSave'] = function (...) end;
-    };
     EntityNamed = function (...) end;
     EntityUtils = {
         ['DumpEntities'] = function (...) end;
@@ -8230,14 +8182,6 @@ do local todo = { -- hide globals in case it is present in the workspace
             ['bExported_to_test'] = true;
             ['bSaved_by_game'] = false;
         };
-    };
-    EnvironmentModule = {
-        ['BlendTimeOfDay'] = function (...) end;
-        ['CoverHole'] = function (...) end;
-        ['ForceImmediateWeatherUpdate'] = function (...) end;
-        ['GetRainIntensity'] = function (...) end;
-        ['MakeHole'] = function (...) end;
-        ['RebuildClouds'] = function (...) end;
     };
     EquipWeapon = function (...) end;
     Explosion = {
@@ -10459,10 +10403,6 @@ do local todo = { -- hide globals in case it is present in the workspace
         };
         ['simplifiedRootRotation'] = false;
     };
-    Horsetraders = {
-        ['RemoveHaggleMetarole'] = function (...) end;
-        ['SetupHaggle'] = function (...) end;
-    };
 
     ImpressByPlayer = function (...) end;
     IndulgenceBoxTrigger = {
@@ -11982,15 +11922,6 @@ do local todo = { -- hide globals in case it is present in the workspace
     IsNumber = function (...) end;
     IsStr = function (...) end;
     IsTable = function (...) end;
-    ItemManager = {
-        ['AddOnEquipBuff'] = function (...) end;
-        ['GetItem'] = function (...) end;
-        ['GetItemName'] = function (...) end;
-        ['GetItemOwner'] = function (...) end;
-        ['GetItemUIName'] = function (...) end;
-        ['IsItemOversized'] = function (...) end;
-        ['RemoveItem'] = function (...) end;
-    };
     ItemSystem = {
         ['GetPackItemByIndex'] = function (...) end;
         ['GetPackNumItems'] = function (...) end;
@@ -12820,18 +12751,6 @@ do local todo = { -- hide globals in case it is present in the workspace
         ['PrintEffectIdByMatIndex'] = function (...) end;
     };
     MergeInternal = function (...) end;
-    Minigame = {
-        ['CanStartReadingMinigame'] = function (...) end;
-        ['CanUseMinigame'] = function (...) end;
-        ['GetBookStudyProgress'] = function (...) end;
-        ['StartDice'] = function (...) end;
-        ['StartDiceByName'] = function (...) end;
-        ['StartDiceWithScore'] = function (...) end;
-        ['StartHerbGathering'] = function (...) end;
-        ['StartHoleDigging'] = function (...) end;
-        ['StartLockPicking'] = function (...) end;
-        ['WasBookOpened'] = function (...) end;
-    };
     MissileWeapon = {
         ['GetActions'] = function (...) end;
         ['GetUsableName'] = function (...) end;
@@ -21021,230 +20940,6 @@ do local todo = { -- hide globals in case it is present in the workspace
         ['fUseAngle'] = 0.7;
         ['nUserId'] = 0;
     };
-    SocialClass = {
-        ['GetEntitySocialClassData'] = function (...) end;
-        ['GetSocialClassData'] = function (...) end;
-        ['data'] = {
-            ['apothecary'] = {
-                ['dirtMultiplier'] = 0;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 5;
-                ['wealthyCustomer'] = true;
-            };
-            ['armorer'] = {
-                ['crimePunishmentMultiplier'] = 1.5;
-                ['dirtMultiplier'] = 0.7;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 4;
-                ['wealthyCustomer'] = true;
-            };
-            ['bailiff'] = {
-                ['crimePunishmentMultiplier'] = 5;
-                ['dirtMultiplier'] = 0;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 5;
-                ['wealthyCustomer'] = true;
-            };
-            ['baker'] = {
-                ['dirtMultiplier'] = 0.3;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 2;
-            };
-            ['bandit'] = {
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 2;
-            };
-            ['bartender'] = {
-                ['dirtMultiplier'] = 0.3;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 3;
-            };
-            ['bathhouseAbbess'] = {
-                ['dirtMultiplier'] = 0;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 3;
-            };
-            ['bathhouseMaid'] = {
-                ['dirtMultiplier'] = 0;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 2;
-            };
-            ['beggar'] = {
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 0.5;
-            };
-            ['blacksmith'] = {
-                ['crimePunishmentMultiplier'] = 1.5;
-                ['dirtMultiplier'] = 0.7;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 3;
-                ['wealthyCustomer'] = true;
-            };
-            ['blacksmithApprentice'] = {
-                ['dirtMultiplier'] = 0.7;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 2;
-            };
-            ['butcher'] = {
-                ['dirtMultiplier'] = 0.5;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 2;
-            };
-            ['circator'] = {
-                ['crimePunishmentMultiplier'] = 2;
-                ['dirtMultiplier'] = 0;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 5;
-            };
-            ['collier'] = {
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 1;
-            };
-            ['craftsman'] = {
-                ['dirtMultiplier'] = 0.5;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 2;
-            };
-            ['cuman'] = {
-                ['isCuman'] = true;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 2;
-            };
-            ['fake_soldier'] = {
-                ['dirtMultiplier'] = 0.5;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 3;
-            };
-            ['fightClubFighter'] = {
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 2;
-            };
-            ['fortuneTeller'] = {
-                ['dirtMultiplier'] = 0.3;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 1;
-            };
-            ['herbalist'] = {
-                ['dirtMultiplier'] = 0.5;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 1;
-            };
-            ['innkeeper'] = {
-                ['dirtMultiplier'] = 0.3;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 3;
-            };
-            ['lumberjack'] = {
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 1;
-            };
-            ['mason'] = {
-                ['dirtMultiplier'] = 0.7;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 1;
-            };
-            ['mercenary'] = {
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 3;
-            };
-            ['merchant'] = {
-                ['crimePunishmentMultiplier'] = 1.5;
-                ['dirtMultiplier'] = 0;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 3;
-                ['wealthyCustomer'] = true;
-            };
-            ['miller'] = {
-                ['dirtMultiplier'] = 0.5;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 2;
-            };
-            ['miner'] = {
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 1;
-            };
-            ['monk'] = {
-                ['dirtMultiplier'] = 0;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 2;
-            };
-            ['nobleman'] = {
-                ['crimePunishmentMultiplier'] = 12.5;
-                ['dirtMultiplier'] = 0;
-                ['greetMeWithWave'] = false;
-                ['lunchInPub'] = false;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 10;
-                ['wealthyCustomer'] = true;
-            };
-            ['officer'] = {
-                ['crimePunishmentMultiplier'] = 2.5;
-                ['dirtMultiplier'] = 0;
-                ['lunchInPub'] = false;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 6;
-                ['suppressWatchCorpse'] = true;
-                ['wealthyCustomer'] = true;
-            };
-            ['poacher'] = {
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 1;
-            };
-            ['priest'] = {
-                ['crimePunishmentMultiplier'] = 1.5;
-                ['dirtMultiplier'] = 0;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 5;
-            };
-            ['quarryman'] = {
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 1;
-            };
-            ['refugee'] = {
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 0.5;
-            };
-            ['renegade'] = {
-                ['neverAcceptsSurrender'] = true;
-            };
-            ['ruffian'] = {
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 1;
-            };
-            ['scribe'] = {
-                ['dirtMultiplier'] = 0;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 4;
-                ['wealthyCustomer'] = true;
-            };
-            ['security'] = {
-                ['dirtMultiplier'] = 0.5;
-                ['neverAcceptsSurrender'] = true;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 5;
-            };
-            ['shoemaker'] = {
-                ['dirtMultiplier'] = 0.3;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 3;
-            };
-            ['shootmaster'] = {
-                ['dirtMultiplier'] = 0.5;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 3;
-            };
-            ['soldier'] = {
-                ['crimePunishmentMultiplier'] = 2.5;
-                ['dirtMultiplier'] = 0.5;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 3;
-            };
-            ['tailor'] = {
-                ['dirtMultiplier'] = 0.3;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 3;
-            };
-            ['tanner'] = {
-                ['dirtMultiplier'] = 0.7;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 2;
-            };
-            ['townsman'] = {
-                ['dirtMultiplier'] = 0;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 3;
-            };
-            ['villager'] = {
-                ['dirtMultiplier'] = 0.7;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 1;
-            };
-            ['wanderer'] = {
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 1;
-            };
-            ['watchman'] = {
-                ['crimePunishmentMultiplier'] = 2.5;
-                ['dirtMultiplier'] = 0.5;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 3;
-            };
-            ['weaponsmith'] = {
-                ['crimePunishmentMultiplier'] = 1.5;
-                ['dirtMultiplier'] = 0.7;
-                ['persuadeToTalkWithLowReputationPriceMultiplier'] = 4;
-                ['wealthyCustomer'] = true;
-            };
-        };
-        ['defaultValues'] = {
-            ['crimePunishmentMultiplier'] = 1;
-            ['dealsWithStolenItems'] = false;
-            ['diceMaximumBet'] = 1000;
-            ['diceMinimumBet'] = 10;
-            ['dirtMultiplier'] = 1;
-            ['greetMeWithWave'] = true;
-            ['isCuman'] = false;
-            ['lunchInPub'] = true;
-            ['neverAcceptsSurrender'] = false;
-            ['persuadeToTalkWithLowReputationPriceMultiplier'] = 1;
-            ['suppressWatchCorpse'] = false;
-            ['wealthyCustomer'] = false;
-        };
-    };
     Sound = {
         ['GetAudioEnvironmentID'] = function (...) end;
         ['GetAudioRtpcID'] = function (...) end;
@@ -23531,47 +23226,6 @@ do local todo = { -- hide globals in case it is present in the workspace
             ['mass'] = 25;
             ['stiffness_scale'] = 73;
         };
-    };
-    XGenAIModule = {
-        ['AddLink'] = function (...) end;
-        ['AddRecordedIntellectForFaderProfiling'] = function (...) end;
-        ['DespawnPerceptibleVolume'] = function (...) end;
-        ['FindLinks'] = function (...) end;
-        ['GetBrainVariable'] = function (...) end;
-        ['GetEntityByWUID'] = function (...) end;
-        ['GetEntityIdByWUID'] = function (...) end;
-        ['GetMyWUID'] = function (...) end;
-        ['GetOwner'] = function (...) end;
-        ['GetWuidDebugString'] = function (...) end;
-        ['HasClothingLink'] = function (...) end;
-        ['IgnorePerception'] = function (...) end;
-        ['IsOneshotAvailable'] = function (...) end;
-        ['IsOneshotBlocked'] = function (...) end;
-        ['IsPointInAreaWithLabel'] = function (...) end;
-        ['IsPointInAreaWithLabelWUID'] = function (...) end;
-        ['IsStanceAvailable'] = function (...) end;
-        ['IsStanceBlocked'] = function (...) end;
-        ['IsUnstanceAvailable'] = function (...) end;
-        ['IsUnstanceBlocked'] = function (...) end;
-        ['LootEnd'] = function (...) end;
-        ['LootInventoryBegin'] = function (...) end;
-        ['MakeTableFromType'] = function (...) end;
-        ['OnDestroy'] = function (...) end;
-        ['OnPropertyChange'] = function (...) end;
-        ['OnSpawn'] = function (...) end;
-        ['OnStart'] = function (...) end;
-        ['PlaceToSlotFromInventory'] = function (...) end;
-        ['ProduceSound'] = function (...) end;
-        ['ProduceSoundWUID'] = function (...) end;
-        ['SendMessageToEntity'] = function (...) end;
-        ['SendMessageToEntityArray'] = function (...) end;
-        ['SendMessageToEntityData'] = function (...) end;
-        ['SetBrainVariable'] = function (...) end;
-        ['SetPlayerDogMode'] = function (...) end;
-        ['SpawnPerceptibleVolume'] = function (...) end;
-        ['SpawnPerceptibleVolumeOnWUID'] = function (...) end;
-        ['_GetDataVariable'] = function (...) end;
-        ['_SetDataVariable'] = function (...) end;
     };
 
 } end

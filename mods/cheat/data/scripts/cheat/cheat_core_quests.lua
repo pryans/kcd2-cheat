@@ -12,7 +12,6 @@ function Cheat:find_quest(searchKey, returnAll)
   local quests = {}
 
   for i = 0, rows do
-    ---@type kcd2def*Database.TableLine-quest?
     local rowInfo = Database.GetTableLine(tableName, i)
     local found = false
 
@@ -63,7 +62,6 @@ function Cheat:find_quest_objective(questId, objectiveId)
   local tableInfo = Database.GetTableInfo(tableName)
   local rows = tableInfo.LineCount - 1
   for i = 0, rows do
-    ---@type kcd2def*Database.TableLine-quest_objective?
     local rowInfo = Database.GetTableLine(tableName, i)
     if rowInfo then
       if rowInfo.quest_id == questId and rowInfo.objective_id == objectiveId then
