@@ -3,13 +3,14 @@ Cheat.g_database_cache = {}
 function Cheat:loadDatabase(databaseName)
     local database = {}
     if not Cheat.g_database_cache[databaseName] then
+        ---@diagnostic disable-next-line: undefined-field
         local lineCount = Database.GetTableInfo(databaseName).LineCount
         for n = 0, lineCount - 1 do
             table.insert(database, Database.GetTableLine(databaseName, n))
         end
         Cheat.g_database_cache[databaseName] = database
     end
-    return database
+    return Cheat.g_database_cache[databaseName]
 end
 
 function Cheat:findRows(database, searchKey, rowIdKey, rowNameKey)
@@ -35,11 +36,9 @@ function Cheat:findRows(database, searchKey, rowIdKey, rowNameKey)
             local foundRow = {}
             foundRow.id = tostring(row[rowIdKey])
             foundRow.name = tostring(row[rowNameKey])
-            --foundRow.data = {}
 
             for k, v in pairs(row) do
                 if k and v and k ~= rowIdKey and k ~= rowNameKey and not Cheat:isBlank(v) then
-                    --foundRow.data[k] = v
                     foundRow[k] = v
                 end
             end
@@ -133,6 +132,75 @@ function Cheat:xmlLoadDatabase(xmlFile, onTagFunction)
     return true
 end
 
+function Cheat:xmlLoadLocalizationDatabase(xmlFile)
+    Cheat:logDebug("Loading XML localization database file [%s]", xmlFile)
+
+    if not xmlFile then
+        return false, nil
+    end
+
+    local xml = System.LoadTextFile(xmlFile)
+    if not xml then
+        return false, nil
+    end
+
+    local luaTableResult = {}
+    local rowStartTag = "<Row>"
+    local rowEndTag = "</Row>"
+    local cellStartTag = "<Cell>"
+    local cellEndTag = "</Cell>"
+
+    local rowStartIndex = 1
+    while true do
+        rowStartIndex, _ = string.find(xml, rowStartTag, rowStartIndex, true)
+        if not rowStartIndex then
+            break -- No more rows found
+        end
+
+        local rowEndIndex = string.find(xml, rowEndTag, rowStartIndex, true)
+        if not rowEndIndex then
+            break -- Malformed XML, row start but no end
+        end
+
+        local rowContent = string.sub(xml, rowStartIndex + #rowStartTag, rowEndIndex - 1)
+        local cells = {}
+        local cellStartIndex = 1
+        while true do
+            cellStartIndex, _ = string.find(rowContent, cellStartTag, cellStartIndex, true)
+            if not cellStartIndex then
+                break -- No more cells in this row
+            end
+
+            local cellEndIndex = string.find(rowContent, cellEndTag, cellStartIndex, true)
+            if not cellEndIndex then
+                break -- Malformed XML, cell start but no end in this row
+            end
+
+            local cellValue = string.sub(rowContent, cellStartIndex + #cellStartTag, cellEndIndex - 1)
+            table.insert(cells, cellValue)
+            cellStartIndex = cellEndIndex + #cellEndTag
+        end
+
+        if #cells >= 1 then
+            local key = Cheat:trimToNil(cells[1])
+            local value1 = Cheat:toLower(Cheat:trimToNil(cells[2]))
+            local value2 = Cheat:toLower(Cheat:trimToNil(cells[3]))
+
+            if key and value1 then
+                -- field 1 vs 2 can be formal and inforaml, or singular and plural
+                luaTableResult[key] = {
+                    field1 = value1,
+                    field2 = value2
+                }
+            end
+        end
+
+        rowStartIndex = rowEndIndex + #rowEndTag
+    end
+
+    return luaTableResult
+end
+
 -- ============================================================================
 -- player functions
 -- ============================================================================
@@ -163,6 +231,10 @@ function Cheat:packTable(...)
 end
 
 function Cheat:serializeTable(t)
+    if not t then
+        return "nil"
+    end
+
     local s = ""
     for k, v in pairs(t) do
         if #s > 0 then
@@ -251,7 +323,7 @@ function Cheat:isBlank(value)
 end
 
 function Cheat:toUpper(value)
-    if not Cheat:isBlank(value) then
+    if value then
         -- string.upper fails if passed nil
         return string.upper(value)
     else
@@ -260,7 +332,7 @@ function Cheat:toUpper(value)
 end
 
 function Cheat:toLower(value)
-    if not Cheat:isBlank(value) then
+    if value then
         -- string.lower fails if passed nil
         return string.lower(value)
     else
@@ -270,6 +342,20 @@ end
 
 function Cheat:endsWith(String, End)
     return End == "" or string.sub(String, -string.len(End)) == End
+end
+
+function Cheat:trim(value)
+    if not value then return nil end
+    value = value:gsub("^%s+", ""):gsub("%s+$", "")
+    return value
+end
+
+function Cheat:trimToNil(value)
+    value = Cheat:trim(value)
+    if Cheat:isBlank(value) then
+        return nil
+    end
+    return value
 end
 
 -- ============================================================================
@@ -314,6 +400,45 @@ function Cheat:clamp(value, min, max)
     end
 
     return value
+end
+
+function Cheat:isNear(v1, v2, nearDistance)
+    return math.abs(v1 - v2) <= nearDistance
+end
+
+function Cheat:createSpawnVectorFromVector(avoidCenter, position, radius, near)
+    if not radius or radius < 0 then
+        radius = 0
+    end
+
+    if not near or near < 0 then
+        near = 0
+    end
+
+    -- need to avoid an infinite loop
+    if radius - near < 2 then
+        Cheat:logError("createSpawnVectorFromVector: invalid near/radius")
+        radius = 10
+        near = 2
+    end
+
+    -- TODO/TBD: make sure zPos isn't under the ground
+    while true do
+        local spawnX = math.random(position.x - radius, position.x + radius)
+        local spawnY = math.random(position.y - radius, position.y + radius)
+        if avoidCenter then
+            -- used to make sure spawn point isn't on top of the player
+            if not Cheat:isNear(spawnX, position.x, near) and not Cheat:isNear(spawnY, position.y, near) then
+                return { x = spawnX, y = spawnY, z = position.z }
+            end
+        else
+            return { x = spawnX, y = spawnY, z = position.z }
+        end
+    end
+end
+
+function Cheat:createSpawnVectorFromPosition(avoidCenter, xPos, yPos, zPos, radius)
+    return Cheat:createSpawnVectorFromVector(avoidCenter, { x = xPos, y = yPos, z = zPos }, radius)
 end
 
 -- ============================================================================

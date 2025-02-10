@@ -583,7 +583,7 @@ function Cheat:tp_to_npc(line)
     local num, numErr = Cheat:argsGet(args, "num")
     if not idErr and not numErr then
         Cheat:cheat_find_npc("token:" .. id)
-        local npcs = Cheat:find_npc(id)
+        local npcs = Cheat:findNpc(id)
 
         if num == nil or num <= 0 then
             num = #npcs

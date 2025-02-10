@@ -10,7 +10,7 @@ function Cheat:cheat_get_time()
     local hours = (gameTimeInSeconds / 3600) % 24
     local minutes = (gameTimeInSeconds / 60) % 60
     local seconds = gameTimeInSeconds % 60
-    local time = string.format("days=%.3d time=%.2d:%.2d:%.2d speed=%d paused=%s", days, hours, minutes, seconds, Calendar.GetWorldTimeRatio(), tostring(Calendar.IsWorldTimePaused()))
+    local time = string.format("days=%.3d time=%.2d:%.2d:%.2d speed=%d worldTimePaused=%s", days, hours, minutes, seconds, Calendar.GetWorldTimeRatio(), tostring(Calendar.IsWorldTimePaused()))
     Cheat:logInfo("Current game time: %s", time)
     return true;
 end
@@ -46,13 +46,17 @@ Cheat.cheat_set_time_speed_args = {
     ratio = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "The ratio between real time and game time. Default 15.") end,
 }
 Cheat:createCommand("cheat_set_time_speed", "Cheat:cheat_set_time_speed(%line)", Cheat.cheat_set_time_speed_args,
-    "Set the game time speed as a ratio between real time and game time.\n$8A high ratio, like 1000, is faster. Default is 15. 0 will pause time.",
+    "Set the game time speed as a ratio between real time and game time.\n$8A high ratio, like 1000, is faster. Default is 15.",
     "Speed up game time", "cheat_set_time_speed ratio:1000")
 function Cheat:cheat_set_time_speed(line)
     local args = Cheat:argsProcess(line, Cheat.cheat_set_time_speed_args)
     local ratio, ratioErr = Cheat:argsGet(args, "ratio")
     if ratioErr then
         return false
+    end
+
+    if ratio < 0 then
+        ratio = 0
     end
 
     Calendar.SetWorldTimeRatio(ratio)

@@ -331,7 +331,7 @@ function Cheat:cheat_find_items(line)
     end
 
     for _, item in ipairs(items) do
-        Cheat:logInfo("Item: name=%s id=%s %s", item.name, item.id)
+        Cheat:logInfo("Item: name=%s id=%s", item.name, item.id)
     end
     return true, items
 end
@@ -465,7 +465,7 @@ end
 -- cheat_repair_items
 -- ============================================================================
 Cheat.cheat_repair_items_args = {
-    condition = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 50, showHelp, "The item condition to apply between 0 and 100. Default 50.") end
+    condition = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 100, showHelp, "The item condition to apply between 0 and 100. Default 100.") end
 }
 Cheat:createCommand("cheat_repair_items", "Cheat:cheat_repair_items(%line)", Cheat.cheat_repair_items_args,
     "Repairs all damaged items in your inventory to at least the given condition.\n$4This can uneqip items so don't do this in combat.",
@@ -630,15 +630,15 @@ function Cheat:test_core_items()
     Cheat:testAssert("cheat_damage_items 9.6", Cheat:getUserItem(Cheat.g_shield1_id, 1, 20))
     Cheat:removeAllItems()
 
-    -- cheat_repair_items (default condition of 50)
+    -- cheat_repair_items (default condition of 100)
     Cheat:testAssert("cheat_repair_items 10.1", Cheat:cheat_add_item("id:" .. Cheat.g_dagger1_id .. " amount:1 condition:25"))
     Cheat:testAssert("cheat_repair_items 10.2", Cheat:cheat_add_item("id:" .. Cheat.g_shield1_id .. " amount:1 condition:25"))
     Cheat:testAssert("cheat_repair_items 10.3", #(Cheat:getUserItems()) == 2)
     Cheat:testAssert("cheat_repair_items 10.4", Cheat:getUserItem(Cheat.g_dagger1_id, 1, 25))
     Cheat:testAssert("cheat_repair_items 10.5", Cheat:getUserItem(Cheat.g_shield1_id, 1, 25))
     Cheat:testAssert("cheat_repair_items 10.6", Cheat:cheat_repair_items())
-    Cheat:testAssert("cheat_repair_items 10.7", Cheat:getUserItem(Cheat.g_dagger1_id, 1, 50))
-    Cheat:testAssert("cheat_repair_items 10.8", Cheat:getUserItem(Cheat.g_shield1_id, 1, 50))
+    Cheat:testAssert("cheat_repair_items 10.7", Cheat:getUserItem(Cheat.g_dagger1_id, 1, 100))
+    Cheat:testAssert("cheat_repair_items 10.8", Cheat:getUserItem(Cheat.g_shield1_id, 1, 100))
     Cheat:removeAllItems()
 
     -- cheat_repair_items (custom conditions)

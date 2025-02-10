@@ -40,6 +40,8 @@ end
 function Cheat:onSystemStarted()
     Cheat:logDebug("Cheat:onSystemStarted")
     Cheat:initItemDatabase()
+    Cheat:initLocalizationDatabase()
+    Cheat:initSoulsDatabase()
 end
 
 function Cheat:onQuickLoadingStart()
