@@ -12,8 +12,9 @@
 ---@alias kcd2def*unknown_function (fun(...): ...)? this function has not been investigated yet (pair with '---@deprecated' or 'private' to generate warning)
 ---@alias kcd2def*luaindex integer array index from 1 to length inclusive (position)
 ---@alias kcd2def*cppindex integer array index from 0 to length - 1 (offset)
----@alias kcd2def*luakey boolean|string|number|integer|function|table|thread|userdata|lightuserdata any valid table key (so anything not nil)
-
+---@alias kcd2def*flatvalue boolean|string|number|integer|function|thread|lightuserdata
+---@alias kcd2def*tablelike table|userdata
+---@alias kcd2def*luakey kcd2def*flatvalue|kcd2def*tablelike any valid table key (so anything not nil)
 
 
 --- Generics (these definitions can be buggy)
@@ -23,6 +24,11 @@
 ---@generic V: kcd2def*luakey
 ---@alias kcd2def*DatabaseUtils.RemapColumns fun(columns: {[K]: V[]}, indexColumn: K): {[V]: {[K]: V}}
 ---@alias kcd2def*DatabaseUtils.RemapSingleColumn fun(columns: {[K]: V[]}, indexColumn: K): {[V]: V}
+
+---@generic O: any
+---@generic K: any
+---@generic V: any
+---@alias kcd2def*iterator<O,K,V> fun(obj: O?, key: K?): K?, V?
 
 
 --- Common Structures (no metatable, but common fields)
