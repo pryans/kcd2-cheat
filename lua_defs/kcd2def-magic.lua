@@ -58,7 +58,7 @@ g_SignalData = {
 	};
 };
 
----@type table<string,kcd2def*Vector>
+---@type { [string]: kcd2def*Vector }
 g_Vectors = {
 	down = {
 		x = 0;
