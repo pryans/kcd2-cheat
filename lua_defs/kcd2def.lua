@@ -9,7 +9,7 @@
 ---@module "kcd2def-enums"
 
 
----@alias kcd2def*unknown_function fun(...): ... this function has not been investigated yet
+---@alias kcd2def*unknown_function (fun(...): ...)? this function has not been investigated yet (pair with '---@deprecated' or 'private' to generate warning)
 ---@alias kcd2def*luaindex integer array index from 1 to length inclusive (position)
 ---@alias kcd2def*cppindex integer array index from 0 to length - 1 (offset)
 ---@alias kcd2def*luakey boolean|string|number|integer|function|table|thread|userdata|lightuserdata any valid table key (so anything not nil)
@@ -28,7 +28,7 @@
 --- Common Structures (no metatable, but common fields)
 
 
----@class kdc2def*Actor.PhysicalStats
+---@class kcd2def*Actor.PhysicalStats
 ---@field public mass number
 
 ---@class kcd2def*Database.TableInfo
@@ -38,10 +38,10 @@
 ---@class kcd2def*Database.TableLine
 ---@class kcd2def*Database.TableColumn
 
----@class kdc2def*Database.TableColumnInfo
+---@class kcd2def*Database.TableColumnInfo
 ---@field public Name string
 
----@class kdc2def*Database.TableColumnData
+---@class kcd2def*Database.TableColumnData
 
 ---@class kcd2def*Vector
 ---@field public x number
@@ -55,7 +55,7 @@
 ---@class kcd2def*Actor
 ---@field public AwakePhysics fun(self: kcd2def*Actor, unk_1: 1|number): nil
 ---@field public AddImpulse fun(self: kcd2def*Actor, unk_1: -1|number, unk_position: kcd2def*Vector, unk_up: kcd2def*Vector, unk_acceleration: number): nil
----@field public GetPhysicalStats fun(self:kcd2def*Actor): kdc2def*Actor.PhysicalStats
+---@field public GetPhysicalStats fun(self:kcd2def*Actor): kcd2def*Actor.PhysicalStats
 ---@field public GetWorldDir fun(self: kcd2def*Actor): kcd2def*Vector
 ---@field public GetWorldPos fun(self: kcd2def*Actor): kcd2def*Vector
 
@@ -81,10 +81,10 @@
 ---@class kcd2def*Database
 ---
 ---@nodiscard
----@field public GetColumnInfo fun(tableName: string, columnIndex: integer): kdc2def*Database.TableColumnInfo?
+---@field public GetColumnInfo fun(tableName: string, columnIndex: integer): kcd2def*Database.TableColumnInfo?
 ---
 ---@nodiscard
----@field public GetTableColumnData fun(tableName: string, columns: string[]): {string : kdc2def*Database.TableColumnData}?
+---@field public GetTableColumnData fun(tableName: string, columns: string[]): {string : kcd2def*Database.TableColumnData}?
 ---
 ---@nodiscard
 ---@field public GetTableInfo fun(tableName: string): kcd2def*Database.TableInfo?
@@ -118,6 +118,42 @@
 ---@nodiscard
 ---@field public RemapSingleColumn kcd2def*DatabaseUtils.RemapSingleColumn
 
+---@class kcd2def*Game
+---@field private AddSaveLock kcd2def*unknown_function
+---@field private AllowTutorials kcd2def*unknown_function
+---@field private BlockTutorials kcd2def*unknown_function
+---@field private CacheResource kcd2def*unknown_function
+---@field private CreatePrefab kcd2def*unknown_function
+---@field private DeletePrefab kcd2def*unknown_function
+---@field private HideCurrentTutorial kcd2def*unknown_function
+---@field private HideInfoText kcd2def*unknown_function
+---@field private HidePrefab kcd2def*unknown_function
+---@field private HideTutorial kcd2def*unknown_function
+---@field private InventoryModeOnlyCodex kcd2def*unknown_function
+---@field private IsDemo kcd2def*unknown_function
+---@field private IsLoadingEngineSaveGame kcd2def*unknown_function
+---@field private IsPlayer kcd2def*unknown_function
+---@field private KeybindsRebindInput kcd2def*unknown_function
+---@field private LogGameEvent kcd2def*unknown_function
+---@field private MovePrefab kcd2def*unknown_function
+---@field private QuickLoad kcd2def*unknown_function
+---@field private QuickSave kcd2def*unknown_function
+---@field private RemoveSaveLock kcd2def*unknown_function
+---@field private ResetEntity kcd2def*unknown_function
+---@field private ResetTutorial kcd2def*unknown_function
+---@field private SaveGameViaResting kcd2def*unknown_function
+---@field private SendInfoText kcd2def*unknown_function
+---@field private SetPrefabPhase kcd2def*unknown_function
+---@field private SetPrefabPhaseById kcd2def*unknown_function
+---@field private ShadowplayStartStop kcd2def*unknown_function
+---@field private ShowItemsTransfer kcd2def*unknown_function
+---@field private ShowNotification kcd2def*unknown_function
+---@field private ShowOverlayTutorial kcd2def*unknown_function
+---@field private ShowStatCheckResult kcd2def*unknown_function
+---@field private ShowTutorial kcd2def*unknown_function
+---@field private SpawnPrefab kcd2def*unknown_function
+
+
 
 --- Global Annotations
 
@@ -129,48 +165,79 @@ Database = ...
 ---@type kcd2def*DatabaseUtils
 DatabaseUtils = ...
 
+---@type kcd2def*Game
+Game = ...
 
+---@deprecated
 ---@type kcd2def*unknown_function
 _IAction = ...
+
+---@deprecated
 ---@type kcd2def*unknown_function
 _IActionMap = ...
+
+---@deprecated
 ---@type kcd2def*unknown_function
 _IClass = ...
+
+---@deprecated
 ---@type kcd2def*unknown_function
 _IDisabledBarkMetarole = ...
+
+---@deprecated
 ---@type kcd2def*unknown_function
 _IEnabled = ...
+
+---@deprecated
 ---@type kcd2def*unknown_function
 _IFunc = ...
+
+---@deprecated
 ---@type kcd2def*unknown_function
 _IHint = ...
+
+---@deprecated
 ---@type kcd2def*unknown_function
 _IInteraction = ...
+
+---@deprecated
 ---@type kcd2def*unknown_function
 _IReason = ...
+
+---@deprecated
 ---@type kcd2def*unknown_function
 _IType = ...
+
+---@deprecated
 ---@type kcd2def*unknown_function
 _IUiOrder = ...
+
+---@deprecated
 ---@type kcd2def*unknown_function
 _IUiVisible = ...
 
 _dataMetaTable = {
+	---@deprecated
     ---@type kcd2def*unknown_function
 	__index = ...;
+	---@deprecated
     ---@type kcd2def*unknown_function
 	__newindex = ...;
 }
 
+---@deprecated
 ---@type kcd2def*unknown_function
 expr = ...
 
+---@deprecated
 ---@type kcd2def*unknown_function
 forwardTime = ...
 
+---@deprecated
 ---@type kcd2def*unknown_function
 gcinfo = ...
 
+---@deprecated
 ---@type kcd2def*unknown_function
 imod = ...
 
@@ -185,18 +252,24 @@ json = {
 ---@type kcd2def*Actor-player
 player = ...
 
+---@deprecated
 ---@type kcd2def*unknown_function
 newproxy = ...
 
 q = {
+	---@deprecated
     ---@type kcd2def*unknown_function
 	ci = ...;
+	---@deprecated
     ---@type kcd2def*unknown_function
 	dd = ...;
+	---@deprecated
     ---@type kcd2def*unknown_function
 	en = ...;
+	---@deprecated
     ---@type kcd2def*unknown_function
 	nen = ...;
+	---@deprecated
     ---@type kcd2def*unknown_function
 	sm = ...;
 	utils = {

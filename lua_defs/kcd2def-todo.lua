@@ -5,6 +5,7 @@
 --- besides these, there are also classes/metatables/structures to document
 --- some of the state is defined within lua scripts, some in XML scripts, and some in the engine.
 --- we can figure out the types of functions based on their usage in scripts, if present, and their definition if available.
+--- mark undocumented functions as kcd2def*unknown_function and either '---@deprecated' or 'private' so they generate warnings at their usage
 
 do local todo = { -- hide globals in case it is present in the workspace
     AI = {
@@ -8848,41 +8849,6 @@ do local todo = { -- hide globals in case it is present in the workspace
         ['WUIDToMsg'] = function (...) end;
         ['WUIDToString'] = function (...) end;
         ['WUIDToUI'] = function (...) end;
-    };
-    Game = {
-        ['AddSaveLock'] = function (...) end;
-        ['AllowTutorials'] = function (...) end;
-        ['BlockTutorials'] = function (...) end;
-        ['CacheResource'] = function (...) end;
-        ['CreatePrefab'] = function (...) end;
-        ['DeletePrefab'] = function (...) end;
-        ['HideCurrentTutorial'] = function (...) end;
-        ['HideInfoText'] = function (...) end;
-        ['HidePrefab'] = function (...) end;
-        ['HideTutorial'] = function (...) end;
-        ['InventoryModeOnlyCodex'] = function (...) end;
-        ['IsDemo'] = function (...) end;
-        ['IsLoadingEngineSaveGame'] = function (...) end;
-        ['IsPlayer'] = function (...) end;
-        ['KeybindsRebindInput'] = function (...) end;
-        ['LogGameEvent'] = function (...) end;
-        ['MovePrefab'] = function (...) end;
-        ['QuickLoad'] = function (...) end;
-        ['QuickSave'] = function (...) end;
-        ['RemoveSaveLock'] = function (...) end;
-        ['ResetEntity'] = function (...) end;
-        ['ResetTutorial'] = function (...) end;
-        ['SaveGameViaResting'] = function (...) end;
-        ['SendInfoText'] = function (...) end;
-        ['SetPrefabPhase'] = function (...) end;
-        ['SetPrefabPhaseById'] = function (...) end;
-        ['ShadowplayStartStop'] = function (...) end;
-        ['ShowItemsTransfer'] = function (...) end;
-        ['ShowNotification'] = function (...) end;
-        ['ShowOverlayTutorial'] = function (...) end;
-        ['ShowStatCheckResult'] = function (...) end;
-        ['ShowTutorial'] = function (...) end;
-        ['SpawnPrefab'] = function (...) end;
     };
     GameToken = {
         ['DumpAllTokens'] = function (...) end;
