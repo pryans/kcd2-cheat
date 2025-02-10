@@ -37,6 +37,10 @@
 ---@class kcd2def*Actor.PhysicalStats
 ---@field public mass number
 
+---@class kcd2def*AnimDoor.FlowEvents.Input
+---@field private [01] kcd2def*unknown_function
+---@field public [02] 'bool'
+
 ---@class kcd2def*Database.TableInfo
 ---@field public ColumnCount integer
 ---@field public LineCount integer
@@ -76,6 +80,160 @@
 
 ---@class kcd2def*Actor-player:kcd2def*Actor
 
+---@class kcd2def*AnimDoor.Client
+---@field private OnLevelLoaded kcd2def*unknown_function
+
+---@class kcd2def*AnimDoor.Editor
+---@field public Icon 'Door.bmp'
+---@field public ShowBounds 1
+
+---@class kcd2def*AnimDoor.FlowEvents.Inputs: {[string]: kcd2def*AnimDoor.FlowEvents.Input}
+---@field public Close kcd2def*AnimDoor.FlowEvents.Input
+---@field public Hide kcd2def*AnimDoor.FlowEvents.Input
+---@field public Lock kcd2def*AnimDoor.FlowEvents.Input
+---@field public Open kcd2def*AnimDoor.FlowEvents.Input
+---@field public UnHide kcd2def*AnimDoor.FlowEvents.Input
+---@field public Unlock kcd2def*AnimDoor.FlowEvents.Input
+
+---@class kcd2def*AnimDoor.FlowEvents.Outputs
+---@field public Close 'bool'
+---@field public Hide 'bool'
+---@field public Lock 'bool'
+---@field public Open 'bool'
+---@field public UnHide 'bool'
+---@field public Unlock 'bool'
+
+---@class kcd2def*AnimDoor.FlowEvents
+---@field public Inputs kcd2def*AnimDoor.FlowEvents.Inputs
+---@field public Outputs kcd2def*AnimDoor.FlowEvents.Outputs
+
+---@class kcd2def*AnimDoor.Properties.Animation
+---@field public anim_Close 'Close'
+---@field public anim_Open 'Open'
+
+---@class kcd2def*AnimDoor.Properties.Lock
+---@field public bCanLockPick true
+---@field public bCanUnlockWithDynamicKey true
+---@field public bDoLockOnMissingHomeArea true
+---@field public bLockDifficultyOverride false
+---@field public bLockInside false
+---@field public bLockOutside false
+---@field public bLockReversed false
+---@field public bLocked false
+---@field public bNeverLockByPassingNPC true
+---@field public bSendMessage false
+---@field public esLockFanciness 'Common'
+---@field public esLockTypes 'none/none'
+---@field public fKeepUnlockedFrom number 7.5
+---@field public fKeepUnlockedTo number 19.5
+---@field public fLockDifficulty number 0.5
+---@field public guidItemClassId ''
+
+---@class kcd2def*AnimDoor.Properties.Physics
+---@field public Density -1
+---@field public Mass -1
+---@field public bPhysicalize true
+---@field public bPushableByPlayers false
+---@field public bRigidBody false
+
+---@class kcd2def*AnimDoor.Properties.Sounds
+---@field public snd_Close 'Sounds/environment:doors:door_wood_1_close'
+---@field public snd_Open 'Sounds/environment:doors:door_wood_1_open'
+
+---@class kcd2def*AnimDoor.Properties
+---@field public Animation kcd2def*AnimDoor.Properties.Animation
+---@field public Lock kcd2def*AnimDoor.Properties.Lock
+---@field public Physics kcd2def*AnimDoor.Properties.Physics
+---@field public Sounds kcd2def*AnimDoor.Properties.Sounds
+---@field public bActivatePortal false
+---@field public bExported_to_game true
+---@field public bExported_to_test true
+---@field public bInteractiveCollisionClass true
+---@field public bNoFriendlyFire false
+---@field public bSaved_by_game true
+---@field public esDoorAnimSet ''
+---@field public esNavCompoment 'Door'
+---@field public fUseDistance number 2.5
+---@field public guidSmartObjectType ''
+---@field public object_Model ''
+---@field public sWH_AI_EntityCategory 'Door'
+---@field public soclass_SmartObjectHelpers ''
+---@field public soclasses_SmartObjectClass ''
+
+---@class kcd2def*AnimDoor.Server	
+---@field private OnUpdate' kcd2def*unknown_function
+
+---@class kcd2def*AnimDoor
+---@field private BuildNPCAnimationName' kcd2def*unknown_function
+---@field private BuildObjectAnimationName' kcd2def*unknown_function
+---@field public Client kcd2def*AnimDoor.Client
+---@field private Close' kcd2def*unknown_function
+---@field private DespawnSuspiciousVolume' kcd2def*unknown_function
+---@field private DisableLockpick' kcd2def*unknown_function
+---@field private DoLockOnMissingHomeArea' kcd2def*unknown_function
+---@field private DoPlayAnimation' kcd2def*unknown_function
+---@field private DoPlaySound' kcd2def*unknown_function
+---@field private DoStopSound' kcd2def*unknown_function
+---@field private DumpState' kcd2def*unknown_function
+---@field public Editor kcd2def*AnimDoor.Editor
+---@field private EnableLockpick' kcd2def*unknown_function
+---@field private Event_Close' kcd2def*unknown_function
+---@field private Event_Hide' kcd2def*unknown_function
+---@field private Event_Lock' kcd2def*unknown_function
+---@field private Event_Open' kcd2def*unknown_function
+---@field private Event_UnHide' kcd2def*unknown_function
+---@field private Event_Unlock' kcd2def*unknown_function
+---@field public FlowEvents kcd2def*AnimDoor.FlowEvents
+---@field private GenerateLockDifficulty' kcd2def*unknown_function
+---@field private GetActions' kcd2def*unknown_function
+---@field private GetLockDifficulty' kcd2def*unknown_function
+---@field private GetSuspiciousVolume' kcd2def*unknown_function
+---@field private IsAccessedFromFront' kcd2def*unknown_function
+---@field private IsInUse' kcd2def*unknown_function
+---@field private IsInteractive' kcd2def*unknown_function
+---@field private IsLocked' kcd2def*unknown_function
+---@field private IsOnKeySide' kcd2def*unknown_function
+---@field private IsOpen' kcd2def*unknown_function
+---@field private IsRightDoor' kcd2def*unknown_function
+---@field private IsUsable' kcd2def*unknown_function
+---@field private IsUsableMsgChanged' kcd2def*unknown_function
+---@field private Lock' kcd2def*unknown_function
+---@field private LockType'] = 'door';
+---@field private Lockpick' kcd2def*unknown_function
+---@field private NeedSerialize' kcd2def*unknown_function
+---@field private OnEnablePhysics' kcd2def*unknown_function
+---@field private OnLoad' kcd2def*unknown_function
+---@field private OnPropertyChange' kcd2def*unknown_function
+---@field private OnReset' kcd2def*unknown_function
+---@field private OnSave' kcd2def*unknown_function
+---@field private OnSpawn' kcd2def*unknown_function
+---@field private OnUsed' kcd2def*unknown_function
+---@field private Open' kcd2def*unknown_function
+---@field private PhysicalizeThis' kcd2def*unknown_function
+---@field private ProduceAiSound' kcd2def*unknown_function
+---@field public Properties kcd2def*AnimDoor.Properties
+---@field private Reset' kcd2def*unknown_function
+---@field public Server kcd2def*AnimDoor.Server	
+---@field private SetInteractiveCollisionType' kcd2def*unknown_function
+---@field private SetLockedDueToPrivate' kcd2def*unknown_function
+---@field private SetPhysicalFlags' kcd2def*unknown_function
+---@field private SetShouldBeLockedOverride' kcd2def*unknown_function
+---@field private SetUnlockedDueExpected' kcd2def*unknown_function
+---@field private ShouldBeLocked' kcd2def*unknown_function
+---@field private SpawnSuspiciousVolume' kcd2def*unknown_function
+---@field private Unlock' kcd2def*unknown_function
+---@field public bLocked false
+---@field public bNeedUpdate 0
+---@field public bNoAnims 0
+---@field public bUseSameAnim 0
+---@field public bUseableMsgChanged 0
+---@field public lastAnim ''
+---@field public nDirection -1
+---@field public nSoundId 0
+---@field public nUpdateAfterLoad 0
+---@field public nUserId 0
+
+
 ---@class kcd2def*Database
 ---
 ---@nodiscard
@@ -92,7 +250,6 @@
 ---
 ---@field public LoadTable fun(tableName): boolean
 
----@source Data/Scripts/Utils/DatabaseUtils.lua:1
 ---@class kcd2def*DatabaseUtils
 ---@source Data/Scripts/Utils/DatabaseUtils.lua:4
 ---@nodiscard
@@ -232,6 +389,14 @@
 ---@field private StartLockPicking kcd2def*unknown_function
 ---@field private WasBookOpened kcd2def*unknown_function
 
+---@class kcd2def*Physics
+---@field private RayTraceCheck kcd2def*unknown_function
+---@field private RayWorldIntersection kcd2def*unknown_function
+---@field private RegisterExplosionCrack kcd2def*unknown_function
+---@field private RegisterExplosionShape kcd2def*unknown_function
+---@field private SamplePhysEnvironment kcd2def*unknown_function
+---@field private SimulateExplosion kcd2def*unknown_function
+
 ---@class kcd2def*RPG
 ---@field private AddLocationPoint kcd2def*unknown_function
 ---@field private AddStatXP kcd2def*unknown_function
@@ -246,6 +411,34 @@
 ---@field private NotifyLevelXpGain kcd2def*unknown_function
 ---@field private ReconcileWithPublicFriends kcd2def*unknown_function
 ---@field private _GetConstant kcd2def*unknown_function
+
+---@class kcd2def*VectorUtils
+---@field private Copy kcd2def*unknown_function
+---@field private CrossProduct kcd2def*unknown_function
+---@field private Distance kcd2def*unknown_function
+---@field private DistanceSquared kcd2def*unknown_function
+---@field private DistanceSquared2D kcd2def*unknown_function
+---@field private DotProduct kcd2def*unknown_function
+---@field private DotProduct2D kcd2def*unknown_function
+---@field private GetAngleBetween kcd2def*unknown_function
+---@field private GetAngleBetween2D kcd2def*unknown_function
+---@field private GetDirection kcd2def*unknown_function
+---@field private IsZero kcd2def*unknown_function
+---@field private Length kcd2def*unknown_function
+---@field private LengthSquared kcd2def*unknown_function
+---@field private Lerp kcd2def*unknown_function
+---@field private LogVector kcd2def*unknown_function
+---@field private Negate kcd2def*unknown_function
+---@field private Normalize kcd2def*unknown_function
+---@field private Product kcd2def*unknown_function
+---@field private Rotate2D kcd2def*unknown_function
+---@field private Rotate90AroundZ kcd2def*unknown_function
+---@field private RotateAround kcd2def*unknown_function
+---@field private RotateMinus90AroundZ kcd2def*unknown_function
+---@field private Scale kcd2def*unknown_function
+---@field private Subtract kcd2def*unknown_function
+---@field private Sum kcd2def*unknown_function
+---@field private ToString kcd2def*unknown_function
 
 ---@class kcd2def*XGenAIModule
 ---@field private AddLink kcd2def*unknown_function
@@ -292,6 +485,8 @@
 
 --- Global Annotations
 
+---@type kcd2def*AnimDoor
+AnimDoor = ...
 
 ---@type kcd2def*BasicAIActions
 BasicAIActions = ...
@@ -322,6 +517,9 @@ ItemManager = ...
 
 ---@type kcd2def*Minigame
 Minigame = ...
+
+---@type kcd2def*Physics
+Physics = ...
 
 ---@type kcd2def*RPG
 RPG = ...
@@ -554,6 +752,9 @@ SocialClass = {
 		wealthyCustomer = false;
 	};
 };
+
+---@type kcd2def*VectorUtils
+VectorUtils = ...
 
 ---@type kcd2def*XGenAIModule
 XGenAIModule = ...
