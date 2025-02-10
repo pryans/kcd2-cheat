@@ -15,7 +15,7 @@
 ---@alias kcd2def*flatvalue boolean|string|number|integer|function|thread|lightuserdata
 ---@alias kcd2def*tablelike table|userdata
 ---@alias kcd2def*luakey kcd2def*flatvalue|kcd2def*tablelike any valid table key (so anything not nil)
-
+---@alias kcd2def*package.loader fun(modulename: string): chunk_or_errmsg: function|string
 
 --- Generics (these definitions can be buggy)
 

@@ -357,7 +357,23 @@ loadstring = loadstring
 lshift = lshift
 module = module
 next = next
-package = package -- not worth expanding
+package = {
+	config = '\\\\n;\\n?\\n!\\n-\\';
+	cpath = '.\\?.dll;!\\?.dll;!\\loadall.dll';
+	---@type {[string]:table}
+	loaded = {
+	};
+	---@type kcd2def*package.loader[]
+	loaders = {
+		...;
+		...;
+		...;
+		...;
+	};
+	loadlib = package.loadlib;
+	path = ';.\\?.lua;!\\lua\\?.lua;!\\lua\\?\\init.lua;!\\?.lua;!\\?\\init.lua;C:\\Program Files (x86)\\Lua\\5.1\\lua\\?.luac';
+	seeall = package.seeall;
+}
 pairs = pairs
 pcall = pcall
 print = print
