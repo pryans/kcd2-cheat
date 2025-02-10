@@ -3,14 +3,18 @@
 --- definition file containing LuaCATS annotations for the lua state (except builtins) after all typical packages of Kingdom Come Deliverance II have loaded
 --- if a parameter is annotated starting with 'unk_', the purpose or type of that parameter is merely being guessed
 
+
+---@module "kcd2def-builtin"
+---@module "kcd2def-magic"
+---@module "kcd2def-enums"
+
+
 ---@alias kcd2def*unknown_function fun(...): ... this function has not been investigated yet
 ---@alias kcd2def*luaindex integer array index from 1 to length inclusive (position)
 ---@alias kcd2def*cppindex integer array index from 0 to length - 1 (offset)
 ---@alias kcd2def*luakey boolean|string|number|integer|function|table|thread|userdata|lightuserdata any valid table key (so anything not nil)
 
----@module "kcd2def-builtin"
----@module "kcd2def-magic"
----@module "kcd2def-enums"
+
 
 --- Generics (these definitions can be buggy)
 
@@ -19,6 +23,7 @@
 ---@generic V: kcd2def*luakey
 ---@alias kcd2def*DatabaseUtils.RemapColumns fun(columns: {[K]: V[]}, indexColumn: K): {[V]: {[K]: V}}
 ---@alias kcd2def*DatabaseUtils.RemapSingleColumn fun(columns: {[K]: V[]}, indexColumn: K): {[V]: V}
+
 
 --- Common Structures (no metatable, but common fields)
 
