@@ -335,8 +335,6 @@ function Cheat:getEntityClass(entity)
     return nil
 end
 
---# for _,x in pairs(System.GetEntitiesInSphere(player:GetPos(), 20)) do Cheat:log(tostring(Cheat:getEntityClass(x))) end
---# for _ in 1,10 do Cheat:log("hi") end
 function Cheat:getTargetedEntity()
     local from = player:GetPos()
     from.z = from.z + 1.615
@@ -415,8 +413,6 @@ function Cheat:findEntities(searchKey, range, class)
     Cheat:logDebug("Found [%d] matching entities for [%s] [%s] [%s]", #matchingEntities, tostring(searchKey), tostring(range), tostring(class))
     return matchingEntities
 end
-
--- #Cheat:log(tostring( Cheat:findNpcs("Hrushka", 5)[1]:GetWorldPos() ))
 
 function Cheat:findNpcs(searchKey, range)
     return Cheat:findEntities(searchKey, range, "NPC")

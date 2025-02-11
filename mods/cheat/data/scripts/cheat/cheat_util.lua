@@ -13,62 +13,55 @@ function Cheat:loadDatabase(databaseName)
     return Cheat.g_database_cache[databaseName]
 end
 
-function Cheat:findRows(database, searchKey, rowIdKey, rowNameKey)
-    local searchKeyUpper = nil
+function Cheat:findRows(database, searchOperation, fields)
+    local searchKeyUpper = Cheat:toUpper(Cheat:trimToNil(searchOperation.searchKey))
     local foundRows = {}
 
-    if not Cheat:isBlank(searchKey) then
-        searchKeyUpper = Cheat:toUpper(searchKey)
-    end
-
     for _, row in ipairs(database) do
-        local rowIdUpper = Cheat:toUpper(row[rowIdKey])
-        local rowNameUpper = Cheat:toUpper(row[rowNameKey])
-        local found = false
-
         if searchKeyUpper then
-            found = (rowIdUpper == searchKeyUpper) or (string.find(rowNameUpper, searchKeyUpper, 1, true) ~= nil)
-        else
-            found = true
-        end
-
-        if found then
-            local foundRow = {}
-            foundRow.id = tostring(row[rowIdKey])
-            foundRow.name = tostring(row[rowNameKey])
-
-            for k, v in pairs(row) do
-                if k and v and k ~= rowIdKey and k ~= rowNameKey and not Cheat:isBlank(v) then
-                    foundRow[k] = v
+            for _, field in ipairs(fields) do
+                if row[field] then
+                    local searchText = Cheat:trimToNil(Cheat:toUpper(row[field]))
+                    if searchOperation.exact then
+                        if searchText == searchKeyUpper then
+                            table.insert(foundRows, row)
+                            break
+                        end
+                    else
+                        if searchText and string.find(searchText, searchKeyUpper, 1, true) then
+                            table.insert(foundRows, row)
+                            break
+                        end
+                    end
                 end
             end
-
-            table.insert(foundRows, foundRow)
+        else
+            table.insert(foundRows, row)
         end
     end
 
-    Cheat:logDebug("Found [%s] rows for search token [%s].", tostring(#foundRows), tostring(searchKey))
+    Cheat:logDebug("Found [%s] rows for search token [%s].", tostring(#foundRows), Cheat:serializeTable(searchOperation))
     return foundRows
 end
 
-function Cheat:findRow(database, searchKey, rowIdKey, rowNameKey)
-    local rows = Cheat:findRows(database, searchKey, rowIdKey, rowNameKey)
+function Cheat:findRow(database, searchOperation, fields)
+    local rows = Cheat:findRows(database, searchOperation, fields)
     local row = nil
     if rows and #rows > 0 then
         row = rows[#rows]
-        Cheat:logDebug("Found row [%s] with id [%s].", row[rowNameKey], row[rowIdKey])
+        Cheat:logDebug("Found Row: %s", Cheat:serializeTable(row))
     end
     return row
 end
 
 function Cheat:findDatabaseRows(databaseName, searchKey)
     local database = Cheat:loadDatabase(databaseName)
-    return Cheat:findRows(database, searchKey, databaseName .. "_id", databaseName .. "_name")
+    return Cheat:findRows(database, searchKey, { databaseName .. "_id", databaseName .. "_name" })
 end
 
 function Cheat:findDatabaseRow(databaseName, searchKey)
     local database = Cheat:loadDatabase(databaseName)
-    return Cheat:findRow(database, searchKey, databaseName .. "_id", databaseName .. "_name")
+    return Cheat:findRow(database, searchKey, { databaseName .. "_id", databaseName .. "_name" })
 end
 
 function Cheat:xmlParseAttributes(xml)
@@ -86,13 +79,16 @@ function Cheat:xmlReadTags(xml, onTagFunction)
     table.insert(stack, top)
     local ni, c, label, xarg, empty
     local i, j = 1, 1
+    local tagsLoaded = 0
     while true do
         ---@diagnostic disable-next-line: cast-local-type
         ni, j, c, label, xarg, empty = string.find(xml, "<(%/?)([%w:]+)(.-)(%/?)>", i)
         if not ni then break end
         if empty == "/" then
             -- empty element tag
-            onTagFunction(label, Cheat:xmlParseAttributes(xarg))
+            if onTagFunction(label, Cheat:xmlParseAttributes(xarg)) then
+                tagsLoaded = tagsLoaded + 1
+            end
         elseif c == "" then
             -- start tag
             top = { label = label, xarg = Cheat:xmlParseAttributes(xarg) }
@@ -107,17 +103,20 @@ function Cheat:xmlReadTags(xml, onTagFunction)
             if toclose.label ~= label then
                 Cheat:logError("trying to close [%s] with [%s]", toclose.label, label)
             end
-            onTagFunction(toclose.label, toclose.xarg)
+            if onTagFunction(toclose.label, toclose.xarg) then
+                tagsLoaded = tagsLoaded + 1
+            end
         end
         i = j + 1
     end
+    return tagsLoaded
 end
 
 function Cheat:xmlLoadDatabase(xmlFile, onTagFunction)
     -- function onTagFunction(str:tag, table:attributes)
     -- libs/tables/item/item.xml
 
-    Cheat:logDebug("Loading XML database file [%s]", xmlFile)
+    --- Cheat:logDebug("Loading XML database [%s] ...", xmlFile)
 
     if not xmlFile or not onTagFunction then
         return false
@@ -128,7 +127,12 @@ function Cheat:xmlLoadDatabase(xmlFile, onTagFunction)
         return false
     end
 
-    Cheat:xmlReadTags(xml, onTagFunction)
+    local tagsLoaded = Cheat:xmlReadTags(xml, onTagFunction)
+    if tagsLoaded > 0 then
+        Cheat:logDebug("Finished loading [%d] tags from XML database [%s]", tagsLoaded, xmlFile)
+    else
+        Cheat:logError("Failed to load data from XML database [%s]", xmlFile)
+    end
     return true
 end
 

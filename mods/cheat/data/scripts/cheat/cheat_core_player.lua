@@ -215,7 +215,7 @@ function Cheat:cheat_add_stat_levels(line)
     end
 
     player.soul:AdvanceToStatLevel(stat, level)
-    Cheat:logInfo("Adds [%s] levels to stat [%s], new level is [%s].", tostring(levels), tostring(stat), tostring(level))
+    Cheat:logInfo("Added [%s] levels to stat [%s], new level is [%s].", tostring(levels), tostring(stat), tostring(level))
     return true
 end
 

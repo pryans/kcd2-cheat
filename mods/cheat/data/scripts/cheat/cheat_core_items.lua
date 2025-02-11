@@ -19,12 +19,16 @@ Cheat.g_cheesecake = "2a2ac072-a7eb-42f5-8757-776c02647559"
 --Cheat.g_bow2_id = "94de53e1-8874-4a64-9837-ae758cb62e8b" -- item can't be repaired over 0.6 health, shows as 100 cond in ui, bugged?
 Cheat.g_dagger1_id = "3a640e5d-d8bd-4e8b-b61d-8cd5180e79e7"
 Cheat.g_shield1_id = "fd65fbb0-115b-4b63-a410-c235a69860a1"
+Cheat.g_long_ranged_arrow_id = "d5e6764d-18ba-44cb-8dd0-6640a17785a8"         -- long-range arrow
+Cheat.g_enhanced_long_range_arrow_id = "7db6b854-e307-4a47-ba39-943190b2469e" -- enhanced long-range arrow
+
 -- #player.inventory:CreateItem("5c23394a-3300-4570-a8b7-ef1c11519047", 1, 1)
 -- #player.inventory:CreateItem("86e4ff24-88db-4024-abe6-46545fa0fbd1", 1, 1)
 -- #player.inventory:CreateItem("3a640e5d-d8bd-4e8b-b61d-8cd5180e79e7", 1, 1)
 -- #player.inventory:CreateItem("fd65fbb0-115b-4b63-a410-c235a69860a1", 1, 1)
 -- #Cheat:removeAllItems()
 Cheat.g_item_database = {}
+Cheat.g_item_database_search_fields = { "id", "l2name" }
 Cheat.g_item_lookup = {}
 Cheat.g_item_category_map = {
     MiscItem = 0,
@@ -77,15 +81,16 @@ function Cheat:initItemDatabase()
 
                 -- ensure we haven't loaded this iteam already
                 if not Cheat.g_item_lookup[item.id] then
-                    local item_category_id = Cheat.g_item_category_map[tag]
-                    if item_category_id then
-                        item["item_category_name"] = tag
-                        item["item_category_id"] = item_category_id
+                    local category_id = Cheat.g_item_category_map[tag]
+                    if category_id then
+                        item["category_name"] = tag
+                        item["category_id"] = category_id
                         table.insert(Cheat.g_item_database, item)
-                        Cheat:logDebug("Adding item: %s:: %s", tag, Cheat:serializeTable(item))
+                        --Cheat:logDebug("Adding item: %s:: %s", tag, Cheat:serializeTable(item))
                         Cheat.g_item_lookup[item.id] = item
+                        return true
                     else
-                        Cheat:logError("Item id [%s] has no item_category_id for [%s]", item.id, tag)
+                        Cheat:logError("Item id [%s] has no category_id for [%s]", item.id, tag)
                         Cheat.g_item_database_errors = Cheat.g_item_database_errors + 1
                     end
                 else
@@ -97,6 +102,7 @@ function Cheat:initItemDatabase()
                 Cheat.g_item_database_errors = Cheat.g_item_database_errors + 1
             end
         end
+        return false
     end
 
     -- seems like there are bunch of items in different xml files now ...
@@ -114,6 +120,18 @@ function Cheat:initItemDatabase()
         Cheat:logDebug("Done loading XML item databases.")
     else
         Cheat:logError("Found [%d] errors while loading item XML databases.", Cheat.g_item_database_errors)
+    end
+
+    -- localize item database
+    for _, item in pairs(Cheat.g_item_database) do
+        local names = Cheat:getLocalizedItemNames(item)
+        if names then
+            item["l1name"] = names.field1
+            item["l2name"] = names.field2
+        else
+            item["l1name"] = nil
+            item["l2name"] = nil
+        end
     end
 end
 
@@ -141,33 +159,103 @@ function Cheat:getItemCount(id)
     return player.inventory:GetCountOfClass(id)
 end
 
-function Cheat:addItem(id, amount, condition, notify)
+function Cheat:getInventoryItemCount()
+    -- this isn't accurate, GetInventoryTable() probably isn't an array
+    -- #player.inventory:GetInventoryTable()
+    local count = 0
+    for _, v in pairs(player.inventory:GetInventoryTable()) do
+        count = count + 1
+    end
+    return count
+end
+
+function Cheat:getItem(id)
+    return Cheat.g_item_lookup[id]
+end
+
+function Cheat:addItem(searchOperation, amount, condition, notify, logSuccess)
     -- note that some items don't have condition (like lockpicks)
     -- player.inventory:CreateItemOfClass("86e4ff24-88db-4024-abe6-46545fa0fbd1", 5)
     -- player.inventory:CreateItem("86e4ff24-88db-4024-abe6-46545fa0fbd1", 0.5, 3)
     -- player.inventory:CreateItem("8d76f58e-a521-4205-a7e8-9ac077eee5f0", 0.5, 3)
     -- ItemUtils.CreateInvItem(player, "86e4ff24-88db-4024-abe6-46545fa0fbd1", 3, 0.5)
-    -- #Cheat:addItem("86e4ff24-88db-4024-abe6-46545fa0fbd1", 1, 100, true)
-    -- #Cheat:addItem("86e4ff24-88db-4024-abe6-46545fa0fbd1", 1, 50, true)
-
     -- #System.Log(tostring( Cheat:conditionToHealth(50) ))
+
     amount = Cheat:max(amount or 1, 1)
     local health = Cheat:conditionToHealth(condition)
-    Cheat:logDebug("addItem: %s, %s, %s", id, tostring(health), tostring(amount))
-    if player.inventory:CreateItem(id, health, amount) then
-        if notify then
-            Game.ShowItemsTransfer(id, -amount)
+
+    local item = Cheat:findItem(searchOperation)
+    if not item then
+        Cheat:logError("Item [%s] not found.", Cheat:serializeTable(searchOperation))
+        return false
+    end
+
+    if item.isquestitem == "true" then
+        Cheat:logError("Cannot add a quest item: %s", Cheat:getItemDisplayText(item))
+        return false
+    end
+
+    local startingAmount = Cheat:getItemCount(item.id)
+    local endingAmount = startingAmount + amount
+
+    while true do
+        -- some items seem like they can only be added 1 at a time?
+        if not player.inventory:CreateItem(item.id, health, amount) then
+            Cheat:logError("Failed to add item.")
+            return false
+        end
+
+        local currentAmount = Cheat:getItemCount(item.id)
+        if currentAmount == endingAmount then
+            break
+        else
+            amount = endingAmount - currentAmount
         end
     end
+
+    local amountAdded = endingAmount - startingAmount
+
+    if notify then
+        Game.ShowItemsTransfer(item.id, -amountAdded)
+    end
+
+    if logSuccess then
+        Cheat:logInfo("Added [%s] item [%s] to player's inventory (condition [%s]).", tostring(amountAdded), tostring(item.name), tostring(condition))
+    end
+
+    return true
 end
 
-function Cheat:removeItem(id, amount, notify)
-    amount = Cheat:max(amount or 1, 1)
-    local amount_removed = player.inventory:DeleteItemOfClass(id, amount)
-    if notify then
-        Game.ShowItemsTransfer(id, -amount_removed)
+function Cheat:removeItem(searchOperation, amount, notify, logSuccess)
+    local item = Cheat:findItem(searchOperation)
+    if not item then
+        Cheat:logError("No item matching [%s] found in item database.", Cheat:serializeTable(searchOperation))
+        return false
     end
-    return amount_removed
+
+    local itemCount = Cheat:getItemCount(item.id)
+    if itemCount == 0 then
+        Cheat:logError("Item [%s] not found in player's inventory.", tostring(item.name))
+        return false
+    end
+
+    local amountToRemove = Cheat:clamp(amount, 1, itemCount)
+    local amountRemoved = player.inventory:DeleteItemOfClass(item.id, amountToRemove)
+
+    if amountRemoved == 0 then
+        Cheat:logError("Failed to removed item [%s].", tostring(item.name))
+        return false
+    end
+
+    if notify then
+        Game.ShowItemsTransfer(item.id, -amountRemoved)
+    end
+
+    if logSuccess then
+        Cheat:logInfo("Removed [%s] of item [%s] from player's inventory.", tostring(amountRemoved), tostring(item.name))
+    end
+
+    return true
 end
 
 function Cheat:removeAllItems()
@@ -183,12 +271,22 @@ function Cheat:removeAllItem(id, notify)
     return amount_removed
 end
 
-function Cheat:findItems(searchKey)
-    return Cheat:findRows(Cheat.g_item_database, searchKey, "id", "name")
+function Cheat:findItems(searchOperation)
+    if searchOperation then
+        return Cheat:findRows(Cheat.g_item_database, searchOperation, Cheat.g_item_database_search_fields)
+    else
+        return Cheat.g_item_database
+    end
 end
 
-function Cheat:findItem(searchKey)
-    return Cheat:findRow(Cheat.g_item_database, searchKey, "id", "name")
+function Cheat:findItem(searchOperation)
+    -- if the searchKey is an item ID (UUID) we can skip the DB scan
+    local item = Cheat:getItem(searchOperation.searchKey)
+    if item then
+        return item
+    else
+        return Cheat:findRow(Cheat.g_item_database, searchOperation, Cheat.g_item_database_search_fields)
+    end
 end
 
 function Cheat:getUserItem(id, amount, condition)
@@ -215,34 +313,39 @@ end
 
 function Cheat:getUserItems()
     local items = {}
+    local totalItems = 0;
+    local backedupItems = 0
     for _, userdata in pairs(player.inventory:GetInventoryTable()) do
+        totalItems = totalItems + 1
         local item = Cheat:buildUserItem(userdata)
         if item then
             table.insert(items, item)
+            backedupItems = backedupItems + 1
+        else
+            Cheat:logError("Failed to backup user item: %s", Cheat:serializeTable(userdata))
         end
     end
-    return items
+    return items, totalItems, backedupItems
 end
 
 function Cheat:buildUserItem(userdata)
     local itemInstance = ItemManager.GetItem(userdata)
+    if not itemInstance then
+        return nil
+    end
+
     local itemInstanceId = itemInstance.id
     local itemId = itemInstance.class
-    Cheat:logDebug("==================")
-    Cheat:logDebug("itemInstance: %s", Cheat:serializeTable(itemInstance))
+    --Cheat:logDebug("==================")
+    --Cheat:logDebug("itemInstance: %s", Cheat:serializeTable(itemInstance))
 
-    -- Armor:: maxstatus=16 clothing=F_Cotehardie04_m04 price=4771 defensesmash=3 weight=3 wealthlevel=10 defensestab=1 charisma=51 conspicuousness=1 uiinfo=ui_in_cotehardie strreq=0 visibilitycoef=2.57681966 noise=0.11 maxquality=4 iconid=F_Cotehardie04_m04_B id=a84d558b-9542-4223-90d3-22c096c3bda6 fadecoef=1 socialclassid=60 defenseslash=1 visibility=1
-    -- item_category_name=Armor
-    -- item_category_id=4
-    -- name=F_Cotehardie04_m04_B
-    -- uiname=ui_nm_f_cotehardie01_m01
-    local itemDefinition = Cheat:findItem(itemId)
+    local itemDefinition = Cheat:getItem(itemId)
     if not itemDefinition then
         Cheat:logError("Item [%s] not found in item database.", itemId)
         return nil
     end
 
-    Cheat:logDebug("itemDefinition: %s", Cheat:serializeTable(itemDefinition))
+    --Cheat:logDebug("itemDefinition: %s", Cheat:serializeTable(itemDefinition))
 
     local itemInstanceOwer = tostring(ItemManager.GetItemOwner(itemInstanceId))
     local itemCondition = Cheat:healthToCondition(itemInstance.health)
@@ -252,12 +355,14 @@ function Cheat:buildUserItem(userdata)
         id = itemId,
         amount = itemInstance.amount,
         condition = itemCondition,
-        category_id = itemDefinition.item_category_id,
+        category_id = itemDefinition.category_id,
         uiname = itemDefinition.uiname,
+        l1name = itemDefinition.l1name,
+        l2name = itemDefinition.l2name,
         name = itemDefinition.name,
         owner = itemInstanceOwer
     }
-    Cheat:logDebug("userItem: %s", Cheat:serializeTable(userItem))
+    --Cheat:logDebug("userItem: %s", Cheat:serializeTable(userItem))
     return userItem
 end
 
@@ -298,41 +403,81 @@ function Cheat:recreateItems(mode, condition)
 
         if shouldDelete then
             Cheat:logDebug("shouldDelete [%s]", Cheat:serializeTable(item))
-            Cheat:removeItem(item.id, item.amount, false)
+            Cheat:removeItem({ exact = true, searchKey = item.id }, item.amount, false, false)
         end
 
         if shouldRecreate then
             Cheat:logDebug("shouldRecreate [%s]", Cheat:serializeTable(item))
-            Cheat:addItem(item.id, item.amount, condition, false)
+            Cheat:addItem({ exact = true, searchKey = item.id }, item.amount, condition, false, false)
         end
     end
+
+    return true
+end
+
+function Cheat:getItemDisplayText(item)
+    if not item then
+        return "nil"
+    end
+    -- Create a console friendly version of the item.
+    local data = {}
+    for k, v in pairs(item) do
+        if k ~= "id" and k ~= "l2name" and k ~= "l1name" then
+            data[k] = v
+        end
+    end
+    local name = item.name
+    if item.l1name then
+        name = item.l1name
+    end
+    if item.l2name then
+        name = item.l2name
+    end
+    return string.format("name=%s id=%s %s", tostring(name), tostring(item.id), Cheat:serializeTable(data))
 end
 
 -- ============================================================================
 -- cheat_find_items
 -- ============================================================================
 Cheat.cheat_find_items_args = {
-    token = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a the item's name. Leave empty to list all items.") end
+    any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+    exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
+    token = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Legacy.") end
 }
 Cheat:createCommand("cheat_find_items", "Cheat:cheat_find_items(%line)", Cheat.cheat_find_items_args,
-    "Finds all of the items that match the given token.",
-    "Show all items", "cheat_find_items token:",
-    "Show all items with 'arrow' in their name", "cheat_find_items token:arrow")
+    "Perform case-insensitive search for items by ID and localized name.",
+    "Show all items", "cheat_find_items",
+    "Matches items with 'long-range arrow' in their names", "cheat_find_items any:long-range arrow",
+    "Matches item named 'long-range arrow'", "cheat_find_items exact:long-range arrow"
+)
 function Cheat:cheat_find_items(line)
     local args = Cheat:argsProcess(line, Cheat.cheat_find_items_args)
+    local any, anyErr = Cheat:argsGet(args, "any")
+    local exact, exactErr = Cheat:argsGet(args, "exact")
     local token, tokenErr = Cheat:argsGet(args, "token")
-    if tokenErr then
+    if anyErr or exactErr or tokenErr then
         return false, nil
     end
 
-    local items = Cheat:findItems(token)
+    local searchOperation = nil
+    if exact then
+        searchOperation = { exact = true, searchKey = exact }
+    elseif any then
+        searchOperation = { exact = false, searchKey = any }
+    elseif token then
+        searchOperation = { exact = false, searchKey = token }
+    end
+
+    local items = Cheat:findItems(searchOperation)
     if #items == 0 then
         return false, nil
     end
 
     for _, item in ipairs(items) do
-        Cheat:logInfo("Item: name=%s id=%s", item.name, item.id)
+        Cheat:logInfo("Item: %s", Cheat:getItemDisplayText(item))
     end
+
+    Cheat:logInfo("Found [%s] items for search [%s].", tostring(#items), Cheat:serializeTable(searchOperation))
     return true, items
 end
 
@@ -340,34 +485,43 @@ end
 -- cheat_add_item
 -- ============================================================================
 Cheat.cheat_add_item_args = {
-    id = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "The item ID or all or part of a the item's name. Uses last match from cheat_find_items.") end,
+    any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+    exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
+    id = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Legacy.") end,
     amount = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The number of items to add. Default 1.") end,
     condition = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 100, showHelp, "The condition of the item added. Default 100.") end
 }
 Cheat:createCommand("cheat_add_item", "Cheat:cheat_add_item(%line)", Cheat.cheat_add_item_args,
     "Adds an item to the player's inventory.",
-    "Adds the last item with 'bow' in its name", "cheat_add_item id:bow",
-    "Adds the item ui_nm_arrow_hunter by ID", "cheat_add_item id:802507e9-d620-47b5-ae66-08fcc314e26a",
-    "Adds 10 items ui_nm_arrow_hunter by fullname with 50% condition", "cheat_add_item id:ui_nm_arrow_hunter amount:10 condition:50")
+    "Adds 1 item with 'bow' in anywhere in name", "cheat_add_item any:bow",
+    "Adds 1 item with 'hunting arrow' anywhere in name", "cheat_add_item any:hunting arrow",
+    "Adds 2 items exactly named 'military sword' with 50% condition", "cheat_add_item exact:military sword amount:10 condition:50")
 function Cheat:cheat_add_item(line)
     local args = Cheat:argsProcess(line, Cheat.cheat_add_item_args)
-    local id, idErr = Cheat:argsGet(args, "id")
+    local token, tokenErr = Cheat:argsGet(args, "id")
+    local any, anyErr = Cheat:argsGet(args, "any")
+    local exact, exactErr = Cheat:argsGet(args, "exact")
     local amount, amountErr = Cheat:argsGet(args, "amount")
     local condition, conditionErr = Cheat:argsGet(args, "condition")
-
-    if idErr or amountErr or conditionErr then
-        return
-    end
-
-    local item = Cheat:findItem(id)
-    if not item then
-        Cheat:logError("Item [%s] not found.", tostring(id))
+    if tokenErr or anyErr or exactErr or amountErr or conditionErr then
         return false
     end
 
-    Cheat:addItem(item.id, amount, condition, true)
-    Cheat:logInfo("Added [%s] item [%s] to player's inventory (condition [%s]).", tostring(amount), tostring(item.name), tostring(condition))
-    return true
+    local searchOperation = nil
+    if exact then
+        searchOperation = { exact = true, searchKey = exact }
+    elseif any then
+        searchOperation = { exact = false, searchKey = any }
+    elseif token then
+        searchOperation = { exact = false, searchKey = token }
+    end
+
+    if not searchOperation then
+        Cheat:logError("Must provide one of: exact, any")
+        return false
+    end
+
+    return Cheat:addItem(searchOperation, amount, condition, true, true)
 end
 
 -- cheat_add_all_items
@@ -376,14 +530,8 @@ Cheat:createCommand("cheat_add_all_items", "Cheat:cheat_add_all_items()", nil,
     "Adds all items the player's inventory. Enjoy!",
     "Add all items", "cheat_add_all_items")
 function Cheat:cheat_add_all_items()
-    local items = Cheat:findItems()
-    if not items or #items == 0 then
-        Cheat:logError("No items found in item database.")
-        return false
-    end
-
-    for _, item in ipairs(items) do
-        Cheat:addItem(item.id, 1, 100, false)
+    for _, item in ipairs(Cheat:findItems()) do
+        player.inventory:CreateItem(item.id, 1, 1)
     end
     Cheat:logInfo("All items added.")
     return true
@@ -393,7 +541,9 @@ end
 -- cheat_remove_item
 -- ============================================================================
 Cheat.cheat_remove_item_args = {
-    id = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "The item ID or all or part of a the item's name. Uses last match from cheat_find_items.") end,
+    any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+    exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
+    id = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Legacy.") end,
     amount = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The number of items to remove. Default 1.") end,
 }
 Cheat:createCommand("cheat_remove_item", "Cheat:cheat_remove_item(%line)", Cheat.cheat_remove_item_args,
@@ -403,26 +553,29 @@ Cheat:createCommand("cheat_remove_item", "Cheat:cheat_remove_item(%line)", Cheat
     "Removes 10 items ui_nm_arrow_hunter by fullname", "cheat_remove_item id:ui_nm_arrow_hunter amount:10")
 function Cheat:cheat_remove_item(line)
     local args = Cheat:argsProcess(line, Cheat.cheat_remove_item_args)
-    local id, idErr = Cheat:argsGet(args, "id")
+    local token, tokenErr = Cheat:argsGet(args, "id")
+    local any, anyErr = Cheat:argsGet(args, "any")
+    local exact, exactErr = Cheat:argsGet(args, "exact")
     local amount, amountErr = Cheat:argsGet(args, "amount")
-    if idErr or amountErr then
+    if tokenErr or anyErr or exactErr or amountErr then
         return false
     end
 
-    local item = Cheat:findItem(id)
-    if not item then
-        Cheat:logError("No item matching [%s] found in item database.", tostring(id))
+    local searchOperation = nil
+    if exact then
+        searchOperation = { exact = true, searchKey = exact }
+    elseif any then
+        searchOperation = { exact = false, searchKey = any }
+    elseif token then
+        searchOperation = { exact = false, searchKey = token }
+    end
+
+    if not searchOperation then
+        Cheat:logError("Must provide one of: exact, any")
         return false
     end
 
-    if not Cheat:hasItem(item.id) then
-        Cheat:logError("Item [%s] not found in player's inventory.", tostring(item.name))
-        return false
-    end
-
-    local amount_removed = Cheat:removeItem(item.id, amount, true)
-    Cheat:logInfo("Removed [%s] of item [%s] from player's inventory.", tostring(amount_removed), tostring(item.name))
-    return true
+    return Cheat:removeItem(searchOperation, amount, true, true)
 end
 
 -- ============================================================================
@@ -476,7 +629,6 @@ function Cheat:cheat_repair_items(line)
     if conditionErr then
         return false
     end
-    condition = Cheat:clamp(condition, 0, 100)
     Cheat:recreateItems("repairall", condition)
     Cheat:logInfo("All items repaired to at least [%d] condition.", condition)
     return true
@@ -512,8 +664,16 @@ Cheat:createCommand("cheat_backup_inventory", "Cheat:cheat_backup_inventory()", 
     "i.e. A Woman's Lot (DLC). See cheat_restore_inventory.",
     "Saves all items", "cheat_backup_inventory")
 function Cheat:cheat_backup_inventory()
-    Cheat.g_user_items = Cheat:getUserItems()
-    return true
+    local items, totalItems, backedupItems = Cheat:getUserItems()
+    if totalItems > 0 and totalItems == backedupItems then
+        Cheat.g_user_items = items
+        Cheat:logInfo("Backup completed.")
+        return true
+    else
+        Cheat.g_user_items = nil
+        Cheat:logInfo("Failed to backup [%d] of [%d] items.", totalItems - backedupItems, totalItems)
+        return false
+    end
 end
 
 -- ============================================================================
@@ -529,9 +689,7 @@ function Cheat:cheat_restore_inventory()
     end
 
     for _, userItem in ipairs(Cheat.g_user_items) do
-        Cheat:addItem(userItem.id, userItem.amount, userItem.condition, true)
-        Cheat:logInfo("Added [%s] item [%s] to player's inventory (condition [%s]).",
-            tostring(userItem.amount), tostring(userItem.condition), tostring(userItem.condition))
+        Cheat:addItem({ exact = true, searchKey = userItem.id }, userItem.amount, userItem.condition, true, true)
     end
     Cheat.g_user_items = nil
 
@@ -548,9 +706,8 @@ function Cheat:test_core_items()
 
     -- before testing
     Cheat:removeAllItems()
-    Cheat:testAssert("remove all items before testing", #(Cheat:getUserItems()) == 0)
+    Cheat:testAssert("remove all items before testing", Cheat:getInventoryItemCount() == 0)
 
-    -- cheat_find_items
     result, items = Cheat:cheat_find_items(nil)
     Cheat:testAssert("cheat_find_items 1", result and items and #items > 0)
 
@@ -567,29 +724,37 @@ function Cheat:test_core_items()
     Cheat:removeAllItems()
 
     -- cheat_add_item default amount and condition
-    Cheat:testAssert("cheat_add_item lockpick 1.1", Cheat:cheat_add_item("id:" .. Cheat.g_bread_id .. ""))
-    Cheat:testAssert("cheat_add_item lockpick 1.2", Cheat:getItemCount(Cheat.g_bread_id) == 1)
+    Cheat:testAssert("cheat_add_item bread id 1.1", Cheat:cheat_add_item("id:" .. Cheat.g_bread_id .. ""))
+    Cheat:testAssert("cheat_add_item bread id 1.2", Cheat:getItemCount(Cheat.g_bread_id) == 1)
     Cheat:removeAllItems()
 
     -- cheat_add_item with amount and default condition
-    Cheat:testAssert("cheat_add_item lockpick 2.1", Cheat:cheat_add_item("id:" .. Cheat.g_bread_id .. " amount:2"))
-    Cheat:testAssert("cheat_add_item lockpick 2.2", Cheat:getItemCount(Cheat.g_bread_id) == 2)
+    Cheat:testAssert("cheat_add_item bread id 2.1", Cheat:cheat_add_item("id:" .. Cheat.g_bread_id .. " amount:2"))
+    Cheat:testAssert("cheat_add_item bread id 2.2", Cheat:getItemCount(Cheat.g_bread_id) == 2)
     Cheat:removeAllItems()
 
     -- cheat_add_item and condition and default amount
-    Cheat:testAssert("cheat_add_item lockpick 3.1", Cheat:cheat_add_item("id:" .. Cheat.g_bread_id .. " condition:50"))
+    Cheat:testAssert("cheat_add_item bread id 3.1", Cheat:cheat_add_item("id:" .. Cheat.g_bread_id .. " condition:50"))
     item = Cheat:getUserItem(Cheat.g_bread_id)
-    Cheat:testAssert("cheat_add_item lockpick 3.2", item and item.id == Cheat.g_bread_id)
-    Cheat:testAssert("cheat_add_item lockpick 3.3", item and item.amount == 1)
-    Cheat:testAssert("cheat_add_item lockpick 3.4", item and item.condition == 50)
+    Cheat:testAssert("cheat_add_item bread id 3.2", item and item.id == Cheat.g_bread_id)
+    Cheat:testAssert("cheat_add_item bread id 3.3", item and item.amount == 1)
+    Cheat:testAssert("cheat_add_item bread id 3.4", item and item.condition == 50)
     Cheat:removeAllItems()
 
     -- cheat_add_item with amount and condition
-    Cheat:testAssert("cheat_add_item lockpick 4.1", Cheat:cheat_add_item("id:" .. Cheat.g_bread_id .. " amount:4 condition:40"))
+    Cheat:testAssert("cheat_add_item bead id 4.1", Cheat:cheat_add_item("id:" .. Cheat.g_bread_id .. " amount:4 condition:40"))
     item = Cheat:getUserItem(Cheat.g_bread_id)
-    Cheat:testAssert("cheat_add_item lockpick 4.2", item and item.id == Cheat.g_bread_id)
-    Cheat:testAssert("cheat_add_item lockpick 4.3", item and item.amount == 4)
-    Cheat:testAssert("cheat_add_item lockpick 4.4", item and item.condition == 40)
+    Cheat:testAssert("cheat_add_item bead id 4.2", item and item.id == Cheat.g_bread_id)
+    Cheat:testAssert("cheat_add_item bead id 4.3", item and item.amount == 4)
+    Cheat:testAssert("cheat_add_item bead id 4.4", item and item.condition == 40)
+    Cheat:removeAllItems()
+
+    -- cheat_add_item using localized name
+    Cheat:testAssert("cheat_add_item lockpick name 5.1", Cheat:cheat_add_item("id:lockpick"))
+    item = Cheat:getUserItem(Cheat.g_lockpick_id)
+    Cheat:testAssert("cheat_add_item lockpick name 5.2", item and item.id == Cheat.g_lockpick_id)
+    Cheat:testAssert("cheat_add_item lockpick name 5.3", item and item.amount == 1)
+    Cheat:testAssert("cheat_add_item lockpick name 5.4", item and item.condition == 100)
     Cheat:removeAllItems()
 
     -- cheat_remove_item
@@ -598,7 +763,7 @@ function Cheat:test_core_items()
     Cheat:testAssertFalse("cheat_remove_item invalid 6.3", Cheat:cheat_remove_item(""))
     Cheat:testAssertFalse("cheat_remove_item invalid 6.4", Cheat:cheat_remove_item("id:"))
     Cheat:testAssert("cheat_remove_item 6.5", Cheat:cheat_add_item("id:" .. Cheat.g_bread_id .. " amount:3"))
-    Cheat:testAssert("cheat_remove_item 6.6", Cheat:cheat_remove_item("id:" .. Cheat.g_bread_id .. ""))
+    Cheat:testAssert("cheat_remove_item 6.6", Cheat:cheat_remove_item("id:" .. Cheat.g_bread_id))
     Cheat:testAssert("cheat_remove_item 6.7", Cheat:getItemCount(Cheat.g_bread_id) == 2)
     Cheat:testAssert("cheat_remove_item 6.8", Cheat:cheat_remove_item("id:" .. Cheat.g_bread_id .. " amount:2"))
     Cheat:testAssert("cheat_remove_item 6.9", Cheat:getItemCount(Cheat.g_bread_id) == 0)
@@ -607,7 +772,7 @@ function Cheat:test_core_items()
     -- cheat_remove_items
     Cheat:testAssert("cheat_remove_items 7.1", Cheat:cheat_add_item("id:" .. Cheat.g_bread_id .. " amount:10"))
     Cheat:testAssert("cheat_remove_items 7.2", Cheat:cheat_remove_items())
-    Cheat:testAssert("cheat_remove_items 7.3", #(Cheat:getUserItems()) == 0)
+    Cheat:testAssert("cheat_remove_items 7.3", Cheat:getInventoryItemCount() == 0)
     Cheat:removeAllItems()
 
     -- cheat_damage_items (default 50)
@@ -616,7 +781,7 @@ function Cheat:test_core_items()
     Cheat:testAssert("cheat_damage_items 8.3", Cheat:getUserItem(Cheat.g_dagger1_id, 1, 100))
     Cheat:testAssert("cheat_damage_items 8.4", Cheat:getUserItem(Cheat.g_shield1_id, 1, 100))
     Cheat:testAssert("cheat_damage_items 8.5", Cheat:cheat_damage_items())
-    Cheat:testAssert("cheat_damage_items 8.6", #(Cheat:getUserItems()) == 2)
+    Cheat:testAssert("cheat_damage_items 8.6", Cheat:getInventoryItemCount() == 2)
     Cheat:testAssert("cheat_damage_items 8.7", Cheat:getUserItem(Cheat.g_dagger1_id, 1, 50))
     Cheat:testAssert("cheat_damage_items 8.8", Cheat:getUserItem(Cheat.g_shield1_id, 1, 50))
     Cheat:removeAllItems()
@@ -625,7 +790,7 @@ function Cheat:test_core_items()
     Cheat:testAssert("cheat_damage_items 9.1", Cheat:cheat_add_item("id:" .. Cheat.g_dagger1_id .. " amount:1 condition:100"))
     Cheat:testAssert("cheat_damage_items 9.2", Cheat:cheat_add_item("id:" .. Cheat.g_shield1_id .. " amount:1 condition:20"))
     Cheat:testAssert("cheat_damage_items 9.3", Cheat:cheat_damage_items("condition:25"))
-    Cheat:testAssert("cheat_damage_items 9.4", #(Cheat:getUserItems()) == 2)
+    Cheat:testAssert("cheat_damage_items 9.4", Cheat:getInventoryItemCount() == 2)
     Cheat:testAssert("cheat_damage_items 9.5", Cheat:getUserItem(Cheat.g_dagger1_id, 1, 25))
     Cheat:testAssert("cheat_damage_items 9.6", Cheat:getUserItem(Cheat.g_shield1_id, 1, 20))
     Cheat:removeAllItems()
@@ -633,7 +798,7 @@ function Cheat:test_core_items()
     -- cheat_repair_items (default condition of 100)
     Cheat:testAssert("cheat_repair_items 10.1", Cheat:cheat_add_item("id:" .. Cheat.g_dagger1_id .. " amount:1 condition:25"))
     Cheat:testAssert("cheat_repair_items 10.2", Cheat:cheat_add_item("id:" .. Cheat.g_shield1_id .. " amount:1 condition:25"))
-    Cheat:testAssert("cheat_repair_items 10.3", #(Cheat:getUserItems()) == 2)
+    Cheat:testAssert("cheat_repair_items 10.3", Cheat:getInventoryItemCount() == 2)
     Cheat:testAssert("cheat_repair_items 10.4", Cheat:getUserItem(Cheat.g_dagger1_id, 1, 25))
     Cheat:testAssert("cheat_repair_items 10.5", Cheat:getUserItem(Cheat.g_shield1_id, 1, 25))
     Cheat:testAssert("cheat_repair_items 10.6", Cheat:cheat_repair_items())
@@ -645,7 +810,7 @@ function Cheat:test_core_items()
     Cheat:testAssert("cheat_repair_items 11.1", Cheat:cheat_add_item("id:" .. Cheat.g_dagger1_id .. " amount:1 condition:25"))
     Cheat:testAssert("cheat_repair_items 11.2", Cheat:cheat_add_item("id:" .. Cheat.g_shield1_id .. " amount:1 condition:80"))
     Cheat:testAssert("cheat_repair_items 11.3", Cheat:cheat_repair_items("condition:75"))
-    Cheat:testAssert("cheat_repair_items 11.4", #(Cheat:getUserItems()) == 2)
+    Cheat:testAssert("cheat_repair_items 11.4", Cheat:getInventoryItemCount() == 2)
     Cheat:testAssert("cheat_repair_items 11.5", Cheat:getUserItem(Cheat.g_dagger1_id, 1, 75))
     Cheat:testAssert("cheat_repair_items 11.6", Cheat:getUserItem(Cheat.g_shield1_id, 1, 80))
     Cheat:removeAllItems()
@@ -668,13 +833,98 @@ function Cheat:test_core_items()
     Cheat:testAssert("cheat_backup_inventory 14.3", Cheat:cheat_backup_inventory())
     Cheat:removeAllItems()
     Cheat:testAssert("cheat_restore_inventory 14.4", Cheat:cheat_restore_inventory())
-    Cheat:testAssert("cheat_restore_inventory 14.5", #(Cheat:getUserItems()) == 2)
+    Cheat:testAssert("cheat_restore_inventory 14.5", Cheat:getInventoryItemCount() == 2)
     Cheat:testAssert("cheat_restore_inventory 14.6", Cheat:getUserItem(Cheat.g_cheesecake, 2, 10))
     Cheat:testAssert("cheat_restore_inventory 14.7", Cheat:getUserItem(Cheat.g_bread_id, 3, 90))
 
+    -- any\exact - cheat_find_items - any name
+    result, items = Cheat:cheat_find_items("any:long-range arrow")
+    Cheat:testAssert("cheat_find_items any name 15.1", result and items and #items == 2)
+    Cheat:testAssert("cheat_find_items any name 15.2", result and items and items[1].id == Cheat.g_enhanced_long_range_arrow_id)
+    Cheat:testAssert("cheat_find_items any name 15.3", result and items and items[2].id == Cheat.g_long_ranged_arrow_id)
+    Cheat:removeAllItems()
+
+    -- any\exact - cheat_find_items - any id
+    result, items = Cheat:cheat_find_items("any:" .. Cheat.g_enhanced_long_range_arrow_id)
+    Cheat:testAssert("cheat_find_items any id 16.1", result and items and #items == 1)
+    Cheat:testAssert("cheat_find_items any id 16.2", result and items and items[1].id == Cheat.g_enhanced_long_range_arrow_id)
+    Cheat:removeAllItems()
+
+    -- any\exact - cheat_find_items - exact name
+    result, items = Cheat:cheat_find_items("exact:long-range arrow")
+    Cheat:testAssert("cheat_find_items exact name 17.1", result and items and #items == 1)
+    Cheat:testAssert("cheat_find_items exact name 17.2", result and items and items[1].id == Cheat.g_long_ranged_arrow_id)
+    Cheat:removeAllItems()
+
+    -- any\exact - cheat_find_items - exact id
+    result, items = Cheat:cheat_find_items("exact:" .. Cheat.g_enhanced_long_range_arrow_id)
+    Cheat:testAssert("cheat_find_items exact id 18.1", result and items and #items == 1)
+    Cheat:testAssert("cheat_find_items exact id 18.2", result and items and items[1].id == Cheat.g_enhanced_long_range_arrow_id)
+    Cheat:removeAllItems()
+
+    -- any\exact - cheat_add_item - any name
+    Cheat:testAssert("cheat_add_item any name 19.1", Cheat:cheat_add_item("any:long-range arrow"))
+    Cheat:testAssert("cheat_add_item any name 19.2", Cheat:getItemCount(Cheat.g_long_ranged_arrow_id) == 1)
+    Cheat:removeAllItems()
+
+    -- any\exact - cheat_add_item - any id
+    Cheat:testAssert("cheat_add_item any id 20.1", Cheat:cheat_add_item("any:" .. Cheat.g_long_ranged_arrow_id))
+    Cheat:testAssert("cheat_add_item any id 20.2", Cheat:getItemCount(Cheat.g_long_ranged_arrow_id) == 1)
+    Cheat:removeAllItems()
+
+    -- any\exact - cheat_add_item - exact name
+    Cheat:testAssert("cheat_add_item exact name 21.1", Cheat:cheat_add_item("exact:enhanced long-range arrow"))
+    Cheat:testAssert("cheat_add_item exact name 21.2", Cheat:getItemCount(Cheat.g_enhanced_long_range_arrow_id) == 1)
+    Cheat:removeAllItems()
+
+    -- any\exact - cheat_add_item - exact id
+    Cheat:testAssert("cheat_add_item exact id 22.1", Cheat:cheat_add_item("exact:" .. Cheat.g_enhanced_long_range_arrow_id))
+    Cheat:testAssert("cheat_add_item exact id 22.2", Cheat:getItemCount(Cheat.g_enhanced_long_range_arrow_id) == 1)
+    Cheat:removeAllItems()
+
+    -- any\exact - cheat_remove_item - any name
+    Cheat:testAssert("cheat_remove_item any name 23.1", Cheat:cheat_add_item("any:" .. Cheat.g_long_ranged_arrow_id))
+    Cheat:testAssert("cheat_remove_item any name 23.2", Cheat:cheat_add_item("any:" .. Cheat.g_enhanced_long_range_arrow_id))
+    Cheat:testAssert("cheat_remove_item any name 23.3", Cheat:getInventoryItemCount() == 2)
+    Cheat:testAssert("cheat_remove_item any name 23.4", Cheat:cheat_remove_item("any:long-range arrow"))
+    Cheat:testAssert("cheat_remove_item any name 23.5", Cheat:getInventoryItemCount() == 1) -- removes the last one
+    Cheat:removeAllItems()
+
+    -- any\exact - cheat_remove_item - any id
+    Cheat:testAssert("cheat_remove_item any id  24.1", Cheat:cheat_add_item("any:" .. Cheat.g_long_ranged_arrow_id))
+    Cheat:testAssert("cheat_remove_item any id  24.2", Cheat:cheat_add_item("any:" .. Cheat.g_enhanced_long_range_arrow_id))
+    Cheat:testAssert("cheat_remove_item any id  24.3", Cheat:getInventoryItemCount() == 2)
+    Cheat:testAssert("cheat_remove_item any id  24.4", Cheat:cheat_remove_item("any:" .. Cheat.g_long_ranged_arrow_id))
+    Cheat:testAssert("cheat_remove_item any id  24.5", Cheat:getItemCount(Cheat.g_long_ranged_arrow_id) == 0)
+    Cheat:testAssert("cheat_remove_item any id  24.6", Cheat:getItemCount(Cheat.g_enhanced_long_range_arrow_id) == 1)
+    Cheat:removeAllItems()
+
+    -- any\exact - cheat_remove_item - exact name
+    Cheat:testAssert("cheat_remove_item exact name 25.1", Cheat:cheat_add_item("any:" .. Cheat.g_long_ranged_arrow_id))
+    Cheat:testAssert("cheat_remove_item exact name 25.2", Cheat:cheat_add_item("any:" .. Cheat.g_enhanced_long_range_arrow_id))
+    Cheat:testAssert("cheat_remove_item exact name 25.3", Cheat:getInventoryItemCount() == 2)
+    Cheat:testAssert("cheat_remove_item exact name 25.4", Cheat:cheat_remove_item("exact:enhanced long-range arrow"))
+    Cheat:testAssert("cheat_remove_item exact name 25.5", Cheat:getItemCount(Cheat.g_long_ranged_arrow_id) == 1)
+    Cheat:testAssert("cheat_remove_item exact name 25.6", Cheat:getItemCount(Cheat.g_enhanced_long_range_arrow_id) == 0)
+    Cheat:removeAllItems()
+
+    -- any\exact - cheat_remove_item - exact id
+    Cheat:testAssert("cheat_remove_item exact id 26.1", Cheat:cheat_add_item("any:" .. Cheat.g_long_ranged_arrow_id))
+    Cheat:testAssert("cheat_remove_item exact id 26.2", Cheat:cheat_add_item("any:" .. Cheat.g_enhanced_long_range_arrow_id))
+    Cheat:testAssert("cheat_remove_item exact id 26.3", Cheat:getInventoryItemCount() == 2)
+    Cheat:testAssert("cheat_remove_item exact id 26.4", Cheat:cheat_remove_item("exact:" .. Cheat.g_enhanced_long_range_arrow_id))
+    Cheat:testAssert("cheat_remove_item exact id 26.5", Cheat:getItemCount(Cheat.g_long_ranged_arrow_id) == 1)
+    Cheat:testAssert("cheat_remove_item exact id 26.6", Cheat:getItemCount(Cheat.g_enhanced_long_range_arrow_id) == 0)
+    Cheat:removeAllItems()
+
+    -- block adding quest items
+    Cheat:testAssertFalse("cheat_add_item block quest items 27.1", Cheat:cheat_add_item("exact:2cf06381-7692-4f3c-b917-e98dd3b5f8e3"))
+    Cheat:testAssert("cheat_add_item block quest items 27.2", Cheat:getInventoryItemCount() == 0)
+    Cheat:removeAllItems()
+
     -- cheat_add_all_items (this will freeze the game for like 30 seconds)
     Cheat:testAssert("cheat_add_all_items 15.1", Cheat:cheat_add_all_items())
-    Cheat:testAssert("cheat_add_all_items 15.2", #(Cheat:getUserItems()) >= 3000)
+    Cheat:testAssert("cheat_add_all_items 15.2", Cheat:getInventoryItemCount() >= 4732)
     Cheat:removeAllItems()
 
     Cheat:endTest()

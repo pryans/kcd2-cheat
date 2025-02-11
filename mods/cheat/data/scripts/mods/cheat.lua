@@ -39,8 +39,11 @@ end
 
 function Cheat:onSystemStarted()
     Cheat:logDebug("Cheat:onSystemStarted")
-    Cheat:initItemDatabase()
+
     Cheat:initLocalizationDatabase()
+
+    -- these databases use the localization database
+    Cheat:initItemDatabase()
     Cheat:initSoulsDatabase()
 end
 
