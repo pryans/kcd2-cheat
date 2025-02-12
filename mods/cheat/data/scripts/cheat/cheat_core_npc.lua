@@ -615,7 +615,7 @@ Cheat:createCommand("cheat_find_npc", "Cheat:cheat_find_npc(%line)", Cheat.cheat
     "Find NPC with name exact matching 'Bara'", "cheat_find_npc exact:bara",
     "Find all NPCs near player.", "cheat_find_npc radius:5")
 function Cheat:cheat_find_npc(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_find_npc_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_find_npc_args, "cheat_find_npc")
     local any, anyErr = Cheat:argsGet(args, "any")
     local exact, exactErr = Cheat:argsGet(args, "exact")
     local radius, radiusErr = Cheat:argsGet(args, "radius")
@@ -656,7 +656,7 @@ Cheat:createCommand("cheat_revive_npc", "Cheat:cheat_revive_npc(%line)", Cheat.c
     "Revive Father Godwin.", "cheat_revive_npc exact:bara",
     "Revives all bandits near the player.", "cheat_revive_npc any:bandit radius:10")
 function Cheat:cheat_revive_npc(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_revive_npc_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_revive_npc_args, "cheat_revive_npc")
     local any, anyErr = Cheat:argsGet(args, "any")
     local exact, exactErr = Cheat:argsGet(args, "exact")
     local radius, radiusErr = Cheat:argsGet(args, "radius")
@@ -713,9 +713,9 @@ Cheat.cheat_teleport_npc_to_loc_args = {
 }
 Cheat:createCommand("cheat_teleport_npc_to_loc", "Cheat:cheat_teleport_npc_to_loc(%line)", Cheat.cheat_teleport_npc_to_loc_args,
     "Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locations.",
-    "Teleport Father Godwin to somewhere...", "cheat_teleport_npc_to_loc token:Father_Godwin x:1 y:2 z:3")
+    "Teleport Bara to somewhere...", "cheat_teleport_npc_to_loc exact:Bara x:1 y:2 z:3")
 function Cheat:cheat_teleport_npc_to_loc(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_teleport_npc_to_loc_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_teleport_npc_to_loc_args, "cheat_teleport_npc_to_loc")
     local any, anyErr = Cheat:argsGet(args, "any")
     local exact, exactErr = Cheat:argsGet(args, "exact")
     local x, xErr = Cheat:argsGet(args, "x")
@@ -772,7 +772,7 @@ Cheat:createCommand("cheat_teleport_npc_to_player", "Cheat:cheat_teleport_npc_to
     "Teleport Bara to the player.", "cheat_teleport_npc_to_player exact:bara",
     "Teleport all bandits to the player.", "cheat_teleport_npc_to_player any:bandit radius:50")
 function Cheat:cheat_teleport_npc_to_player(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_teleport_npc_to_player_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_teleport_npc_to_player_args, "cheat_teleport_npc_to_player")
     local any, anyErr = Cheat:argsGet(args, "any")
     local exact, exactErr = Cheat:argsGet(args, "exact")
     local radius, radiusErr = Cheat:argsGet(args, "radius")
@@ -860,7 +860,7 @@ Cheat:createCommand("cheat_mass_kill", "Cheat:cheat_mass_kill(%line)", Cheat.che
     "Kill Bara", "cheat_mass_kill exact:bara",
     "Kills all bandits near the player", "cheat_mass_kill any:bandit radius:20")
 function Cheat:cheat_mass_kill(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_kill_npc_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_kill_npc_args, "cheat_mass_kill")
     local any, anyErr = Cheat:argsGet(args, "any")
     local exact, exactErr = Cheat:argsGet(args, "exact")
     local radius, radiusErr = Cheat:argsGet(args, "radius")
@@ -902,7 +902,7 @@ Cheat:createCommand("cheat_spawn", "Cheat:cheat_spawn(%line)", Cheat.cheat_spawn
     "(Working in progress) Spawns entities. Enter the ID (number) from this list:\n" .. Cheat:formatArrayAsList(Cheat.g_soul_category_keys, 3),
     "Spawn 10 bandits", "cheat_spawn id:pig count:10")
 function Cheat:cheat_spawn(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_spawn_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_spawn_args, "cheat_spawn")
     local id, idErr = Cheat:argsGet(args, "id")
     local count, countErr = Cheat:argsGet(args, "count")
     local radius, radiusErr = Cheat:argsGet(args, "radius")

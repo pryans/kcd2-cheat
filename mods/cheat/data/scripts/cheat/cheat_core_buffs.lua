@@ -138,7 +138,7 @@ Cheat:createCommand("cheat_find_buffs", "Cheat:cheat_find_buffs(%line)", Cheat.c
     "Show all buffs", "cheat_find_buffs token:",
     "Show all buffs with 'heal' in their name", "cheat_find_buffs token:heal")
 function Cheat:cheat_find_buffs(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_find_buffs_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_find_buffs_args, "cheat_find_buffs")
     local token, tokenErr = Cheat:argsGet(args, "token")
     if tokenErr then
         return false
@@ -159,19 +159,15 @@ end
 -- cheat_add_buff
 -- ============================================================================
 Cheat.cheat_add_buff_args = {
-    id = function (args, name, showHelp)
-        return Cheat:argsGetRequired(args, name, showHelp,
-            "The buff ID or all or part of a the buff's name. Uses last match from cheat_find_buffs.")
-    end
+    id = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "The buff ID or all or part of a the buff's name. Uses last match from cheat_find_buffs.") end
 }
-
 Cheat:createCommand("cheat_add_buff", "Cheat:cheat_add_buff(%line)", Cheat.cheat_add_buff_args,
     "Adds the given buff to the player.",
     "Adds the last buff with 'heal' in its name", "cheat_add_buff id:heal",
     "Adds the buff poor_hearing buff by ID", "cheat_add_buff id:29336a21-dd76-447b-a4f0-94dd6b9db466",
     "Adds the buff healthEatSleep_instant buff by full name", "cheat_add_buff id:healthEatSleep_instant")
 function Cheat:cheat_add_buff(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_add_buff_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_add_buff_args, "cheat_add_buff")
     local id, idErr = Cheat:argsGet(args, "id")
     if idErr then
         return false
@@ -206,16 +202,14 @@ Cheat.potion_buffs["10"] = { name = "Hair o' the Dog", id = "cf87b636-408a-403e-
 
 Cheat.cheat_add_potion_buff_args = {
     id = function (args, name, showHelp)
-        local helpText = Cheat:createHelpForLookupTable(Cheat.potion_buffs,
-            "The potion ID or all/part of potion name. Supported potions:\n")
+        local helpText = Cheat:createHelpForLookupTable(Cheat.potion_buffs, "The potion ID or all/part of potion name. Supported potions:\n")
         return Cheat:argsGetRequired(args, name, showHelp, helpText)
     end,
 }
-
 Cheat:createCommand("cheat_add_potion_buff", "Cheat:cheat_add_potion_buff(%line)", Cheat.cheat_add_potion_buff_args,
     "Adds a potion buff to the player.")
 function Cheat:cheat_add_potion_buff(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_add_potion_buff_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_add_potion_buff_args, "cheat_add_potion_buff")
     local id, idErr = Cheat:argsGet(args, "id")
     if idErr then
         return false
@@ -237,19 +231,15 @@ end
 -- cheat_remove_buff
 -- ============================================================================
 Cheat.cheat_remove_buff_args = {
-    id = function (args, name, showHelp)
-        return Cheat:argsGetRequired(args, name, showHelp,
-            "The buff ID or all or part of a the buff's name. Uses last match from cheat_find_buffs.")
-    end
+    id = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "The buff ID or all or part of a the buff's name. Uses last match from cheat_find_buffs.") end
 }
-
 Cheat:createCommand("cheat_remove_buff", "Cheat:cheat_remove_buff(%line)", Cheat.cheat_remove_buff_args,
     "Removes the given buff from the player.",
     "Removes the last buff with 'heal' in its name", "cheat_remove_buff id:heal",
     "Removes the buff poor_hearing buff by ID", "cheat_remove_buff id:29336a21-dd76-447b-a4f0-94dd6b9db466",
     "Removes the buff healthEatSleep_instant buff by full name", "cheat_remove_buff id:healthEatSleep_instant")
 function Cheat:cheat_remove_buff(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_remove_buff_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_remove_buff_args, "cheat_remove_buff")
     local id, idErr = Cheat:argsGet(args, "id")
     if idErr then
         return false
