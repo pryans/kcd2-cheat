@@ -8,7 +8,10 @@ function Cheat:createCommand(cmdName, cmdFunc, cmdArgsSet, cmdDocs, ...)
     if cmdArgsSet then
         cmdHelp = cmdHelp .. "\n$8Arguments:$8\n"
         for key, val in pairs(cmdArgsSet) do
-            cmdHelp = cmdHelp .. "\t$6" .. tostring(key) .. ": $5" .. tostring(val(nil, key, true)) .. "\n"
+            if key ~= "default_arg" then
+                local isDefault = key == cmdArgsSet.default_arg
+                cmdHelp = cmdHelp .. "\t$6" .. tostring(key) .. ": $5" .. (isDefault and "[default]" or "") .. tostring(val(nil, key, true)) .. "\n"
+            end
         end
     end
 
