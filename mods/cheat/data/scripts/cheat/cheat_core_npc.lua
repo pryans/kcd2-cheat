@@ -184,18 +184,36 @@ local SOUL_CLASS = {
     SHEEP_RAM = 34
 }
 
-Cheat.g_soul_database = {}
-Cheat.g_soul_keys = {}
+Cheat.g_souls_by_name = {}
+Cheat.g_soul_category_database = {}
+Cheat.g_soul_category_keys = {}
+table.insert(Cheat.g_soul_category_keys, "Boar")
+table.insert(Cheat.g_soul_category_keys, "Pig")
+table.insert(Cheat.g_soul_category_keys, "Bull")
+table.insert(Cheat.g_soul_category_keys, "Cow")
+table.insert(Cheat.g_soul_category_keys, "Hare")
+table.insert(Cheat.g_soul_category_keys, "Horse")
+table.insert(Cheat.g_soul_category_keys, "Men")
+table.insert(Cheat.g_soul_category_keys, "Women")
+table.insert(Cheat.g_soul_category_keys, "Red Doe")
+table.insert(Cheat.g_soul_category_keys, "Roe Doe")
+table.insert(Cheat.g_soul_category_keys, "Red Stag")
+table.insert(Cheat.g_soul_category_keys, "Roe Buck")
+table.insert(Cheat.g_soul_category_keys, "Sheep")
+table.insert(Cheat.g_soul_category_keys, "Ram")
+table.insert(Cheat.g_soul_category_keys, "Wild Dog")
+table.insert(Cheat.g_soul_category_keys, "Dog")
+table.insert(Cheat.g_soul_category_keys, "Wolf")
 
-function Cheat:addSoul(soulKey, entityClass, soul)
+function Cheat:addSoulToCategory(soulKey, entityClass, soul)
     -- entityClass is the name of the Lua class to use?
-    if not Cheat.g_soul_database[soulKey] then
-        Cheat.g_soul_database[soulKey] = {
+    if not Cheat.g_soul_category_database[soulKey] then
+        Cheat.g_soul_category_database[soulKey] = {
             souls = {},
             entityClass = entityClass
         }
     end
-    table.insert(Cheat.g_soul_database[soulKey].souls, soul)
+    table.insert(Cheat.g_soul_category_database[soulKey].souls, soul)
 end
 
 function Cheat:initSoulsDatabase()
@@ -206,74 +224,75 @@ function Cheat:initSoulsDatabase()
     for _, soul in ipairs(souls) do
         if soul.soul_archetype_id == SOUL_ARCHETYPE.BOAR then
             -- Boar_pig
-            Cheat:addSoul("Boar", "Boar", soul)
+            Cheat:addSoulToCategory("Boar", "Boar", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.PIG then
             -- Pig_?
             -- Pig_pig
-            Cheat:addSoul("Pig", "Pig", soul)
+            Cheat:addSoulToCategory("Pig", "Pig", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.CATTLE_BULL then
             -- CattleBull_cattle_bull 2
-            Cheat:addSoul("Bull", "CattleBull", soul)
+            Cheat:addSoulToCategory("Bull", "CattleBull", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.CATTLE_COW then
             -- CattleCow_cattle_cow 12
-            Cheat:addSoul("Cow", "CattleCow", soul)
+            Cheat:addSoulToCategory("Cow", "CattleCow", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.HARE then
             -- Hare_hare 1
-            Cheat:addSoul("Hare", "Hare", soul)
+            Cheat:addSoulToCategory("Hare", "Hare", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.HERO or soul.soul_class_id == SOUL_CLASS.PLAYER then
             -- Hero_? 1
             -- Hero_player 2
             -- NPC_player 1
-            Cheat:addSoul("Hero", "Player", soul)
+            --table.insert(Cheat.g_soul_category_keys, "Hero")
+            -- spawning these will crashed my game
+            -- Cheat:addSoulToCategory("Hero", "Player", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.HORSE then
             -- Horse_? 44
             -- Horse_horse 565
-            Cheat:addSoul("Horse", "Horse", soul)
+            Cheat:addSoulToCategory("Horse", "Horse", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.NPC then
             -- NPC_none 19
             -- NPC_? 6054
-            Cheat:addSoul("Men", "NPC", soul)
+            Cheat:addSoulToCategory("Men", "NPC", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.NPC_FEMALE then
             -- NPC_Female_? 961
             -- NPC_Female_herbalist 1
             -- NPC_Female_none 4
-            Cheat:addSoul("Women", "NPC_Female", soul)
+            Cheat:addSoulToCategory("Women", "NPC_Female", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.RED_DEER_DOE then
             -- RedDeerDoe_red_deer_doe 3
-            Cheat:addSoul("Red Doe", "RedDeerDoe", soul)
+            Cheat:addSoulToCategory("Red Doe", "RedDeerDoe", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.ROE_DEER_HIND then
             -- RoeDeerHind_roe_deer_hind 1
-            Cheat:addSoul("Roe Doe", "RoeDeerHind", soul)
+            Cheat:addSoulToCategory("Roe Doe", "RoeDeerHind", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.RED_DEER_STAG then
             -- RedDeerStag_red_deer_stag 11
-            Cheat:addSoul("Red Stag", "RedDeerStag", soul)
+            Cheat:addSoulToCategory("Red Stag", "RedDeerStag", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.ROE_DEER_BUCK then
             -- RoeDeerBuck_red_deer_buck 1
             -- RoeDeerBuck_red_deer_stag 1
-            Cheat:addSoul("Roe Buck", "RoeDeerBuck", soul)
+            Cheat:addSoulToCategory("Roe Buck", "RoeDeerBuck", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.SHEEP_EWE then
             -- SheepEwe_sheep_ewe 16
-            Cheat:addSoul("Sheep", "SheepEwe", soul)
+            Cheat:addSoulToCategory("Sheep", "SheepEwe", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.SHEEP_RAM then
             -- SheepRam_sheep_ram 4
-            Cheat:addSoul("Ram", "SheepRam", soul)
+            Cheat:addSoulToCategory("Ram", "SheepRam", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.WILD_DOG or soul.soul_class_id == SOUL_CLASS.WILD_DOG then
             -- Dog_wilddog 153
             -- WildDog_dog 11
-            Cheat:addSoul("Wild Dog", "WildDog", soul)
+            Cheat:addSoulToCategory("Wild Dog", "WildDog", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.DOG or soul.soul_class_id == SOUL_CLASS.DOG then
             -- Dog_dog 3
-            Cheat:addSoul("Dog", "Dog", soul)
+            Cheat:addSoulToCategory("Dog", "Dog", soul)
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.WOLF or soul.soul_class_id == SOUL_CLASS.WOLF then
             --  Wolf_wolf 79
-            Cheat:addSoul("Wolf", "Wolf", soul)
+            Cheat:addSoulToCategory("Wolf", "Wolf", soul)
         else
             Cheat:logError("No bucket for soul.")
         end
     end
 
-    for soulKey, soulsInfo in pairs(Cheat.g_soul_database) do
-        table.insert(Cheat.g_soul_keys, soulKey)
+    for soulKey, soulsInfo in pairs(Cheat.g_soul_category_database) do
         Cheat:logDebug("Loaded [%s] souls into soul key [%s].", #soulsInfo.souls, soulKey)
     end
 
@@ -294,8 +313,17 @@ function Cheat:isClass(entity, className)
     return false
 end
 
+function Cheat:isClasses(entity, classNames)
+    for _, className in pairs(classNames) do
+        if Cheat:isClass(entity, className) then
+            return true
+        end
+    end
+    return false
+end
+
 function Cheat:isNpc(entity)
-    return Cheat:hasSoul(entity) and Cheat:isClass(entity, "NPC")
+    return Cheat:hasSoul(entity) and (Cheat:isClass(entity, "NPC") or Cheat:isClass(entity, "NPC_Female"))
 end
 
 function Cheat:getEntityName(entity)
@@ -335,6 +363,14 @@ function Cheat:getEntityClass(entity)
     return nil
 end
 
+function Cheat:getEntityHealth(entity)
+    if entity and entity["actor"] then
+        return entity.actor:GetHealth()
+    else
+        return nil
+    end
+end
+
 function Cheat:getTargetedEntity()
     local from = player:GetPos()
     from.z = from.z + 1.615
@@ -346,11 +382,10 @@ function Cheat:getTargetedEntity()
     local skip = player.id;
     local hitData = {}
     local hits = Physics.RayWorldIntersection(from, dir, 1, ent_all, skip, nil, hitData)
-    --Cheat:logDebug("hits=" .. tostring(hits))
-    --Cheat:logDebug("foundent=" .. tostring(hits > 0 and hitData[1].entity))
+    Cheat:logDebug("Hit Data: %s", Cheat:serializeTable(hitData))
     if hits > 0 then
         if hitData[1]["entity"] then
-            Cheat:logDebug("Found: %s", Cheat:serializeTable(hitData[1].entity))
+            Cheat:logDebug("Targeted Entity: %s", Cheat:serializeTable(hitData[1].entity))
             return hitData[1].entity
         end
     end
@@ -360,24 +395,33 @@ end
 function Cheat:getEntityInfo(entity)
     if not entity then
         Cheat:logWarn("logEntityInfo call on nil entity.")
-        return
+        return nil
     end
 
     local names = Cheat:getLocalizedEntityNames(entity)
 
+    -- socialClass = npcEntity.soul:GetSocialClass().Name,
+    -- factionID = npcEntity.soul:GetFactionID(),
+
     local entityInfo = {
-        ename = Cheat:getEntityName(entity) or "?",
-        l1name = names and names.field1 or "?",
-        l2name = names and names.field2 or "?",
         id = Cheat:getEntityId(entity) or "?",
         class = Cheat:getEntityClass(entity) or "?",
-        loc = Cheat:serializeTable(entity:GetWorldPos())
+        name = Cheat:getEntityName(entity) or "?",
+        l1name = names and names.field1 or "?",
+        l2name = names and names.field2 or "?",
+        loc = Cheat:serializeTable(entity:GetWorldPos()),
+        health = Cheat:getEntityHealth(entity)
     }
 
+    Cheat:logDebug("EntityInfo: %s", Cheat:getEntityInfoDisplayText(entityInfo))
     return entityInfo
 end
 
-function Cheat:findEntities(searchKey, range, class)
+function Cheat:findEntities(searchOperation, range, classes)
+    if not searchOperation then
+        searchOperation = { exact = false, searchKey = nil }
+    end
+
     local entities = nil
     if range then
         entities = System.GetEntitiesInSphere(player:GetPos(), Cheat:max(range, 0))
@@ -385,37 +429,44 @@ function Cheat:findEntities(searchKey, range, class)
         entities = System.GetEntities()
     end
 
-    local searchKeyLower = Cheat:toLower(Cheat:trimToNil(searchKey))
+    local searchKeyLower = Cheat:toLower(Cheat:trimToNil(searchOperation.searchKey))
     local matchingEntities = {}
     for _, entity in pairs(entities) do
-        if Cheat:isClass(entity, class) then
+        if not classes or Cheat:isClasses(entity, classes) then
             if searchKeyLower then
-                local names = { Cheat:getEntityName(entity) }
+                local names = {}
                 local localizedNames = Cheat:getLocalizedEntityNames(entity)
                 if localizedNames then
                     table.insert(names, localizedNames.field1)
                     table.insert(names, localizedNames.field2)
+                else
+                    local entityName = Cheat:getEntityName(entity)
+                    if entityName then
+                        table.insert(names, entityName)
+                    end
                 end
 
                 for _, name in ipairs(names) do
                     local nameLower = Cheat:toLower(Cheat:trimToNil(name))
-                    if string.find(nameLower, searchKeyLower, 1, true) then
+                    local found = (searchOperation.exact and nameLower == searchKeyLower) or (not searchOperation.exact and string.find(nameLower, searchKeyLower, 1, true))
+                    if found then
                         table.insert(matchingEntities, entity)
-                        Cheat:logDebug("Found: %s", Cheat:serializeTable(entity))
+                        Cheat:logDebug("Found: %s", Cheat:getEntityDisplayText(entity))
+                        break
                     end
                 end
             else
-                Cheat:logDebug("Found: %s", Cheat:serializeTable(entity))
+                Cheat:logDebug("Found: %s", Cheat:getEntityDisplayText(entity))
                 table.insert(matchingEntities, entity)
             end
         end
     end
-    Cheat:logDebug("Found [%d] matching entities for [%s] [%s] [%s]", #matchingEntities, tostring(searchKey), tostring(range), tostring(class))
+    Cheat:logDebug("Found [%d] matching entities for [%s] [%s] [%s]", #matchingEntities, Cheat:serializeTable(searchOperation), tostring(range), Cheat:serializeTable(classes))
     return matchingEntities
 end
 
-function Cheat:findNpcs(searchKey, range)
-    return Cheat:findEntities(searchKey, range, "NPC")
+function Cheat:findNpcs(searchOperation, range)
+    return Cheat:findEntities(searchOperation, range, { "NPC", "NPC_Female" })
 end
 
 function Cheat:createUniqueEntityName(entityClass)
@@ -430,6 +481,47 @@ function Cheat:spawmEntity(entityName, entityClass, entitySoul, avoidSpawnCenter
         entityName = Cheat:createUniqueEntityName(entityClass)
     end
 
+    --[[
+
+    <skald_character age="3" body_type="4" description_string_name="char_HAJNY_HRUSKA_description" gender="0"
+        history_string_name="char_HAJNY_HRUSKA_history" image1="true" image2="false" image3="false" image4="true"
+        master_role_name="EVENT_TABORY_LUKOSTRELBA_URS" mortality_id="0" owner="Jan Zeman"
+        physical_description_string_name="char_HAJNY_HRUSKA_physicalDescription"
+        skald_character_full_name_string_name="char_HAJNY_HRUSKA_fullName"
+        skald_character_name="char_HAJNY_HRUSKA"
+        streaming_string_name="char_HAJNY_HRUSKA_streaming"
+        ui_name_string_name="char_HAJNY_HRUSKA_uiName"
+        unique_assets="7" voice_categories="generic christian" voice_id="234" />
+
+
+        localized.cell2/3
+            -> localized.cell1 (uiname)
+                -> skald_character.ui_name_string_name
+
+        entity.name(taboryUCesty_archery_urs)
+            ->  <InventoryPreset Name="inventory_taboryUCesty_archery_urs">
+                    <ClothingPresetRef Name="taboryUCesty_archery_urs" />
+                    <WeaponPresetRef Name="taboryUCesty_archery_urs" />
+                    <InventoryPresetRef Name="pockets_huntsman" />
+                    <PresetItem Name="beer" Amount="1" />
+                    <PresetItem Name="water" Amount="1" />
+                    <PresetItem Name="repairKit_tailorsSmall" Amount="1" />
+                </InventoryPreset>
+            -> soul.soul_name -> soul.soul_id
+                <soul
+                    brain_id="4b914d1c-724a-a92d-3e6b-d183d35b8b98"
+                    digestion_multiplier="0"
+                    factionName="eventNPCs_civilians_friends"
+                    initial_clothing_dirt="0"
+                    skald_character_name="char_HAJNY_HRUSKA" social_class_id="88"
+                    soul_archetype_id="0"
+                    soul_id="c82be12b-76e1-4da5-88c9-6b1c50aa080b"
+                    soul_name="taboryUCesty_archery_urs"
+                    soul_vip_class_id="0"
+                    xp_multiplier="0" />
+    ]]
+
+    --[[
     local spawnParams = {}
     spawnParams.class = entityClass
     spawnParams.position = Cheat:createSpawnVectorFromVector(avoidSpawnCenter, spawnCenter, spawnRadius, spawnNear)
@@ -437,119 +529,182 @@ function Cheat:spawmEntity(entityName, entityClass, entitySoul, avoidSpawnCenter
     spawnParams.name = entityName
     spawnParams.properties = {}
     spawnParams.properties.sharedSoulGuid = entitySoul
-
+    Cheat:logDebug(Cheat:serializeTable(spawnParams))
     local entity = System.SpawnEntity(spawnParams)
+
+    System.GetEntity("taboryUCesty_archery_urs")
+    System.SpawnEntity({ name = "taboryUCesty_archery_urs", class = "NPC", sharedSoulGuid = "c82be12b-76e1-4da5-88c9-6b1c50aa080b", position = player:GetWorldPos() })
+    ]]
+
+    local params = {
+        name = entityName,
+        class = entityClass,
+        position = Cheat:createSpawnVectorFromVector(avoidSpawnCenter, spawnCenter, spawnRadius, spawnNear),
+        orientation = player:GetWorldPos(),
+        scale = 1,
+        archetype = nil,
+        soul = entitySoul,
+        properties = {},
+        propertiesInstance = {}
+    }
+
+    local entity = System.SpawnEntity(params)
     if entity then
         Cheat:logInfo("Spawned: %s", Cheat:serializeTable(Cheat:getEntityInfo(entity)))
+    else
+        Cheat:logError("Failed to spawn entity: %s", Cheat:serializeTable(params))
     end
 end
 
--- ============================================================================
--- cheat_kill_npc
--- ============================================================================
-Cheat.cheat_kill_npc_args = {
-    token = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "All or part of the NPC's name.") end,
-    radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The kill radius around player. Default 5.") end,
-}
-Cheat:createCommand("cheat_kill_npc", "Cheat:cheat_kill_npc(%line)", Cheat.cheat_kill_npc_args,
-    "Kills all the killable NPCs within the given radius of the player.",
-    "Kill everything.", "cheat_kill_npc radius:200",
-    "Kill Father Godwin.", "cheat_kill_npc token:Godwin radius:2",
-    "Kill all bandits near the player.", "cheat_kill_npc token:bandit radius:20")
-function Cheat:cheat_kill_npc(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_kill_npc_args)
-    local token, tokenErr = Cheat:argsGet(args, "token")
-    local radius, radiusErr = Cheat:argsGet(args, "radius")
-    if tokenErr or radiusErr then
-        return false
-    end
+function Cheat:spawn()
+    -- System.RemoveEntity(Cheat:getTargetedEntity().id)
+    -- System.Log(tostring(Cheat:getTargetedEntity():Reset()))
 
-    local npcs = Cheat:findNpcs(token, radius)
-    if not npcs or #npcs == 0 then
-        Cheat:logError("No NPCs matching [%s] found in radius [%s].", token, tostring(radius))
-        return false
-    end
+    local sp                      = {}
+    sp.ClassName                  = "NPC"
+    sp.Name                       = "taboryUCesty_archery_urs"
+    sp.SoulGuid                   = "c82be12b-76e1-4da5-88c9-6b1c50aa080b"
+    sp.Properties                 = {}
+    sp.PercepDestinationrObjectAI = false
+    sp.PerceptibleObjectAI        = false
+    sp.Pos                        = player:GetWorldPos()
+    sp.Rot                        = player:GetAngles()
 
-    for _, npc in ipairs(npcs) do
-        npc.soul:DealDamage(9999, 9999)
-        Cheat:logInfo("Killed: %s", Cheat:serializeTable(Cheat:getEntityInfo(npc)))
+    System.SpawnEntity({ class = "Boar", position = player:GetWorldPos() }) --, name = "taboryUCesty_archery_urs", properties = {SoulGuid = "c82be12b-76e1-4da5-88c9-6b1c50aa080b"}})
+
+    Cheat:logInfo("before spawn")
+    local entity = XGenAIModule.SpawnEntity(sp)
+    if entity then
+        Cheat:logInfo("Spawned: %s", Cheat:serializeTable(Cheat:getEntityInfo(entity)))
+    else
+        Cheat:logError("crap")
     end
-    return true
 end
 
--- ============================================================================
--- cheat_resurrect_npc
--- ============================================================================
-Cheat.cheat_resurrect_npc_args = {
-    token = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "All or part of the NPC's name.") end,
-    radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The resurrection radius around player. Default 5.") end,
-}
-Cheat:createCommand("cheat_resurrect_npc", "Cheat:cheat_resurrect_npc(%line)", Cheat.cheat_resurrect_npc_args,
-    "Resurrects all dead NPCs within the given radius of the player.",
-    "Resurrect everything.", "cheat_resurrect_npc radius:200",
-    "Resurrect Father Godwin.", "cheat_resurrect_npc token:Godwin radius:2",
-    "Resurrects all bandits near the player.", "cheat_resurrect_npc token:bandit radius:10")
-function Cheat:cheat_resurrect_npc(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_resurrect_npc_args)
-    local token, tokenErr = Cheat:argsGet(args, "token")
-    local radius, radiusErr = Cheat:argsGet(args, "radius")
-
-    if tokenErr or radiusErr then
-        return false
+function Cheat:getEntityInfoDisplayText(entityInfo)
+    if not entityInfo then
+        return "nil"
     end
 
-    local npcs = Cheat:findNpcs(token, radius)
-    if not npcs or #npcs == 0 then
-        Cheat:logError("No NPCs matching [%s] found in radius [%s].", token, tostring(radius))
-        return false
+    local name = entityInfo.name
+    if entityInfo.l1name then
+        name = entityInfo.l1name
+    end
+    if entityInfo.l2name then
+        name = entityInfo.l2name
     end
 
-    for _, npc in ipairs(npcs) do
-        if npc:IsDead() then
-            npc.actor:ReviveToDefaults()
-            --npc:SetWorldPos(entity.entityPosition)
-            Cheat:logInfo("Resurrected: %s", Cheat:serializeTable(Cheat:getEntityInfo(npc)))
-        end
-    end
-    return true
+    return string.format("name=%s class=%s loc=%s health=%s", tostring(name), tostring(entityInfo.class), tostring(entityInfo.loc), tostring(entityInfo.health))
+end
+
+function Cheat:getEntityDisplayText(entity)
+    return Cheat:getEntityInfoDisplayText(Cheat:getEntityInfo(entity))
 end
 
 -- ============================================================================
 -- cheat_find_npc
 -- ============================================================================
 Cheat.cheat_find_npc_args = {
-    token = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "All or part of the NPC's name.") end,
+    any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+    exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
     radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The search radius around player.") end,
 }
 Cheat:createCommand("cheat_find_npc", "Cheat:cheat_find_npc(%line)", Cheat.cheat_find_npc_args,
-    "Finds and shows information about an NPC.\n$8This only works if the NPC has been loaded into the world.",
-    "Find Father Godwin", "cheat_find_npc token:godwin",
-    "Find all NPS near player.", "cheat_find_npc radius:5")
+    "Finds NPCs loaded into the world.",
+    "Find any NPC with 'hunt' in name", "cheat_find_npc any:hunt",
+    "Find NPC with name exact matching 'Bara'", "cheat_find_npc exact:bara",
+    "Find all NPCs near player.", "cheat_find_npc radius:5")
 function Cheat:cheat_find_npc(line)
     local args = Cheat:argsProcess(line, Cheat.cheat_find_npc_args)
-    local token, tokenErr = Cheat:argsGet(args, "token")
+    local any, anyErr = Cheat:argsGet(args, "any")
+    local exact, exactErr = Cheat:argsGet(args, "exact")
     local radius, radiusErr = Cheat:argsGet(args, "radius")
-    if tokenErr or radiusErr then
-        return false
+    if anyErr or exactErr or radiusErr then
+        return false, nil
     end
 
-    local npcs = Cheat:findNpcs(token, radius)
+    local searchOperation = nil
+    if exact then
+        searchOperation = { exact = true, searchKey = exact }
+    elseif any then
+        searchOperation = { exact = false, searchKey = any }
+    end
+
+    local npcs = Cheat:findNpcs(searchOperation, radius)
     if not npcs or #npcs == 0 then
-        Cheat:logError("No NPCs matching [%s] found in radius [%s].", token, tostring(radius))
-        return false
+        Cheat:logWarn("No NPCs matching [%s] found in radius [%s].", Cheat:serializeTable(searchOperation), tostring(radius))
+        return false, nil
     end
 
     for _, npc in ipairs(npcs) do
-        Cheat:logInfo("Found: %s", Cheat:serializeTable(Cheat:getEntityInfo(npc)))
+        Cheat:logInfo("Found: %s", Cheat:getEntityDisplayText(npc))
     end
-    return true
+    return true, npcs
+end
+
+-- ============================================================================
+-- cheat_revive_npc
+-- ============================================================================
+Cheat.cheat_revive_npc_args = {
+    any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+    exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
+    radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The resurrection radius around player. Default 5.") end,
+}
+Cheat:createCommand("cheat_revive_npc", "Cheat:cheat_revive_npc(%line)", Cheat.cheat_revive_npc_args,
+    "(Does not work yet) Revives dead NPCs by name or within the given radius of the player.",
+    "Revive everything.", "cheat_revive_npc radius:200",
+    "Revive Father Godwin.", "cheat_revive_npc exact:bara",
+    "Revives all bandits near the player.", "cheat_revive_npc any:bandit radius:10")
+function Cheat:cheat_revive_npc(line)
+    local args = Cheat:argsProcess(line, Cheat.cheat_revive_npc_args)
+    local any, anyErr = Cheat:argsGet(args, "any")
+    local exact, exactErr = Cheat:argsGet(args, "exact")
+    local radius, radiusErr = Cheat:argsGet(args, "radius")
+    if anyErr or exactErr or radiusErr then
+        return false, nil
+    end
+
+    local searchOperation = nil
+    if exact then
+        searchOperation = { exact = true, searchKey = exact }
+    elseif any then
+        searchOperation = { exact = false, searchKey = any }
+    end
+
+    local npcs = Cheat:findNpcs(searchOperation, radius)
+    if not npcs or #npcs == 0 then
+        Cheat:logWarn("No NPCs matching [%s] found in radius [%s].", Cheat:serializeTable(searchOperation), tostring(radius))
+        return false, nil
+    end
+
+    for _, npc in ipairs(npcs) do
+        if Cheat:getEntityHealth(npc) <= 0 then
+            -- turns npc into a zombie
+            -- seems like the ai is no longer running
+            npc.actor:Revive(true)
+
+            -- #Cheat:getTargetedEntity().Reset(self, true, true);
+            -- Cheat:getTargetedEntity().actor:Reset(true, true)
+            -- Cheat:getTargetedEntity():OnReset(true)
+            --npc:Reset()
+            --npc.actor:InitialSetup(true)
+            --npc.soul:SetState("health", 100)
+            --npc:ReviveInEditor()
+            --npc.actor:Revive(true)
+            --npc.soul:Revive()
+            --npc:SetWorldPos(entity.entityPosition)
+            Cheat:logInfo("Resurrected: %s", Cheat:getEntityDisplayText(npc))
+        end
+    end
+    return true, npcs
 end
 
 -- ============================================================================
 -- cheat_teleport_npc_to_loc
 -- ============================================================================
 Cheat.cheat_teleport_npc_to_loc_args = {
-    token = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "All or part of the NPC's name.") end,
+    any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+    exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
     x = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "X coordinate.") end,
     y = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "Y coordinate.") end,
     z = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "Z coordinate.") end,
@@ -561,73 +716,114 @@ Cheat:createCommand("cheat_teleport_npc_to_loc", "Cheat:cheat_teleport_npc_to_lo
     "Teleport Father Godwin to somewhere...", "cheat_teleport_npc_to_loc token:Father_Godwin x:1 y:2 z:3")
 function Cheat:cheat_teleport_npc_to_loc(line)
     local args = Cheat:argsProcess(line, Cheat.cheat_teleport_npc_to_loc_args)
-    local token, tokenErr = Cheat:argsGet(args, "token")
+    local any, anyErr = Cheat:argsGet(args, "any")
+    local exact, exactErr = Cheat:argsGet(args, "exact")
     local x, xErr = Cheat:argsGet(args, "x")
     local y, yErr = Cheat:argsGet(args, "y")
     local z, zErr = Cheat:argsGet(args, "z")
     local radius, radiusErr = Cheat:argsGet(args, "radius")
     local max, maxErr = Cheat:argsGet(args, "max")
-    if tokenErr or xErr or yErr or zErr or radiusErr or maxErr then
-        return false
+    if anyErr or exactErr or xErr or yErr or zErr or radiusErr or maxErr then
+        return false, nil
     end
 
-    local npcs = Cheat:findNpcs(token)
+    local searchOperation = nil
+    if exact then
+        searchOperation = { exact = true, searchKey = exact }
+    elseif any then
+        searchOperation = { exact = false, searchKey = any }
+    end
+
+    if not searchOperation then
+        Cheat:logError("Must provide one of: exact, any")
+        return false, nil
+    end
+
+    local npcs = Cheat:findNpcs(searchOperation)
     if not npcs or #npcs == 0 then
-        Cheat:logError("No NPCs matching [%s] found.", token)
-        return false
+        Cheat:logWarn("No NPCs matching [%s] found in radius [%s].", Cheat:serializeTable(searchOperation), tostring(radius))
+        return false, nil
     end
 
     local teleportCount = 0
     for _, npc in ipairs(npcs) do
         if teleportCount < max then
-            npc:SetWorldPos(Cheat:createSpawnVectorFromPosition(false, x, y, z, radius));
+            npc:SetWorldPos(Cheat:createSpawnVectorFromPosition(false, x, y, z, radius, 0));
             teleportCount = teleportCount + 1
-            Cheat:logInfo("Teleported: %s", Cheat:serializeTable(Cheat:getEntityInfo(npc)))
+            Cheat:logInfo("Teleported: %s", Cheat:getEntityDisplayText(npc))
         else
             break
         end
     end
-    return true
+    return true, npcs
 end
 
 -- ============================================================================
 -- cheat_teleport_npc_to_player
 -- ============================================================================
 Cheat.cheat_teleport_npc_to_player_args = {
-    token = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "All or part of the NPC's name.") end,
+    any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+    exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
     radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The teleport radius around the player. Default 5") end,
     max = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The maximum NPCs to teleport. Default 1.") end
 }
 Cheat:createCommand("cheat_teleport_npc_to_player", "Cheat:cheat_teleport_npc_to_player(%line)", Cheat.cheat_teleport_npc_to_player_args,
     "Teleports one or more NPCs to the player's location.",
-    "Teleport Bara to the player.", "cheat_teleport_npc_to_player token:bara")
+    "Teleport Bara to the player.", "cheat_teleport_npc_to_player exact:bara",
+    "Teleport all bandits to the player.", "cheat_teleport_npc_to_player any:bandit radius:50")
 function Cheat:cheat_teleport_npc_to_player(line)
     local args = Cheat:argsProcess(line, Cheat.cheat_teleport_npc_to_player_args)
-    local token, tokenErr = Cheat:argsGet(args, "token")
+    local any, anyErr = Cheat:argsGet(args, "any")
+    local exact, exactErr = Cheat:argsGet(args, "exact")
     local radius, radiusErr = Cheat:argsGet(args, "radius")
     local max, maxErr = Cheat:argsGet(args, "max")
-    if tokenErr or radiusErr or maxErr then
-        return false
+    if anyErr or exactErr or radiusErr or maxErr then
+        return false, nil
     end
 
-    local npcs = Cheat:findNpcs(token)
+    local searchOperation = nil
+    if exact then
+        searchOperation = { exact = true, searchKey = exact }
+    elseif any then
+        searchOperation = { exact = false, searchKey = any }
+    end
+
+    if not searchOperation then
+        Cheat:logError("Must provide one of: exact, any")
+        return false, nil
+    end
+
+    local npcs = Cheat:findNpcs(searchOperation)
     if not npcs or #npcs == 0 then
-        Cheat:logError("No NPCs matching [%s] found.", token)
-        return false
+        Cheat:logWarn("No NPCs matching [%s] found in radius [%s].", Cheat:serializeTable(searchOperation), tostring(radius))
+        return false, nil
     end
 
     local playerPosition = player:GetWorldPos();
     local teleportCount = 0
     for _, npc in ipairs(npcs) do
         if teleportCount < max then
-            npc:SetWorldPos(Cheat:createSpawnVectorFromPosition(false, playerPosition, radius));
+            npc:SetWorldPos(Cheat:createSpawnVectorFromVector(true, playerPosition, radius, 2));
             teleportCount = teleportCount + 1
-            Cheat:logInfo("Teleported: %s", Cheat:serializeTable(Cheat:getEntityInfo(npc)))
+            Cheat:logInfo("Teleported: %s", Cheat:getEntityDisplayText(npc))
         else
             break
         end
     end
-    return true
+    return true, npcs
+end
+
+-- ============================================================================
+-- cheat_target
+-- ============================================================================
+Cheat:createCommand("cheat_target", "Cheat:cheat_target()", nil, "shows information about your current target.")
+function Cheat:cheat_target()
+    local entity = Cheat:getTargetedEntity()
+    if entity then
+        Cheat:logInfo("Targeted: %s", Cheat:getEntityDisplayText(entity))
+    else
+        Cheat:logWarn("You are not targeting anything.")
+    end
 end
 
 -- ============================================================================
@@ -639,15 +835,59 @@ function Cheat:cheat_kill()
     if entity then
         local entityInfo = Cheat:getEntityInfo(entity)
         if Cheat:hasSoul(entity) then
-            Cheat.entity_target.soul:DealDamage(9999, 9999)
-            Cheat:logInfo("Killed: %s", Cheat:serializeTable(entityInfo))
+            entity.soul:DealDamage(9999, 9999)
+            Cheat:logInfo("Killed: %s", Cheat:getEntityInfoDisplayText(entityInfo))
         else
             Cheat:logError("Targeted entity has no soul, can't kill it.")
-            Cheat:logError("Targeted: %s", Cheat:serializeTable(entityInfo))
+            Cheat:logError("Targeted: %s", Cheat:getEntityInfoDisplayText(entityInfo))
         end
     else
         Cheat:logWarn("You are not targeting anything.")
     end
+end
+
+-- ============================================================================
+-- cheat_mass_kill
+-- ============================================================================
+Cheat.cheat_kill_npc_args = {
+    any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+    exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
+    radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 10, showHelp, "The kill radius around player. Default 10.") end,
+}
+Cheat:createCommand("cheat_mass_kill", "Cheat:cheat_mass_kill(%line)", Cheat.cheat_kill_npc_args,
+    "Kills all the killable entities within the given radius of the player.",
+    "Kill everything within 200 units of player", "cheat_mass_kill radius:200",
+    "Kill Bara", "cheat_mass_kill exact:bara",
+    "Kills all bandits near the player", "cheat_mass_kill any:bandit radius:20")
+function Cheat:cheat_mass_kill(line)
+    local args = Cheat:argsProcess(line, Cheat.cheat_kill_npc_args)
+    local any, anyErr = Cheat:argsGet(args, "any")
+    local exact, exactErr = Cheat:argsGet(args, "exact")
+    local radius, radiusErr = Cheat:argsGet(args, "radius")
+    if anyErr or exactErr or radiusErr then
+        return false, nil
+    end
+
+    local searchOperation = nil
+    if exact then
+        searchOperation = { exact = true, searchKey = exact }
+    elseif any then
+        searchOperation = { exact = false, searchKey = any }
+    end
+
+    local entities = Cheat:findEntities(searchOperation, radius)
+    if not entities or #entities == 0 then
+        Cheat:logWarn("No entities matching [%s] found in radius [%s].", Cheat:serializeTable(searchOperation), tostring(radius))
+        return false, nil
+    end
+
+    for _, entity in ipairs(entities) do
+        if entity and Cheat:hasSoul(entity) and entity ~= player then
+            entity.soul:DealDamage(9999, 9999)
+            Cheat:logInfo("Killed: %s", Cheat:getEntityDisplayText(entity))
+        end
+    end
+    return true, entities
 end
 
 -- ============================================================================
@@ -659,7 +899,7 @@ Cheat.cheat_spawn_args = {
     radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 10, showHelp, "The spawn radius around the player. Default 10.") end
 }
 Cheat:createCommand("cheat_spawn", "Cheat:cheat_spawn(%line)", Cheat.cheat_spawn_args,
-    "Spawns entities. Enter the ID (number) from this list:\n" .. Cheat:formatArrayAsList(Cheat.g_soul_keys, 3)
+    "(Working in progress) Spawns entities. Enter the ID (number) from this list:\n" .. Cheat:formatArrayAsList(Cheat.g_soul_category_keys, 3),
     "Spawn 10 bandits", "cheat_spawn id:pig count:10")
 function Cheat:cheat_spawn(line)
     local args = Cheat:argsProcess(line, Cheat.cheat_spawn_args)
@@ -671,13 +911,13 @@ function Cheat:cheat_spawn(line)
         return false
     end
 
-    if not Cheat.g_soul_keys[id] then
+    if not Cheat.g_soul_category_keys[id] then
         Cheat:logError("Spawn type ID [%s] does not exist.", tostring(id))
         return false
     end
 
-    local soulKey = Cheat.g_soul_keys[id]
-    local soulsInfo = Cheat.g_soul_database[soulKey]
+    local soulKey = Cheat.g_soul_category_keys[id]
+    local soulsInfo = Cheat.g_soul_category_database[soulKey]
 
     if not soulsInfo then
         Cheat:logError("Soul key [%s] not found. (Report this bug)", tostring(soulKey))
@@ -693,44 +933,6 @@ function Cheat:cheat_spawn(line)
         local spawnRadius      = radius                                            -- size of spawn area
         local spawnNear        = 2                                                 -- how far from the center we need to be
         Cheat:spawmEntity(entityName, entityClass, entitySoul, avoidSpawnCenter, spawnCenter, spawnRadius, spawnNear)
-    end
-end
-
--- ============================================================================
--- cheat_spawn_npc
--- ============================================================================
-Cheat.cheat_spawn_npc_args = {
-    token = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "The sould ID, all/part of the soul name, or all/part of localized soul name.") end
-}
-Cheat:createCommand("cheat_spawn_npc", "Cheat:cheat_spawn_npc(%line)", Cheat.cheat_spawn_npc_args,
-    "Searches through the database of souls and spawns 1 NPC for each match.\n$8" ..
-    "This is intended to be used to spawn specific NPCs.\n$8" ..
-    "The list of souls is in v_soul_character_data.xml in tables.pak.",
-    "Spawn Olena by name (spawns 2 NPCs, 1 is invisible)", "cheat_spawn_npc token:olena",
-    "Spawn all NPCs with 'father' in their name", "cheat_spawn_npc token:father",
-    "Spawn by soul ID", "cheat_spawn_npc token:4d69f4f4-6b78-7b1f-5a61-8fa8045b7aac",
-    "Spawn by ui name", "cheat_spawn_npc token:char_452_uiName")
-function Cheat:cheat_spawn_npc(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_spawn_npc_args)
-    local token, tokenErr = Cheat:argsGet(args, "token")
-    if tokenErr then
-        return false
-    end
-
-    local searchKey = Cheat:toLower(token)
-    for soulKey, soulInfo in pairs(Cheat.g_soul_database) do
-        if string.find(soulKey, searchKey, 1, true) then
-            break
-        end
-    end
-
-    local souls = Cheat:find_soul(token, true)
-    if souls and #souls > 0 then
-        for i, soul in ipairs(souls) do
-            Cheat:spawmEntity(nil, "NPC", soul.soul_id, nil, nil)
-        end
-    else
-        Cheat:logError("Soul [%s] not found.", token)
     end
 end
 

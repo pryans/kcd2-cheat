@@ -190,10 +190,14 @@ function Cheat:addItem(searchOperation, amount, condition, notify, logSuccess)
         return false
     end
 
+    -- need to try and create quest items since so many commands delete/create items as part of their core functionality
+    -- repairing items will delete all the quest items for example
+    --[[
     if item.isquestitem == "true" then
         Cheat:logError("Cannot add a quest item: %s", Cheat:getItemDisplayText(item))
         return false
     end
+    ]]
 
     local startingAmount = Cheat:getItemCount(item.id)
     local endingAmount = startingAmount + amount
@@ -202,6 +206,7 @@ function Cheat:addItem(searchOperation, amount, condition, notify, logSuccess)
         -- some items seem like they can only be added 1 at a time?
         if not player.inventory:CreateItem(item.id, health, amount) then
             Cheat:logError("Failed to add item.")
+            -- quest items that fail to be added will exit here
             return false
         end
 
@@ -917,9 +922,9 @@ function Cheat:test_core_items()
     Cheat:testAssert("cheat_remove_item exact id 26.6", Cheat:getItemCount(Cheat.g_enhanced_long_range_arrow_id) == 0)
     Cheat:removeAllItems()
 
-    -- block adding quest items
-    Cheat:testAssertFalse("cheat_add_item block quest items 27.1", Cheat:cheat_add_item("exact:2cf06381-7692-4f3c-b917-e98dd3b5f8e3"))
-    Cheat:testAssert("cheat_add_item block quest items 27.2", Cheat:getInventoryItemCount() == 0)
+    -- try and add quest items
+    Cheat:testAssert("cheat_add_item add quest items 27.1", Cheat:cheat_add_item("exact:2cf06381-7692-4f3c-b917-e98dd3b5f8e3"))
+    Cheat:testAssert("cheat_add_item add quest items 27.2", Cheat:getInventoryItemCount() > 0)
     Cheat:removeAllItems()
 
     -- cheat_add_all_items (this will freeze the game for like 30 seconds)

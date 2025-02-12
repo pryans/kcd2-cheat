@@ -420,8 +420,8 @@ function Cheat:createSpawnVectorFromVector(avoidCenter, position, radius, near)
     end
 
     -- need to avoid an infinite loop
-    if radius - near < 2 then
-        Cheat:logError("createSpawnVectorFromVector: invalid near/radius")
+    if avoidCenter and radius - near < 2 then
+        Cheat:logWarn("changed radius/near from [%s/%s] to [10/2]", tostring(radius), tostring(near))
         radius = 10
         near = 2
     end
@@ -432,7 +432,7 @@ function Cheat:createSpawnVectorFromVector(avoidCenter, position, radius, near)
         local spawnY = math.random(position.y - radius, position.y + radius)
         if avoidCenter then
             -- used to make sure spawn point isn't on top of the player
-            if not Cheat:isNear(spawnX, position.x, near) and not Cheat:isNear(spawnY, position.y, near) then
+            if not (Cheat:isNear(spawnX, position.x, near) and Cheat:isNear(spawnY, position.y, near)) then
                 return { x = spawnX, y = spawnY, z = position.z }
             end
         else
@@ -441,8 +441,8 @@ function Cheat:createSpawnVectorFromVector(avoidCenter, position, radius, near)
     end
 end
 
-function Cheat:createSpawnVectorFromPosition(avoidCenter, xPos, yPos, zPos, radius)
-    return Cheat:createSpawnVectorFromVector(avoidCenter, { x = xPos, y = yPos, z = zPos }, radius)
+function Cheat:createSpawnVectorFromPosition(avoidCenter, xPos, yPos, zPos, radius, near)
+    return Cheat:createSpawnVectorFromVector(avoidCenter, { x = xPos, y = yPos, z = zPos }, radius, near)
 end
 
 -- ============================================================================
