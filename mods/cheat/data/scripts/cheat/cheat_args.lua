@@ -4,7 +4,7 @@
 function Cheat:argsParse(line)
     -- this method is designed to parse a string of args passed to a console command
     -- some interesting things to note
-    -- 1. you can't pass = sign as an arg to a console command, no idea why but it acts a terminator for the passed string
+    -- 1. you can't pass = sign as an arg to a console command, no idea why but it acts a terminator for the passed string (KCD 1 and 2)
     -- 2. you can't pass multiple arguments, has to be 1 string
 
     if line == nil then
@@ -42,12 +42,12 @@ function Cheat:argsParse(line)
         end
     end
 
-    
     return args
 end
 
-function Cheat:argsProcess(line, cmdArgsSet)
+function Cheat:argsProcess(line, cmdArgsSet, cmdName)
     local results = {}
+    local displayHelp = false
     if cmdArgsSet then
         local args = Cheat:argsParse(line)
         local argsEmpty = next(args) == nil
@@ -59,16 +59,28 @@ function Cheat:argsProcess(line, cmdArgsSet)
             for key, val in pairs(cmdArgsSet) do
                 if key ~= "default_arg" then
                     local value, valueErr = val(args, key, false)
-    
+
+                    if valueErr then
+                        displayHelp = true
+                    end
+
                     local result = {}
                     result.value = value
                     result.valueErr = valueErr
-    
+
                     results[key] = result
                 end
             end
         end
     end
+
+    if displayHelp then
+        if cmdName then
+            -- This is the only way to display all the newlines in the console help text
+            System.ExecuteCommand(cmdName .. " ?")
+        end
+    end
+
     return results
 end
 

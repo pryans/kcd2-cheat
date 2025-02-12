@@ -189,7 +189,7 @@ Cheat:createCommand("cheat_set_state", "Cheat:cheat_set_state(%line)", Cheat.che
     "Set hunger to 100 points", "cheat_set_state state:hunger value:100",
     "Set exhaust to 100 points", "cheat_set_state state:exhaust value:100")
 function Cheat:cheat_set_state(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_set_state_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_set_state_args, "cheat_set_state")
     local state, stateErr = Cheat:argsGet(args, "state")
     local value, valueErr = Cheat:argsGet(args, "value")
     if stateErr or valueErr then
@@ -219,7 +219,7 @@ Cheat:createCommand("cheat_set_stat_level", "Cheat:cheat_set_stat_level(%line)",
     "Set player's strength to level 20", "cheat_set_stat_level stat:strength level:20",
     "Set player's agility to level 5", "cheat_set_stat_level stat:agility level:5")
 function Cheat:cheat_set_stat_level(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_set_stat_level_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_set_stat_level_args, "cheat_set_stat_level")
     local stat, statErr = Cheat:argsGet(args, "stat")
     local level, levelErr = Cheat:argsGet(args, "level")
     if statErr or levelErr then
@@ -260,7 +260,7 @@ Cheat:createCommand("cheat_add_stat_levels", "Cheat:cheat_add_stat_levels(%line)
     "Adds levels to a player's stat.\n$4 WARNING: A stat's level cannot lowered once set.",
     "Add 5 levels to player's strength.", "cheat_add_stat_levels stat:str levels:5")
 function Cheat:cheat_add_stat_levels(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_add_stat_levels_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_add_stat_levels_args, "cheat_add_stat_levels")
     local stat, statErr = Cheat:argsGet(args, "stat")
     local levels, levelErr = Cheat:argsGet(args, "levels")
     if statErr or levelErr then
@@ -302,7 +302,7 @@ Cheat:createCommand("cheat_add_money", "Cheat:cheat_add_money(%line)", Cheat.che
     "Adds the given amount of groschen to the player's inventory.",
     "Add 200 groschen", "cheat_add_money amount:200")
 function Cheat:cheat_add_money(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_add_money_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_add_money_args, "cheat_add_money")
     local amount, amountErr = Cheat:argsGet(args, "amount")
     if amountErr then
         return false
@@ -334,7 +334,7 @@ Cheat:createCommand("cheat_set_bow_reticle", "Cheat:cheat_set_bow_reticle(%line)
     "Turn it on", "cheat_set_bow_reticle enable:true",
     "Turn it off", "cheat_set_bow_reticle enable:false")
 function Cheat:cheat_set_bow_reticle(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_set_bow_reticle_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_set_bow_reticle_args, "cheat_set_bow_reticle")
     local enable, enableErr = Cheat:argsGet(args, "enable")
     if enableErr then
         return false
@@ -363,7 +363,7 @@ Cheat:createCommand("cheat_set_compass", "Cheat:cheat_set_compass(%line)", Cheat
     "Turn it on", "cheat_set_compass enable:true",
     "Turn it off", "cheat_set_compass enable:false")
 function Cheat:cheat_set_compass(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_set_compass_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_set_compass_args, "cheat_set_compass")
     local enable, enableErr = Cheat:argsGet(args, "enable")
     if enableErr then
         return false
@@ -390,7 +390,7 @@ Cheat:createCommand("cheat_set_hud", "Cheat:cheat_set_hud(%line)", Cheat.cheat_s
     "Turn it on", "cheat_set_hud enable:true",
     "Turn it off", "cheat_set_hud enable:false")
 function Cheat:cheat_set_hud(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_set_hud_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_set_hud_args, "cheat_set_hud")
     local enable, enableErr = Cheat:argsGet(args, "enable")
     if not enableErr then
         if enable then
@@ -416,7 +416,7 @@ Cheat:createCommand("cheat_set_statusbar", "Cheat:cheat_set_statusbar(%line)", C
     "Turn it on", "cheat_set_statusbar enable:true",
     "Turn it off", "cheat_set_statusbar enable:false")
 function Cheat:cheat_set_statusbar(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_set_statusbar_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_set_statusbar_args, "cheat_set_statusbar")
     local enable, enableErr = Cheat:argsGet(args, "enable")
     if not enableErr then
         if enable then
@@ -442,7 +442,7 @@ Cheat:createCommand("cheat_set_third_person", "Cheat:cheat_set_third_person(%lin
     "Turn it on", "cheat_set_third_person enable:true",
     "Turn it off", "cheat_set_third_person enable:false")
 function Cheat:cheat_set_third_person(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_set_third_person_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_set_third_person_args, "cheat_set_third_person")
     local enable, enableErr = Cheat:argsGet(args, "enable")
     if not enableErr then
         if enable then
@@ -604,7 +604,7 @@ Cheat:createCommand("cheat_set_regen", "Cheat:cheat_set_regen(%line)", Cheat.che
     "Adds 5 to player's health every second.", "cheat_set_regen enable:true state:health amount:5",
     "Disable all state regeneration.", "cheat_set_regen enable:false state:all")
 function Cheat:cheat_set_regen(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_set_regen_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_set_regen_args, "cheat_set_regen")
     local enable, enableErr = Cheat:argsGet(args, "enable")
     local state, stateErr = Cheat:argsGet(args, "state")
     local amount, amountErr = Cheat:argsGet(args, "amount")

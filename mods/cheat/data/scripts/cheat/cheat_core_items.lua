@@ -190,10 +190,14 @@ function Cheat:addItem(searchOperation, amount, condition, notify, logSuccess)
         return false
     end
 
+    -- need to try and create quest items since so many commands delete/create items as part of their core functionality
+    -- repairing items will delete all the quest items for example
+    --[[
     if item.isquestitem == "true" then
         Cheat:logError("Cannot add a quest item: %s", Cheat:getItemDisplayText(item))
         return false
     end
+    ]]
 
     local startingAmount = Cheat:getItemCount(item.id)
     local endingAmount = startingAmount + amount
@@ -202,6 +206,7 @@ function Cheat:addItem(searchOperation, amount, condition, notify, logSuccess)
         -- some items seem like they can only be added 1 at a time?
         if not player.inventory:CreateItem(item.id, health, amount) then
             Cheat:logError("Failed to add item.")
+            -- quest items that fail to be added will exit here
             return false
         end
 
@@ -497,7 +502,7 @@ Cheat:createCommand("cheat_add_item", "Cheat:cheat_add_item(%line)", Cheat.cheat
     "Adds 1 item with 'hunting arrow' anywhere in name", "cheat_add_item any:hunting arrow",
     "Adds 2 items exactly named 'military sword' with 50% condition", "cheat_add_item exact:military sword amount:10 condition:50")
 function Cheat:cheat_add_item(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_add_item_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_add_item_args, "cheat_add_item")
     local token, tokenErr = Cheat:argsGet(args, "id")
     local any, anyErr = Cheat:argsGet(args, "any")
     local exact, exactErr = Cheat:argsGet(args, "exact")
@@ -552,7 +557,7 @@ Cheat:createCommand("cheat_remove_item", "Cheat:cheat_remove_item(%line)", Cheat
     "Removes the item ui_nm_arrow_hunter by ID", "cheat_remove_item id:802507e9-d620-47b5-ae66-08fcc314e26a",
     "Removes 10 items ui_nm_arrow_hunter by fullname", "cheat_remove_item id:ui_nm_arrow_hunter amount:10")
 function Cheat:cheat_remove_item(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_remove_item_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_remove_item_args, "cheat_remove_item")
     local token, tokenErr = Cheat:argsGet(args, "id")
     local any, anyErr = Cheat:argsGet(args, "any")
     local exact, exactErr = Cheat:argsGet(args, "exact")
@@ -624,7 +629,7 @@ Cheat:createCommand("cheat_repair_items", "Cheat:cheat_repair_items(%line)", Che
     "Repairs all damaged items in your inventory to at least the given condition.\n$4This can uneqip items so don't do this in combat.",
     "Repair all items to 75%.", "cheat_repair_items condition:75")
 function Cheat:cheat_repair_items(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_repair_items_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_repair_items_args, "cheat_repair_items")
     local condition, conditionErr = Cheat:argsGet(args, "condition")
     if conditionErr then
         return false
@@ -644,7 +649,7 @@ Cheat:createCommand("cheat_damage_items", "Cheat:cheat_damage_items(%line)", Che
     "Damages all weapons and armor in your inventory to at most given condition.\n$4This can uneqip items so don't do this in combat.",
     "Damage all weapons and armor to 25%", "cheat_damage_items condition:25")
 function Cheat:cheat_damage_items(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_damage_items_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_damage_items_args, "cheat_damage_items")
     local condition, conditionErr = Cheat:argsGet(args, "condition")
     if conditionErr then
         return false
@@ -917,9 +922,9 @@ function Cheat:test_core_items()
     Cheat:testAssert("cheat_remove_item exact id 26.6", Cheat:getItemCount(Cheat.g_enhanced_long_range_arrow_id) == 0)
     Cheat:removeAllItems()
 
-    -- block adding quest items
-    Cheat:testAssertFalse("cheat_add_item block quest items 27.1", Cheat:cheat_add_item("exact:2cf06381-7692-4f3c-b917-e98dd3b5f8e3"))
-    Cheat:testAssert("cheat_add_item block quest items 27.2", Cheat:getInventoryItemCount() == 0)
+    -- try and add quest items, this is expected to fail for now ...
+    Cheat:testAssert("cheat_add_item add quest items 27.1", not Cheat:cheat_add_item("exact:2cf06381-7692-4f3c-b917-e98dd3b5f8e3"))
+    Cheat:testAssert("cheat_add_item add quest items 27.2", Cheat:getInventoryItemCount() == 0)
     Cheat:removeAllItems()
 
     -- cheat_add_all_items (this will freeze the game for like 30 seconds)

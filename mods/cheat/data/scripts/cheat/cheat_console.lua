@@ -1,4 +1,3 @@
----@diagnostic disable: deprecated
 -- ============================================================================
 -- createCommand
 -- ============================================================================
@@ -49,25 +48,6 @@ function Cheat:createCommand(cmdName, cmdFunc, cmdArgsSet, cmdDocs, ...)
     end
 
     System.AddCCommand(cmdName, cmdFunc, cmdHelp)
-end
-
--- ============================================================================
--- cheat_eval
--- ============================================================================
-Cheat:createCommand("cheat_eval", "Cheat:cheat_eval(%line)", nil,
-    "Executes the given Lua code. This is not a cheat it is used for testing and debugging.",
-    "Dump all methods on the cheat table", "cheat_eval Cheat:print_methods(cheat)",
-    "Dump all methods on player metatable", "cheat_eval Cheat:print_methods(getmetatable(player))",
-    "Log the value of something to the console", "cheat_eval Cheat:logInfo(tostring(player.soul:GetState(\"health\")))")
-function Cheat:cheat_eval(line)
-    Cheat:logDebug("Begin eval [%s].", tostring(line))
-    --Defining a function from the string and run it
-    local func = loadstring(line)
-    if func then
-        System.LogAlways(tostring(func()))
-    end
-    Cheat:logDebug("End eval [%s].", tostring(line))
-    return true
 end
 
 -- ============================================================================
