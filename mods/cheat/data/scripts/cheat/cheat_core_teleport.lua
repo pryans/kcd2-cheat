@@ -2,23 +2,30 @@
 -- cheat_teleport
 -- ============================================================================
 Cheat.cheat_teleport_args = {
-    x = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "X coordinate") end,
-    y = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "Y coordinate") end,
-    z = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "Z coordinate") end
+    x = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "X coordinate") end,
+    y = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "Y coordinate") end,
+    z = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "Z coordinate") end
 }
 
 Cheat:createCommand("cheat_teleport", "Cheat:teleport(%line)", Cheat.cheat_teleport_args,
-    "Teleports the player to the given coordinates.\n$8You can end up in the air or under the map.\n$8I suggest saving your game and turn on immortality first.",
-    "Type to console", "cheat_teleport x:3000 y:1500 z:300")
+"Teleports the player to the given coordinates.\n$8You can end up in the air or under the map.\n$8I suggest saving your game and turn on immortality first.",
+"Type to console", "cheat_teleport x:3000 y:1500 z:300", "Move only one axis", "cheat_teleport z:200")
 function Cheat:teleport(line)
     local args = Cheat:argsProcess(line, Cheat.cheat_teleport_args)
+    local loc = player:GetWorldPos();
     local nx, nxErr = Cheat:argsGet(args, "x")
     local ny, nyErr = Cheat:argsGet(args, "y")
     local nz, nzErr = Cheat:argsGet(args, "z")
-    if not nxErr and not nyErr and not nzErr then
-        player:SetWorldPos({ x = nx, y = ny, z = nz });
-        Cheat:logInfo("Teleported player to x=%d y=%d z=%d", nx, ny, nz)
+    if nxErr and not nyErr and not nzErr then
+        return false, nil
     end
+
+    local newX = nx or loc.x
+    local newY = ny or loc.y
+    local newZ = nz or loc.z
+
+    player:SetWorldPos({ x = newX, y = newY, z = newZ });
+    Cheat:logInfo("Teleported player to x=%d y=%d z=%d", newX, newY, newZ)
 end
 
 -- ============================================================================
@@ -31,125 +38,115 @@ end
 -- https://www.reddit.com/r/kingdomcome/comments/tw7u1p/map_of_all_cuman_and_bandit_camp_locations/
 -- https://kingdom-come-deliverance.fandom.com/
 
---[[
-System.AddCCommand("cheat_teleport_to", "Cheat:teleport_to(%line)",
-    "Teleports the player to the given town or village.\n$8\n$8\n$8Supported places:\n$8KOLBEN'S FARM (1), LEDETCHKO (2), MERHOJED (3), MERHOJED WARCAMP (4),\n$8MONASTERY (5), NEUHOF (6), PRIBYSLAVITZ (7), RATTAY (8),\n$8RATTAY TOURNAMENT GROUND (9), ROVNA (10), SAMOPESH (11), SASAU (12),\n$8SKALITZ (13), TALMBERG (14), TALMBERG QUARRY (15), UZHITZ (16), VRANIK (17)")
-]]
+Cheat.cheat_teleport_to_args = {
+    default_arg = "place",
+    place = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "Teleport to town or village") end,
+}
+
+function Cheat:init_teleport_places()
+    self.places = {
+        { name = "Apollonia", x = 2804, y = 2087, z = 110 },
+        { name = "Apollonia", x = 2763, y = 2482, z = 117, comment = "Hermit" },
+        { name = "Bozhena", x = 1497, y = 1984, z = 17 },
+        { name = "Capon's Camp", x = 2547, y = 3041, z = 92 },
+        { name = "Nevabok", x = 2088, y = 1344, z = 15, comment = "Mill"},
+        { name = "Nevabok", x = 1932, y = 1142, z = 52, comment = "Fortress"},
+        { name = "Nomad's camp", x = 1062, y = 1884, z = 31 },
+        { name = "Rocktower Pond", x = 733, y = 1879, z = 12 },
+        { name = "Schdiar - West Farm", x = 2405, y = 1420, z = 67 },
+        { name = "Semine", x = 1613, y = 1594, z = 78 },
+        { name = "Semine", x = 1136, y = 1392, z = 11, comment = "Lower Mill" },
+        { name = "Tachov", x = 1991, y = 2510, z = 115 },
+        { name = "Troskowitz", x = 2314, y = 2045, z = 107 },
+        { name = "Trosky", x = 2419, y = 2652, z = 199 },
+        { name = "Vidlak Pond", x = 1248, y = 2692, z = 19,},
+        { name = "Zhelejov", x = 1773, y = 1976, z = 42 },
+        { name = "Zhelejov", x = 1658, y = 2161, z = 34, comment = "Wagoners' Inn" },
+    }
+
+    local helpText = "Teleports the player to the given town or village.\n$8\n$8\n$8Supported places:\n$8"
+    helpText = helpText .. Cheat:printLocations(self.places)
+
+    --System.AddCCommand('cheat_teleport_to', 'Cheat:teleport_to(%line)', helpText)
+    Cheat:createCommand("cheat_teleport_to", "Cheat:teleport_to(%line)", Cheat.cheat_teleport_to_args, helpText,
+        "Teleport to Apollonia", "cheat_teleport_to apollonia",
+        "Teleport to Apollonia (Hermit)", "cheat_teleport_to apollonia hermit",
+        "Teleport to Bozhena", "cheat_teleport_to 3",
+        "Teleport to saved location 'saved 1'", "cheat_teleport_to saved 1")
+end
+
+Cheat:init_teleport_places()
+
 function Cheat:teleport_to(line)
-    if Cheat:NotPlayerCharacter() then
-        return false
+    if player.soul:GetGender() == 2 then
+        Cheat:logError("You can't use this command while playing Thereza!")
+        return
     end
 
-    local args = string.gsub(tostring(line), "place:", "")
+    local args = Cheat:argsProcess(line, Cheat.cheat_teleport_to_args)
+    local placeArg = Cheat:argsGet(args, "place")
 
-    local places = {}
-    places["1"] = "x:1363 y:2481 z:109"
-    places["2"] = "x:2052 y:1304 z:30"
-    places["3"] = "x:1636 y:2618 z:126"
-    places["4"] = "x:1408 y:2713 z:129"
-    places["5"] = "x:929 y:1617 z:36"
-    places["6"] = "x:3522 y:1524 z:131"
-    places["7"] = "x:1557 y:3719 z:107"
-    places["8"] = "x:2534 y:572 z:81"
-    places["9"] = "x:2725 y:667 z:102"
-    places["10"] = "x:1261 y:3129 z:25"
-    places["11"] = "x:1139 y:2239 z:71"
-    places["12"] = "x:896 y:1186 z:27"
-    places["13"] = "x:829 y:3522 z:51"
-    places["14"] = "x:2360 y:2846 z:105"
-    places["15"] = "x:2128 y:2959 z:74"
-    places["16"] = "x:3041 y:3324 z:156"
-    places["17"] = "x:930 y:913 z:130"
-
-    if places[Cheat:toUpper(args)] ~= nil then
-        Cheat:teleport(places[Cheat:toUpper(args)])
+    if self.places[tonumber(placeArg)] ~= nil then
+        local place = self.places[tonumber(placeArg)]
+        local placeName = place.name
+        if place.comment ~= nil then
+            placeName = placeName .. " (" .. place.comment .. ")"
+        end
+        Cheat:logDebug("Teleporting to %s", placeName)
+        Cheat:teleport("x:" .. place.x .. " y:" .. place.y .. " z:" .. place.z)
+        return nil
     else
-        local checkteste = "error"
-        for k, v in pairs(places) do
-            if string.find(k, Cheat:toUpper(args)) then
-                checkteste = v
+        Cheat:logDebug("Checking saved locations for [%s].", placeArg)
+        if Cheat.saved_locations and Cheat.saved_locations[placeArg] ~= nil then
+            Cheat:logDebug("Found saved location for [%s].", placeArg)
+            player:SetWorldPos(Cheat.saved_locations[placeArg]);
+            return nil
+        end
+
+        for k, place in ipairs(self.places) do
+            local placeFullName = place.name
+            if place.comment ~= nil then
+                placeFullName = placeFullName .. " " .. place.comment
+            end
+            if Cheat:toUpper(placeArg) == Cheat:toUpper(placeFullName) then
+                Cheat:teleport("x:" .. place.x .. " y:" .. place.y .. " z:" .. place.z)
+                return nil
             end
         end
-        if checkteste ~= "error" then
-            Cheat:teleport(checkteste)
-        else
-            Cheat:logError("Invalid Town or Village - For a list of supported towns and villages type: 'cheat_teleport_to ?'")
-        end
     end
+    Cheat:logError("Invalid Town or Village - For a list of supported towns and villages type: 'cheat_teleport_to ?'")
 end
 
 -- ============================================================================
 -- cheat_tp_bc (BANDIT CAMPS)
 -- ============================================================================
 Cheat.cheat_tp_bc_args = {
-    id = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "Teleport to bandit camp") end,
+    id = function(args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "Teleport to bandit camp") end,
 }
 
---[[
 Cheat:createCommand("cheat_tp_bc", "Cheat:tp_bc(%line)", Cheat.cheat_tp_bc_args,
-    "Teleports the player to the given bandit camp.\n$8\n$8\n$8Camps are numbered as follows:\n$8\n$81 to 4 for camps related to the Ruin quest\n$85 to 9 related to the Raiders quest\n$810 to 12 for the Interloopers quest\n$8\n$8For all other bandit camps as noted below:\n$8\n$8MOLDAVIT CAMP (13), SKALITZ SMELTERY (14), SASAU (15),\n$8MONASTERY (16), NORTH OF MONASTERY (17), NORTH OF MERHOJED (18),\n$8EAST OF SKALITZ (19), WEST OF RATTAY (20), WEST OF VRANIK (21), SOUTH EAST OF TALMBERG (22)",
-    "Type to console", "cheat_tp_bc id:1")
-]]
+"Teleports the player to the given bandit camp.\n$8\n$8\n$8By the pond bandit camp",
+"Type to console", "cheat_tp_bc id:1")
 function Cheat:tp_bc(line)
-    if Cheat:NotPlayerCharacter() then
-        return false
-    end
-
     local gender = player.soul:GetGender()
     local args = Cheat:argsProcess(line, Cheat.cheat_tp_bc_args)
-    local nplace, nplaceErr = Cheat:argsGet(args, "id")
+    local nplace, nplaceErr = Cheat:argsGet(args, 'id')
 
     local places = {}
-    -- As I am not a big fan of much typing I shortened all places names (WileCoyote68)
-    -- All bandit camp locations for RUIN Quest.
-    places["1"] = "x:3385 y:633 z:60"
-    places["2"] = "x:1724 y:708 z:69"
-    places["3"] = "x:3212 y:1380 z:101"
-    places["4"] = "x:1726 y:951 z:47"
+    places["1"] = "x:902 y:1994 z:13"
 
-    -- All bandit camp locations for RAIDERS Quest.
-    places["5"] = "x:2464 y:2195 z:150"
-    places["6"] = "x:2668 y:3163 z:136"
-    places["7"] = "x:1669 y:3257 z:53"
-    places["8"] = "x:3615 y:3193 z:172"
-    places["9"] = "x:2454 y:2362 z:100"
-
-    -- All bandit camp locations for INTERLOPERS Quest.
-    places["10"] = "x:188 y:3266 z:106"
-    places["11"] = "x:536 y:2840 z:87"
-    places["12"] = "x:536 y:2395 z:32"
-
-    -- MOLDAVITE_BANDIT_CAMP
-    places["13"] = "x:365 y:1749 z:19"
-    -- SKALITZ_SMELTERY_BANDIT_CAMP
-    places["14"] = "x:873 y:3279 z:23"
-    -- SASAU_BANDIT_CAMP
-    places["15"] = "x:1295 y:1707 z:40"
-    -- MONASTERY_BANDIT_CAMP
-    places["16"] = "x:696 y:2115 z:52"
-    -- NORTH OF MONASTERY
-    places["17"] = "x:692 y:2110 z:52"
-    -- NORTH OF MERHOJED
-    places["18"] = "x:1731 y:2977 z:132"
-    -- EAST OF SKALITZ
-    places["19"] = "x:1274 y:3499 z:87"
-    -- WEST OF RATTAY
-    places["20"] = "x:1271 y:532 z:156"
-    -- WEST OF VRANIK (poachers)
-    places["21"] = "x:229 y:999 z:156"
-    -- SOUTH EAST OF TALMBERG (not raiders? they drop ears)
-    places["22"] = "x:2697 y:2187 z:126"
-
-
-    if not nplaceErr then
-        if places[Cheat:toUpper(nplace)] ~= nil then
-            Cheat:teleport(places[Cheat:toUpper(nplace)])
-        else
-            Cheat:logError("Invalid Camp - For a list of supported camps type: 'cheat_tp_bc ?'")
+    if gender ~= 2 then
+        if not nplaceErr then
+            if places[Cheat:toUpper(nplace)] ~= nil then
+                Cheat:teleport(places[Cheat:toUpper(nplace)])
+            else
+                Cheat:logError("Invalid Camp - For a list of supported camps type: 'cheat_tp_bc ?'")
+            end
         end
+    else
+        Cheat:logError("You can't use this command while playing Thereza!")
     end
 end
-
 -- ============================================================================
 -- cheat_tp_bh (BATH HOUSES)
 -- ============================================================================

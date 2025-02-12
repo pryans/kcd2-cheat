@@ -1,4 +1,5 @@
 Cheat.g_database_cache = {}
+Cheat.saved_locations = {}
 
 function Cheat:loadDatabase(databaseName)
     local database = {}
@@ -609,6 +610,73 @@ function Cheat:testAssertFalse(name, value)
         Cheat:log(string.format("$3[PASS] %s", tostring(name)))
         Cheat.g_cheat_test_pass = Cheat.g_cheat_test_pass + 1
     end
+end
+
+-- ============================================================================
+-- Print locations
+-- format of locations:
+-- local locations = {
+--   { name = "Romani camp - Horse Handler Mikolai", x = 1062, y = 1884, z = 32, comment = "comment" },
+-- }
+-- ============================================================================
+-- Helper function to find the longest name length for padding
+local function getColumnMaxLength(locations, columnIndex, columnsCount)
+    local maxLength = 0
+    for i = columnIndex, #locations, columnsCount do
+        local location = locations[i]
+        if location then
+            -- Check both name and comment length
+            local nameLength = #location.name + 4 + #tostring(i)
+            local commentLength = location.comment and #location.comment or 0
+            maxLength = math.max(maxLength, nameLength, commentLength)
+        end
+    end
+    return maxLength
+end
+
+function Cheat:printLocations(locations)
+    local columnsCount = 3
+    local columnWidths = {}
+    local separator = " || "
+
+    -- Calculate max width for each column
+    for col = 1, columnsCount do
+        columnWidths[col] = getColumnMaxLength(locations, col, columnsCount) + 5  -- Add some extra spacing
+    end
+
+    local result = ""
+    for i = 1, #locations, columnsCount do
+        local nameLine = ""
+        local commentLine = ""
+
+        for j = 0, columnsCount-1 do
+            -- Format name
+            if locations[i + j] then
+                local index = i + j
+                local name = string.format("[%d] %s", index, locations[index].name)
+                nameLine = nameLine .. string.format("$3%-" .. columnWidths[j+1] .. "s", name)
+            else
+                nameLine = nameLine .. string.format("%-" .. columnWidths[j+1] .. "s", "")
+            end
+
+            -- Format comment
+            if locations[i + j] and locations[i + j].comment then
+                local comment = "    " .. locations[i + j].comment  -- Add indent to comment
+                commentLine = commentLine .. string.format("$8%-" .. columnWidths[j+1] .. "s", comment)
+            else
+                commentLine = commentLine .. string.format("$8%-" .. columnWidths[j+1] .. "s", "")
+            end
+
+            -- Add separator except for last column
+            if j < columnsCount-1 then
+                nameLine = nameLine .. separator
+                commentLine = commentLine .. separator
+            end
+        end
+
+        result = result .. nameLine .. "\n" .. commentLine .. "\n"
+    end
+    return result
 end
 
 -- ============================================================================

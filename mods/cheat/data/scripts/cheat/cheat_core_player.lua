@@ -93,13 +93,86 @@ end
 -- ============================================================================
 -- cheat_loc
 -- ============================================================================
-Cheat:createCommand("cheat_loc", "Cheat:loc()", nil,
-    "Shows player's world location.",
+Cheat.cheat_loc_args = {
+    default_arg = 'save',
+    save = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "The name of the location to save.") end,
+}
+
+Cheat:createCommand("cheat_loc", "Cheat:loc(%line)", Cheat.cheat_loc_args,
+    "Shows player's world location and saves it if a name is provided.",
     "Type to console", "cheat_loc")
-function Cheat:loc()
+function Cheat:loc(line)
     local loc = player:GetWorldPos();
-    Cheat:logInfo("Player's location x=%d y=%d z=%d", loc.x, loc.y, loc.z)
+    -- print all attributes of loc 
+    for k, v in pairs(loc) do
+        Cheat:logInfo("  %s = %s", k, tostring(v))
+    end
+
+    if player.GetWorldDirPos then
+        local loc2 = player:GetWorldDirPos();
+        for k, v in pairs(loc2) do
+            Cheat:logInfo("  %s = %s", k, tostring(v))
+        end
+    end
+
+    if player.GetPos then
+        local pPos = player:GetPos()
+        for k, v in pairs(pPos) do
+            Cheat:logInfo("  %s = %s", k, tostring(v))
+        end
+    end
+
+    if player.GetWorldDir then
+        local pDir = player:GetWorldDir()
+        for k, v in pairs(pDir) do
+            Cheat:logInfo("  %s = %s", k, tostring(v))
+        end
+    end
+    
+    if player.GetAngles then
+        local angles = player:GetAngles()
+        for k, v in pairs(angles) do
+            Cheat:logInfo("  %s = %s", k, tostring(v))
+        end
+    end
+    
+    
+        
+    if player.GetAngles then
+        local angles = player:GetAngles()
+        Cheat:logInfo("player:GetAngles()")
+        for k, v in pairs(angles) do
+            Cheat:logInfo("  %s = %s", k, tostring(v))
+        end
+    end
+
+    local locString = string.format("x=%d y=%d z=%d", loc.x, loc.y, loc.z)
+    Cheat:logInfo("Player's location: %s", locString)
+    local args = Cheat:argsProcess(line, Cheat.cheat_loc_args)
+    local save, saveErr = Cheat:argsGet(args, "save")
+    if save then
+        Cheat:logInfo("Saving location: %s to [%s].", locString, tostring(save))
+        Cheat.saved_locations[save] = loc
+    end
     return loc
+end
+
+Cheat:createCommand("cheat_loc_show_saved", "Cheat:loc_show_saved()", nil,
+    "Shows all saved locations.",
+    "Type to console", "cheat_loc_show_saved")
+function Cheat:loc_show_saved()
+    for k, v in pairs(Cheat.saved_locations) do
+        Cheat:logInfo("Location: %s  --  x=%d y=%d z=%d", k, v.x, v.y, v.z)
+    end
+end
+
+Cheat:createCommand("cheat_loc_show_saved", "Cheat:loc_show_saved()", nil,
+    "Shows all saved locations.",
+    "Type to console", "cheat_loc_show_saved")
+function Cheat:loc_show_saved()
+    for k, v in pairs(Cheat.saved_locations) do
+        Cheat:logInfo("Location: %s  --  x=%d y=%d z=%d", k, v.x, v.y, v.z)
+    end
 end
 
 -- ============================================================================
@@ -215,7 +288,7 @@ function Cheat:cheat_add_stat_levels(line)
     end
 
     player.soul:AdvanceToStatLevel(stat, level)
-    Cheat:logInfo("Added [%s] levels to stat [%s], new level is [%s].", tostring(levels), tostring(stat), tostring(level))
+    Cheat:logInfo("Adds [%s] levels to stat [%s], new level is [%s].", tostring(levels), tostring(stat), tostring(level))
     return true
 end
 
