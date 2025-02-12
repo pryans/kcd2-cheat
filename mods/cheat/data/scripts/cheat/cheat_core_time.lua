@@ -19,26 +19,48 @@ end
 -- cheat_set_time
 -- ============================================================================
 Cheat.cheat_set_time_args = {
-    hours = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "The number of hours.") end,
+    default_arg = "hours",
+    hours = function(args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 0, showHelp, "The number of hours.") end,
+    minutes = function(args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 0, showHelp, "The number of minutes.") end,
 }
-Cheat:createCommand("cheat_set_time", "Cheat:cheat_set_time(%line)", Cheat.cheat_set_time_args,
-    "Moved time forward the given number of hours.",
-    "Move 5 hours forward", "cheat_set_time hours:5")
-function Cheat:cheat_set_time(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_set_time_args)
-    local hours, hoursErr = Cheat:argsGet(args, "hours")
-    if hoursErr then
-        return false
-    end
 
+Cheat:createCommand("cheat_set_time", "Cheat:cheat_set_time(%line)", Cheat.cheat_set_time_args,
+  "Moved time forward the given number of hours and minutes.",
+  "Move 5 hours and 30 minutes forward", "cheat_set_time hours:5 minutes:30",
+  "Move 2 hours forward using default argument", "cheat_set_time 2")
+function Cheat:cheat_set_time(line)
+  local args = Cheat:argsProcess(line, Cheat.cheat_set_time_args)
+  -- print args
+  Cheat:logDebug("args: %s", Cheat:serializeTable(args))
+  local hours, hoursErr = Cheat:argsGet(args, 'hours')
+  local minutes, minutesErr = Cheat:argsGet(args, 'minutes')
+  if not hoursErr and not minutesErr then
+    hours = hours or 0
+    minutes = minutes or 0
+    if (hours == 0 and minutes == 0) then
+      Cheat:logError("No time to move forward.")
+      return false
+    end
+    local seconds = (hours * 3600) + (minutes * 60)
     Cheat:cheat_get_time()
-    Calendar.SetWorldTime(Calendar.GetWorldTime() + (hours * 3600))
+    Calendar.SetWorldTime(Calendar.GetWorldTime() + seconds)
     XGenAIModule.SendMessageToEntity(player.this.id, "timekeeper:recalculate", "");
-    Cheat:logInfo("Time moved forward [%s] hours.", tostring(hours))
+    message = "Time moved forward"
+    if (hours > 0) then
+      message = message .. " " .. tostring(hours) .. " hours"
+    end
+    if (minutes > 0) then
+      if (hours > 0) then
+        message = message .. " and "
+      end
+      message = message .. tostring(minutes) .. " minutes"
+    end
+    Cheat:logInfo(message)
     Cheat:cheat_get_time()
     return true
+  end
+  return false
 end
-
 -- ============================================================================
 -- cheat_set_time_speed
 -- ============================================================================
