@@ -29,26 +29,21 @@ function Cheat:teleport(line)
 end
 
 -- ============================================================================
--- cheat_teleport_to (TOWNS AND VILLAGES)
+-- cheat_teleport_trosky and cheat_teleport_kuttenberg
 -- ============================================================================
 
--- Thanks to these sources, and others for helping to find many of these places:
--- https://kingdomcomemap.github.io/
--- https://forum.kingdomcomerpg.com/t/map-enemy-camps/41266
--- https://www.reddit.com/r/kingdomcome/comments/tw7u1p/map_of_all_cuman_and_bandit_camp_locations/
--- https://kingdom-come-deliverance.fandom.com/
-
-Cheat.cheat_teleport_to_args = {
+Cheat.cheat_teleport_places = {
     default_arg = "place",
-    place = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "Teleport to town or village") end,
+    place = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "Place to teleport to") end,
 }
 
-function Cheat:init_teleport_places()
-    self.places = {
+function Cheat:init_teleport_places_trosky()
+    self.places_trosky = {
         { name = "Apollonia", x = 2804, y = 2087, z = 110 },
         { name = "Apollonia", x = 2763, y = 2482, z = 117, comment = "Hermit" },
         { name = "Bozhena", x = 1497, y = 1984, z = 17 },
         { name = "Capon's Camp", x = 2547, y = 3041, z = 92 },
+        { name = "Kuttenberg Cart", x = 2644, y = 1531, z = 88 },
         { name = "Nevabok", x = 2088, y = 1344, z = 15, comment = "Mill"},
         { name = "Nevabok", x = 1932, y = 1142, z = 52, comment = "Fortress"},
         { name = "Nomad's camp", x = 1062, y = 1884, z = 31 },
@@ -64,30 +59,84 @@ function Cheat:init_teleport_places()
         { name = "Zhelejov", x = 1658, y = 2161, z = 34, comment = "Wagoners' Inn" },
     }
 
-    local helpText = "Teleports the player to the given town or village.\n$8\n$8\n$8Supported places:\n$8"
-    helpText = helpText .. Cheat:printLocations(self.places)
+    local helpText = "Teleports the player to the given place in Trosky region.\nDo not use in Kuttenberg region\n$8\n$8\n$8Supported places:\n$8"
+    helpText = helpText .. Cheat:printLocations(self.places_trosky)
 
-    --System.AddCCommand('cheat_teleport_to', 'Cheat:teleport_to(%line)', helpText)
-    Cheat:createCommand("cheat_teleport_to", "Cheat:teleport_to(%line)", Cheat.cheat_teleport_to_args, helpText,
-        "Teleport to Apollonia", "cheat_teleport_to apollonia",
-        "Teleport to Apollonia (Hermit)", "cheat_teleport_to apollonia hermit",
-        "Teleport to Bozhena", "cheat_teleport_to 3",
-        "Teleport to saved location 'saved 1'", "cheat_teleport_to saved 1")
+    --System.AddCCommand('cheat_teleport_trosky', 'Cheat:teleport_to(%line)', helpText)
+    Cheat:createCommand("cheat_teleport_trosky", "Cheat:teleport_trosky(%line)", Cheat.cheat_teleport_places, helpText,
+        "Teleport to Apollonia", "cheat_teleport_trosky apollonia",
+        "Teleport to Apollonia (Hermit)", "cheat_teleport_trosky apollonia hermit",
+        "Teleport to Bozhena", "cheat_teleport_trosky 3",
+        "Teleport to saved location 'saved 1'", "cheat_teleport_trosky saved 1")
 end
 
-Cheat:init_teleport_places()
+function Cheat:init_teleport_places_kuttenberg()
+    self.places_kuttenberg = {
+        { name = "Bohunowitz", x = 1993, y = 3441, z = 103 },
+        { name = "Bylany", x = 1699, y = 1035, z = 102 },
+        { name = "Danemark", x = 1589, y = 183, z = 57 },
+        { name = "Devil's Den", x = 2905, y = 2919, z = 107 },
+        { name = "Grund", x = 3215, y = 2187, z = 95 },
+        { name = "Horschan", x = 2617, y = 2628, z = 133 },
+        { name = "Kuttenberg", x = 3168, y = 678, z = 52, comment = "Center"},
+        { name = "Kuttenberg", x = 3182, y = 973, z = 56, comment = "Northern entrance"},
+        { name = "Kuttenberg", x = 3168, y = 333, z = 29, comment = "Southern entrance"},
+        { name = "Kuttenberg", x = 2967, y = 907, z = 66, comment = "Western entrance"},
+        { name = "Maleshov", x = 555, y = 354, z = 111 },
+        { name = "Miskowitz", x = 1554, y = 1981, z = 145 },
+        { name = "Pschitoky", x = 2301, y = 1824, z = 130 },
+        { name = "Old Kutna", x = 3068, y = 1358, z = 101 },
+        { name = "Old Lhota", x = 627, y = 947, z = 97 },
+        { name = "Opatowitz", x = 1789, y = 2972, z = 159 },
+        { name = "Raborsch", x = 1576, y = 3813, z = 114 },
+        { name = "Sigismund Camp", x = 1664, y = 2808, z = 184, comment = "Center"},
+        { name = "Sigismund Camp", x = 1764, y = 2732, z = 171, comment = "Eastern entrance"},
+        { name = "Sigismund Camp", x = 1724, y = 2852, z = 172, comment = "Northern entrance"},
+        { name = "Sigismund Camp", x = 1642, y = 2736, z = 185, comment = "Southern entrance"},
+        { name = "Sigismund Camp", x = 1576, y = 2823, z = 189, comment = "Western entrance"},
+        { name = "Suchdol", x = 698, y = 3287, z = 141 },
+        { name = "Sedletz Monastery", x = 3898, y = 749, z = 29 },
+        { name = "Trosky Cart", x = 439, y = 3729, z = 132 },
+        { name = "Wysoka", x = 425, y = 2489, z = 219 },
+    }
 
-function Cheat:teleport_to(line)
+    local helpText = "Teleports the player to the given place in Kuttenberg region.\nDo not use in Trosky region\n$8\n$8\n$8Supported places:\n$8"
+    helpText = helpText .. Cheat:printLocations(self.places_kuttenberg)
+
+    --System.AddCCommand('cheat_teleport_to', 'Cheat:teleport_to(%line)', helpText)
+    Cheat:createCommand("cheat_teleport_kuttenberg", "Cheat:teleport_kuttenberg(%line)", Cheat.cheat_teleport_kuttenberg_args, helpText,
+        "Teleport to Bohunowitz", "cheat_teleport_kuttenberg place:bohunowitz",
+        "Teleport to Bylany", "cheat_teleport_kuttenberg bylany",
+        "Teleport to Danemark", "cheat_teleport_kuttenberg 3",
+        "Teleport to saved location 'saved 1'", "cheat_teleport_kuttenberg saved 1")
+end
+
+Cheat:init_teleport_places_trosky()
+Cheat:init_teleport_places_kuttenberg()
+
+function Cheat:teleport_trosky(line)
+    Cheat:teleport_to_places(line, self.places_trosky, {
+        region = "trosky",
+    })
+end
+
+function Cheat:teleport_kuttenberg(line)
+    Cheat:teleport_to_places(line, self.places_kuttenberg, {
+        region = "kuttenberg",
+    })
+end
+
+function Cheat:teleport_to_places(line, places, options)
     if player.soul:GetGender() == 2 then
         Cheat:logError("You can't use this command while playing Thereza!")
         return
     end
 
-    local args = Cheat:argsProcess(line, Cheat.cheat_teleport_to_args)
+    local args = Cheat:argsProcess(line, Cheat.cheat_teleport_places)
     local placeArg = Cheat:argsGet(args, "place")
 
-    if self.places[tonumber(placeArg)] ~= nil then
-        local place = self.places[tonumber(placeArg)]
+    if places[tonumber(placeArg)] ~= nil then
+        local place = places[tonumber(placeArg)]
         local placeName = place.name
         if place.comment ~= nil then
             placeName = placeName .. " (" .. place.comment .. ")"
@@ -103,7 +152,7 @@ function Cheat:teleport_to(line)
             return nil
         end
 
-        for k, place in ipairs(self.places) do
+        for k, place in ipairs(places) do
             local placeFullName = place.name
             if place.comment ~= nil then
                 placeFullName = placeFullName .. " " .. place.comment
@@ -114,7 +163,7 @@ function Cheat:teleport_to(line)
             end
         end
     end
-    Cheat:logError("Invalid Town or Village - For a list of supported towns and villages type: 'cheat_teleport_to ?'")
+    Cheat:logError("Invalid Place - For a list of supported places type: 'cheat_teleport_%s ?'", options.region)
 end
 
 -- ============================================================================

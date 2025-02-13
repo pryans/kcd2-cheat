@@ -108,44 +108,6 @@ function Cheat:loc(line)
         Cheat:logInfo("  %s = %s", k, tostring(v))
     end
 
-    if player.GetWorldDirPos then
-        local loc2 = player:GetWorldDirPos();
-        for k, v in pairs(loc2) do
-            Cheat:logInfo("  %s = %s", k, tostring(v))
-        end
-    end
-
-    if player.GetPos then
-        local pPos = player:GetPos()
-        for k, v in pairs(pPos) do
-            Cheat:logInfo("  %s = %s", k, tostring(v))
-        end
-    end
-
-    if player.GetWorldDir then
-        local pDir = player:GetWorldDir()
-        for k, v in pairs(pDir) do
-            Cheat:logInfo("  %s = %s", k, tostring(v))
-        end
-    end
-    
-    if player.GetAngles then
-        local angles = player:GetAngles()
-        for k, v in pairs(angles) do
-            Cheat:logInfo("  %s = %s", k, tostring(v))
-        end
-    end
-    
-    
-        
-    if player.GetAngles then
-        local angles = player:GetAngles()
-        Cheat:logInfo("player:GetAngles()")
-        for k, v in pairs(angles) do
-            Cheat:logInfo("  %s = %s", k, tostring(v))
-        end
-    end
-
     local locString = string.format("x=%d y=%d z=%d", loc.x, loc.y, loc.z)
     Cheat:logInfo("Player's location: %s", locString)
     local args = Cheat:argsProcess(line, Cheat.cheat_loc_args)
