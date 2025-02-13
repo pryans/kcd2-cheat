@@ -611,6 +611,36 @@ function Cheat:testAssertFalse(name, value)
     end
 end
 
+function Cheat:testAssertEquals(name, actualValue, expectedValue)
+    if actualValue ~= expectedValue then
+        Cheat:log(string.format("[FAIL] %s actualValue [%s] ~= expectedValue [%s]",
+            name, tostring(actualValue), tostring(expectedValue)))
+        Cheat.g_cheat_test_fail = Cheat.g_cheat_test_fail + 1
+    else
+        Cheat:log(string.format("[PASS] %s actualValue [%s] ~= expectedValue [%s]",
+            name, tostring(actualValue), tostring(expectedValue)))
+        Cheat.g_cheat_test_pass = Cheat.g_cheat_test_pass + 1
+    end
+end
+
+function Cheat:testAssertEqualsFloat(name, actualValue, expectedValue, maxDifference)
+    local diff = nil
+
+    if actualValue and expectedValue and maxDifference then
+        diff = math.abs(actualValue - expectedValue)
+    end
+
+    if not diff or diff >= maxDifference then
+        Cheat:log(string.format("[FAIL] %s actualValue [%s] ~= expectedValue [%s], maxDifference [%s] (diff=%s)",
+            name, tostring(actualValue), tostring(expectedValue), tostring(maxDifference), tostring(diff)))
+        Cheat.g_cheat_test_fail = Cheat.g_cheat_test_fail + 1
+    else
+        Cheat:log(string.format("[PASS] %s actualValue [%s] ~= expectedValue [%s] maxDifference [%s]",
+            name, tostring(actualValue), tostring(expectedValue), tostring(maxDifference)))
+        Cheat.g_cheat_test_pass = Cheat.g_cheat_test_pass + 1
+    end
+end
+
 -- ============================================================================
 -- end
 -- ============================================================================
