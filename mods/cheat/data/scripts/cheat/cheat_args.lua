@@ -7,7 +7,12 @@ function Cheat:argsParse(line)
     -- 1. you can't pass = sign as an arg to a console command, no idea why but it acts a terminator for the passed string (KCD 1 and 2)
     -- 2. you can't pass multiple arguments, has to be 1 string
 
-    Cheat:logDebug("parsing args line [" .. tostring(line) .. "]")
+    if line == nil then
+        Cheat:logDebug("no args passed")
+        return {}
+    end
+
+    Cheat:logDebug("parsing args line [%s]", tostring(line))
     local args = {}
     local key = nil
 
@@ -15,7 +20,9 @@ function Cheat:argsParse(line)
         return args
     end
 
-    for word in string.gmatch(string.gsub(line, ":", ": "), "%S+") do
+    local words = string.gmatch(string.gsub(line, ":", ": "), "%S+")
+
+    for word in words do
         if Cheat:endsWith(word, ":") then
             if key then
                 Cheat:logDebug("parsed key=[%s] value=[%s]", key, args[key])
@@ -43,19 +50,26 @@ function Cheat:argsProcess(line, cmdArgsSet, cmdName)
     local displayHelp = false
     if cmdArgsSet then
         local args = Cheat:argsParse(line)
+        local argsEmpty = next(args) == nil
+        if argsEmpty and cmdArgsSet.default_arg then
+            args[cmdArgsSet.default_arg] = line
+            Cheat:logDebug("Using default argument [%s] with value [%s].", cmdArgsSet.default_arg, line)
+        end
         if args then
             for key, val in pairs(cmdArgsSet) do
-                local value, valueErr = val(args, key, false)
+                if key ~= "default_arg" then
+                    local value, valueErr = val(args, key, false)
 
-                if valueErr then
-                    displayHelp = true
+                    if valueErr then
+                        displayHelp = true
+                    end
+
+                    local result = {}
+                    result.value = value
+                    result.valueErr = valueErr
+
+                    results[key] = result
                 end
-
-                local result = {}
-                result.value = value
-                result.valueErr = valueErr
-
-                results[key] = result
             end
         end
     end
@@ -292,6 +306,15 @@ function Cheat:runTests()
     Cheat:testAssert("didn't get correct test token value got: " .. tostring(testToken),
         testToken == "test123" and testTokenErr == false)
 
+    local argsSetWithDefault = {
+        default_arg = "token",
+        token = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "token help") end
+    }
+
+    local args = Cheat:argsProcess("test123", argsSetWithDefault)
+    local testToken, testTokenErr = Cheat:argsGet(args, "token")
+    Cheat:testAssert("didn't get correct test token value got: " .. tostring(testToken),
+        testToken == "test123" and testTokenErr == false)
 
     testval = Cheat:argsParse("x:1")
     Cheat:testAssert("didn't parse x:1", testval["x"] == "1")

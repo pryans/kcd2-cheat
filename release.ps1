@@ -69,4 +69,4 @@ if ( Test-Path -PathType Container "${KCD_MOD_DIR}" ) {
 Expand-Archive -Force -Path "build/mods/${MOD_NAME}-${MOD_VERSION}.zip" -DestinationPath "${KCD_MODS_DIR}"
 
 # DONE
-Write-Host "Done"
+Write-Host "Done at $(Get-Date -Format "yyyy-MM-dd - HH:mm:ss")"
