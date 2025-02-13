@@ -1,3 +1,13 @@
+function Cheat:getRegion()
+    local currentLogLevel = Cheat.g_cheat_log_level;
+    Cheat:logSetLevel(Cheat.g_cheat_log_level_off)
+    local bozhenaSearch = Cheat:findNpcs({ exact = false, searchKey = "bozhena" })
+    Cheat:logSetLevel(currentLogLevel)
+    local hasBozhena = bozhenaSearch and #bozhenaSearch > 0
+
+    return hasBozhena and Cheat.Region.TROSKY or Cheat.Region.KUTTENBERG
+end
+
 -- ============================================================================
 -- cheat_teleport
 -- ============================================================================
@@ -116,19 +126,25 @@ Cheat:init_teleport_places_kuttenberg()
 
 function Cheat:teleport_trosky(line)
     Cheat:teleport_to_places(line, self.places_trosky, {
-        region = "trosky",
+        region = Cheat.Region.TROSKY,
     })
 end
 
 function Cheat:teleport_kuttenberg(line)
     Cheat:teleport_to_places(line, self.places_kuttenberg, {
-        region = "kuttenberg",
+        region = Cheat.Region.KUTTENBERG,
     })
 end
 
 function Cheat:teleport_to_places(line, places, options)
     if player.soul:GetGender() == 2 then
         Cheat:logError("You can't use this command while playing Thereza!")
+        return
+    end
+
+    local currentRegion = Cheat:getRegion()
+    if currentRegion ~= options.region then
+        Cheat:logError("You are not in the %s region!", options.region)
         return
     end
 

@@ -1,5 +1,13 @@
 Cheat.g_database_cache = {}
 Cheat.saved_locations = {}
+Cheat.Region = {
+    TROSKY = "trosky",
+    KUTTENBERG = "kuttenberg"
+}
+
+setmetatable(Cheat.Region, {
+    __newindex = function() error("Cannot modify enum") end
+})
 
 function Cheat:loadDatabase(databaseName)
     local database = {}
