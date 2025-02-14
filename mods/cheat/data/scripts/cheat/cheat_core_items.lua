@@ -347,6 +347,10 @@ function Cheat:getItem(id)
     return Cheat.g_item_lookup[id]
 end
 
+function Cheat:addItemByName(itemName, amount, condition, quality, quest, notify, logSuccess)
+    return Cheat:addItem({ exact = true, searchKey = itemName }, amount, condition, quality, quest, notify, logSuccess)
+end
+
 function Cheat:addItem(searchOperation, amount, condition, quality, quest, notify, logSuccess)
     -- note that some items don't have condition (like lockpicks)
     -- some quest item cannot be added while others can
@@ -425,6 +429,10 @@ function Cheat:addItem(searchOperation, amount, condition, quality, quest, notif
     end
 
     return true
+end
+
+function Cheat:removeItemById(itemId, amount, quest, notify, logSuccess)
+    return Cheat:removeItem({ exact = true, searchKey = itemId }, amount, quest, notify, logSuccess)
 end
 
 function Cheat:removeItem(searchOperation, amount, quest, notify, logSuccess)

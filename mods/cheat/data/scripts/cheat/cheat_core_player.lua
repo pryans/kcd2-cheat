@@ -78,11 +78,14 @@ function Cheat:cheat_stash()
     end
 
     for i, stash in pairs(System.GetEntitiesByClass("Stash")) do
-        local ownerWuid = EntityModule.GetInventoryOwner(stash.inventoryId)
-        if ownerWuid == player.this.id then
-            Cheat:logInfo("Opening stash [%s].", tostring(stash.inventoryId))
-            stash:Open(player)
-            return true
+        local stashInformation = StashInventoryCollector.GetStashInformation(stash)
+        if stashInformation and stashInformation.isMasterStash then
+            local ownerWuid = EntityModule.GetInventoryOwner(stash.inventoryId)
+            if ownerWuid == player.this.id then
+                Cheat:logInfo("Opening stash [%s].", tostring(stash.inventoryId))
+                stash:Open(player)
+                return true
+            end
         end
     end
 
