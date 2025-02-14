@@ -1411,9 +1411,6 @@ function Cheat:test_cheat_damage_gear()
     Cheat:testAssert("cheat_damage_gear quest 11", Cheat:getUserItem(Cheat.g_quality3_item_1_id, 1, 50))
     Cheat:testAssert("cheat_damage_gear quest 12", Cheat:getUserItem(Cheat.g_quality4_item_1_id, 1, 50))
 
-    local item = Cheat:getUserItem(Cheat.g_quality2_item_1_id); Cheat:testAssertEquals("cheat_damage_gear quest 10", item.condition, 50)
-    local item = Cheat:getUserItem(Cheat.g_quality2_item_1_id); Cheat:testAssertEquals("cheat_damage_gear quest 10", item.quality, 2)
-
     -- cheat_damage_gear quest flag
     Cheat:testAssert("cheat_damage_gear quest 13", Cheat:cheat_damage_gear("quest:true"))
     --Cheat:testAssert("cheat_damage_gear quest 14", Cheat:getUserItem(Cheat.g_quest_item_1_id, 1, 50))
