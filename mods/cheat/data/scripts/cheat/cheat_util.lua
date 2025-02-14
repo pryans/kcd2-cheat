@@ -382,11 +382,11 @@ function Cheat:max(x, y)
 end
 
 function Cheat:truncate(number)
-    if number >= 0 then
-        return math.floor(number)
-    else
-        return math.ceil(number)
+    if number then
+        local truncated_number, _ = math.modf(number) -- Discard fractional part with '_'
+        return truncated_number
     end
+    return nil
 end
 
 function Cheat:clamp(value, min, max)
@@ -613,11 +613,11 @@ end
 
 function Cheat:testAssertEquals(name, actualValue, expectedValue)
     if actualValue ~= expectedValue then
-        Cheat:log(string.format("[FAIL] %s actualValue [%s] ~= expectedValue [%s]",
+        Cheat:log(string.format("$4[FAIL] %s actualValue [%s] ~= expectedValue [%s]",
             name, tostring(actualValue), tostring(expectedValue)))
         Cheat.g_cheat_test_fail = Cheat.g_cheat_test_fail + 1
     else
-        Cheat:log(string.format("[PASS] %s actualValue [%s] ~= expectedValue [%s]",
+        Cheat:log(string.format("$3[PASS] %s actualValue [%s] ~= expectedValue [%s]",
             name, tostring(actualValue), tostring(expectedValue)))
         Cheat.g_cheat_test_pass = Cheat.g_cheat_test_pass + 1
     end
@@ -631,11 +631,11 @@ function Cheat:testAssertEqualsFloat(name, actualValue, expectedValue, maxDiffer
     end
 
     if not diff or diff >= maxDifference then
-        Cheat:log(string.format("[FAIL] %s actualValue [%s] ~= expectedValue [%s], maxDifference [%s] (diff=%s)",
+        Cheat:log(string.format("$4[FAIL] %s actualValue [%s] ~= expectedValue [%s], maxDifference [%s] (diff=%s)",
             name, tostring(actualValue), tostring(expectedValue), tostring(maxDifference), tostring(diff)))
         Cheat.g_cheat_test_fail = Cheat.g_cheat_test_fail + 1
     else
-        Cheat:log(string.format("[PASS] %s actualValue [%s] ~= expectedValue [%s] maxDifference [%s]",
+        Cheat:log(string.format("$3[PASS] %s actualValue [%s] ~= expectedValue [%s] maxDifference [%s]",
             name, tostring(actualValue), tostring(expectedValue), tostring(maxDifference)))
         Cheat.g_cheat_test_pass = Cheat.g_cheat_test_pass + 1
     end
