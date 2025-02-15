@@ -936,7 +936,7 @@ end
 -- ============================================================================
 Cheat.cheat_repair_gear_args = {
     condition = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 100, showHelp, "The item condition to apply between 0 and 100. Default 100.") end,
-    quality = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The item quality. Defaults to, and cannot exceed, the item's max quality.") end,
+    quality = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The item quality. Defaults to, and cannot exceed, the item's max quality or quality 3.") end,
     quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt repairing quest items.") end
 }
 Cheat:createCommand("cheat_repair_gear", "Cheat:cheat_repair_gear(%line)", Cheat.cheat_repair_gear_args,
@@ -961,11 +961,11 @@ end
 -- ============================================================================
 Cheat.cheat_damage_gear_args = {
     condition = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 50, showHelp, "The item condition to apply between 0 and 100. Default 50.") end,
-    quality = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The item quality. Defaults to, and cannot exceed, the item's max quality.") end,
+    quality = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The item quality. Defaults to, and cannot exceed, the item's max quality or quality 3.") end,
     quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt damaging quest items.") end
 }
 Cheat:createCommand("cheat_damage_gear", "Cheat:cheat_damage_gear(%line)", Cheat.cheat_damage_gear_args,
-    "Repairs weapons and armor." ..
+    "Damages weapons and armor." ..
     "\n$4This can uneqip items so don't do this in combat.",
     "Damage gear to 25%", "cheat_damage_gear condition:25")
 function Cheat:cheat_damage_gear(line)
