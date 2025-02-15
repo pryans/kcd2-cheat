@@ -26,6 +26,7 @@ function Cheat:onInit()
     Cheat:loadFile("scripts/cheat/cheat_core_player.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_time.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_weather.lua")
+    Cheat:loadFile("scripts/cheat/cheat_core_storage.lua")
 
     -- todo next
     Cheat:loadFile("scripts/cheat/cheat_core_perks.lua")

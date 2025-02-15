@@ -445,6 +445,19 @@ function Cheat:createSpawnVectorFromPosition(avoidCenter, xPos, yPos, zPos, radi
     return Cheat:createSpawnVectorFromVector(avoidCenter, { x = xPos, y = yPos, z = zPos }, radius, near)
 end
 
+function Cheat:distanceToPlayer(entity)
+    local v1 = g_Vectors.temp_v1
+    entity:GetWorldPos(v1)
+
+    local v2 = g_Vectors.temp_v2
+    player:GetWorldPos(v2)
+
+    local v3 = g_Vectors.temp_v3
+    v3 = VectorUtils.Subtract(v2, v1)
+
+    return VectorUtils.Length(v3)
+end
+
 -- ============================================================================
 -- type functions
 -- ============================================================================
