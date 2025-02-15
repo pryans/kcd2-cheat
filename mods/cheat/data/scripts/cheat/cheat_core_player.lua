@@ -67,27 +67,29 @@ function Cheat:get_exhaust()
 end
 
 -- ============================================================================
--- cheat_stash
+-- cheat_no_clip / cheat_clip
 -- ============================================================================
-Cheat:createCommand("cheat_stash", "Cheat:cheat_stash()", nil,
-    "Opens the player's stash. This only works if you have unlocked at least 1 stash.",
-    "Open your stash", "cheat_stash")
-function Cheat:cheat_stash()
-    if Cheat:NotPlayerCharacter() then
-        return false
+Cheat:createCommand("cheat_no_clip", "Cheat:cheat_clip_mode(2)", nil, "Turns off player collision detection.", "Turn Off", "cheat_no_clip")
+Cheat:createCommand("cheat_clip", "Cheat:cheat_clip_mode(0)", nil, "Turns on player collision detection.", "Turn On", "cheat_clip")
+function Cheat:cheat_clip_mode(mode)
+    -- 0 normal
+    -- 1 no collision, no gravity, no ground
+    -- 2 no collision, gravity, ground
+    -- 3 collision, gravity, ground
+    -- 4 collision, gravity, ground
+    -- 5 no collision, no gravity, no ground (walk in flat plain into ground/air)
+    -- 6 collision, no gravity, ground
+    -- 7 normal
+    mode = tonumber(mode)
+    player:SetColliderMode(mode)
+    if mode == 0 then
+        Cheat:logInfo("Clip On")
+    elseif mode == 2 then
+        Cheat:logInfo("Clip Off")
+    else
+        Cheat:logInfo("Collider Mode = %s", tostring(mode))
     end
-
-    for i, stash in pairs(System.GetEntitiesByClass("Stash")) do
-        local ownerWuid = EntityModule.GetInventoryOwner(stash.inventoryId)
-        if ownerWuid == player.this.id then
-            Cheat:logInfo("Opening stash [%s].", tostring(stash.inventoryId))
-            stash:Open(player)
-            return true
-        end
-    end
-
-    Cheat:logError("You don't have a stash yet.")
-    return false
+    return true
 end
 
 -- ============================================================================
@@ -711,9 +713,6 @@ function Cheat:test_core_player()
 
     -- cheat_charm
     Cheat:testAssert("cheat_charm", Cheat:cheat_charm())
-
-    -- cheat_stash
-    Cheat:testAssert("cheat_stash", Cheat:cheat_stash())
 
     Cheat:endTest()
 end

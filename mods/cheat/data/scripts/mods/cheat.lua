@@ -17,24 +17,41 @@ function Cheat:onInit()
     Cheat:loadFile("scripts/cheat/cheat_debug.lua")
     Cheat:loadFile("scripts/cheat/cheat_stubs.lua")
     Cheat:loadFile("scripts/cheat/cheat_console.lua")
+
     Cheat:loadFile("scripts/cheat/cheat_core_buffs.lua")
-    Cheat:loadFile("scripts/cheat/cheat_core_factions.lua")
-    Cheat:loadFile("scripts/cheat/cheat_core_horses.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_items.lua")
-    Cheat:loadFile("scripts/cheat/cheat_core_merchants.lua")
-    Cheat:loadFile("scripts/cheat/cheat_core_perks.lua")
-    Cheat:loadFile("scripts/cheat/cheat_core_physics.lua")
+    Cheat:loadFile("scripts/cheat/cheat_core_map.lua")
+    Cheat:loadFile("scripts/cheat/cheat_core_npc.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_picking.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_player.lua")
-    Cheat:loadFile("scripts/cheat/cheat_core_skills.lua")
-    Cheat:loadFile("scripts/cheat/cheat_core_quests.lua")
-    Cheat:loadFile("scripts/cheat/cheat_core_map.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_time.lua")
-    Cheat:loadFile("scripts/cheat/cheat_core_npc.lua")
-    Cheat:loadFile("scripts/cheat/cheat_core_teleport.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_weather.lua")
+    Cheat:loadFile("scripts/cheat/cheat_core_storage.lua")
+
+    -- todo next
+    Cheat:loadFile("scripts/cheat/cheat_core_perks.lua")
+    Cheat:loadFile("scripts/cheat/cheat_core_skills.lua")
+
+    --Cheat:loadFile("scripts/cheat/cheat_core_factions.lua")
+    --Cheat:loadFile("scripts/cheat/cheat_core_horses.lua")
+    --Cheat:loadFile("scripts/cheat/cheat_core_merchants.lua")
+    --Cheat:loadFile("scripts/cheat/cheat_core_physics.lua")
+    --Cheat:loadFile("scripts/cheat/cheat_core_quests.lua")
+    --Cheat:loadFile("scripts/cheat/cheat_core_teleport.lua")
 
     Cheat:logInfo("Loaded KCD2 Cheat version %s", Cheat.version)
+
+    --[[
+
+    Cheat:test_core_player()
+    Cheat:test_core_buffs()
+    Cheat:test_core_items()
+    Cheat:test_core_time()
+    Cheat:test_core_weather()
+    Cheat:test_core_picking()
+    Cheat:test_core_storage()
+
+    ]]
 end
 
 function Cheat:onSystemStarted()

@@ -391,11 +391,11 @@ function Cheat:max(x, y)
 end
 
 function Cheat:truncate(number)
-    if number >= 0 then
-        return math.floor(number)
-    else
-        return math.ceil(number)
+    if number then
+        local truncated_number, _ = math.modf(number) -- Discard fractional part with '_'
+        return truncated_number
     end
+    return nil
 end
 
 function Cheat:clamp(value, min, max)
@@ -452,6 +452,19 @@ end
 
 function Cheat:createSpawnVectorFromPosition(avoidCenter, xPos, yPos, zPos, radius, near)
     return Cheat:createSpawnVectorFromVector(avoidCenter, { x = xPos, y = yPos, z = zPos }, radius, near)
+end
+
+function Cheat:distanceToPlayer(entity)
+    local v1 = g_Vectors.temp_v1
+    entity:GetWorldPos(v1)
+
+    local v2 = g_Vectors.temp_v2
+    player:GetWorldPos(v2)
+
+    local v3 = g_Vectors.temp_v3
+    v3 = VectorUtils.Subtract(v2, v1)
+
+    return VectorUtils.Length(v3)
 end
 
 -- ============================================================================
@@ -616,6 +629,36 @@ function Cheat:testAssertFalse(name, value)
         Cheat.g_cheat_test_fail = Cheat.g_cheat_test_fail + 1
     else
         Cheat:log(string.format("$3[PASS] %s", tostring(name)))
+        Cheat.g_cheat_test_pass = Cheat.g_cheat_test_pass + 1
+    end
+end
+
+function Cheat:testAssertEquals(name, actualValue, expectedValue)
+    if actualValue ~= expectedValue then
+        Cheat:log(string.format("$4[FAIL] %s actualValue [%s] ~= expectedValue [%s]",
+            name, tostring(actualValue), tostring(expectedValue)))
+        Cheat.g_cheat_test_fail = Cheat.g_cheat_test_fail + 1
+    else
+        Cheat:log(string.format("$3[PASS] %s actualValue [%s] ~= expectedValue [%s]",
+            name, tostring(actualValue), tostring(expectedValue)))
+        Cheat.g_cheat_test_pass = Cheat.g_cheat_test_pass + 1
+    end
+end
+
+function Cheat:testAssertEqualsFloat(name, actualValue, expectedValue, maxDifference)
+    local diff = nil
+
+    if actualValue and expectedValue and maxDifference then
+        diff = math.abs(actualValue - expectedValue)
+    end
+
+    if not diff or diff >= maxDifference then
+        Cheat:log(string.format("$4[FAIL] %s actualValue [%s] ~= expectedValue [%s], maxDifference [%s] (diff=%s)",
+            name, tostring(actualValue), tostring(expectedValue), tostring(maxDifference), tostring(diff)))
+        Cheat.g_cheat_test_fail = Cheat.g_cheat_test_fail + 1
+    else
+        Cheat:log(string.format("$3[PASS] %s actualValue [%s] ~= expectedValue [%s] maxDifference [%s]",
+            name, tostring(actualValue), tostring(expectedValue), tostring(maxDifference)))
         Cheat.g_cheat_test_pass = Cheat.g_cheat_test_pass + 1
     end
 end

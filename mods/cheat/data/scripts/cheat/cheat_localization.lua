@@ -39,6 +39,57 @@ function Cheat:getLocalizedItemNames(item)
     return Cheat:getLocalizedNames(Cheat.g_localization_item_database, item.uiname)
 end
 
+function Cheat:getLocalizedEntityNames(entity)
+    if entity then
+        if entity["soul"] then
+            return Cheat:getLocalizedSoulNames(entity.soul)
+        elseif entity["uiname"] then
+            return Cheat:getLocalizedItemNames(entity)
+        end
+    end
+    return nil
+end
+
+-- #Cheat:tprint(Cheat:getLocalizedSoulNames(Cheat:getTargetedEntity().soul))
+-- #Cheat:log(Cheat:getLocalizedName(Cheat:getTargetedEntity()))
+function Cheat:getLocalizedName(entity)
+    if not entity then
+        return nil
+    end
+
+    local lnames = nil
+    if entity["soul"] then
+        lnames = Cheat:getLocalizedSoulNames(entity.soul)
+    elseif entity["uiname"] then
+        lnames = Cheat:getLocalizedItemNames(entity)
+    end
+
+    local name = nil
+    if lnames and lnames.field1 then
+        name = lnames.field1
+    elseif lnames and lnames.field2 then
+        name = lnames.field2
+    else
+        local ename = nil
+
+        if (type(entity) == "userdata") then
+            local e = System.GetEntity(entity)
+            if (e) then
+                ename = e:GetName()
+            end
+        elseif (type(entity) == "table") then
+            ename = entity:GetName()
+        end
+
+        if ename then
+            name = ename
+        else
+            name = "unknown"
+        end
+    end
+    return name
+end
+
 function Cheat:findUIName(databse, searchKey)
     if not databse then
         return nil
