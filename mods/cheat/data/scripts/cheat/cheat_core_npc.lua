@@ -338,17 +338,6 @@ function Cheat:getEntityName(entity)
     return nil
 end
 
-function Cheat:getLocalizedEntityNames(entity)
-    if entity then
-        if entity["soul"] then
-            return Cheat:getLocalizedSoulNames(entity.soul)
-        else
-            Cheat:logError("getLocalizedEntityNames - entity has no soul")
-        end
-    end
-    return nil
-end
-
 function Cheat:getEntityId(entity)
     if entity and entity["this"] and entity.this["id"] then
         return tostring(entity.this.id)
@@ -466,7 +455,7 @@ function Cheat:findEntities(searchOperation, range, classes)
 end
 
 function Cheat:findNpcs(searchOperation, range)
-    return Cheat:findEntities(searchOperation, range, { "NPC", "NPC_Female" })
+    return Cheat:findEntities(searchOperation, range, { "NPC", "NPC_Female", "Horse" })
 end
 
 function Cheat:createUniqueEntityName(entityClass)
