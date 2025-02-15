@@ -92,7 +92,6 @@ end
 -- ============================================================================
 -- cheat_no_stash_lockpicking
 -- ============================================================================
-
 Cheat:createCommand("cheat_no_stash_lockpicking", "Cheat:cheat_no_stash_lockpicking(%line)", Cheat.cheat_picking_args,
     "Bypass stash lockpicking but consumes a lockpick.\n$8Restarting the game reverts this effect.",
     "Turn off lockpicking minigame on stashes.", "cheat_no_stash_lockpicking")

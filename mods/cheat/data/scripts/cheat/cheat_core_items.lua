@@ -55,7 +55,7 @@ Cheat.g_quality3_item_1_id = "eda316a4-59d9-49ae-b67b-f6837789bd0c"
 Cheat.g_quality4_item_1_id = "9e31a288-7de0-4c0d-81cd-5cf00548d2d5"
 
 Cheat.g_item_database = {}
-Cheat.g_item_database_search_fields = { "id", "l2name" }
+Cheat.g_item_database_search_fields = { "id", "l2name", "name" }
 Cheat.g_item_database_skip_tags = { PickableItem = true, Image = true, DocumentContent = true, Phase = true, ItemClasses = true, NPCTool = true, database = true }
 Cheat.g_item_database_errors = 0
 Cheat.g_item_database_aliases = {}
@@ -249,8 +249,8 @@ function Cheat:initItemDatabase()
     Cheat:xmlLoadDatabase("libs/tables/item/item__horse.xml", p_func)
     Cheat:xmlLoadDatabase("libs/tables/item/item__aux.xml", p_func)
     Cheat:xmlLoadDatabase("libs/tables/item/item__alchemy.xml", p_func)
-    Cheat:xmlLoadDatabase("libs/tables/item/item__autotests.xml", p_func)
-    Cheat:xmlLoadDatabase("libs/tables/item/item__test.xml", p_func)
+    --Cheat:xmlLoadDatabase("libs/tables/item/item__autotests.xml", p_func)
+    --Cheat:xmlLoadDatabase("libs/tables/item/item__test.xml", p_func)
     Cheat:xmlLoadDatabase("libs/tables/item/item__unique.xml", p_func)
 
     for _, item in pairs(Cheat.g_item_database) do
@@ -1551,12 +1551,12 @@ function Cheat:test_cheat_add_all_items()
     -- cheat_add_all_items without quest flag
     Cheat:removeAllItems()
     Cheat:testAssert("cheat_add_all_items no quest 1", Cheat:cheat_add_all_items())
-    Cheat:testAssertEquals("cheat_add_all_items no quest 2", Cheat:getInventoryItemCount(), 4725)
+    Cheat:testAssertEquals("cheat_add_all_items no quest 2", Cheat:getInventoryItemCount(), 4521)
 
     -- cheat_add_all_items with quest flag
     Cheat:removeAllItems()
     Cheat:testAssert("cheat_add_all_items quest 1", Cheat:cheat_add_all_items())
-    Cheat:testAssertEquals("cheat_add_all_items quest 2", Cheat:getInventoryItemCount(), 4725)
+    Cheat:testAssertEquals("cheat_add_all_items quest 2", Cheat:getInventoryItemCount(), 4521)
 end
 
 -- ============================================================================
