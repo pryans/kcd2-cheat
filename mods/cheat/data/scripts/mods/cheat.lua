@@ -49,6 +49,7 @@ function Cheat:onInit()
     Cheat:test_core_time()
     Cheat:test_core_weather()
     Cheat:test_core_picking()
+    Cheat:test_core_storage()
 
     ]]
 end
