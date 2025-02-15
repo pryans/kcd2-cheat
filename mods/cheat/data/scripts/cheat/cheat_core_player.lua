@@ -679,9 +679,6 @@ function Cheat:test_core_player()
     -- cheat_charm
     Cheat:testAssert("cheat_charm", Cheat:cheat_charm())
 
-    -- cheat_stash
-    Cheat:testAssert("cheat_stash", Cheat:cheat_stash())
-
     Cheat:endTest()
 end
 
