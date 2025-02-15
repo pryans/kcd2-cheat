@@ -45,7 +45,8 @@ function Cheat:getStashes(searchOperation)
             local matched = false
             local shouldLog = false
 
-            if searchOperation and searchOperation.searchKey and type > 2 then
+            -- no point in filtering player stashes
+            if type > 2 and searchOperation and searchOperation.searchKey then
                 local searchKeyLower = Cheat:toLower(searchOperation.searchKey)
                 local nameLower = Cheat:toLower(data.name)
                 local ownerLower = Cheat:toLower(data.stashOwnerName)
@@ -67,11 +68,13 @@ function Cheat:getStashes(searchOperation)
             if matched then
                 table.insert(stashDatabase[type].stashes, data)
                 if shouldLog then
-                    Cheat:logInfo("%s Stash: owner=%s (%s) type=%s index=%s",
+                    Cheat:logInfo("%s Stash: index=%s owner=%s pos=%s distance=%s name=%s",
                         tostring(stashDatabase[type].name),
-                        tostring(data.stashOwnerName), tostring(data.name),
-                        tostring(type),
-                        tostring(#stashDatabase[type].stashes))
+                        tostring(#stashDatabase[type].stashes),
+                        tostring(data.stashOwnerName),
+                        tostring(Cheat:serializeTable(data.pos)),
+                        tostring(data.distance),
+                        tostring(data.name))
                 end
             end
         else
@@ -140,7 +143,7 @@ function Cheat:cheat_stash(line)
         local stashesInfo = stashDatabase[type]
         if stashesInfo.stashes[index] then
             local stashInfo = stashesInfo.stashes[index]
-            Cheat:tprint(stashInfo)
+            --Cheat:tprint(stashInfo)
             Cheat:logInfo("Opening [%s Stash] (owner=%s type=%s index=%s).",
                 tostring(stashesInfo.name), tostring(stashInfo.stashOwnerName), tostring(type), tostring(index))
 
@@ -214,6 +217,18 @@ function Cheat:cheat_inventory(line)
         Cheat:logWarn("No inventory for NPC: %s", Cheat:getEntityDisplayText(npc))
         return false
     end
+end
+
+-- ============================================================================
+-- test_core_storage
+-- ============================================================================
+function Cheat:test_core_storage()
+    Cheat:beginTest("test_core_storage")
+
+    Cheat:testAssert("cheat_stash", Cheat:cheat_stash())
+    Cheat:testAssert("cheat_inventory", Cheat:cheat_inventory("cheat_inventory exact:bara"))
+
+    Cheat:endTest()
 end
 
 -- ============================================================================
