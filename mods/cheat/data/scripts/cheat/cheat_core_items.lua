@@ -617,6 +617,9 @@ function Cheat:recreateItems(mode, condition, quality, quest)
             if Cheat.g_ownstolen_cat_ids[item.category_id] and item.owner ~= Cheat.g_player_data_m and item.owner ~= Cheat.g_player_data_f then
                 shouldDelete = true
                 shouldRecreate = true
+                -- we'll change ownership but keep the condition and quality
+                condition = item.condition
+                quality = item.quality
             end
         end
 
