@@ -438,7 +438,7 @@ function Cheat:createSpawnVectorFromVector(avoidCenter, position, radius, near)
     end
 
     -- need to avoid an infinite loop
-    if avoidCenter and radius - near < 2 then
+    if avoidCenter and radius - near < 0.1 then
         Cheat:logWarn("changed radius/near from [%s/%s] to [10/2]", tostring(radius), tostring(near))
         radius = 10
         near = 2
@@ -498,6 +498,29 @@ function Cheat:getGroundHeight(x, y)
     else
         return nil
     end
+end
+
+function Cheat:stringToVector(value)
+    -- Replace all non-digits with spaces
+    local digit_string = string.gsub(value, "[^0-9.]", " ")
+
+    -- Tokenize the string by whitespace and get the first 3 tokens
+    local tokens = {}
+    local count = 0
+    for token in string.gmatch(digit_string, "%S+") do -- %S+ matches one or more non-whitespace characters
+        count = count + 1
+        if count <= 3 then
+            table.insert(tokens, token)
+        else
+            break
+        end
+    end
+
+    local vector = {}
+    vector.x = tokens[1] or nil
+    vector.y = tokens[2] or nil
+    vector.z = tokens[3] or nil
+    return vector
 end
 
 -- ============================================================================
