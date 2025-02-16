@@ -36,28 +36,20 @@ table.insert(Cheat.g_weather, "summer_overcast_B_no_rain")
 -- ============================================================================
 -- cheat_set_weather
 -- ============================================================================
-Cheat.cheat_set_weather_args = {
-    id = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "The weather type ID.") end,
-    transition = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 30, showHelp, "The number of real world seconds to transition the weather. Default 30.") end,
-}
-Cheat:createCommandLegacy("cheat_set_weather", "Cheat:cheat_set_weather(%line)", Cheat.cheat_set_weather_args,
+Cheat:createCommand("cheat_set_weather", {
+        id = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "The weather type ID.") end,
+        transition = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 30, showHelp, "The number of real world seconds to transition the weather. Default 30.") end,
+    },
     "Sets the weather to the given weather ID.\n" .. Cheat:formatArrayAsList(Cheat.g_weather, 3),
     "Set weather to foggy storm", "cheat_set_weather id:6")
-function Cheat:cheat_set_weather(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_set_weather_args)
-    local id, idErr = Cheat:argsGet(args, "id")
-    local transition, transitionErr = Cheat:argsGet(args, "transition")
-    if idErr or transitionErr then
+function Cheat:cheat_set_weather(c)
+    if not Cheat.g_weather[c.id] then
+        Cheat:logError("Weather ID [%s] does not exist.", tostring(c.id))
         return false
     end
 
-    if not Cheat.g_weather[id] then
-        Cheat:logError("Weather ID [%s] does not exist.", tostring(id))
-        return false
-    end
-
-    EnvironmentModule.BlendTimeOfDay(Cheat.g_weather[id], transition * Calendar.GetWorldTimeRatio(), true)
-    Cheat:logInfo("Set weather to [%s].", Cheat.g_weather[id])
+    EnvironmentModule.BlendTimeOfDay(Cheat.g_weather[c.id], c.transition * Calendar.GetWorldTimeRatio(), true)
+    Cheat:logInfo("Set weather to [%s].", Cheat.g_weather[c.id])
     return true
 end
 
@@ -67,10 +59,10 @@ end
 function Cheat:test_core_weather()
     Cheat:beginTest("cheat_set_weather")
 
-    Cheat:testAssertFalse("cheat_set_weather invalid 1", Cheat:cheat_set_weather(""))
-    Cheat:testAssertFalse("cheat_set_weather invalid 2", Cheat:cheat_set_weather("id:-1"))
-    Cheat:testAssertFalse("cheat_set_weather invalid 3", Cheat:cheat_set_weather("id:1 transition:abc"))
-    Cheat:testAssert("cheat_set_weather 1", Cheat:cheat_set_weather("id:1 transition:0"))
+    Cheat:testAssertFalse("cheat_set_weather invalid 1", Cheat:proxy("cheat_set_weather", ""))
+    Cheat:testAssertFalse("cheat_set_weather invalid 2", Cheat:proxy("cheat_set_weather", "id:-1"))
+    Cheat:testAssertFalse("cheat_set_weather invalid 3", Cheat:proxy("cheat_set_weather", "id:1 transition:abc"))
+    Cheat:testAssert("cheat_set_weather 1", Cheat:proxy("cheat_set_weather", "id:1 transition:0"))
 
     Cheat:endTest()
 end
