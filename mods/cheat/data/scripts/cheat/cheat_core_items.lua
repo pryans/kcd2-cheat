@@ -536,7 +536,7 @@ function Cheat:getUserItems()
             table.insert(items, item)
             backedupItems = backedupItems + 1
         else
-            Cheat:logError("Failed to backup user item: %s", Cheat:serializeTable(userdata))
+            Cheat:logError("Failed to convert user item: %s", Cheat:serializeTable(userdata))
         end
     end
     return items, totalItems, backedupItems
@@ -982,25 +982,45 @@ function Cheat:cheat_damage_gear(line)
 end
 
 -- ============================================================================
+-- cheat_list_inventory
+-- ============================================================================
+Cheat:createCommand("cheat_list_inventory", nil, "Lists your inventory.")
+function Cheat:cheat_list_inventory(c)
+    local count = 0
+    for _, item in pairs(Cheat:getUserItems()) do
+        count = count + 1
+        Cheat:logInfo("Inventory Item: %s", Cheat:getItemDisplayText(item))
+    end
+    Cheat:logInfo("List all [%d] inventory items.", count)
+    return true
+end
+
+-- ============================================================================
 -- cheat_backup_inventory
 -- ============================================================================
 Cheat:createCommandLegacy("cheat_backup_inventory", "Cheat:cheat_backup_inventory()", nil,
-    "Saves inventory to temporary game memory. Use cheat_restore_inventory to restore the backup.\n" ..
-    "Intended for situations where the contents of your inventory will be lost due to game mechanics.\n" ..
+    "Saves inventory to temporary mod memory which remains even on the main menu screen.\n" ..
+    "Use to avoid situations where game mechanics causes lose of your inventory,\n" ..
+    "moving items between game saves, or for New Game+ item transfers.\n" ..
+    "Use cheat_restore_inventory to restore the backup.\n" ..
     "$4WARNING: cheat_restore_inventory cannot restore quest items and quality 4 items.\n",
     "Saves all items", "cheat_backup_inventory")
 function Cheat:cheat_backup_inventory()
-    local items, totalItems, backedupItems = Cheat:getUserItems()
+    local userItems, totalItems, backedupItems = Cheat:getUserItems()
     if totalItems > 0 and totalItems == backedupItems then
-        for _, item in pairs(items) do
-            if not Cheat:canCreateItem(item.id) then
+        local blockedCount = 0
+        for _, item in pairs(userItems) do
+            if Cheat:canCreateItem(item.id) then
+                Cheat:logInfo("Backup Item: %s", Cheat:getItemDisplayText(item))
+            else
+                blockedCount = blockedCount + 1
                 Cheat:logWarn("Your inventory contains a blocked item that won't work with cheat_restore_inventory.")
-                Cheat:logWarn("Block: %s", Cheat:getItemDisplayText(item))
+                Cheat:logWarn("Blocked Item: %s", Cheat:getItemDisplayText(item))
             end
         end
 
-        Cheat.g_user_items = items
-        Cheat:logInfo("Backup completed.")
+        Cheat.g_user_items = userItems
+        Cheat:logInfo("Backed backup [%d] of [%d] items.", backedupItems - blockedCount, totalItems)
         return true
     else
         Cheat.g_user_items = nil
@@ -1022,18 +1042,18 @@ function Cheat:cheat_restore_inventory()
         return false
     end
 
-    local totalItems = #Cheat.g_user_items
+    local totalItems = 0
     local itemsRestored = 0
-    for _, userItem in ipairs(Cheat.g_user_items) do
+    for _, item in ipairs(Cheat.g_user_items) do
         totalItems = totalItems + 1
-        if Cheat:addItem({ exact = true, searchKey = userItem.id }, userItem.amount, userItem.condition, nil, true, true) then
+        if Cheat:addItem({ exact = true, searchKey = item.id }, item.amount, item.condition, item.quality, true, true) then
             itemsRestored = itemsRestored + 1
         else
-            Cheat:logError("Failed to restore item: %s", Cheat:getItemDisplayText(Cheat:buildUserItem(userItem)))
+            Cheat:logError("Failed to restore item: %s", Cheat:getItemDisplayText(item))
         end
     end
 
-    Cheat:logInfo("Restored from backup [%d] of [%d] items.", itemsRestored, totalItems)
+    Cheat:logInfo("Restored from backup [%s] of [%s] items.", tostring(itemsRestored), tostring(totalItems))
     return true
 end
 
