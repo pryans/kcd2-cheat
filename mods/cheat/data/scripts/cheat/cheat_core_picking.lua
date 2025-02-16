@@ -93,8 +93,10 @@ end
 -- cheat_no_stash_lockpicking
 -- ============================================================================
 Cheat:createCommand("cheat_no_stash_lockpicking", Cheat.cheat_picking_args,
-    "Bypass stash lockpicking but consumes a lockpick.\n$8Restarting the game reverts this effect.",
-    "Turn off lockpicking minigame on stashes.", "cheat_no_stash_lockpicking")
+    "Bypass stash lockpicking but consumes a lockpick.\n" ..
+    "$4Restarting the game reverts this effect.",
+    "Turn off lockpicking minigame on stashes", "cheat_no_stash_lockpicking",
+    "Turn off lockpicking minigame on stashes and disable lockpick requirement", "cheat_no_stash_lockpicking nolockpicks:true")
 function Cheat:cheat_no_stash_lockpicking(c)
     Cheat.g_no_lockpicks_required = c.nolockpicks
 
@@ -114,8 +116,10 @@ end
 -- cheat_no_door_lockpicking
 -- ============================================================================
 Cheat:createCommand("cheat_no_door_lockpicking", Cheat.cheat_picking_args,
-    "Bypass door lockpicking but consumes a lockpick.\n$8Restarting the game reverts this effect.",
-    "Turn off lockpicking minigame on doors.", "cheat_no_door_lockpicking")
+    "Bypass door lockpicking but consumes a lockpick.\n" ..
+    "$4Restarting the game reverts this effect.",
+    "Turn off lockpicking minigame on doors", "cheat_no_door_lockpicking",
+    "Turn off lockpicking minigame on doors and disable lockpick requirement", "cheat_no_door_lockpicking nolockpicks:true")
 function Cheat:cheat_no_door_lockpicking(c)
     Cheat.g_no_lockpicks_required = c.nolockpicks
 
@@ -135,8 +139,10 @@ end
 -- cheat_no_lockpicking
 -- ============================================================================
 Cheat:createCommand("cheat_no_lockpicking", Cheat.cheat_picking_args,
-    "Bypass door and stash lockpicking but consumes a lockpick.\n$8Restarting the game reverts this effect.",
-    "Turn off lockpicking minigames on doors and stashes.", "cheat_no_lockpicking")
+    "Bypass door and stash lockpicking but consumes a lockpick.\n" ..
+    "$4Restarting the game reverts this effect.",
+    "Turn off lockpicking minigames on doors and stashes", "cheat_no_lockpicking",
+    "Turn off lockpicking minigames on doors and stashes and disable lockpick requirement", "cheat_no_lockpicking nolockpicks:true")
 function Cheat:cheat_no_lockpicking(c)
     Cheat:proxy("cheat_no_stash_lockpicking", "nolockpicks:" .. tostring(c.nolockpicks))
     Cheat:proxy("cheat_no_door_lockpicking", "nolockpicks:" .. tostring(c.nolockpicks))
@@ -147,8 +153,9 @@ end
 -- cheat_no_pickpocketing
 -- ============================================================================
 Cheat:createCommand("cheat_no_pickpocketing", nil,
-    "Bypass pickpocketing minigame.\n$8They can still catch you.\n$8Restarting the game reverts this effect.",
-    "Turn off pickpocketing minigame.", "cheat_no_pickpocketing")
+    "Bypass pickpocketing minigame, however NPCs can still notice you committing a crime.\n" ..
+    "$4Restarting the game reverts this effect.",
+    "Turn off pickpocketing minigame", "cheat_no_pickpocketing")
 function Cheat:cheat_no_pickpocketing()
     for key, _ in pairs(BasicAIActions) do
         if key == "OnPickpocketing" then
