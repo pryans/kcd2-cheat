@@ -598,7 +598,7 @@ Cheat.cheat_find_npc_args = {
     exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
     radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The search radius around player.") end,
 }
-Cheat:createCommand("cheat_find_npc", "Cheat:cheat_find_npc(%line)", Cheat.cheat_find_npc_args,
+Cheat:createCommandLegacy("cheat_find_npc", "Cheat:cheat_find_npc(%line)", Cheat.cheat_find_npc_args,
     "Finds NPCs loaded into the world.",
     "Find any NPC with 'hunt' in name", "cheat_find_npc any:hunt",
     "Find NPC with name exact matching 'Bara'", "cheat_find_npc exact:bara",
@@ -639,7 +639,7 @@ Cheat.cheat_revive_npc_args = {
     exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
     radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The resurrection radius around player. Default 5.") end,
 }
-Cheat:createCommand("cheat_revive_npc", "Cheat:cheat_revive_npc(%line)", Cheat.cheat_revive_npc_args,
+Cheat:createCommandLegacy("cheat_revive_npc", "Cheat:cheat_revive_npc(%line)", Cheat.cheat_revive_npc_args,
     "(Does not work yet) Revives dead NPCs by name or within the given radius of the player.",
     "Revive everything.", "cheat_revive_npc radius:200",
     "Revive Father Godwin.", "cheat_revive_npc exact:bara",
@@ -700,7 +700,7 @@ Cheat.cheat_teleport_npc_to_loc_args = {
     radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The teleport radius around the x,y,z target. Default 5.") end,
     max = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 10, showHelp, "The maximum NPCs to teleport. Default 10.") end
 }
-Cheat:createCommand("cheat_teleport_npc_to_loc", "Cheat:cheat_teleport_npc_to_loc(%line)", Cheat.cheat_teleport_npc_to_loc_args,
+Cheat:createCommandLegacy("cheat_teleport_npc_to_loc", "Cheat:cheat_teleport_npc_to_loc(%line)", Cheat.cheat_teleport_npc_to_loc_args,
     "Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locations.",
     "Teleport Bara to somewhere...", "cheat_teleport_npc_to_loc exact:Bara x:1 y:2 z:3")
 function Cheat:cheat_teleport_npc_to_loc(line)
@@ -756,7 +756,7 @@ Cheat.cheat_teleport_npc_to_player_args = {
     radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The teleport radius around the player. Default 5") end,
     max = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The maximum NPCs to teleport. Default 1.") end
 }
-Cheat:createCommand("cheat_teleport_npc_to_player", "Cheat:cheat_teleport_npc_to_player(%line)", Cheat.cheat_teleport_npc_to_player_args,
+Cheat:createCommandLegacy("cheat_teleport_npc_to_player", "Cheat:cheat_teleport_npc_to_player(%line)", Cheat.cheat_teleport_npc_to_player_args,
     "Teleports one or more NPCs to the player's location.",
     "Teleport Bara to the player.", "cheat_teleport_npc_to_player exact:bara",
     "Teleport all bandits to the player.", "cheat_teleport_npc_to_player any:bandit radius:50")
@@ -805,7 +805,7 @@ end
 -- ============================================================================
 -- cheat_target
 -- ============================================================================
-Cheat:createCommand("cheat_target", "Cheat:cheat_target()", nil, "shows information about your current target.")
+Cheat:createCommandLegacy("cheat_target", "Cheat:cheat_target()", nil, "shows information about your current target.")
 function Cheat:cheat_target()
     local entity = Cheat:getTargetedEntity()
     if entity then
@@ -818,7 +818,7 @@ end
 -- ============================================================================
 -- cheat_kill
 -- ============================================================================
-Cheat:createCommand("cheat_kill", "Cheat:cheat_kill()", nil, "Kills the player's current target.")
+Cheat:createCommandLegacy("cheat_kill", "Cheat:cheat_kill()", nil, "Kills the player's current target.")
 function Cheat:cheat_kill()
     local entity = Cheat:getTargetedEntity()
     if entity then
@@ -843,7 +843,7 @@ Cheat.cheat_kill_npc_args = {
     exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
     radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 10, showHelp, "The kill radius around player. Default 10.") end,
 }
-Cheat:createCommand("cheat_mass_kill", "Cheat:cheat_mass_kill(%line)", Cheat.cheat_kill_npc_args,
+Cheat:createCommandLegacy("cheat_mass_kill", "Cheat:cheat_mass_kill(%line)", Cheat.cheat_kill_npc_args,
     "Kills all the killable entities within the given radius of the player.",
     "Kill everything within 200 units of player", "cheat_mass_kill radius:200",
     "Kill Bara", "cheat_mass_kill exact:bara",
@@ -887,7 +887,7 @@ Cheat.cheat_spawn_args = {
     count = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "Number of things to spawn. Default 1.") end,
     radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 10, showHelp, "The spawn radius around the player. Default 10.") end
 }
-Cheat:createCommand("cheat_spawn", "Cheat:cheat_spawn(%line)", Cheat.cheat_spawn_args,
+Cheat:createCommandLegacy("cheat_spawn", "Cheat:cheat_spawn(%line)", Cheat.cheat_spawn_args,
     "(Working in progress) Spawns entities. Enter the ID (number) from this list:\n" .. Cheat:formatArrayAsList(Cheat.g_soul_category_keys, 3),
     "Spawn 10 bandits", "cheat_spawn id:pig count:10")
 function Cheat:cheat_spawn(line)

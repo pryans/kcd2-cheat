@@ -92,7 +92,7 @@ end
 -- ============================================================================
 -- cheat_no_stash_lockpicking
 -- ============================================================================
-Cheat:createCommand("cheat_no_stash_lockpicking", "Cheat:cheat_no_stash_lockpicking(%line)", Cheat.cheat_picking_args,
+Cheat:createCommandLegacy("cheat_no_stash_lockpicking", "Cheat:cheat_no_stash_lockpicking(%line)", Cheat.cheat_picking_args,
     "Bypass stash lockpicking but consumes a lockpick.\n$8Restarting the game reverts this effect.",
     "Turn off lockpicking minigame on stashes.", "cheat_no_stash_lockpicking")
 function Cheat:cheat_no_stash_lockpicking(line)
@@ -119,7 +119,7 @@ end
 -- ============================================================================
 -- cheat_no_door_lockpicking
 -- ============================================================================
-Cheat:createCommand("cheat_no_door_lockpicking", "Cheat:cheat_no_door_lockpicking(%line)", Cheat.cheat_picking_args,
+Cheat:createCommandLegacy("cheat_no_door_lockpicking", "Cheat:cheat_no_door_lockpicking(%line)", Cheat.cheat_picking_args,
     "Bypass door lockpicking but consumes a lockpick.\n$8Restarting the game reverts this effect.",
     "Turn off lockpicking minigame on doors.", "cheat_no_door_lockpicking")
 function Cheat:cheat_no_door_lockpicking(line)
@@ -146,7 +146,7 @@ end
 -- ============================================================================
 -- cheat_no_lockpicking
 -- ============================================================================
-Cheat:createCommand("cheat_no_lockpicking", "Cheat:cheat_no_lockpicking(%line)", Cheat.cheat_picking_args,
+Cheat:createCommandLegacy("cheat_no_lockpicking", "Cheat:cheat_no_lockpicking(%line)", Cheat.cheat_picking_args,
     "Bypass door and stash lockpicking but consumes a lockpick.\n$8Restarting the game reverts this effect.",
     "Turn off lockpicking minigames on doors and stashes.", "cheat_no_lockpicking")
 function Cheat:cheat_no_lockpicking(line)
@@ -163,7 +163,7 @@ end
 -- ============================================================================
 -- cheat_no_pickpocketing
 -- ============================================================================
-Cheat:createCommand("cheat_no_pickpocketing", "Cheat:cheat_no_pickpocketing()", nil,
+Cheat:createCommandLegacy("cheat_no_pickpocketing", "Cheat:cheat_no_pickpocketing()", nil,
     "Bypass pickpocketing minigame.\n$8They can still catch you.\n$8Restarting the game reverts this effect.",
     "Turn off pickpocketing minigame.", "cheat_no_pickpocketing")
 function Cheat:cheat_no_pickpocketing()

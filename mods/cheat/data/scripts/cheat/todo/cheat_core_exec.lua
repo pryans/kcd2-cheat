@@ -41,7 +41,7 @@ Cheat.cheat_exec_delay_args = {
     end,
 }
 
-Cheat:createCommand("cheat_exec_delay", "Cheat:cheat_exec_delay(%line)", Cheat.cheat_exec_delay_args,
+Cheat:createCommandLegacy("cheat_exec_delay", "Cheat:cheat_exec_delay(%line)", Cheat.cheat_exec_delay_args,
     "Sets the number of milliseconds to delay execution of the next command.",
     "1 second delay", "cheat_exec_delay ms:1000")
 function Cheat:cheat_exec_delay(line)
@@ -59,7 +59,7 @@ Cheat.cheat_exec_file_args = {
     file = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "The file to execute.") end
 }
 
-Cheat:createCommand("cheat_exec_file", "Cheat:cheat_exec_file(%line)", Cheat.cheat_exec_file_args,
+Cheat:createCommandLegacy("cheat_exec_file", "Cheat:cheat_exec_file(%line)", Cheat.cheat_exec_file_args,
     "Executes a file of console commands. Use an absolute path or\n$8path relative to SteamLibrary\\steamapps\\common\\KingdomComeDeliverance.",
     "Manually run autocheat.txt", "cheat_exec_file file:Data\\autocheat.txt")
 function Cheat:cheat_exec_file(line)
@@ -90,7 +90,7 @@ end
 -- ============================================================================
 -- cheat_auto_exec
 -- ============================================================================
-Cheat:createCommand("cheat_auto_exec", "Cheat:cheat_auto_exec()", nil,
+Cheat:createCommandLegacy("cheat_auto_exec", "Cheat:cheat_auto_exec()", nil,
     "This command does nothing and is here for documentation only.\n$8" ..
     "You can run cheat commands automatically when a level loads by placing them in file Data\autocheat.txt.\n$8" ..
     "This is useful for commands that are not permanent.")

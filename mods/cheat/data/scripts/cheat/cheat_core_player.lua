@@ -69,8 +69,8 @@ end
 -- ============================================================================
 -- cheat_no_clip / cheat_clip
 -- ============================================================================
-Cheat:createCommand("cheat_no_clip", "Cheat:cheat_clip_mode(2)", nil, "Turns off player collision detection.", "Turn Off", "cheat_no_clip")
-Cheat:createCommand("cheat_clip", "Cheat:cheat_clip_mode(0)", nil, "Turns on player collision detection.", "Turn On", "cheat_clip")
+Cheat:createCommandLegacy("cheat_no_clip", "Cheat:cheat_clip_mode(2)", nil, "Turns off player collision detection.", "Turn Off", "cheat_no_clip")
+Cheat:createCommandLegacy("cheat_clip", "Cheat:cheat_clip_mode(0)", nil, "Turns on player collision detection.", "Turn On", "cheat_clip")
 function Cheat:cheat_clip_mode(mode)
     -- 0 normal
     -- 1 no collision, no gravity, no ground
@@ -95,7 +95,7 @@ end
 -- ============================================================================
 -- cheat_loc
 -- ============================================================================
-Cheat:createCommand("cheat_loc", "Cheat:loc()", nil,
+Cheat:createCommandLegacy("cheat_loc", "Cheat:loc()", nil,
     "Shows player's world location.",
     "Type to console", "cheat_loc")
 function Cheat:loc()
@@ -111,7 +111,7 @@ Cheat.cheat_set_state_args = {
     state = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "One of: health, stamina, exhaust, hunger, or .") end,
     value = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "The number to assign to the given state.") end
 }
-Cheat:createCommand("cheat_set_state", "Cheat:cheat_set_state(%line)", Cheat.cheat_set_state_args,
+Cheat:createCommandLegacy("cheat_set_state", "Cheat:cheat_set_state(%line)", Cheat.cheat_set_state_args,
     "Sets one of the player's states to the given value.",
     "Set health to 100 points", "cheat_set_state state:health value:100",
     "Set stamina to 100 points", "cheat_set_state state:stamina value:100",
@@ -143,7 +143,7 @@ Cheat.cheat_set_stat_level_args = {
     stat = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "One of: strength, agility, vitality, or speech.") end,
     level = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, string.format("The desired level for the given stat (max %s).", tostring(RPG.StatCap))) end
 }
-Cheat:createCommand("cheat_set_stat_level", "Cheat:cheat_set_stat_level(%line)", Cheat.cheat_set_stat_level_args,
+Cheat:createCommandLegacy("cheat_set_stat_level", "Cheat:cheat_set_stat_level(%line)", Cheat.cheat_set_stat_level_args,
     "Sets one of the player's stats to the given level.\n$4 WARNING: A stat's level cannot lowered once set.",
     "Set player's strength to level 20", "cheat_set_stat_level stat:strength level:20",
     "Set player's agility to level 5", "cheat_set_stat_level stat:agility level:5")
@@ -185,7 +185,7 @@ Cheat.cheat_add_stat_levels_args = {
     stat = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "One of: strength, agility, vitality, or speech.") end,
     levels = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, string.format("The levels to add to the stat (max %s). Level cannot lowered.", tostring(RPG.StatCap))) end
 }
-Cheat:createCommand("cheat_add_stat_levels", "Cheat:cheat_add_stat_levels(%line)", Cheat.cheat_add_stat_levels_args,
+Cheat:createCommandLegacy("cheat_add_stat_levels", "Cheat:cheat_add_stat_levels(%line)", Cheat.cheat_add_stat_levels_args,
     "Adds levels to a player's stat.\n$4 WARNING: A stat's level cannot lowered once set.",
     "Add 5 levels to player's strength.", "cheat_add_stat_levels stat:str levels:5")
 function Cheat:cheat_add_stat_levels(line)
@@ -227,7 +227,7 @@ end
 Cheat.cheat_add_money_args = {
     amount = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "The amount of groschen to add.") end
 }
-Cheat:createCommand("cheat_add_money", "Cheat:cheat_add_money(%line)", Cheat.cheat_add_money_args,
+Cheat:createCommandLegacy("cheat_add_money", "Cheat:cheat_add_money(%line)", Cheat.cheat_add_money_args,
     "Adds the given amount of groschen to the player's inventory.",
     "Add 200 groschen", "cheat_add_money amount:200")
 function Cheat:cheat_add_money(line)
@@ -258,7 +258,7 @@ end
 Cheat.cheat_set_bow_reticle_args = {
     enable = function (args, name, showHelp) return Cheat:argsGetRequiredBoolean(args, name, showHelp, "true or false") end,
 }
-Cheat:createCommand("cheat_set_bow_reticle", "Cheat:cheat_set_bow_reticle(%line)", Cheat.cheat_set_bow_reticle_args,
+Cheat:createCommandLegacy("cheat_set_bow_reticle", "Cheat:cheat_set_bow_reticle(%line)", Cheat.cheat_set_bow_reticle_args,
     "Enables or disables the bow reticle. Won't take effect if bow is drawn.",
     "Turn it on", "cheat_set_bow_reticle enable:true",
     "Turn it off", "cheat_set_bow_reticle enable:false")
@@ -287,7 +287,7 @@ end
 Cheat.cheat_set_compass_args = {
     enable = function (args, name, showHelp) return Cheat:argsGetRequiredBoolean(args, name, showHelp, "true or false") end,
 }
-Cheat:createCommand("cheat_set_compass", "Cheat:cheat_set_compass(%line)", Cheat.cheat_set_compass_args,
+Cheat:createCommandLegacy("cheat_set_compass", "Cheat:cheat_set_compass(%line)", Cheat.cheat_set_compass_args,
     "Enables or disables the compass.",
     "Turn it on", "cheat_set_compass enable:true",
     "Turn it off", "cheat_set_compass enable:false")
@@ -314,7 +314,7 @@ end
 Cheat.cheat_set_hud_args = {
     enable = function (args, name, showHelp) return Cheat:argsGetRequiredBoolean(args, name, showHelp, "true or false") end,
 }
-Cheat:createCommand("cheat_set_hud", "Cheat:cheat_set_hud(%line)", Cheat.cheat_set_hud_args,
+Cheat:createCommandLegacy("cheat_set_hud", "Cheat:cheat_set_hud(%line)", Cheat.cheat_set_hud_args,
     "Enables or disables the hud.",
     "Turn it on", "cheat_set_hud enable:true",
     "Turn it off", "cheat_set_hud enable:false")
@@ -340,7 +340,7 @@ end
 Cheat.cheat_set_statusbar_args = {
     enable = function (args, name, showHelp) return Cheat:argsGetRequiredBoolean(args, name, showHelp, "true or false") end,
 }
-Cheat:createCommand("cheat_set_statusbar", "Cheat:cheat_set_statusbar(%line)", Cheat.cheat_set_statusbar_args,
+Cheat:createCommandLegacy("cheat_set_statusbar", "Cheat:cheat_set_statusbar(%line)", Cheat.cheat_set_statusbar_args,
     "Enables or disables the statusbar.",
     "Turn it on", "cheat_set_statusbar enable:true",
     "Turn it off", "cheat_set_statusbar enable:false")
@@ -366,7 +366,7 @@ end
 Cheat.cheat_set_third_person_args = {
     enable = function (args, name, showHelp) return Cheat:argsGetRequiredBoolean(args, name, showHelp, "true or false") end,
 }
-Cheat:createCommand("cheat_set_third_person", "Cheat:cheat_set_third_person(%line)", Cheat.cheat_set_third_person_args,
+Cheat:createCommandLegacy("cheat_set_third_person", "Cheat:cheat_set_third_person(%line)", Cheat.cheat_set_third_person_args,
     "Enables or disables the third person view.",
     "Turn it on", "cheat_set_third_person enable:true",
     "Turn it off", "cheat_set_third_person enable:false")
@@ -389,7 +389,7 @@ end
 -- ============================================================================
 -- cheat_wash_dirt_and_blood
 -- ============================================================================
-Cheat:createCommand("cheat_wash_dirt_and_blood", "Cheat:cheat_wash_dirt_and_blood()", nil,
+Cheat:createCommandLegacy("cheat_wash_dirt_and_blood", "Cheat:cheat_wash_dirt_and_blood()", nil,
     "Washes all blood and dirt from the player.",
     "Wash yourself and your horse", "cheat_wash_dirt_and_blood")
 function Cheat:cheat_wash_dirt_and_blood()
@@ -401,7 +401,7 @@ end
 -- ============================================================================
 -- cheat_charm
 -- ============================================================================
-Cheat:createCommand("cheat_charm", "Cheat:cheat_charm()", nil,
+Cheat:createCommandLegacy("cheat_charm", "Cheat:cheat_charm()", nil,
     "Automates your morning routine of bath-haircut-sex for maximum Charisma bonus.\n$8Washes all dirt and blood and applies Fresh Cut and Smitten buffs.",
     "Wash yourself and add Charisma buffs", "cheat_charm")
 function Cheat:cheat_charm()
@@ -527,7 +527,7 @@ Cheat.cheat_set_regen_args = {
     state = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "The state to regen: all, health, stamina, or exhaust.") end,
     amount = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The amount to regen every second. (Default 1)") end
 }
-Cheat:createCommand("cheat_set_regen", "Cheat:cheat_set_regen(%line)", Cheat.cheat_set_regen_args,
+Cheat:createCommandLegacy("cheat_set_regen", "Cheat:cheat_set_regen(%line)", Cheat.cheat_set_regen_args,
     "Regenerates player health, stamina, hunger, or exhaust over time; pulses once per second.",
     "Adds 5 to all states every second.", "cheat_set_regen enable:true state:all amount:5",
     "Adds 5 to player's health every second.", "cheat_set_regen enable:true state:health amount:5",

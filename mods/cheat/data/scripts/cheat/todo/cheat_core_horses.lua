@@ -166,7 +166,7 @@ Cheat.cheat_find_horses_args = {
     end
 }
 
-Cheat:createCommand("cheat_find_horses", "Cheat:cheat_find_horses(%line)", Cheat.cheat_find_horses_args,
+Cheat:createCommandLegacy("cheat_find_horses", "Cheat:cheat_find_horses(%line)", Cheat.cheat_find_horses_args,
     "Find and display stats of horses.",
     "List all horses", "cheat_find_horses token:",
     "Find all horses in MRH stable", "cheat_find_horses token:mrh")
@@ -189,7 +189,7 @@ Cheat.cheat_set_horse_args = {
     end
 }
 
-Cheat:createCommand("cheat_set_horse", "Cheat:cheat_set_horse(%line)", Cheat.cheat_set_horse_args,
+Cheat:createCommandLegacy("cheat_set_horse", "Cheat:cheat_set_horse(%line)", Cheat.cheat_set_horse_args,
     "Sets the player's horse. Use command cheat_find_horses to display a list of horse UUIDs.",
     "Set horse by name part", "cheat_set_horse id:mrh_05",
     "Remove horse", "cheat_set_horse id:nil")
@@ -218,7 +218,7 @@ end
 -- ============================================================================
 -- cheat_teleport_horse
 -- ============================================================================
-Cheat:createCommand("cheat_teleport_horse", "Cheat:cheat_teleport_horse()", nil,
+Cheat:createCommandLegacy("cheat_teleport_horse", "Cheat:cheat_teleport_horse()", nil,
     "Teleports your horse to you.",
     "Teleport your horse to you", "cheat_teleport_horse")
 function Cheat:cheat_teleport_horse()

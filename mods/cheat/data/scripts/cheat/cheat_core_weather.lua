@@ -40,7 +40,7 @@ Cheat.cheat_set_weather_args = {
     id = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "The weather type ID.") end,
     transition = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 30, showHelp, "The number of real world seconds to transition the weather. Default 30.") end,
 }
-Cheat:createCommand("cheat_set_weather", "Cheat:cheat_set_weather(%line)", Cheat.cheat_set_weather_args,
+Cheat:createCommandLegacy("cheat_set_weather", "Cheat:cheat_set_weather(%line)", Cheat.cheat_set_weather_args,
     "Sets the weather to the given weather ID.\n" .. Cheat:formatArrayAsList(Cheat.g_weather, 3),
     "Set weather to foggy storm", "cheat_set_weather id:6")
 function Cheat:cheat_set_weather(line)

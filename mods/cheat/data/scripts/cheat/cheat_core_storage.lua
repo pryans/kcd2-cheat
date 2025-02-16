@@ -94,11 +94,11 @@ Cheat.cheat_stash_args = {
     type = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The stash type: 1=master(default), 2=owned, 3=world") end,
     index = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The stash index.") end
 }
-Cheat:createCommand("cheat_stash", "Cheat:cheat_stash(%line)", Cheat.cheat_stash_args,
+Cheat:createCommandLegacy("cheat_stash", "Cheat:cheat_stash(%line)", Cheat.cheat_stash_args,
     "Opens your master stash by default. Can open any stash.",
     "Open your master stash", "cheat_stash",
     "Open your 1st owned stash", "cheat_stash type:2 index:1",
-    "Open your 1st world stash", "cheat_stash type:3 index:1")
+    "Open 1st world stash", "cheat_stash type:3 index:1")
 function Cheat:cheat_stash(line)
     if Cheat:NotPlayerCharacter() then
         return false
@@ -171,7 +171,7 @@ Cheat.cheat_inventory_args = {
     any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
     exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end
 }
-Cheat:createCommand("cheat_inventory", "Cheat:cheat_inventory(%line)", Cheat.cheat_inventory_args,
+Cheat:createCommandLegacy("cheat_inventory", "Cheat:cheat_inventory(%line)", Cheat.cheat_inventory_args,
     "Opens the targeted or matching NPC's inventory.",
     "Open a random horse's inventory", "cheat_inventory any:horse",
     "Open Bara's inventory", "cheat_inventory exact:bara",

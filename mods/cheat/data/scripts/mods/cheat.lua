@@ -29,6 +29,7 @@ function Cheat:onInit()
     Cheat:loadFile("scripts/cheat/cheat_core_storage.lua")
 
     -- todo next
+    Cheat:loadFile("scripts/cheat/cheat_core_teleport.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_perks.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_skills.lua")
 
@@ -37,7 +38,6 @@ function Cheat:onInit()
     --Cheat:loadFile("scripts/cheat/cheat_core_merchants.lua")
     --Cheat:loadFile("scripts/cheat/cheat_core_physics.lua")
     --Cheat:loadFile("scripts/cheat/cheat_core_quests.lua")
-    --Cheat:loadFile("scripts/cheat/cheat_core_teleport.lua")
 
     Cheat:logInfo("Loaded KCD2 Cheat version %s", Cheat.version)
 
@@ -60,6 +60,7 @@ function Cheat:onSystemStarted()
     Cheat:initLocalizationDatabase()
 
     -- these databases use the localization database
+    Cheat:initBuffDatabase()
     Cheat:initItemDatabase()
     Cheat:initSoulsDatabase()
 end

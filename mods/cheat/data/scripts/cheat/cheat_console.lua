@@ -1,61 +1,149 @@
 -- ============================================================================
 -- createCommand
 -- ============================================================================
-function Cheat:createCommand(cmdName, cmdFunc, cmdArgsSet, cmdDocs, ...)
-    local cmdHelp = "$8" .. cmdDocs .. "$8\n"
+Cheat.g_command_registry = {}
+Cheat.g_command_proxies = {}
 
-    if cmdArgsSet then
-        cmdHelp = cmdHelp .. "\n$8Arguments:$8\n"
-        for key, val in pairs(cmdArgsSet) do
-            cmdHelp = cmdHelp .. "\t$6" .. tostring(key) .. ": $5" .. tostring(val(nil, key, true)) .. "\n"
+function Cheat:proxy(cmdName, line)
+    Cheat:logDebug("commandProxy: name[%s], line[%s]", tostring(cmdName), tostring(line))
+
+    local argsSet = Cheat.g_command_registry[cmdName].cmdArgsSet
+    local cmdContext = {}
+    if argsSet then
+        local args = Cheat:argsProcess(line, argsSet)
+        local hasErrors = false
+        for argName, _ in pairs(args) do
+            local argValue, argErr = Cheat:argsGet(args, argName)
+            cmdContext[argName] = argValue
+            if argErr then
+                hasErrors = true
+            end
         end
+
+        if hasErrors then
+            System.ExecuteCommand(cmdName .. " ?")
+            return false
+        end
+    else
+        cmdContext.line = line
     end
 
-    local examples = Cheat:packTable(...)
-    if examples and #examples > 0 then
-        --Cheat:logDebug("examples = " .. tostring(#examples))
-        cmdHelp = cmdHelp .. "\n$8Examples:$8\n"
-        local i = 1
-        while i < examples.n do
-            cmdHelp = cmdHelp .. "\t$6" .. tostring(examples[i]) .. ":\n\t$5" .. tostring(examples[i + 1]) .. "\n\n"
-            --Cheat:logDebug(cmdHelp)
-            i = i + 2
+    Cheat:logDebug("commandProxy: name[%s], context[%s]", tostring(cmdName), Cheat:serializeTable(cmdContext))
+    return Cheat[cmdName](Cheat, cmdContext)
+end
+
+function Cheat:createCommand(cmdName, cmdArgsSet, cmdDocs, ...)
+    if not Cheat.g_command_registry[cmdName] then
+        local cmdHelp = "$8" .. cmdDocs .. "$8\n"
+
+        if cmdArgsSet then
+            cmdHelp = cmdHelp .. "\n$8Arguments:$8\n"
+            for key, val in pairs(cmdArgsSet) do
+                cmdHelp = cmdHelp .. "\t$6" .. tostring(key) .. ": $5" .. tostring(val(nil, key, true)) .. "\n"
+            end
         end
+
+        local examples = Cheat:packTable(...)
+        if examples and #examples > 0 then
+            --Cheat:logDebug("examples = " .. tostring(#examples))
+            cmdHelp = cmdHelp .. "\n$8Examples:$8\n"
+            local i = 1
+            while i < examples.n do
+                cmdHelp = cmdHelp .. "\t$6" .. tostring(examples[i]) .. ":\n\t$5" .. tostring(examples[i + 1]) .. "\n\n"
+                --Cheat:logDebug(cmdHelp)
+                i = i + 2
+            end
+        end
+
+        Cheat.g_command_registry[cmdName] = { cmdName = cmdName, cmdArgsSet = cmdArgsSet, cmdHelp = cmdHelp }
+
+        local proxyFunctionName = "g_command_proxies_" .. cmdName
+        Cheat[proxyFunctionName] = function (self, line)
+            Cheat:logDebug("Function Proxy: %s(%s)", tostring(proxyFunctionName), tostring(line))
+            Cheat:proxy(cmdName, line)
+        end
+
+        local proxyFunction = "Cheat:" .. proxyFunctionName .. "(%line)"
+        System.AddCCommand(cmdName, proxyFunction, cmdHelp)
+    else
+        Cheat:logError("Console command [%s] is already registered.", tostring(cmdName))
+    end
+end
+
+function Cheat:createCommandAlias(aliasName, aliasTarget)
+    Cheat:logDebug("here createCommandAlias")
+
+    if Cheat.g_command_registry[aliasName] then
+        Cheat:logError("A command with name [%s] already exists.", tostring(aliasName))
+        return false
     end
 
-    if Cheat.isCommandLineBuild then
-        cmdHelp = " \n \n[size=4][b]" .. cmdName .. "[/b][/size]" .. "\n" .. cmdHelp
-        cmdHelp = cmdHelp:gsub("$8Arguments:$8", "[b]Arguments:[/b]")
-        cmdHelp = cmdHelp:gsub("$8Examples:$8", "[b]Examples:[/b]")
-
-        for i = 1, 9 do
-            cmdHelp = cmdHelp:gsub("$" .. tostring(i), "")
-        end
-
-        --print(cmdHelp)
-
-        local helpFile = io.open(Cheat.devHome .. "/Source/Docs/help.txt", "a+")
-        if helpFile then
-            helpFile:write(cmdHelp)
-            helpFile:flush()
-            helpFile:close()
-        end
-
-        table.insert(Cheat.commands, cmdName)
+    local target = Cheat.g_command_registry[aliasTarget]
+    if not target then
+        Cheat:logError("Alias target command [%s] not found.", tostring(aliasTarget))
+        return false
     end
 
-    System.AddCCommand(cmdName, cmdFunc, cmdHelp)
+    Cheat.g_command_registry[aliasName] = target
+    local proxyFunctionName = "g_command_proxies_" .. target.cmdName
+    local proxyFunction = "Cheat:" .. proxyFunctionName .. "(%line)"
+    System.AddCCommand(aliasName, proxyFunction, target.cmdHelp)
+    Cheat:logInfo("Created alias [%s] with target [%s].", tostring(aliasName), tostring(aliasTarget))
+    return true
+end
+
+function Cheat:createCommandLegacy(cmdName, cmdFunc, cmdArgsSet, cmdDocs, ...)
+    if not Cheat.g_command_registry[cmdName] then
+        local cmdHelp = "$8" .. cmdDocs .. "$8\n"
+
+        if cmdArgsSet then
+            cmdHelp = cmdHelp .. "\n$8Arguments:$8\n"
+            for key, val in pairs(cmdArgsSet) do
+                cmdHelp = cmdHelp .. "\t$6" .. tostring(key) .. ": $5" .. tostring(val(nil, key, true)) .. "\n"
+            end
+        end
+
+        local examples = Cheat:packTable(...)
+        if examples and #examples > 0 then
+            --Cheat:logDebug("examples = " .. tostring(#examples))
+            cmdHelp = cmdHelp .. "\n$8Examples:$8\n"
+            local i = 1
+            while i < examples.n do
+                cmdHelp = cmdHelp .. "\t$6" .. tostring(examples[i]) .. ":\n\t$5" .. tostring(examples[i + 1]) .. "\n\n"
+                --Cheat:logDebug(cmdHelp)
+                i = i + 2
+            end
+        end
+
+        Cheat.g_command_registry[cmdName] = { cmdName = cmdName, cmdFunc = cmdFunc, cmdArgsSet = cmdArgsSet, cmdHelp = cmdHelp }
+        System.AddCCommand(cmdName, cmdFunc, cmdHelp)
+    else
+        Cheat:logError("Console command [%s] is already registered to function [%s].", tostring(cmdName), tostring(cmdFunc))
+    end
+end
+
+-- ============================================================================
+-- cheat_alias
+-- ============================================================================
+Cheat:createCommand("cheat_alias", {
+        name = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "Name of the new command.") end,
+        target = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "Existing cheat command to execute.") end,
+    },
+    "Creates an alias for a cheat command.",
+    "Alias cheat_teleport_to_checkpoint to 'cgoto'", "cheat_alias name:cgoto target:cheat_teleport_to_checkpoint")
+function Cheat:cheat_alias(c)
+    Cheat:createCommandAlias(c.name, c.target)
 end
 
 -- ============================================================================
 -- cheat_save
 -- ============================================================================
-Cheat:createCommand("cheat_save", "Cheat:cheat_save()", nil,
+Cheat:createCommand("cheat_save", nil,
     "This instantly saves your game. No item requirements or save limits.",
     "Save your game", "cheat_save")
 function Cheat:cheat_save()
     -- probably not needed..
-    Game.RemoveSaveLock()
+    -- Game.RemoveSaveLock() -- throws an error
     if not Game.IsLoadingEngineSaveGame() then
         Game.SaveGameViaResting()
         return true
@@ -135,6 +223,31 @@ function Cheat:EventSystemListener(actionName, eventName, argTable)
 end
 
 UIAction.RegisterEventSystemListener(Cheat, "", "", "EventSystemListener")
+
+-- ============================================================================
+-- ElementListener
+-- ============================================================================
+Cheat.g_map_cursor_point = nil
+function Cheat:ElementListener(elementName, instanceId, eventName, argTable)
+    Cheat:logDebug("ElementListener: elementName[%s] instanceId[%s] eventName[%s]",
+        tostring(elementName), tostring(instanceId), tostring(eventName))
+    if Cheat:logIsDebugEnabled() then
+        if argTable then
+            Cheat:tprint(argTable)
+        end
+    end
+
+    if argTable[0] == "ui_apse_checkpoint_add" then
+        local cursor = {
+            x = UIAction.CallFunction("ApseMap", instanceId, "GetCurrentCursorPosX"),
+            y = UIAction.CallFunction("ApseMap", instanceId, "GetCurrentCursorPosY"),
+        }
+        Cheat.g_map_cursor_point = cursor
+        Cheat:logDebug("Cheat:ElementListener: ui_apse_checkpoint_add [%s]", Cheat:serializeTable(cursor))
+    end
+end
+
+UIAction.RegisterElementListener(Cheat, "ApseMap", -1, "", "ElementListener")
 
 -- ============================================================================
 -- end

@@ -13,17 +13,17 @@ function Cheat:onHover(nTimerId)
     player:AwakePhysics(1);
     player:AddImpulse(-1, pos, g_Vectors.v001, player:GetPhysicalStats().mass * Cheat.g_cheat_hover_force);
     Cheat.g_cheat_hover_timer_id = Script.SetTimer(Cheat.g_cheat_hover_timer_period_millis,
-      function(nTimerId) Cheat:onHover(nTimerId) end)
+      function (nTimerId) Cheat:onHover(nTimerId) end)
   end
 end
 
-Cheat:createCommand("cheat_phys_hover", "Cheat:hover()", nil,
+Cheat:createCommandLegacy("cheat_phys_hover", "Cheat:hover()", nil,
   "Use F1 key to toggle hover on and off.\n$8This uses physics to push the player slightly up.\n$8This is intended to be used with F2 push.")
 function Cheat:hover()
   if not Cheat.g_cheat_hover_enabled then
     Cheat.g_cheat_hover_enabled = true
     Cheat.g_cheat_hover_timer_id = Script.SetTimer(Cheat.g_cheat_hover_timer_period_millis,
-      function(nTimerId) Cheat:onHover(nTimerId) end)
+      function (nTimerId) Cheat:onHover(nTimerId) end)
     --Cheat:logInfo("Hover On")
   else
     Cheat.g_cheat_hover_enabled = false
@@ -52,17 +52,17 @@ function Cheat:onPush(nTimerId)
     player:AwakePhysics(1);
     player:AddImpulse(-1, pos, dir, player:GetPhysicalStats().mass * Cheat.g_cheat_push_force);
     Cheat.g_cheat_push_timer_id = Script.SetTimer(Cheat.g_cheat_push_timer_period_millis,
-      function(nTimerId) Cheat:onPush(nTimerId) end)
+      function (nTimerId) Cheat:onPush(nTimerId) end)
   end
 end
 
-Cheat:createCommand("cheat_phys_push", "Cheat:push()", nil,
+Cheat:createCommandLegacy("cheat_phys_push", "Cheat:push()", nil,
   "Use F2 key to toggle push on and off.\n$8This uses physics to push the player forward.\n$8This is intended to be used with F1 hover.")
 function Cheat:push()
   if not Cheat.g_cheat_push_enabled then
     Cheat.g_cheat_push_enabled = true
     Cheat.g_cheat_push_timer_id = Script.SetTimer(Cheat.g_cheat_push_timer_period_millis,
-      function(nTimerId) Cheat:onPush(nTimerId) end)
+      function (nTimerId) Cheat:onPush(nTimerId) end)
   else
     Cheat.g_cheat_push_enabled = false
     if Cheat.g_cheat_push_timer_id then
@@ -93,17 +93,17 @@ function Cheat:onSprint(nTimerId)
     player:AddImpulse(-1, pos, Cheat.g_cheat_down_vector, player:GetPhysicalStats().mass * 9.81);
     player:AddImpulse(-1, pos, dir, player:GetPhysicalStats().mass * Cheat.g_cheat_sprint_force);
     Cheat.g_cheat_sprint_timer_id = Script.SetTimer(Cheat.g_cheat_sprint_timer_period_millis,
-      function(nTimerId) Cheat:onSprint(nTimerId) end)
+      function (nTimerId) Cheat:onSprint(nTimerId) end)
   end
 end
 
-Cheat:createCommand("cheat_phys_sprint", "Cheat:sprint()", nil,
+Cheat:createCommandLegacy("cheat_phys_sprint", "Cheat:sprint()", nil,
   "Use F3 key to toggle sprinting on and off.\n$8This uses physics to push the player forward (and down for friction).")
 function Cheat:sprint()
   if not Cheat.g_cheat_sprint_enabled then
     Cheat.g_cheat_sprint_enabled = true
     Cheat.g_cheat_sprint_timer_id = Script.SetTimer(Cheat.g_cheat_sprint_timer_period_millis,
-      function(nTimerId) Cheat:onSprint(nTimerId) end)
+      function (nTimerId) Cheat:onSprint(nTimerId) end)
   else
     Cheat.g_cheat_sprint_enabled = false
     if Cheat.g_cheat_sprint_timer_id then
@@ -168,7 +168,7 @@ function Cheat:cheat_set_player_physics(p_gravity, p_zerog, p_air_control)
   --return
 
   local originalFunc = _G["EntityUpdateGravity"]
-  _G["EntityUpdateGravity"] = function(ent)
+  _G["EntityUpdateGravity"] = function (ent)
     Cheat:logInfo("new method")
 
     if ent.type ~= "Player" then

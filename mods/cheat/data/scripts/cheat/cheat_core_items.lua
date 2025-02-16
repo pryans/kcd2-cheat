@@ -701,7 +701,7 @@ Cheat.cheat_find_items_args = {
     any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
     exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
 }
-Cheat:createCommand("cheat_find_items", "Cheat:cheat_find_items(%line)", Cheat.cheat_find_items_args,
+Cheat:createCommandLegacy("cheat_find_items", "Cheat:cheat_find_items(%line)", Cheat.cheat_find_items_args,
     "Perform case-insensitive search for items by ID and localized name.",
     "Show all items", "cheat_find_items",
     "Matches items with 'long-range arrow' in their names", "cheat_find_items any:long-range arrow",
@@ -747,7 +747,7 @@ Cheat.cheat_add_item_args = {
     bulk = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, all matches items are added.") end,
     quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt adding quest items.") end
 }
-Cheat:createCommand("cheat_add_item", "Cheat:cheat_add_item(%line)", Cheat.cheat_add_item_args,
+Cheat:createCommandLegacy("cheat_add_item", "Cheat:cheat_add_item(%line)", Cheat.cheat_add_item_args,
     "Adds an item to the player's inventory.",
     "Adds 1 item with 'bow' in anywhere in name", "cheat_add_item any:bow",
     "Adds 1 item with 'hunting arrow' anywhere in name", "cheat_add_item any:hunting arrow",
@@ -799,7 +799,7 @@ end
 Cheat.cheat_add_all_items_args = {
     quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt adding quest items.") end
 }
-Cheat:createCommand("cheat_add_all_items", "Cheat:cheat_add_all_items(%line)", Cheat.cheat_add_all_items_args,
+Cheat:createCommandLegacy("cheat_add_all_items", "Cheat:cheat_add_all_items(%line)", Cheat.cheat_add_all_items_args,
     "Adds all items the player's inventory. Enjoy!",
     "Add all items", "cheat_add_all_items")
 function Cheat:cheat_add_all_items(line)
@@ -836,7 +836,7 @@ Cheat.cheat_remove_item_args = {
     quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt removing quest items.") end,
     bulk = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, all matches items are removed.") end,
 }
-Cheat:createCommand("cheat_remove_item", "Cheat:cheat_remove_item(%line)", Cheat.cheat_remove_item_args,
+Cheat:createCommandLegacy("cheat_remove_item", "Cheat:cheat_remove_item(%line)", Cheat.cheat_remove_item_args,
     "Removes an item to the player's inventory.",
     "Removes the last item with 'bow' in its name", "cheat_remove_item id:bow",
     "Removes the item ui_nm_arrow_hunter by ID", "cheat_remove_item id:802507e9-d620-47b5-ae66-08fcc314e26a",
@@ -883,7 +883,7 @@ end
 Cheat.cheat_remove_items_args = {
     quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt removing quest items.") end
 }
-Cheat:createCommand("cheat_remove_items", "Cheat:cheat_remove_items(%line)", Cheat.cheat_remove_items_args,
+Cheat:createCommandLegacy("cheat_remove_items", "Cheat:cheat_remove_items(%line)", Cheat.cheat_remove_items_args,
     "Removes all items in the player's inventory.\n$4THIS DELETES YOUR INVENTORY! Move items you want to a stash first.",
     "Delete your inventory.", "cheat_remove_items")
 function Cheat:cheat_remove_items(line)
@@ -910,7 +910,7 @@ end
 -- ============================================================================
 -- cheat_remove_stolen_items
 -- ============================================================================
-Cheat:createCommand("cheat_remove_stolen_items", "Cheat:cheat_remove_stolen_items()", nil,
+Cheat:createCommandLegacy("cheat_remove_stolen_items", "Cheat:cheat_remove_stolen_items()", nil,
     "Removes all stolen items from your inventory.",
     "Remove stolen items.", "cheat_remove_stolen_items")
 function Cheat:cheat_remove_stolen_items()
@@ -922,7 +922,7 @@ end
 -- ============================================================================
 -- cheat_own_stolen_items
 -- ============================================================================
-Cheat:createCommand("cheat_own_stolen_items", "Cheat:cheat_own_stolen_items()", nil,
+Cheat:createCommandLegacy("cheat_own_stolen_items", "Cheat:cheat_own_stolen_items()", nil,
     "Makes you the owner of all stolen items in your inventory.\n$8This removes the stolen flag from the item.",
     "Take ownership of stolen items", "cheat_own_stolen_items")
 function Cheat:cheat_own_stolen_items()
@@ -939,7 +939,7 @@ Cheat.cheat_repair_gear_args = {
     quality = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The item quality. Defaults to, and cannot exceed, the item's max quality or quality 3.") end,
     quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt repairing quest items.") end
 }
-Cheat:createCommand("cheat_repair_gear", "Cheat:cheat_repair_gear(%line)", Cheat.cheat_repair_gear_args,
+Cheat:createCommandLegacy("cheat_repair_gear", "Cheat:cheat_repair_gear(%line)", Cheat.cheat_repair_gear_args,
     "Repairs weapons and armor." ..
     "\n$4This can uneqip items so don't do this in combat.",
     "Repair gear to 75%.", "cheat_repair_gear condition:75")
@@ -964,7 +964,7 @@ Cheat.cheat_damage_gear_args = {
     quality = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The item quality. Defaults to, and cannot exceed, the item's max quality or quality 3.") end,
     quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt damaging quest items.") end
 }
-Cheat:createCommand("cheat_damage_gear", "Cheat:cheat_damage_gear(%line)", Cheat.cheat_damage_gear_args,
+Cheat:createCommandLegacy("cheat_damage_gear", "Cheat:cheat_damage_gear(%line)", Cheat.cheat_damage_gear_args,
     "Damages weapons and armor." ..
     "\n$4This can uneqip items so don't do this in combat.",
     "Damage gear to 25%", "cheat_damage_gear condition:25")
@@ -984,7 +984,7 @@ end
 -- ============================================================================
 -- cheat_backup_inventory
 -- ============================================================================
-Cheat:createCommand("cheat_backup_inventory", "Cheat:cheat_backup_inventory()", nil,
+Cheat:createCommandLegacy("cheat_backup_inventory", "Cheat:cheat_backup_inventory()", nil,
     "Saves inventory to temporary game memory. Use cheat_restore_inventory to restore the backup.\n" ..
     "Intended for situations where the contents of your inventory will be lost due to game mechanics.\n" ..
     "$4WARNING: cheat_restore_inventory cannot restore quest items and quality 4 items.\n",
@@ -1012,7 +1012,7 @@ end
 -- ============================================================================
 -- cheat_restore_inventory
 -- ============================================================================
-Cheat:createCommand("cheat_restore_inventory", "Cheat:cheat_restore_inventory()", nil,
+Cheat:createCommandLegacy("cheat_restore_inventory", "Cheat:cheat_restore_inventory()", nil,
     "Loads all items stored by cheat_backup_inventory in this game session.\n" ..
     "$4WARNING: cheat_restore_inventory cannot restore quest items and quality 4 items.\n",
     "Load all items", "cheat_restore_inventory")

@@ -58,7 +58,7 @@ Cheat.cheat_find_perks_args = {
     token = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a the perk's name. Leave empty to list all perks.") end,
     any = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "Whether to not filter out perks you can't select yourself") end
 }
-Cheat:createCommand("cheat_find_perks", "Cheat:cheat_find_perks(%line)", Cheat.cheat_find_perks_args,
+Cheat:createCommandLegacy("cheat_find_perks", "Cheat:cheat_find_perks(%line)", Cheat.cheat_find_perks_args,
     "Finds all of the perks that match the given token.",
     "Show all perks", "cheat_find_perks token:",
     "Show all perks with 'hunt' in their name", "cheat_find_perks token:hunt")
@@ -80,7 +80,7 @@ Cheat.cheat_add_perk_args = {
     id = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.") end,
     any = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "Whether to not filter out perks you can't select yourself") end
 }
-Cheat:createCommand("cheat_add_perk", "Cheat:cheat_add_perk(%line)", Cheat.cheat_add_perk_args,
+Cheat:createCommandLegacy("cheat_add_perk", "Cheat:cheat_add_perk(%line)", Cheat.cheat_add_perk_args,
     "Adds the given perk to the player.",
     "Adds the last perk with 'hunt' in its name", "cheat_add_perk id:hunt",
     "Adds the perk juggler perk by ID", "cheat_add_perk id:09a5f2a0-d59f-42c2-a80c-bec9ad7ca168",
@@ -109,7 +109,7 @@ Cheat.cheat_add_all_perks_args = {
     exclude = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true then negative, test, and obsolete of perks are excluded.") end,
     any = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "Whether to not filter out perks you can't select yourself") end
 }
-Cheat:createCommand("cheat_add_all_perks", "Cheat:cheat_add_all_perks(%line)", Cheat.cheat_add_all_perks_args,
+Cheat:createCommandLegacy("cheat_add_all_perks", "Cheat:cheat_add_all_perks(%line)", Cheat.cheat_add_all_perks_args,
     "Adds all perks to the player.",
     "Add all perks", "cheat_add_all_perks exclude:true",
     "Add all perks including negative, test, and obsolete perks", "cheat_add_all_perks exclude:false")
@@ -209,7 +209,7 @@ Cheat.cheat_remove_perk_args = {
     id = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.") end,
     any = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "Whether to not filter out perks you can't select yourself") end
 }
-Cheat:createCommand("cheat_remove_perk", "Cheat:cheat_remove_perk(%line)", Cheat.cheat_remove_perk_args,
+Cheat:createCommandLegacy("cheat_remove_perk", "Cheat:cheat_remove_perk(%line)", Cheat.cheat_remove_perk_args,
     "Removes the given perk from the player.",
     "Removes the last perk with 'hunt' in its name", "cheat_remove_perk id:hunt",
     "Removes the perk juggler by ID", "cheat_remove_perk id:09a5f2a0-d59f-42c2-a80c-bec9ad7ca168",
@@ -234,7 +234,7 @@ end
 -- ============================================================================
 -- cheat_remove_all_perks
 -- ============================================================================
-Cheat:createCommand("cheat_remove_all_perks", "Cheat:cheat_remove_all_perks()", nil,
+Cheat:createCommandLegacy("cheat_remove_all_perks", "Cheat:cheat_remove_all_perks()", nil,
     "Removes all perks from the player.",
     "Remove all perks", "cheat_remove_all_perks")
 function Cheat:cheat_remove_all_perks(line)
@@ -256,7 +256,7 @@ end
 -- ============================================================================
 -- cheat_reset_perks
 -- ============================================================================
-Cheat:createCommand("cheat_reset_perks", "Cheat:cheat_reset_perks()", nil,
+Cheat:createCommandLegacy("cheat_reset_perks", "Cheat:cheat_reset_perks()", nil,
     "Resets all visible Perks.",
     "Reset all Perks", "cheat_reset_perks")
 function Cheat:cheat_reset_perks()

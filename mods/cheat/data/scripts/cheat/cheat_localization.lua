@@ -58,10 +58,18 @@ function Cheat:getLocalizedName(entity)
     end
 
     local lnames = nil
-    if entity["soul"] then
-        lnames = Cheat:getLocalizedSoulNames(entity.soul)
-    elseif entity["uiname"] then
-        lnames = Cheat:getLocalizedItemNames(entity)
+    if not entity.l1name and not entity.l2name then
+        if entity["soul"] then
+            lnames = Cheat:getLocalizedSoulNames(entity.soul)
+        elseif entity["uiname"] then
+            lnames = Cheat:getLocalizedItemNames(entity)
+        end
+    else
+        --when entity = buff db row that has been localized
+        lnames = {
+            field1 = entity.l1name,
+            field2 = entity.l2name
+        }
     end
 
     local name = nil

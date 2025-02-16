@@ -1,7 +1,7 @@
 -- ============================================================================
 -- cheat_reveal_map
 -- ============================================================================
-Cheat:createCommand("cheat_reveal_map", "Cheat:cheat_reveal_map()", nil,
+Cheat:createCommandLegacy("cheat_reveal_map", "Cheat:cheat_reveal_map()", nil,
     "Add a perk to reveal the entire map.",
     "Reveal the entire map", "cheat_reveal_map")
 function Cheat:cheat_reveal_map()

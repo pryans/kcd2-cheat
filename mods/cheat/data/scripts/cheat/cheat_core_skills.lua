@@ -69,7 +69,7 @@ end
 Cheat.cheat_find_skills_args = {
     token = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a the skill's name. Leave empty to list all skills.") end
 }
-Cheat:createCommand("cheat_find_skills", "Cheat:cheat_find_skills(%line)", Cheat.cheat_find_skills_args,
+Cheat:createCommandLegacy("cheat_find_skills", "Cheat:cheat_find_skills(%line)", Cheat.cheat_find_skills_args,
     "Finds all of the skills that match the given token.",
     "Show all skills", "cheat_find_skills token:",
     "Show all skills with 'pick' in their name", "cheat_find_skills token:pick")
@@ -98,7 +98,7 @@ Cheat.cheat_set_skill_level_args = {
     skill = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "The skill name, full or partial, or ID. Use cheat_find_skills to list all skills.") end,
     level = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, string.format("The desired level for the given skill (max %s).", tostring(RPG.SkillCap))) end
 }
-Cheat:createCommand("cheat_set_skill_level", "Cheat:cheat_set_skill_level(%line)", Cheat.cheat_set_skill_level_args,
+Cheat:createCommandLegacy("cheat_set_skill_level", "Cheat:cheat_set_skill_level(%line)", Cheat.cheat_set_skill_level_args,
     "Sets player's skill to the given level.",
     "Set player's lockpicking skill to level 20", "cheat_set_skill_level skill:lockpicking level:20",
     "Set player's bow skill to level 20", "cheat_set_skill_level skill:18 level:20")
@@ -140,7 +140,7 @@ Cheat.cheat_add_skill_levels_args = {
     skill = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "One of: marksmanship, agility, vitality, or speech.") end,
     levels = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, string.format("The levels to add to the skill (max %s). Level cannot lowered.", tostring(RPG.SkillCap))) end
 }
-Cheat:createCommand("cheat_add_skill_levels", "Cheat:cheat_add_skill_levels(%line)", Cheat.cheat_add_skill_levels_args,
+Cheat:createCommandLegacy("cheat_add_skill_levels", "Cheat:cheat_add_skill_levels(%line)", Cheat.cheat_add_skill_levels_args,
     "Adds levels to a player's skill.\n$4 WARNING: A skill's level cannot lowered once set.",
     "Add 5 levels to player's marksmanship.", "cheat_add_skill_levels skill:str levels:5")
 function Cheat:cheat_add_skill_levels(line)

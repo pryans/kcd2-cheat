@@ -1,7 +1,7 @@
 -- ============================================================================
 -- cheat_get_time
 -- ============================================================================
-Cheat:createCommand("cheat_get_time", "Cheat:cheat_get_time()", nil,
+Cheat:createCommandLegacy("cheat_get_time", "Cheat:cheat_get_time()", nil,
     "Logs information about game time.",
     "Get game time", "cheat_get_time")
 function Cheat:cheat_get_time()
@@ -21,7 +21,7 @@ end
 Cheat.cheat_set_time_args = {
     hours = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "The number of hours.") end,
 }
-Cheat:createCommand("cheat_set_time", "Cheat:cheat_set_time(%line)", Cheat.cheat_set_time_args,
+Cheat:createCommandLegacy("cheat_set_time", "Cheat:cheat_set_time(%line)", Cheat.cheat_set_time_args,
     "Moved time forward the given number of hours.",
     "Move 5 hours forward", "cheat_set_time hours:5")
 function Cheat:cheat_set_time(line)
@@ -45,7 +45,7 @@ end
 Cheat.cheat_set_time_speed_args = {
     ratio = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "The ratio between real time and game time. Default 15.") end,
 }
-Cheat:createCommand("cheat_set_time_speed", "Cheat:cheat_set_time_speed(%line)", Cheat.cheat_set_time_speed_args,
+Cheat:createCommandLegacy("cheat_set_time_speed", "Cheat:cheat_set_time_speed(%line)", Cheat.cheat_set_time_speed_args,
     "Set the game time speed as a ratio between real time and game time.\n$8A high ratio, like 1000, is faster. Default is 15.",
     "Speed up game time", "cheat_set_time_speed ratio:1000")
 function Cheat:cheat_set_time_speed(line)

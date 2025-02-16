@@ -1,19 +1,30 @@
 Cheat.g_database_cache = {}
 
 function Cheat:loadDatabase(databaseName)
-    local database = {}
     if not Cheat.g_database_cache[databaseName] then
+        -- force load into memory or you might get 0 rows depending on load order
+        Database.LoadTable(databaseName)
+
         ---@diagnostic disable-next-line: undefined-field
         local lineCount = Database.GetTableInfo(databaseName).LineCount
+
+        local database = {}
         for n = 0, lineCount - 1 do
             table.insert(database, Database.GetTableLine(databaseName, n))
         end
         Cheat.g_database_cache[databaseName] = database
+        Cheat:logDebug("Returning loaded+cached db[%s] lineCount[%s] loadCount[%s]",
+            tostring(databaseName), tostring(lineCount), tostring(#database))
+    else
+        Cheat:logDebug("Returning cached DB [%s]", databaseName)
     end
     return Cheat.g_database_cache[databaseName]
 end
 
 function Cheat:findRows(database, searchOperation, fields)
+    if not searchOperation then
+        searchOperation = { exact = false, searchKey = nil }
+    end
     local searchKeyUpper = Cheat:toUpper(Cheat:trimToNil(searchOperation.searchKey))
     local foundRows = {}
 
@@ -54,14 +65,14 @@ function Cheat:findRow(database, searchOperation, fields)
     return row
 end
 
-function Cheat:findDatabaseRows(databaseName, searchKey)
+function Cheat:findDatabaseRows(databaseName, searchOperation)
     local database = Cheat:loadDatabase(databaseName)
-    return Cheat:findRows(database, searchKey, { databaseName .. "_id", databaseName .. "_name" })
+    return Cheat:findRows(database, searchOperation, { databaseName .. "_id", databaseName .. "_name" })
 end
 
-function Cheat:findDatabaseRow(databaseName, searchKey)
+function Cheat:findDatabaseRow(databaseName, searchOperation)
     local database = Cheat:loadDatabase(databaseName)
-    return Cheat:findRow(database, searchKey, { databaseName .. "_id", databaseName .. "_name" })
+    return Cheat:findRow(database, searchOperation, { databaseName .. "_id", databaseName .. "_name" })
 end
 
 function Cheat:xmlParseAttributes(xml)
@@ -344,14 +355,21 @@ function Cheat:toLower(value)
     end
 end
 
-function Cheat:endsWith(String, End)
-    return End == "" or string.sub(String, -string.len(End)) == End
+function Cheat:startsWith(text, key)
+    return key == "" or string.sub(text, 1, string.len(key)) == key
+end
+
+function Cheat:endsWith(text, key)
+    return key == "" or string.sub(text, -string.len(key)) == key
 end
 
 function Cheat:trim(value)
-    if not value then return nil end
-    value = value:gsub("^%s+", ""):gsub("%s+$", "")
-    return value
+    if value and type(value) == "string" then
+        value = value:gsub("^%s+", ""):gsub("%s+$", "")
+        return value
+    else
+        return value
+    end
 end
 
 function Cheat:trimToNil(value)
@@ -456,6 +474,30 @@ function Cheat:distanceToPlayer(entity)
     v3 = VectorUtils.Subtract(v2, v1)
 
     return VectorUtils.Length(v3)
+end
+
+function Cheat:rayCastUnderPoint(x, y, rayHeight, rayDistance)
+    local from = { x = x, y = y, z = rayHeight }
+    local dir = { x = 0, y = 0, z = -1 }
+    dir = VectorUtils.Scale(dir, rayDistance)
+    local skip = player.id;
+    local hitData = {}
+    local hits = Physics.RayWorldIntersection(from, dir, 1, ent_all, skip, nil, hitData)
+    return hits, hitData
+end
+
+function Cheat:getGroundHeight(x, y)
+    local rayHeight = 1000
+    local rayDistance = 2000
+    local hits, hitData = Cheat:rayCastUnderPoint(x, y, rayHeight, rayDistance)
+    if hits > 0 then
+        for _, hit in pairs(hitData) do
+            Cheat:logDebug("Hit: %s", Cheat:serializeTable(hit))
+        end
+        return rayHeight - hitData[1].dist
+    else
+        return nil
+    end
 end
 
 -- ============================================================================
@@ -604,12 +646,12 @@ function Cheat:endTest()
     end
 end
 
-function Cheat:testAssert(name, value)
+function Cheat:testAssert(message, value)
     if not value then
-        Cheat:log(string.format("$4[FAIL] %s", tostring(name)))
+        Cheat:log(string.format("$4[FAIL] %s", tostring(message)))
         Cheat.g_cheat_test_fail = Cheat.g_cheat_test_fail + 1
     else
-        Cheat:log(string.format("$3[PASS] %s", tostring(name)))
+        Cheat:log(string.format("$3[PASS] %s", tostring(message)))
         Cheat.g_cheat_test_pass = Cheat.g_cheat_test_pass + 1
     end
 end
