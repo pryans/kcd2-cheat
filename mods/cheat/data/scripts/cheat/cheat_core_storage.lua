@@ -88,36 +88,26 @@ end
 -- ============================================================================
 -- cheat_stash
 -- ============================================================================
-Cheat.cheat_stash_args = {
-    any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
-    exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
-    type = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The stash type: 1=master(default), 2=owned, 3=world") end,
-    index = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The stash index.") end
-}
-Cheat:createCommandLegacy("cheat_stash", "Cheat:cheat_stash(%line)", Cheat.cheat_stash_args,
+Cheat:createCommand("cheat_stash", {
+        any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+        exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
+        type = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The stash type: 1=master(default), 2=owned, 3=world") end,
+        index = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The stash index.") end
+    },
     "Opens your master stash by default. Can open any stash.",
     "Open your master stash", "cheat_stash",
     "Open your 1st owned stash", "cheat_stash type:2 index:1",
     "Open 1st world stash", "cheat_stash type:3 index:1")
-function Cheat:cheat_stash(line)
+function Cheat:cheat_stash(c)
     if Cheat:NotPlayerCharacter() then
         return false
     end
 
-    local args = Cheat:argsProcess(line, Cheat.cheat_stash_args, "cheat_stash")
-    local any, anyErr = Cheat:argsGet(args, "any")
-    local exact, exactErr = Cheat:argsGet(args, "exact")
-    local type, typeErr = Cheat:argsGet(args, "type")
-    local index, indexErr = Cheat:argsGet(args, "index")
-    if anyErr or exactErr or typeErr or indexErr then
-        return false
-    end
-
     local searchOperation = nil
-    if exact then
-        searchOperation = { exact = true, searchKey = exact }
-    elseif any then
-        searchOperation = { exact = false, searchKey = any }
+    if c.exact then
+        searchOperation = { exact = true, searchKey = c.exact }
+    elseif c.any then
+        searchOperation = { exact = false, searchKey = c.any }
     else
         searchOperation = { exact = false, searchKey = nil }
     end
@@ -139,13 +129,13 @@ function Cheat:cheat_stash(line)
             tostring(range))
     end
 
-    if stashDatabase[type] then
-        local stashesInfo = stashDatabase[type]
-        if stashesInfo.stashes[index] then
-            local stashInfo = stashesInfo.stashes[index]
+    if stashDatabase[c.type] then
+        local stashesInfo = stashDatabase[c.type]
+        if stashesInfo.stashes[c.index] then
+            local stashInfo = stashesInfo.stashes[c.index]
             --Cheat:tprint(stashInfo)
             Cheat:logInfo("Opening [%s Stash] (owner=%s type=%s index=%s).",
-                tostring(stashesInfo.name), tostring(stashInfo.stashOwnerName), tostring(type), tostring(index))
+                tostring(stashesInfo.name), tostring(stashInfo.stashOwnerName), tostring(c.type), tostring(c.index))
 
             if Cheat.g_stash_last_opened and Cheat.g_stash_last_opened.beingUsedByPlayer then
                 Cheat:logWarn("Close the current stash.")
@@ -155,11 +145,11 @@ function Cheat:cheat_stash(line)
             stashInfo.stash:Open(player)
             return true
         else
-            Cheat:logError("Invalid stash index. (type=%s index=%s).", tostring(type), tostring(index))
+            Cheat:logError("Invalid stash index. (type=%s index=%s).", tostring(c.type), tostring(c.index))
             return false
         end
     else
-        Cheat:logError("Invalid stash type. (type=%s index=%s).", tostring(type), tostring(index))
+        Cheat:logError("Invalid stash type. (type=%s index=%s).", tostring(c.type), tostring(c.index))
         return false
     end
 end
@@ -167,28 +157,20 @@ end
 -- ============================================================================
 -- cheat_inventory
 -- ============================================================================
-Cheat.cheat_inventory_args = {
-    any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
-    exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end
-}
-Cheat:createCommandLegacy("cheat_inventory", "Cheat:cheat_inventory(%line)", Cheat.cheat_inventory_args,
+Cheat:createCommand("cheat_inventory", {
+        any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+        exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end
+    },
     "Opens the targeted or matching NPC's inventory.",
     "Open a random horse's inventory", "cheat_inventory any:horse",
     "Open Bara's inventory", "cheat_inventory exact:bara",
     "Open inventory of current target", "cheat_inventory")
-function Cheat:cheat_inventory(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_inventory_args, "cheat_inventory")
-    local any, anyErr = Cheat:argsGet(args, "any")
-    local exact, exactErr = Cheat:argsGet(args, "exact")
-    if anyErr or exactErr then
-        return false, nil
-    end
-
+function Cheat:cheat_inventory(c)
     local searchOperation = nil
-    if exact then
-        searchOperation = { exact = true, searchKey = exact }
-    elseif any then
-        searchOperation = { exact = false, searchKey = any }
+    if c.exact then
+        searchOperation = { exact = true, searchKey = c.exact }
+    elseif c.any then
+        searchOperation = { exact = false, searchKey = c.any }
     end
 
     local npcs = {}
@@ -225,8 +207,8 @@ end
 function Cheat:test_core_storage()
     Cheat:beginTest("test_core_storage")
 
-    Cheat:testAssert("cheat_stash", Cheat:cheat_stash())
-    Cheat:testAssert("cheat_inventory", Cheat:cheat_inventory("cheat_inventory exact:bara"))
+    Cheat:testAssert("cheat_stash", Cheat:proxy("cheat_stash"))
+    Cheat:testAssert("cheat_inventory", Cheat:proxy("cheat_inventory", "exact:bara"))
 
     Cheat:endTest()
 end
