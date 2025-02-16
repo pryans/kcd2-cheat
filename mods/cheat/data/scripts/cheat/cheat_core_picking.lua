@@ -92,17 +92,11 @@ end
 -- ============================================================================
 -- cheat_no_stash_lockpicking
 -- ============================================================================
-Cheat:createCommandLegacy("cheat_no_stash_lockpicking", "Cheat:cheat_no_stash_lockpicking(%line)", Cheat.cheat_picking_args,
+Cheat:createCommand("cheat_no_stash_lockpicking", Cheat.cheat_picking_args,
     "Bypass stash lockpicking but consumes a lockpick.\n$8Restarting the game reverts this effect.",
     "Turn off lockpicking minigame on stashes.", "cheat_no_stash_lockpicking")
-function Cheat:cheat_no_stash_lockpicking(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_picking_args, "cheat_no_stash_lockpicking")
-    local nolockpicks, nolockpicksErr = Cheat:argsGet(args, "nolockpicks")
-    if nolockpicksErr then
-        return false
-    end
-
-    Cheat.g_no_lockpicks_required = nolockpicks
+function Cheat:cheat_no_stash_lockpicking(c)
+    Cheat.g_no_lockpicks_required = c.nolockpicks
 
     for key, value in pairs(Stash) do
         if key == "OnUsedHold" then
@@ -119,17 +113,11 @@ end
 -- ============================================================================
 -- cheat_no_door_lockpicking
 -- ============================================================================
-Cheat:createCommandLegacy("cheat_no_door_lockpicking", "Cheat:cheat_no_door_lockpicking(%line)", Cheat.cheat_picking_args,
+Cheat:createCommand("cheat_no_door_lockpicking", Cheat.cheat_picking_args,
     "Bypass door lockpicking but consumes a lockpick.\n$8Restarting the game reverts this effect.",
     "Turn off lockpicking minigame on doors.", "cheat_no_door_lockpicking")
-function Cheat:cheat_no_door_lockpicking(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_picking_args, "cheat_no_door_lockpicking")
-    local nolockpicks, nolockpicksErr = Cheat:argsGet(args, "nolockpicks")
-    if nolockpicksErr then
-        return false
-    end
-
-    Cheat.g_no_lockpicks_required = nolockpicks
+function Cheat:cheat_no_door_lockpicking(c)
+    Cheat.g_no_lockpicks_required = c.nolockpicks
 
     for key, value in pairs(AnimDoor) do
         if key == "Lockpick" then
@@ -146,28 +134,23 @@ end
 -- ============================================================================
 -- cheat_no_lockpicking
 -- ============================================================================
-Cheat:createCommandLegacy("cheat_no_lockpicking", "Cheat:cheat_no_lockpicking(%line)", Cheat.cheat_picking_args,
+Cheat:createCommand("cheat_no_lockpicking", Cheat.cheat_picking_args,
     "Bypass door and stash lockpicking but consumes a lockpick.\n$8Restarting the game reverts this effect.",
     "Turn off lockpicking minigames on doors and stashes.", "cheat_no_lockpicking")
-function Cheat:cheat_no_lockpicking(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_picking_args, "cheat_no_lockpicking")
-    local nolockpicks, nolockpicksErr = Cheat:argsGet(args, "nolockpicks")
-    if nolockpicksErr then
-        return false
-    end
-    Cheat:cheat_no_stash_lockpicking("nolockpicks:" .. tostring(nolockpicks))
-    Cheat:cheat_no_door_lockpicking("nolockpicks:" .. tostring(nolockpicks))
+function Cheat:cheat_no_lockpicking(c)
+    Cheat:proxy("cheat_no_stash_lockpicking", "nolockpicks:" .. tostring(c.nolockpicks))
+    Cheat:proxy("cheat_no_door_lockpicking", "nolockpicks:" .. tostring(c.nolockpicks))
     return true
 end
 
 -- ============================================================================
 -- cheat_no_pickpocketing
 -- ============================================================================
-Cheat:createCommandLegacy("cheat_no_pickpocketing", "Cheat:cheat_no_pickpocketing()", nil,
+Cheat:createCommand("cheat_no_pickpocketing", nil,
     "Bypass pickpocketing minigame.\n$8They can still catch you.\n$8Restarting the game reverts this effect.",
     "Turn off pickpocketing minigame.", "cheat_no_pickpocketing")
 function Cheat:cheat_no_pickpocketing()
-    for key, value in pairs(BasicAIActions) do
+    for key, _ in pairs(BasicAIActions) do
         if key == "OnPickpocketing" then
             BasicAIActions[key] = function (self, user, slotId)
                 Cheat:logDebug("BasicAIActions:OnPickpocketing() Override")
@@ -200,19 +183,19 @@ function Cheat:test_core_picking()
     Cheat:testAssertFalse("Cheat:lockpickStash", Cheat:lockpickStash(fakeStash, nil, nil))
     Cheat:testAssertFalse("Cheat:lockpickDoor", Cheat:lockpickDoor(fakeDoor, nil, nil))
 
-    Cheat:testAssert("cheat_no_stash_lockpicking 1", Cheat:cheat_no_stash_lockpicking("nolockpicks:true"))
+    Cheat:testAssert("cheat_no_stash_lockpicking 1", Cheat:proxy("cheat_no_stash_lockpicking", "nolockpicks:true"))
     Cheat:testAssert("cheat_no_stash_lockpicking 2", Cheat.g_no_lockpicks_required)
-    Cheat:testAssert("cheat_no_stash_lockpicking 3", Cheat:cheat_no_stash_lockpicking("nolockpicks:false"))
+    Cheat:testAssert("cheat_no_stash_lockpicking 3", Cheat:proxy("cheat_no_stash_lockpicking", "nolockpicks:false"))
     Cheat:testAssertFalse("cheat_no_stash_lockpicking 4", Cheat.g_no_lockpicks_required)
 
-    Cheat:testAssert("cheat_no_door_lockpicking 1", Cheat:cheat_no_door_lockpicking("nolockpicks:true"))
+    Cheat:testAssert("cheat_no_door_lockpicking 1", Cheat:proxy("cheat_no_door_lockpicking", "nolockpicks:true"))
     Cheat:testAssert("cheat_no_door_lockpicking 2", Cheat.g_no_lockpicks_required)
-    Cheat:testAssert("cheat_no_door_lockpicking 3", Cheat:cheat_no_door_lockpicking("nolockpicks:false"))
+    Cheat:testAssert("cheat_no_door_lockpicking 3", Cheat:proxy("cheat_no_door_lockpicking", "nolockpicks:false"))
     Cheat:testAssertFalse("cheat_no_door_lockpicking 4", Cheat.g_no_lockpicks_required)
 
-    Cheat:testAssert("cheat_no_lockpicking 1", Cheat:cheat_no_lockpicking("nolockpicks:true"))
+    Cheat:testAssert("cheat_no_lockpicking 1", Cheat:proxy("cheat_no_lockpicking", "nolockpicks:true"))
     Cheat:testAssert("cheat_no_lockpicking 2", Cheat.g_no_lockpicks_required)
-    Cheat:testAssert("cheat_no_lockpicking 3", Cheat:cheat_no_lockpicking("nolockpicks:false"))
+    Cheat:testAssert("cheat_no_lockpicking 3", Cheat:proxy("cheat_no_lockpicking", "nolockpicks:false"))
     Cheat:testAssertFalse("cheat_no_lockpicking 4", Cheat.g_no_lockpicks_required)
 
     Cheat:endTest()
