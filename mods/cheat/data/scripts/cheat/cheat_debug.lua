@@ -190,6 +190,26 @@ function Cheat:print_method_args(f)
     Cheat:logDebug("end - print_method_args")
 end
 
+-- use for debugging in console
+-- #dump(x)
+function dump(value)
+    if not value then
+        Cheat:logDebug("nil")
+    elseif type(value) == "table" then
+        local count = 0
+        for k, _ in pairs(value) do
+            count = count + 1
+        end
+        if count > 0 then
+            Cheat:tprint(value)
+        else
+            Cheat:logDebug("empty table")
+        end
+    else
+        Cheat:logDebug(tostring(value))
+    end
+end
+
 -- ============================================================================
 -- end
 -- ============================================================================
