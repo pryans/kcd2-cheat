@@ -360,6 +360,7 @@ function Cheat:getEntityHealth(entity)
     end
 end
 
+-- #Cheat:getEntityInfo(Cheat:getTargetedEntity())
 function Cheat:getTargetedEntity()
     local from = player:GetPos()
     from.z = from.z + 1.615
@@ -402,7 +403,9 @@ function Cheat:getEntityInfo(entity)
         health = Cheat:getEntityHealth(entity)
     }
 
-    Cheat:logDebug("EntityInfo: %s", Cheat:getEntityInfoDisplayText(entityInfo))
+    Cheat:tprint(entity)
+
+    Cheat:logDebug("EntityInfo: %s", Cheat:serializeTable(entityInfo))
     return entityInfo
 end
 
@@ -463,68 +466,67 @@ function Cheat:createUniqueEntityName(entityClass)
     repeat
         entityName = "cheat_" .. entityClass .. tostring(math.random(1, 100000000))
     until System.GetEntityByName(entityName) == nil
+    return entityName
 end
 
-function Cheat:spawmEntity(entityName, entityClass, entitySoul, avoidSpawnCenter, spawnCenter, spawnRadius, spawnNear)
+function Cheat:spawnEntity(entityName, entityClass, entitySoulId, avoidSpawnCenter, spawnCenter, spawnRadius, spawnNear)
     if not entityName then
         entityName = Cheat:createUniqueEntityName(entityClass)
     end
-
     --[[
+    Soul
+        soul_id
+        soul_name
+        soul_archetype_id
+        soul_vip_class_id
+        brain_id
+    Brain
+        brain_id
+        brain_name
 
-    <skald_character age="3" body_type="4" description_string_name="char_HAJNY_HRUSKA_description" gender="0"
-        history_string_name="char_HAJNY_HRUSKA_history" image1="true" image2="false" image3="false" image4="true"
-        master_role_name="EVENT_TABORY_LUKOSTRELBA_URS" mortality_id="0" owner="Jan Zeman"
-        physical_description_string_name="char_HAJNY_HRUSKA_physicalDescription"
-        skald_character_full_name_string_name="char_HAJNY_HRUSKA_fullName"
-        skald_character_name="char_HAJNY_HRUSKA"
-        streaming_string_name="char_HAJNY_HRUSKA_streaming"
-        ui_name_string_name="char_HAJNY_HRUSKA_uiName"
-        unique_assets="7" voice_categories="generic christian" voice_id="234" />
+    For Skald characters the soul has a skald_character_name
 
+    Skald Character
+        skald_character_name
+    Soul
+        skald_character_name
 
-        localized.cell2/3
-            -> localized.cell1 (uiname)
-                -> skald_character.ui_name_string_name
+    Spawn Parmas (PathfindDebugUtils)
+        spawnParams.Name = SoulName = brain_name
+        spawnParams.SharedSoulGuid = SoulSharedGUID = soul_id
 
-        entity.name(taboryUCesty_archery_urs)
-            ->  <InventoryPreset Name="inventory_taboryUCesty_archery_urs">
-                    <ClothingPresetRef Name="taboryUCesty_archery_urs" />
-                    <WeaponPresetRef Name="taboryUCesty_archery_urs" />
-                    <InventoryPresetRef Name="pockets_huntsman" />
-                    <PresetItem Name="beer" Amount="1" />
-                    <PresetItem Name="water" Amount="1" />
-                    <PresetItem Name="repairKit_tailorsSmall" Amount="1" />
-                </InventoryPreset>
-            -> soul.soul_name -> soul.soul_id
-                <soul
-                    brain_id="4b914d1c-724a-a92d-3e6b-d183d35b8b98"
-                    digestion_multiplier="0"
-                    factionName="eventNPCs_civilians_friends"
-                    initial_clothing_dirt="0"
-                    skald_character_name="char_HAJNY_HRUSKA" social_class_id="88"
-                    soul_archetype_id="0"
-                    soul_id="c82be12b-76e1-4da5-88c9-6b1c50aa080b"
-                    soul_name="taboryUCesty_archery_urs"
-                    soul_vip_class_id="0"
-                    xp_multiplier="0" />
+    Pebbles the horse:
+    name = tsem_sedivka
+    soul_id = 4e5abeff-f19e-0eab-0921-a24611c4ad8f
+
+    [DEBUG] Targeted Entity: inventory=table: 0000023F2ED6D280 inspectableByPlayer=true class=Horse AI=table: 0000023F2ED3E5C0 this=table: 0000023F2FA0FF00 actor=table: 0000023F2F5BD840 mountableByPlayer=true mountIsLegalFromAI=false soul=table: 0000023F2ED6DCC0 __this=userdata: 0000023E627CF300 PropertiesInstance=table: 0000023F2F5BDFC0 id=userdata: 000000000002D54A mountIsLegal=false horse=table: 0000023F2F5BD800 Properties=table: 0000023F2F5BEFC0 mountableByPlayerDisabledFromAI=false
+    [DEBUG] EntityInfo: health=100 name=tsem_sedivka l1name=gray id=userdata: 050000000000028A class=Horse loc=y=2060.53 x=2282.11 z=108.438 l2name=pebbles
+
+    Not Pebbles
+    [DEBUG] Targeted Entity: inventory=table: 0000023F2EE7D0C0 actor=table: 0000023F2EE7DE40 mountableByPlayer=true mountIsLegalFromAI=false id=userdata: 00000000003BFD89 __this=userdata: 0000023E6475C700 PropertiesInstance=table: 0000023F2EE7E140 class=Horse AI=table: 0000023F2EE7CA00 mountableByPlayerDisabledFromAI=false inspectableByPlayer=true soul=table: 0000023F2EE7D100 mountIsLegal=false horse=table: 0000023F2EE7D080 this=table: 0000023F2EE7C9C0 Properties=table: 0000023F2EE7E580
+    [DEBUG] EntityInfo: health=100 name=tsem_sedivka l1name=horse id=userdata: 05000000000005C8 class=Horse loc=y=2071 x=2276 z=108.2 l2name=horse
+
+    Cheat:spawnEntity("tsem_sedivka", "Horse", "4e5abeff-f19e-0eab-0921-a24611c4ad8f", true, player:GetWorldPos(), 3, 1)
+
+        <skald_character
+            migration_string_name="char_KUN_SEDIVKA_migration"
+            other_string_name="char_KUN_SEDIVKA_other"
+            protection_string_name="char_KUN_SEDIVKA_protections"
+            skald_character_full_name_string_name="char_KUN_SEDIVKA_fullName"
+            skald_character_name="char_KUN_SEDIVKA"
+            streaming_string_name="char_KUN_SEDIVKA_streaming"
+            ui_name_string_name="char_KUN_SEDIVKA_uiName"
+
+        <soul
+            brain_id="7f6a8b2d-9b2b-4500-9f7b-fc8f3a135029"
+            skald_character_name="char_KUN_SEDIVKA"
+            social_class_id="97"
+            soul_archetype_id="3"
+            soul_class_id="7"
+            soul_id="4e5abeff-f19e-0eab-0921-a24611c4ad8f"
+            soul_name="tsem_sedivka"
+            soul_vip_class_id="0"
     ]]
-
-    --[[
-    local spawnParams = {}
-    spawnParams.class = entityClass
-    spawnParams.position = Cheat:createSpawnVectorFromVector(avoidSpawnCenter, spawnCenter, spawnRadius, spawnNear)
-    spawnParams.orientation = player:GetWorldPos()
-    spawnParams.name = entityName
-    spawnParams.properties = {}
-    spawnParams.properties.sharedSoulGuid = entitySoul
-    Cheat:logDebug(Cheat:serializeTable(spawnParams))
-    local entity = System.SpawnEntity(spawnParams)
-
-    System.GetEntity("taboryUCesty_archery_urs")
-    System.SpawnEntity({ name = "taboryUCesty_archery_urs", class = "NPC", sharedSoulGuid = "c82be12b-76e1-4da5-88c9-6b1c50aa080b", position = player:GetWorldPos() })
-    ]]
-
     local params = {
         name = entityName,
         class = entityClass,
@@ -532,12 +534,24 @@ function Cheat:spawmEntity(entityName, entityClass, entitySoul, avoidSpawnCenter
         orientation = player:GetWorldPos(),
         scale = 1,
         archetype = nil,
-        soul = entitySoul,
         properties = {},
         propertiesInstance = {}
     }
 
+    -- doesn't work
+    -- XGenAIModule.SpawnEntity({Name = "Test Pebbles", ClassName = "Horse", SharedSoulGuid = "4e5abeff-f19e-0eab-0921-a24611c4ad8f", Pos = player:GetWorldPos()})
+
+    -- non of these put the correct soul on the entity
+    params.soul = entitySoulId
+    params.sharedSoulGuid = entitySoulId            -- XGenAIModule.SpawnEntity(spawnParams)
+    params.properties.sharedSoulGuid = entitySoulId -- System.SpawnEntity / horse.Properties.sharedSoulGuid /Not on pebbles
+
+    Cheat:logDebug("== spawn params ======================")
+    Cheat:tprint(params)
     local entity = System.SpawnEntity(params)
+    Cheat:logDebug("== spawned entity ======================")
+    Cheat:tprint(entity)
+
     if entity then
         Cheat:logInfo("Spawned: %s", Cheat:serializeTable(Cheat:getEntityInfo(entity)))
     else
@@ -799,15 +813,17 @@ function Cheat:cheat_spawn(line)
         return false
     end
 
+    local soul = soulsInfo.souls[math.random(1, #soulsInfo.souls)]
+
     for _ = 1, Cheat:max(count, 1) do
-        local entityName       = nil                                               -- auto generate
-        local entityClass      = soulsInfo.entityClass
-        local entitySoul       = soulsInfo.souls[math.random(1, #soulsInfo.souls)] -- pick a random soul
-        local avoidSpawnCenter = true                                              -- don't spawn on top of player
-        local spawnCenter      = player:GetWorldPos()                              -- center of spawn area
-        local spawnRadius      = radius                                            -- size of spawn area
-        local spawnNear        = 2                                                 -- how far from the center we need to be
-        Cheat:spawmEntity(entityName, entityClass, entitySoul, avoidSpawnCenter, spawnCenter, spawnRadius, spawnNear)
+        local entityName       = nil                   -- auto generate
+        local entityClass      = soulsInfo.entityClass -- Lua class name: 'NCP', 'Horse', etc
+        local entitySoul       = soul.soul_id          -- pick a random soul
+        local avoidSpawnCenter = true                  -- don't spawn on top of player
+        local spawnCenter      = player:GetWorldPos()  -- center of spawn area
+        local spawnRadius      = radius                -- size of spawn area
+        local spawnNear        = 2                     -- how far from the center we need to be
+        Cheat:spawnEntity(entityName, entityClass, entitySoul, avoidSpawnCenter, spawnCenter, spawnRadius, spawnNear)
     end
 end
 
