@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<kcd_mod>
+  <info>
+    <name>cheat-autoexec</name>
+    <description>KCD2 Cheat Mod https://www.nexusmods.com/kingdomcomedeliverance2/mods/114</description>
+    <author>Othiden</author>
+    <version>1.0</version>
+    <created_on>2025-02-15T22:58:21-05:00</created_on>
+    <dependencies></dependencies>
+  </info>
+</kcd_mod>
