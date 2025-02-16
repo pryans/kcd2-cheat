@@ -2,6 +2,7 @@
 -- help functions and constants
 -- ============================================================================
 Cheat.g_money_id = "5ef63059-322e-4e1b-abe8-926e100c770e"
+Cheat.g_player_states = { health = true, stamina = true, hunger = true, exhaust = true, karma = false, alcoholism = true }
 
 function Cheat:get_strength()
     return player.soul:GetStatLevel("strength")
@@ -105,34 +106,37 @@ function Cheat:loc()
 end
 
 -- ============================================================================
+-- cheat_get_states
+-- ============================================================================
+Cheat:createCommand("cheat_get_states", nil, "Displays the player's states.")
+function Cheat:cheat_get_states(c)
+    local states = {}
+    for state, _ in pairs(Cheat.g_player_states) do
+        states[state] = player.soul:GetState(state)
+    end
+    Cheat:logTwoColumnTable(states)
+    return true, states
+end
+
+-- ============================================================================
 -- cheat_set_state
 -- ============================================================================
-Cheat.cheat_set_state_args = {
-    state = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "One of: health, stamina, exhaust, hunger, or .") end,
-    value = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "The number to assign to the given state.") end
-}
-Cheat:createCommandLegacy("cheat_set_state", "Cheat:cheat_set_state(%line)", Cheat.cheat_set_state_args,
-    "Sets one of the player's states to the given value.",
-    "Set health to 100 points", "cheat_set_state state:health value:100",
-    "Set stamina to 100 points", "cheat_set_state state:stamina value:100",
-    "Set hunger to 100 points", "cheat_set_state state:hunger value:100",
-    "Set exhaust to 100 points", "cheat_set_state state:exhaust value:100")
-function Cheat:cheat_set_state(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_set_state_args, "cheat_set_state")
-    local state, stateErr = Cheat:argsGet(args, "state")
-    local value, valueErr = Cheat:argsGet(args, "value")
-    if stateErr or valueErr then
+Cheat:createCommand("cheat_set_state", {
+        state = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "The state to set.") end,
+        value = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "The number to assign to the given state.") end
+    },
+    "Sets one of the player's states to the given value.\n" ..
+    "$8Valid states are: health, stamina, exhaust, hunger, and alcoholism.",
+    "Set health to 100 points", "cheat_set_state state:health value:100")
+function Cheat:cheat_set_state(c)
+    if not Cheat.g_player_states[Cheat:toLower(c.state)] then
+        Cheat:logError("State [%s] is invalid or read-only.", tostring(c.state))
+        System.ExecuteCommand("cheat_set_state ?")
         return false
     end
 
-    local values = { health = true, stamina = true, hunger = true, exhaust = true }
-    if not values[Cheat:toLower(state)] then
-        Cheat:logError("Invalid state [%s].", tostring(state))
-        return false
-    end
-
-    player.soul:SetState(state, value)
-    Cheat:logInfo("Set state [%s] to value [%s].", tostring(state), tostring(value))
+    player.soul:SetState(c.state, c.value)
+    Cheat:logInfo("Set state [%s] to value [%s].", tostring(c.state), tostring(c.value))
     return true
 end
 
@@ -643,19 +647,27 @@ function Cheat:test_core_player()
     Cheat:testAssert("cheat_add_stat_levels speech 2", Cheat:get_speech() == 21)
 
     -- cheat_set_state
-    Cheat:testAssertFalse("cheat_set_state invalid 1", Cheat:cheat_set_state(""))
-    Cheat:testAssertFalse("cheat_set_state invalid 2", Cheat:cheat_set_state("state:health"))
-    Cheat:testAssertFalse("cheat_set_state invalid 3", Cheat:cheat_set_state("value:50"))
-    Cheat:testAssertFalse("cheat_set_state invalid 4", Cheat:cheat_set_state("state:invalid value:50"))
+    Cheat:testAssertFalse("cheat_set_state invalid 1", Cheat:proxy("cheat_set_state", ""))
+    Cheat:testAssertFalse("cheat_set_state invalid 2", Cheat:proxy("cheat_set_state", "state:health"))
+    Cheat:testAssertFalse("cheat_set_state invalid 3", Cheat:proxy("cheat_set_state", "value:50"))
+    Cheat:testAssertFalse("cheat_set_state invalid 4", Cheat:proxy("cheat_set_state", "state:invalid value:50"))
+    Cheat:testAssertFalse("cheat_set_state invalid 5", Cheat:proxy("cheat_set_state", "state:karma value:50")) --karma read-only
 
-    Cheat:testAssert("cheat_set_state health 50", Cheat:cheat_set_state("state:health value:50"))
-    Cheat:testAssert("check health 50", Cheat:get_health() == 50)
-    Cheat:testAssert("cheat_set_state stamina 50", Cheat:cheat_set_state("state:stamina value:50"))
-    Cheat:testAssert("check stamina 50", Cheat:get_stamina() == 50)
-    Cheat:testAssert("cheat_set_state hunger 50", Cheat:cheat_set_state("state:hunger value:50"))
-    Cheat:testAssert("check hunger 50", Cheat:get_hunger() == 50)
-    Cheat:testAssert("cheat_set_state exhaust 50", Cheat:cheat_set_state("state:exhaust value:50"))
-    Cheat:testAssert("check exhaust 50", Cheat:get_exhaust() == 50)
+    Cheat:testAssert("cheat_set_state valid 1", Cheat:proxy("cheat_set_state", "state:health value:10"))
+    Cheat:testAssert("cheat_set_state valid 2", Cheat:proxy("cheat_set_state", "state:stamina value:20"))
+    Cheat:testAssert("cheat_set_state valid 3", Cheat:proxy("cheat_set_state", "state:hunger value:30"))
+    Cheat:testAssert("cheat_set_state valid 4", Cheat:proxy("cheat_set_state", "state:exhaust value:40"))
+    Cheat:testAssert("cheat_set_state valid 5", Cheat:proxy("cheat_set_state", "state:alcoholism value:50"))
+
+    -- cheat_get_states
+    local result, playerStates = Cheat:proxy("cheat_get_states")
+    Cheat:testAssert("cheat_get_states 1", result and playerStates and type(playerStates) == "table")
+    Cheat:testAssert("cheat_get_states 2", playerStates and playerStates["health"] == 10)
+    Cheat:testAssert("cheat_get_states 3", playerStates and playerStates["stamina"] == 20)
+    Cheat:testAssert("cheat_get_states 4", playerStates and playerStates["hunger"] == 30)
+    Cheat:testAssert("cheat_get_states 5", playerStates and playerStates["exhaust"] == 40)
+    Cheat:testAssert("cheat_get_states 6", playerStates and playerStates["alcoholism"] == 50)
+    Cheat:testAssert("cheat_get_states 7", playerStates and playerStates["karma"] == 0) --karma read-only
 
     -- cheat_set_regen
     Cheat:testAssertFalse("cheat_set_regen invalid 1", Cheat:cheat_set_regen(""))

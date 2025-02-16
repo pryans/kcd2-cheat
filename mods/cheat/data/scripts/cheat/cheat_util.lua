@@ -330,6 +330,46 @@ function Cheat:lowercaseTableKeys(inputTable)
     return newTable
 end
 
+function Cheat:getSortedKeys(inputTable)
+    local sortedKeys = {}
+    for key in pairs(inputTable) do
+        table.insert(sortedKeys, key)
+    end
+    table.sort(sortedKeys)
+    return sortedKeys
+end
+
+function Cheat:logTwoColumnTable(table_to_print)
+    -- Check if the input is a table
+    if type(table_to_print) ~= "table" then
+        Cheat:logError("Input must be a table.")
+        return
+    end
+
+    -- Find the maximum length of the keys (for left alignment of the first column)
+    local max_key_width = 0
+    for key, _ in pairs(table_to_print) do
+        local key_str = tostring(key) or "?"
+        local key_len = string.len(key_str)
+        if key_len > max_key_width then
+            max_key_width = key_len
+        end
+    end
+
+    -- Print the table in two columns
+    for key, value in pairs(table_to_print) do
+        local key_str = tostring(key) or "?"
+        local value_str = tostring(value) or "?"
+
+        -- Calculate padding to ensure left alignment and no overlap
+        local padding_needed = max_key_width - string.len(key_str)
+        local padding = string.rep(" ", padding_needed)
+
+        -- Print the key (left-aligned), padding, and the value (left-aligned)
+        Cheat:logInfo(key_str .. padding .. "  " .. value_str) -- Added "  " for a small gap between columns
+    end
+end
+
 -- ============================================================================
 -- string functions
 -- ============================================================================
