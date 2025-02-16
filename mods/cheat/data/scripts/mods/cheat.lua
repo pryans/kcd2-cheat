@@ -9,6 +9,33 @@ function Cheat:loadFile(file)
     Script.ReloadScript(file)
 end
 
+function Cheat:autoexec()
+    Cheat:logInfo("Running Autoexec")
+
+    local autoexecFile = "scripts/cheat/autoexec.txt"
+    local autoexecCommands = System.LoadTextFile(autoexecFile)
+    if not autoexecCommands or Cheat:isBlank(autoexecCommands) then
+        Cheat:logWarn("Autoexe file [%s] is empty.", autoexecFile)
+        return false
+    end
+
+    local count = 0
+    for line in string.gmatch(autoexecCommands, "([^\n]*)\n?") do
+        local commandLine = Cheat:trimToNil(line)
+        if commandLine then
+            if not Cheat:startsWith(commandLine, "#") then
+                count = count + 1
+                Cheat:logInfo("Running command [%s]", commandLine)
+                System.ExecuteCommand(commandLine)
+            else
+                Cheat:logInfo("Skipping comment [%s]", commandLine)
+            end
+        end
+    end
+
+    Cheat:logInfo("Autoexec completed running [%] commands.", count)
+end
+
 function Cheat:onInit()
     --System.LogAlways("Cheat:OnInit")
     Cheat:loadFile("scripts/cheat/cheat_util.lua")
@@ -45,6 +72,7 @@ function Cheat:onInit()
 
     Cheat:test_core_player()
     Cheat:test_core_buffs()
+    Cheat:test_core_skills()
     Cheat:test_core_items()
     Cheat:test_core_time()
     Cheat:test_core_weather()
@@ -76,6 +104,7 @@ end
 function Cheat:onGameplayStarted()
     Cheat:logDebug("Cheat:onGameplayStarted")
     Cheat:cheat_timer(true)
+    Cheat:autoexec()
 end
 
 function Cheat:onGamePause()
