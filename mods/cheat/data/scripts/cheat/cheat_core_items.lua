@@ -813,7 +813,7 @@ function Cheat:cheat_add_all_items(line)
     local questItemsAdded = 0
     local blockedItems = 0
     for _, item in ipairs(Cheat:findItems()) do
-        if Cheat:addItem({ exact = true, searchKey = item.id }, item.amount, 1, nil, quest, false, true) then
+        if Cheat:addItem({ exact = true, searchKey = item.id }, item.amount, 100, nil, quest, false, true) then
             itemsAdded = itemsAdded + 1
             if item.isquestitem then
                 questItemsAdded = questItemsAdded + 1
