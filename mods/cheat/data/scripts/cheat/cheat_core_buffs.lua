@@ -317,6 +317,43 @@ function Cheat:cheat_remove_buff_invisible()
 end
 
 -- ============================================================================
+-- cheat_add_buff_carry_weight
+-- ============================================================================
+Cheat:createCommand("cheat_add_buff_carry_weight", {
+        amount = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "Carry weight in pounds, rounded to nearest 10 pounds, caps at 120.") end
+    },
+    "Applies a custom persistent buff to the player's carry weight per point of strength (CPS).",
+    "Adds 100 pounds per str to player's carry weight.", "cheat_add_buff_carry_weight amount:100",
+    "Remove the buff.", "cheat_add_buff_carry_weight amount:0")
+function Cheat:cheat_add_buff_carry_weight(c)
+    -- cps = carry per strength (default is 10)
+    -- carry weight = 60 + (str * cps)
+    -- carry weight cap 600?
+
+    -- custom buff cheat_carry_capacity_1 that adds +100 carry weight
+    local buff_id = "e4fc62ef-683d-4f8d-b02c-cca23d364f35"
+    local buff_multiplier = 10
+
+    -- remove all stacks of the buff
+    local removedAmount = player.soul:RemoveAllBuffsByGuid(buff_id)
+    Cheat:logDebug("removed " .. tostring(removedAmount))
+
+    -- add multiple stacks to add "amount" pounds of capacity to the nearest multiple of buff_multiplier
+    local amount = Cheat:clamp(c.amount, 0, 120)
+    local scaled_number = amount / buff_multiplier
+    local rounded_scaled_number = math.floor(scaled_number + 0.5)
+    for i = 1, rounded_scaled_number do
+        player.soul:AddBuff(buff_id)
+    end
+
+    Cheat:logInfo("Carry weight increased by [%s] (%s*%s) pounds per strength.",
+        tostring(rounded_scaled_number * buff_multiplier),
+        tostring(rounded_scaled_number),
+        tostring(buff_multiplier))
+    return true
+end
+
+-- ============================================================================
 -- test_core_buffs
 -- ============================================================================
 function Cheat:test_core_buffs()

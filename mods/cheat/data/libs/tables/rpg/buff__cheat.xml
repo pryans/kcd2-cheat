@@ -2,5 +2,40 @@
 <database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="barbora" xsi:noNamespaceSchemaLocation="../database.xsd">
 	<buffs version="1">
 		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="a218b534-b2a5-11ed-afa1-0242ac120002" buff_lifetime_id="0" buff_name="cheat_invisibility" buff_params="con=-100,evi=-100,lpv=-100,nbi=-10,noi=-100,ors=-10" duration="-1" icon_id="0" implementation="Cpp:Constant" is_persistent="true" />
+		
+		<!--
+
+		<buff_class buff_class_id="0" buff_class_name="Testing Stat Buff" />
+		<buff_class buff_class_id="1" buff_class_name="System Buff" />
+		<buff_class buff_class_id="2" buff_class_name="Weapon Skill Buff" />
+		<buff_class buff_class_id="3" buff_class_name="Testing Combat Buff" />
+		<buff_class buff_class_id="4" buff_class_name="Perk Buff" />
+		<buff_class buff_class_id="5" buff_class_name="Injury" />
+		<buff_class buff_class_id="6" buff_class_name="Heal" />
+		<buff_class buff_class_id="7" buff_class_name="Poison" />
+		<buff_class buff_class_id="8" buff_class_name="Perception" />
+		<buff_class buff_class_id="9" buff_class_name="Overeat" />
+		<buff_class buff_class_id="10" buff_class_name="Alcohol" />
+		<buff_class buff_class_id="12" buff_class_name="Item Buff" />
+		<buff_class buff_class_id="13" buff_class_name="Potion" />
+		<buff_class buff_class_id="14" buff_class_name="Food Poison" />
+		<buff_class buff_class_id="15" buff_class_name="Script System" />
+		<buff_class buff_class_id="16" buff_class_name="Unconsciousness" />
+		<buff_class buff_class_id="17" buff_class_name="Hangover" />
+		<buff_class buff_class_id="18" buff_class_name="Satisfaction" />
+		<buff_class buff_class_id="19" buff_class_name="Perfume" />
+		<buff_class buff_class_id="20" buff_class_name="Punishment" />
+		<buff_class buff_class_id="21" buff_class_name="ForcedDrunkenness" />
+
+		<buff_exclusivity _comment="allows multiple instances of the same buff on one target" buff_exclusivity_id="0" buff_exclusivity_name="NoExclusivity" />
+		<buff_exclusivity _comment="more instances of the same buff (the same id) are not allowed on one target" buff_exclusivity_id="1" buff_exclusivity_name="IdExclusive" />
+		<buff_exclusivity _comment="more buffs with the same modifier are not allowed on one target" buff_exclusivity_id="2" buff_exclusivity_name="ModExclusive" />
+		<buff_exclusivity _comment="more buffs belonging to the same class are not allowed" buff_exclusivity_id="3" buff_exclusivity_name="ClassExclusive" />
+		<buff_exclusivity _comment="more buffs are not allowed on one target" buff_exclusivity_id="4" buff_exclusivity_name="TargetExclusive" />
+
+		<buff_lifetime buff_lifetime_id="0" buff_lifetime_name="ShortTerm" />
+		<buff_lifetime buff_lifetime_id="1" buff_lifetime_name="LongTerm" />
+		-->
+		<buff buff_class_id="4" buff_exclusivity_id="0" buff_id="e4fc62ef-683d-4f8d-b02c-cca23d364f35" buff_lifetime_id="1" buff_name="cheat_carry_capacity" buff_params="cps+10" buff_ui_type_id="4" duration="-1" icon_id="replaceme" implementation="Cpp:Constant" is_persistent="true" />
 	</buffs>
 </database>
