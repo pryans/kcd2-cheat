@@ -372,6 +372,10 @@ function Cheat:addItem(searchOperation, amount, condition, quality, quest, notif
         return false
     end
 
+    if quality and quality > 3 then
+        Cheat:logWarn("Not possible to create items with quality greater than 3.")
+    end
+
     if not quality then
         quality = item.maxquality
     end
@@ -743,7 +747,7 @@ Cheat.cheat_add_item_args = {
     exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
     amount = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The number of items to add. Default 1.") end,
     condition = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 100, showHelp, "The condition of the item added. Default 100.") end,
-    quality = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The quality of the item added. Defaults to item's max quality.") end,
+    quality = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The quality of the item added (1-3). Defaults to item's max quality.") end,
     bulk = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, all matches items are added.") end,
     quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt adding quest items.") end
 }
