@@ -410,8 +410,8 @@ function Cheat:cheat_charm()
     end
 
     Cheat:cheat_wash_dirt_and_blood()
-    Cheat:cheat_add_buff("id:fresh_cut")
-    Cheat:cheat_add_buff("id:alpha_male_in_love")
+    Cheat:proxy("cheat_add_buff", "exact:fresh_cut")
+    Cheat:proxy("cheat_add_buff", "exact:alpha_male_in_love")
     player.soul:SetState("health", 1000)
     player.soul:SetState("stamina", 1000)
     player.soul:SetState("hunger", 100)
