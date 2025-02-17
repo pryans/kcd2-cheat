@@ -210,6 +210,60 @@ function dump(value)
     end
 end
 
+function Cheat:entityDumper(entity)
+    if not entity then
+        entity = Cheat:getTargetedEntity()
+    end
+
+    local states = { "health", "stamina", "hunger", "exhaust", "karma", "alcoholism" }
+    local foundStates = {}
+    for _, state in ipairs(states) do
+        local value = entity.soul:GetState(state)
+        if value then
+            foundStates[state] = value
+        end
+    end
+
+    local stats = { "strength", "agility", "vitality", "speech", "vision", "hearing", "barter", "courage", "storyProgress" }
+    local foundStats = {}
+    for _, stat in ipairs(stats) do
+        local value = entity.soul:GetStatLevel(stat)
+        if value then
+            foundStats[stat] = value
+        end
+    end
+
+    --[[
+    nvr = nervousness
+    cnp = horse_price = cnp * 10
+    drt = dirtiness
+    sml = stench
+    bad = related to crime
+    con = conspicuousness
+    bld = bloodiness
+    charisma
+    frg = fragrance
+    ]]
+    -- player.soul:GetDerivedStat('hac', {}, self.secondChancesPerks)
+    local derivedStats = { "charisma", "rch", "cse", "vib", "evi", "con", "mst", "mhs", "hlt", "sdt", "fov", "vir", "tsr", "dtf", "dbf", "pt1", "pt5", "dai", "bnc", "hac", "hde", "lfu", "lio", "cap", "alo", "oad", "owa", "wud", "lvl", "noi", "fsm", "nrs", "rsb", "rsa", "ble", "ibi", "bow", "cow", "aco", "caw", "rcw", "mor", "dem", "mcf", "obe", "psr", "xpm", "osl", "mos", "ore", "caf", "rdq", "erq", "sle", "coc", "ufo", "mut", "prb", "fpa", "apa", "cag", "def", "dru", "poi", "pos", "ran", "iex", "hcm", "was", "grm", "brm", "drt", "sml", "smi", "frg", "hko", "enc", "fdm", "sma", "bma", "hgs", "pds", "sha", "pbm", "rml", "hml", "bso", "bld", "bba", "arr", "jrm", "sur", "imm", "apr", "ppr", "ltp", "upr", "skpr", "kopr", "cds", "edm", "prc", "cdw", "eqw", "pla", "wbc", "cbi", "nbi", "alc", "map", "adm", "alm", "hov", "btw", "owl", "rms", "deb", "ach", "prs", "imp", "drd", "crc", "dmt", "mgt", "bad", "nrv", "vag", "mag", "aag", "red", "drv", "pmc", "sdn", "brn", "plr", "bea", "kko", "sse", "ies", "lrm", "prm", "uvh", "uva", "StaminaCooldownDefault", "StaminaCooldownWeaponRaised", "StaminaCooldownAttack", "StaminaCooldownDodge", "StaminaCooldownHit", "StaminaCooldownBlock", "StaminaCooldownBrokenBlock", "StaminaCooldownCollisionHit", "StaminaCooldownJump", "StaminaCooldownFallDamage", "StaminaCooldownArcherySelfHarm", "StaminaCooldownSharpeningDoPedal", "StaminaCooldownBlacksmithingStroke", "StaminaCooldownBlacksmithingExhaustingStroke", "cnp", "cbp", "csp", "slp", "cep", "icp", "crp", "dfe", "csc", "hvp", "pqe", "sks", "sst", "sss", "xst", "xag", "xvi", "xsw", "xcr", "xsu", "xhw", "xma", "xsc", "srr", "bap", "alp", "atd", "ams", "rcx", "lfb", "tba", "nrw", "fac", "ahe", "apo", "ano", "fpd", "eph", "rpd", "rpr", "rpa", "hla", "rpp", "efd", "aml", "lgp" }
+    local foundDerivedStats = {}
+    for _, stat in ipairs(derivedStats) do
+        local value = entity.soul:GetDerivedStat(stat)
+        if value then
+            foundDerivedStats[stat] = value
+        end
+    end
+
+    local info = {
+        name = Cheat:getEntityName(entity),
+        states = foundStates,
+        stats = foundStats,
+        dstats = foundDerivedStats
+    }
+
+    Cheat:tprint(info)
+end
+
 -- ============================================================================
 -- end
 -- ============================================================================

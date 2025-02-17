@@ -3,6 +3,7 @@
 -- ============================================================================
 Cheat.g_money_id = "5ef63059-322e-4e1b-abe8-926e100c770e"
 Cheat.g_player_states = { health = true, stamina = true, hunger = true, exhaust = true, karma = false, alcoholism = true }
+Cheat.g_player_stats = { strength = true, agility = true, vitality = true, speech = true }
 
 function Cheat:get_strength()
     return player.soul:GetStatLevel("strength")
