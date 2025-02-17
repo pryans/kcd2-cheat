@@ -202,8 +202,8 @@ function Cheat:argsGetOptionalNumber(args, argName, defaultValue, showHelp, help
     return returnValue, returnErr
 end
 
-function Cheat:runTests()
-    Cheat:beginTest("cheat_args.lua")
+function Cheat:test_args()
+    Cheat:beginTests("cheat_args.lua")
     local testval, testerr = nil, nil
 
     local argstest = {}
@@ -335,11 +335,7 @@ function Cheat:runTests()
     Cheat:testAssert("didn't return missing file argument error on nil input",
         testfilename == nil and testfilenameErr == true)
 
-    Cheat:endTest()
-end
-
-if Cheat:testEnabled() then
-    Cheat:runTests()
+    Cheat:endTests()
 end
 
 -- ============================================================================

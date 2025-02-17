@@ -592,7 +592,7 @@ end
 -- test_core_player
 -- ============================================================================
 function Cheat:test_core_player()
-    Cheat:beginTest("test_core_player")
+    Cheat:beginTests("test_core_player")
 
     -- loc
     local loc = Cheat:loc()
@@ -692,7 +692,7 @@ function Cheat:test_core_player()
     -- cheat_charm
     Cheat:testAssert("cheat_charm", Cheat:cheat_charm())
 
-    Cheat:endTest()
+    Cheat:endTests()
 end
 
 -- ============================================================================

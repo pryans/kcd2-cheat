@@ -174,7 +174,7 @@ end
 -- test_core_picking
 -- ============================================================================
 function Cheat:test_core_picking()
-    Cheat:beginTest("test_core_picking")
+    Cheat:beginTests("test_core_picking")
     Cheat:removeAllItems()
 
     Cheat.g_no_lockpicks_required = true
@@ -205,7 +205,7 @@ function Cheat:test_core_picking()
     Cheat:testAssert("cheat_no_lockpicking 3", Cheat:proxy("cheat_no_lockpicking", "nolockpicks:false"))
     Cheat:testAssertFalse("cheat_no_lockpicking 4", Cheat.g_no_lockpicks_required)
 
-    Cheat:endTest()
+    Cheat:endTests()
 end
 
 -- ============================================================================

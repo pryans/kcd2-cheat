@@ -180,7 +180,7 @@ end
 -- test_core_player
 -- ============================================================================
 function Cheat:test_core_skills()
-    Cheat:beginTest("test_core_skills")
+    Cheat:beginTests("test_core_skills")
 
     -- find_skills
     local skills = Cheat:find_skills(nil)
@@ -220,7 +220,7 @@ function Cheat:test_core_skills()
     Cheat:testAssert("cheat_add_skill_levels marksmanship 1", Cheat:cheat_add_skill_levels("skill:marksmanship levels:1"))
     Cheat:testAssert("cheat_add_skill_levels marksmanship 2", Cheat:get_skill_level("marksmanship") == 21)
 
-    Cheat:endTest()
+    Cheat:endTests()
 end
 
 -- ============================================================================

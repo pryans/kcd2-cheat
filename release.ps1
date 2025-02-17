@@ -1,3 +1,7 @@
+param (
+  [string]$RUN_TESTS = "false"
+)
+
 $MOD_NAME = "cheat"
 $MOD_DESC = "KCD2 Cheat Mod https://www.nexusmods.com/kingdomcomedeliverance2/mods/114"
 $MOD_AUTHOR = "Othiden"
@@ -35,8 +39,9 @@ New-Item -ItemType Directory -Path "${BUILD_DIR}" -Force | Out-Null
 # clone mods/ to build/
 Copy-Item -Path "mods" -Destination "${BUILD_DIR}" -Recurse -Force
 
-# replace version
-(Get-Content -Path "mods/${MOD_NAME}/data/scripts/mods/cheat.lua" -Raw) -replace "__VERSION__", "${MOD_VERSION}" | Set-Content -Path "build/mods/${MOD_NAME}/data/scripts/mods/cheat.lua"
+# replace variables
+(Get-Content -Path "build/mods/${MOD_NAME}/data/scripts/mods/cheat.lua" -Raw) -replace "__VERSION__", "${MOD_VERSION}" | Set-Content -Path "build/mods/${MOD_NAME}/data/scripts/mods/cheat.lua"
+(Get-Content -Path "build/mods/${MOD_NAME}/data/scripts/mods/cheat.lua" -Raw) -replace """__RUNTESTS__""", "${RUN_TESTS}" | Set-Content -Path "build/mods/${MOD_NAME}/data/scripts/mods/cheat.lua"
 
 # create pak file of data/*
 Compress-Archive -Force -Path "build/mods/${MOD_NAME}/data/*" -DestinationPath "build/mods/${MOD_NAME}/data/${MOD_NAME}.zip" -CompressionLevel Fastest

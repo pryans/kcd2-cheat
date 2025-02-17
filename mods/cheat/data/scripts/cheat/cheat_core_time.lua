@@ -66,7 +66,7 @@ end
 -- test_core_time
 -- ============================================================================
 function Cheat:test_core_time()
-    Cheat:beginTest("test_core_time")
+    Cheat:beginTests("test_core_time")
 
     -- cheat_get_time
     Cheat:testAssert("cheat_get_time", Cheat:proxy("cheat_get_time"))
@@ -95,7 +95,7 @@ function Cheat:test_core_time()
 
     Cheat:testAssert("cheat_set_time_speed reset", Cheat:proxy("cheat_set_time_speed", "ratio:15"))
 
-    Cheat:endTest()
+    Cheat:endTests()
 end
 
 -- ============================================================================
