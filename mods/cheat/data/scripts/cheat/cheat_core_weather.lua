@@ -57,14 +57,14 @@ end
 -- test_core_weather
 -- ============================================================================
 function Cheat:test_core_weather()
-    Cheat:beginTest("cheat_set_weather")
+    Cheat:beginTests("cheat_set_weather")
 
     Cheat:testAssertFalse("cheat_set_weather invalid 1", Cheat:proxy("cheat_set_weather", ""))
     Cheat:testAssertFalse("cheat_set_weather invalid 2", Cheat:proxy("cheat_set_weather", "id:-1"))
     Cheat:testAssertFalse("cheat_set_weather invalid 3", Cheat:proxy("cheat_set_weather", "id:1 transition:abc"))
     Cheat:testAssert("cheat_set_weather 1", Cheat:proxy("cheat_set_weather", "id:1 transition:0"))
 
-    Cheat:endTest()
+    Cheat:endTests()
 end
 
 -- ============================================================================
