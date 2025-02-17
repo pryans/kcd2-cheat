@@ -21,6 +21,11 @@ function Cheat:loadDatabase(databaseName)
     return Cheat.g_database_cache[databaseName]
 end
 
+---findRows
+---@param database table the database to search
+---@param searchOperation table|nil
+---@param fields table array of field names to match on
+---@return table
 function Cheat:findRows(database, searchOperation, fields)
     if not searchOperation then
         searchOperation = { exact = false, searchKey = nil }
@@ -55,6 +60,11 @@ function Cheat:findRows(database, searchOperation, fields)
     return foundRows
 end
 
+---findRow
+---@param database table the database to search
+---@param searchOperation table|nil
+---@param fields table array of field names to match on
+---@return table|nil
 function Cheat:findRow(database, searchOperation, fields)
     local rows = Cheat:findRows(database, searchOperation, fields)
     local row = nil
@@ -145,75 +155,6 @@ function Cheat:xmlLoadDatabase(xmlFile, onTagFunction)
         Cheat:logError("Failed to load data from XML database [%s]", xmlFile)
     end
     return true
-end
-
-function Cheat:xmlLoadLocalizationDatabase(xmlFile)
-    Cheat:logDebug("Loading XML localization database file [%s]", xmlFile)
-
-    if not xmlFile then
-        return false, nil
-    end
-
-    local xml = System.LoadTextFile(xmlFile)
-    if not xml then
-        return false, nil
-    end
-
-    local luaTableResult = {}
-    local rowStartTag = "<Row>"
-    local rowEndTag = "</Row>"
-    local cellStartTag = "<Cell>"
-    local cellEndTag = "</Cell>"
-
-    local rowStartIndex = 1
-    while true do
-        rowStartIndex, _ = string.find(xml, rowStartTag, rowStartIndex, true)
-        if not rowStartIndex then
-            break -- No more rows found
-        end
-
-        local rowEndIndex = string.find(xml, rowEndTag, rowStartIndex, true)
-        if not rowEndIndex then
-            break -- Malformed XML, row start but no end
-        end
-
-        local rowContent = string.sub(xml, rowStartIndex + #rowStartTag, rowEndIndex - 1)
-        local cells = {}
-        local cellStartIndex = 1
-        while true do
-            cellStartIndex, _ = string.find(rowContent, cellStartTag, cellStartIndex, true)
-            if not cellStartIndex then
-                break -- No more cells in this row
-            end
-
-            local cellEndIndex = string.find(rowContent, cellEndTag, cellStartIndex, true)
-            if not cellEndIndex then
-                break -- Malformed XML, cell start but no end in this row
-            end
-
-            local cellValue = string.sub(rowContent, cellStartIndex + #cellStartTag, cellEndIndex - 1)
-            table.insert(cells, cellValue)
-            cellStartIndex = cellEndIndex + #cellEndTag
-        end
-
-        if #cells >= 1 then
-            local key = Cheat:trimToNil(cells[1])
-            local value1 = Cheat:toLower(Cheat:trimToNil(cells[2]))
-            local value2 = Cheat:toLower(Cheat:trimToNil(cells[3]))
-
-            if key and value1 then
-                -- field 1 vs 2 can be formal and inforaml, or singular and plural
-                luaTableResult[key] = {
-                    field1 = value1,
-                    field2 = value2
-                }
-            end
-        end
-
-        rowStartIndex = rowEndIndex + #rowEndTag
-    end
-
-    return luaTableResult
 end
 
 -- ============================================================================
@@ -373,10 +314,17 @@ end
 -- ============================================================================
 -- string functions
 -- ============================================================================
+
+---isBlank
+---@param value string|nil
+---@return boolean
 function Cheat:isBlank(value)
     return value == nil or value == ""
 end
 
+---toUpper
+---@param value string|nil
+---@return string|nil
 function Cheat:toUpper(value)
     if value then
         -- string.upper fails if passed nil
@@ -386,6 +334,9 @@ function Cheat:toUpper(value)
     end
 end
 
+---toLower
+---@param value string|nil
+---@return string|nil
 function Cheat:toLower(value)
     if value then
         -- string.lower fails if passed nil
@@ -395,14 +346,25 @@ function Cheat:toLower(value)
     end
 end
 
+---startsWith
+---@param text string
+---@param key string
+---@return boolean
 function Cheat:startsWith(text, key)
     return key == "" or string.sub(text, 1, string.len(key)) == key
 end
 
+---endsWith
+---@param text string
+---@param key string
+---@return boolean
 function Cheat:endsWith(text, key)
     return key == "" or string.sub(text, -string.len(key)) == key
 end
 
+---trim
+---@param value string|nil
+---@return string|nil
 function Cheat:trim(value)
     if value and type(value) == "string" then
         value = value:gsub("^%s+", ""):gsub("%s+$", "")
@@ -412,6 +374,9 @@ function Cheat:trim(value)
     end
 end
 
+---trimToNil
+---@param value string|nil
+---@return string|nil
 function Cheat:trimToNil(value)
     value = Cheat:trim(value)
     if Cheat:isBlank(value) then
@@ -423,6 +388,11 @@ end
 -- ============================================================================
 -- math functions
 -- ============================================================================
+
+---min
+---@param x number
+---@param y number
+---@return number
 function Cheat:min(x, y)
     if x < y then
         return x
@@ -431,6 +401,10 @@ function Cheat:min(x, y)
     end
 end
 
+---max
+---@param x number
+---@param y number
+---@return number
 function Cheat:max(x, y)
     if x > y then
         return x
@@ -439,20 +413,20 @@ function Cheat:max(x, y)
     end
 end
 
+---truncate
+---@param number any
+---@return integer
 function Cheat:truncate(number)
-    if number then
-        local truncated_number, _ = math.modf(number) -- Discard fractional part with '_'
-        return truncated_number
-    end
-    return nil
+    local truncated_number, _ = math.modf(number) -- Discard fractional part with '_'
+    return truncated_number
 end
 
+---clamp
+---@param value number
+---@param min number
+---@param max number
+---@return number
 function Cheat:clamp(value, min, max)
-    -- can't clamp nil
-    if not value then
-        return nil
-    end
-
     if value < min then
         return min
     end
@@ -464,10 +438,21 @@ function Cheat:clamp(value, min, max)
     return value
 end
 
+---isNear
+---@param v1 number
+---@param v2 number
+---@param nearDistance number
+---@return boolean
 function Cheat:isNear(v1, v2, nearDistance)
     return math.abs(v1 - v2) <= nearDistance
 end
 
+---createSpawnVectorFromVector
+---@param avoidCenter boolean
+---@param position table vector x,y,z
+---@param radius number
+---@param near number
+---@return table vector x,y,z
 function Cheat:createSpawnVectorFromVector(avoidCenter, position, radius, near)
     if not radius or radius < 0 then
         radius = 0
@@ -499,10 +484,21 @@ function Cheat:createSpawnVectorFromVector(avoidCenter, position, radius, near)
     end
 end
 
+---createSpawnVectorFromPosition
+---@param avoidCenter boolean
+---@param xPos number
+---@param yPos number
+---@param zPos number
+---@param radius number
+---@param near number
+---@return table vector x,y,z
 function Cheat:createSpawnVectorFromPosition(avoidCenter, xPos, yPos, zPos, radius, near)
     return Cheat:createSpawnVectorFromVector(avoidCenter, { x = xPos, y = yPos, z = zPos }, radius, near)
 end
 
+---distanceToPlayer
+---@param entity table An entity with a GetWorldPos
+---@return number
 function Cheat:distanceToPlayer(entity)
     local v1 = g_Vectors.temp_v1
     entity:GetWorldPos(v1)
@@ -513,9 +509,17 @@ function Cheat:distanceToPlayer(entity)
     local v3 = g_Vectors.temp_v3
     v3 = VectorUtils.Subtract(v2, v1)
 
+    ---@diagnostic disable-next-line: return-type-mismatch
     return VectorUtils.Length(v3)
 end
 
+---rayCastUnderPoint
+---@param x number
+---@param y number
+---@param rayHeight number
+---@param rayDistance number
+---@return integer hits
+---@return table hitData
 function Cheat:rayCastUnderPoint(x, y, rayHeight, rayDistance)
     local from = { x = x, y = y, z = rayHeight }
     local dir = { x = 0, y = 0, z = -1 }
@@ -523,9 +527,16 @@ function Cheat:rayCastUnderPoint(x, y, rayHeight, rayDistance)
     local skip = player.id;
     local hitData = {}
     local hits = Physics.RayWorldIntersection(from, dir, 1, ent_all, skip, nil, hitData)
+    if not hits then
+        hits = 0
+    end
     return hits, hitData
 end
 
+---getGroundHeight
+---@param x number
+---@param y number
+---@return number|nil groundHeight Will be nil if ground wasn't hit by the ray.
 function Cheat:getGroundHeight(x, y)
     local rayHeight = 1000
     local rayDistance = 2000
@@ -540,6 +551,9 @@ function Cheat:getGroundHeight(x, y)
     end
 end
 
+---stringToVector
+---@param value string Any string of 3 numbers separated by whitespace or punctuation.
+---@return table vector x,y,z
 function Cheat:stringToVector(value)
     -- Replace all non-digits with spaces
     local digit_string = string.gsub(value, "[^0-9.]", " ")
@@ -566,6 +580,10 @@ end
 -- ============================================================================
 -- type functions
 -- ============================================================================
+
+---isBoolean
+---@param value any
+---@return boolean
 function Cheat:isBoolean(value)
     if type(value) ~= "boolean" then
         local testValue = Cheat:toUpper(tostring(value))
@@ -579,6 +597,9 @@ function Cheat:isBoolean(value)
     end
 end
 
+---toBoolean
+---@param value any
+---@return boolean|nil
 function Cheat:toBoolean(value)
     if type(value) ~= "boolean" then
         local testValue = Cheat:toUpper(tostring(value))
@@ -594,6 +615,9 @@ function Cheat:toBoolean(value)
     end
 end
 
+---isNumber
+---@param value any
+---@return boolean
 function Cheat:isNumber(value)
     local testValue = tonumber(value)
     if testValue then
@@ -632,11 +656,7 @@ function Cheat:logOn()
 end
 
 function Cheat:log(value)
-    if Cheat.isCommandLineBuild == false then
-        System.LogAlways(value)
-    else
-        print(value)
-    end
+    System.LogAlways(value)
 end
 
 function Cheat:logIsDebugEnabled()
@@ -682,80 +702,136 @@ end
 -- ============================================================================
 -- testing functions
 -- ============================================================================
-Cheat.g_cheat_test_fail = 0
-Cheat.g_cheat_test_pass = 0
-Cheat.g_cheat_test_name = nil
+Cheat.g_cheat_test_info = nil
+Cheat.g_cheat_test_suite = nil
 
-function Cheat:testEnabled()
-    return Cheat:logIsDebugEnabled() or Cheat.isCommandLineBuild
+function Cheat:beginTestSuite(logOff)
+    logOff = logOff or false
+
+    Cheat.g_cheat_test_suite = {
+        result = nil,
+        logOff = logOff
+    }
 end
 
-function Cheat:beginTest(name)
-    Cheat:log(string.format("$4[TEST] Starting test set [%s].", tostring(name)))
-    Cheat:logOff()
-    Cheat.g_cheat_test_fail = 0
-    Cheat.g_cheat_test_pass = 0
-    Cheat.g_cheat_test_name = name
-end
+function Cheat:endTestSuite()
+    for _, info in ipairs(Cheat.g_cheat_test_suite) do
+        Cheat:log(info.result)
 
-function Cheat:endTest()
-    Cheat:logOn()
-    if Cheat.g_cheat_test_fail > 0 then
-        Cheat:log(string.format("$4[TEST] Test set [%s] failed with fail=[%s] pass[%s].", tostring(Cheat.g_cheat_test_name),
-            tostring(Cheat.g_cheat_test_fail), tostring(Cheat.g_cheat_test_pass)))
-    else
-        Cheat:log(string.format("$4[TEST] Test set [%s] passed with fail=[%s] pass[%s].", tostring(Cheat.g_cheat_test_name),
-            tostring(Cheat.g_cheat_test_fail), tostring(Cheat.g_cheat_test_pass)))
+        for _, message in ipairs(info.failures) do
+            Cheat:log(message)
+        end
     end
+
+    Cheat.g_cheat_test_info = nil
+    Cheat.g_cheat_test_suite = nil
+end
+
+function Cheat:beginTests(name, logOff)
+    -- default to off
+    logOff = logOff or true
+
+    -- test suite overrides local setting
+    if Cheat.g_cheat_test_suite then
+        logOff = Cheat.g_cheat_test_suite.logOff
+    end
+
+    Cheat.g_cheat_test_info = {
+        name = name,
+        pass = 0,
+        fail = 0,
+        logOff = logOff,
+        result = nil,
+        failures = {}
+    }
+
+    if Cheat.g_cheat_test_suite then
+        table.insert(Cheat.g_cheat_test_suite, Cheat.g_cheat_test_info)
+    end
+
+    Cheat:log(string.format("$4[TEST] Starting test set [%s].", tostring(name)))
+
+    if logOff then
+        Cheat:logOff()
+    end
+end
+
+function Cheat:endTests()
+    if Cheat.g_cheat_test_info.logOff then
+        Cheat:logOn()
+    end
+
+    if Cheat.g_cheat_test_info.fail > 0 then
+        Cheat.g_cheat_test_info.result = string.format("$4[FAIL] Test set [%s] failed with fail=[%s] pass[%s].",
+            tostring(Cheat.g_cheat_test_info.name),
+            tostring(Cheat.g_cheat_test_info.fail),
+            tostring(Cheat.g_cheat_test_info.pass))
+
+        for _, message in ipairs(Cheat.g_cheat_test_info.failures) do
+            Cheat:log(message)
+        end
+    else
+        Cheat.g_cheat_test_info.result = string.format("$3[PASS] Test set [%s] passed with fail=[%s] pass[%s].",
+            tostring(Cheat.g_cheat_test_info.name),
+            tostring(Cheat.g_cheat_test_info.fail),
+            tostring(Cheat.g_cheat_test_info.pass))
+    end
+
+    Cheat:log(Cheat.g_cheat_test_info.result)
+    Cheat.g_cheat_test_info = nil
+end
+
+function Cheat:testPass(message)
+    Cheat.g_cheat_test_info.pass = Cheat.g_cheat_test_info.pass + 1
+    Cheat:log(string.format("$3[PASS] %s", tostring(message)))
+end
+
+function Cheat:testFail(message)
+    Cheat.g_cheat_test_info.fail = Cheat.g_cheat_test_info.fail + 1
+    message = string.format("$4[FAIL] %s", tostring(message))
+    table.insert(Cheat.g_cheat_test_info.failures, message)
+    Cheat:log(message)
 end
 
 function Cheat:testAssert(message, value)
-    if not value then
-        Cheat:log(string.format("$4[FAIL] %s", tostring(message)))
-        Cheat.g_cheat_test_fail = Cheat.g_cheat_test_fail + 1
-    else
-        Cheat:log(string.format("$3[PASS] %s", tostring(message)))
-        Cheat.g_cheat_test_pass = Cheat.g_cheat_test_pass + 1
-    end
-end
-
-function Cheat:testAssertFalse(name, value)
     if value then
-        Cheat:log(string.format("$4[FAIL] %s", tostring(name)))
-        Cheat.g_cheat_test_fail = Cheat.g_cheat_test_fail + 1
+        Cheat:testPass(message)
     else
-        Cheat:log(string.format("$3[PASS] %s", tostring(name)))
-        Cheat.g_cheat_test_pass = Cheat.g_cheat_test_pass + 1
+        Cheat:testFail(message)
     end
 end
 
-function Cheat:testAssertEquals(name, actualValue, expectedValue)
-    if actualValue ~= expectedValue then
-        Cheat:log(string.format("$4[FAIL] %s actualValue [%s] ~= expectedValue [%s]",
-            name, tostring(actualValue), tostring(expectedValue)))
-        Cheat.g_cheat_test_fail = Cheat.g_cheat_test_fail + 1
+function Cheat:testAssertFalse(message, value)
+    if not value then
+        Cheat:testPass(message)
     else
-        Cheat:log(string.format("$3[PASS] %s actualValue [%s] ~= expectedValue [%s]",
-            name, tostring(actualValue), tostring(expectedValue)))
-        Cheat.g_cheat_test_pass = Cheat.g_cheat_test_pass + 1
+        Cheat:testFail(message)
     end
 end
 
-function Cheat:testAssertEqualsFloat(name, actualValue, expectedValue, maxDifference)
+function Cheat:testAssertEquals(message, actualValue, expectedValue)
+    message = string.format("%s: actual[%s] expected[%s]", message, tostring(actualValue), tostring(expectedValue))
+    if actualValue == expectedValue then
+        Cheat:testPass(message)
+    else
+        Cheat:testFail(message)
+    end
+end
+
+function Cheat:testAssertEqualsFloat(message, actualValue, expectedValue, maxDifference)
     local diff = nil
 
     if actualValue and expectedValue and maxDifference then
         diff = math.abs(actualValue - expectedValue)
     end
 
+    message = string.format("$4[FAIL] %s actual[%s] expected[%s] maxDifference[%s] (diff=%s)",
+        message, tostring(actualValue), tostring(expectedValue), tostring(maxDifference), tostring(diff))
+
     if not diff or diff >= maxDifference then
-        Cheat:log(string.format("$4[FAIL] %s actualValue [%s] ~= expectedValue [%s], maxDifference [%s] (diff=%s)",
-            name, tostring(actualValue), tostring(expectedValue), tostring(maxDifference), tostring(diff)))
-        Cheat.g_cheat_test_fail = Cheat.g_cheat_test_fail + 1
+        Cheat:testFail(message)
     else
-        Cheat:log(string.format("$3[PASS] %s actualValue [%s] ~= expectedValue [%s] maxDifference [%s]",
-            name, tostring(actualValue), tostring(expectedValue), tostring(maxDifference)))
-        Cheat.g_cheat_test_pass = Cheat.g_cheat_test_pass + 1
+        Cheat:testPass(message)
     end
 end
 
