@@ -19,52 +19,6 @@ function Cheat:dump_all()
     end
 end
 
-function Cheat:print_db_table(tableName, filter, debug)
-    if not Database.LoadTable(tableName) then
-        Cheat:logError("Unable to load table [%s].", tostring(tableName))
-        return
-    end
-
-    local tableInfo = Database.GetTableInfo(tableName)
-    if not tableInfo then
-        Cheat:logError("Table [%s] not found.", tostring(tableName))
-        return
-    end
-
-    if tableInfo.LineCount == 0 then
-        Cheat:logInfo("Table [%s] is empty.", tostring(tableName))
-        return
-    end
-
-    local rows = tableInfo.LineCount - 1
-
-    for i = 0, rows do
-        local tableline = Database.GetTableLine(tableName, i)
-        if tableline then
-            local displayLine = ""
-            for key, value in pairs(tableline) do
-                if debug then
-                    Cheat:logDebug("Pair key=[%s] value=[%s].", tostring(key), tostring(value))
-                end
-
-                if not Cheat:isBlank(filter) then
-                    if string.find(string.upper(key), string.upper(filter)) or string.find(string.upper(tostring(value)), string.upper(filter)) then
-                        displayLine = displayLine .. " " .. key .. "=" .. tostring(value)
-                    end
-                else
-                    displayLine = displayLine .. " " .. key .. "=" .. tostring(value)
-                end
-            end
-
-            if not Cheat:isBlank(displayLine) then
-                Cheat:logInfo(displayLine)
-            end
-        else
-            Cheat:logError("Read nil table line (this is a bug).")
-        end
-    end
-end
-
 function Cheat:print_methods(object, filter)
     if not object then
         Cheat:logDebug("Object is nil")
@@ -72,7 +26,9 @@ function Cheat:print_methods(object, filter)
     end
 
     for key, _ in pairs(object) do
-        if Cheat:isBlank(filter) or string.find(Cheat:toUpper(key), Cheat:toUpper(filter), 1, true) then
+        local keyUpper = Cheat:toUpper(key)
+        local filterUpper = Cheat:toUpper(filter)
+        if Cheat:isBlank(filter) or (keyUpper and filterUpper and string.find(keyUpper, filterUpper, 1, true)) then
             Cheat:logInfo(key)
         end
     end
@@ -192,6 +148,7 @@ end
 
 -- use for debugging in console
 -- #dump(x)
+---@diagnostic disable-next-line: lowercase-global
 function dump(value)
     if not value then
         Cheat:logDebug("nil")

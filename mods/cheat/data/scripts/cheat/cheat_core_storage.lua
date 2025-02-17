@@ -9,6 +9,9 @@ Cheat.g_stash_types = {
 
 Cheat.g_stash_last_opened = nil
 
+---getStashes
+---@param searchOperation table
+---@return table
 function Cheat:getStashes(searchOperation)
     local stashDatabase = {}
     for name, id in pairs(Cheat.g_stash_types) do
@@ -18,11 +21,11 @@ function Cheat:getStashes(searchOperation)
     for _, stash in pairs(System.GetEntitiesByClass("Stash")) do
         local data = {}
         data.pos = stash:GetWorldPos()
-        data.name = Cheat:getLocalizedName(stash) or "none"
+        data.name = Cheat:getLocalizedEntityName(stash) or "none"
         data.distance = Cheat:distanceToPlayer(stash)
         data.stashWuid = XGenAIModule.GetMyWUID(stash)
         data.stashOwnerWuid = XGenAIModule.GetOwner(data.stashWuid)
-        data.stashOwnerName = Cheat:getLocalizedName(XGenAIModule.GetEntityByWUID(data.stashOwnerWuid)) or "none"
+        data.stashOwnerName = Cheat:getLocalizedEntityName(XGenAIModule.GetEntityByWUID(data.stashOwnerWuid)) or "none"
         data.stashHome = XGenAIModule.FindLinks(data.stashOwnerWuid, "home")
         data.masterLinks = XGenAIModule.FindLinks(data.stashWuid, "masterStash")
         data.slaveLinks = XGenAIModule.FindLinks(data.stashWuid, "slaveStash")
@@ -56,7 +59,9 @@ function Cheat:getStashes(searchOperation)
                         matched = true
                     end
                 else
-                    if string.find(nameLower, searchKeyLower, 1, true) or string.find(ownerLower, searchKeyLower, 1, true) then
+                    local nameMatch = nameLower and searchKeyLower and string.find(nameLower, searchKeyLower, 1, true)
+                    local ownerMatch = ownerLower and searchKeyLower and string.find(ownerLower, searchKeyLower, 1, true)
+                    if nameMatch or ownerMatch then
                         shouldLog = true
                         matched = true
                     end
@@ -205,12 +210,12 @@ end
 -- test_core_storage
 -- ============================================================================
 function Cheat:test_core_storage()
-    Cheat:beginTest("test_core_storage")
+    Cheat:beginTests("test_core_storage")
 
     Cheat:testAssert("cheat_stash", Cheat:proxy("cheat_stash"))
     Cheat:testAssert("cheat_inventory", Cheat:proxy("cheat_inventory", "exact:bara"))
 
-    Cheat:endTest()
+    Cheat:endTests()
 end
 
 -- ============================================================================
