@@ -203,7 +203,7 @@ function Cheat:argsGetOptionalNumber(args, argName, defaultValue, showHelp, help
 end
 
 function Cheat:test_args()
-    Cheat:beginTests("cheat_args.lua")
+    Cheat:beginTests("test_args")
     local testval, testerr = nil, nil
 
     local argstest = {}

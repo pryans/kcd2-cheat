@@ -715,6 +715,8 @@ function Cheat:beginTestSuite(logOff)
 end
 
 function Cheat:endTestSuite()
+    Cheat:logDebug("")
+    Cheat:logDebug("=== Test Suite Results ===")
     for _, info in ipairs(Cheat.g_cheat_test_suite) do
         Cheat:log(info.result)
 
@@ -722,6 +724,7 @@ function Cheat:endTestSuite()
             Cheat:log(message)
         end
     end
+    Cheat:logDebug("")
 
     Cheat.g_cheat_test_info = nil
     Cheat.g_cheat_test_suite = nil
@@ -782,14 +785,18 @@ function Cheat:endTests()
 end
 
 function Cheat:testPass(message)
-    Cheat.g_cheat_test_info.pass = Cheat.g_cheat_test_info.pass + 1
+    if Cheat.g_cheat_test_info then
+        Cheat.g_cheat_test_info.pass = Cheat.g_cheat_test_info.pass + 1
+    end
     Cheat:log(string.format("$3[PASS] %s", tostring(message)))
 end
 
 function Cheat:testFail(message)
-    Cheat.g_cheat_test_info.fail = Cheat.g_cheat_test_info.fail + 1
     message = string.format("$4[FAIL] %s", tostring(message))
-    table.insert(Cheat.g_cheat_test_info.failures, message)
+    if Cheat.g_cheat_test_info then
+        Cheat.g_cheat_test_info.fail = Cheat.g_cheat_test_info.fail + 1
+        table.insert(Cheat.g_cheat_test_info.failures, message)
+    end
     Cheat:log(message)
 end
 
@@ -825,7 +832,7 @@ function Cheat:testAssertEqualsFloat(message, actualValue, expectedValue, maxDif
         diff = math.abs(actualValue - expectedValue)
     end
 
-    message = string.format("$4[FAIL] %s actual[%s] expected[%s] maxDifference[%s] (diff=%s)",
+    message = string.format("%s: actual[%s] expected[%s] maxDifference[%s] (diff=%s)",
         message, tostring(actualValue), tostring(expectedValue), tostring(maxDifference), tostring(diff))
 
     if not diff or diff >= maxDifference then

@@ -55,8 +55,8 @@ Cheat.g_quality3_item_1_id = "eda316a4-59d9-49ae-b67b-f6837789bd0c"
 Cheat.g_quality4_item_1_id = "9e31a288-7de0-4c0d-81cd-5cf00548d2d5"
 
 Cheat.g_item_database = {}
-Cheat.g_item_database_search_fields = { "id", "l2name", "name" }
-Cheat.g_item_database_skip_tags = { PickableItem = true, Image = true, DocumentContent = true, Phase = true, ItemClasses = true, NPCTool = true, database = true }
+Cheat.g_item_database_search_fields = { "id", "lname", "name" }
+Cheat.g_item_database_skip_tags = { Image = true, DocumentContent = true, Phase = true, ItemClasses = true, NPCTool = true, database = true }
 Cheat.g_item_database_errors = 0
 Cheat.g_item_database_aliases = {}
 Cheat.g_item_lookup = {}
@@ -151,64 +151,6 @@ Cheat.g_item_health_quality_ranges[4] = {
     { min = (6 / 10) + 0.00000001, max = 10 / 10 },
 }
 
-function Cheat:conditionToHealth(condition, quality, maxquality)
-    if not condition or not quality or not maxquality then
-        Cheat:logError("conditionToHealth: invalid args condition [%s] quality [%s] maxquality [%s]", tostring(condition), tostring(quality), tostring(maxquality))
-        return nil
-    end
-
-    if not Cheat.g_item_health_quality_ranges[maxquality] then
-        Cheat:logError("conditionToHealth: invalid maxquality [%s]", tostring(maxquality))
-        return nil
-    end
-
-    if not Cheat.g_item_health_quality_ranges[maxquality][quality] then
-        Cheat:logError("conditionToHealth: invalid quality [%s] for maxquality [%s]", tostring(quality), tostring(maxquality))
-        return nil
-    end
-
-    local qualityMinHealth = Cheat.g_item_health_quality_ranges[maxquality][quality].min
-    local qualityMaxHealth = Cheat.g_item_health_quality_ranges[maxquality][quality].max
-
-    condition = Cheat:clamp(condition, 0, 100)
-    quality = Cheat:clamp(quality, 1, maxquality)
-
-    -- lerp condition range 0-100 into the quality range min-max
-    return qualityMinHealth + (qualityMaxHealth - qualityMinHealth) * (condition / 100)
-end
-
-function Cheat:healthToCondition(health, maxquality)
-    if not health or not maxquality then
-        Cheat:logError("healthToCondition: invalid args health [%s] maxquality [%s]", tostring(health), tostring(maxquality))
-        return nil, nil
-    end
-
-    if not Cheat.g_item_health_quality_ranges[maxquality] then
-        Cheat:logError("healthToCondition: invalid maxquality [%s]", tostring(maxquality))
-        return nil, nil
-    end
-
-    for quality_index, quality_range in ipairs(Cheat.g_item_health_quality_ranges[maxquality]) do
-        local qualityMinHealth = quality_range.min
-        local qualityMaxHealth = quality_range.max
-
-        if qualityMinHealth <= health and health <= qualityMaxHealth then
-            --print(qualityMinHealth .. " <= " .. health .. " <= " .. qualityMaxHealth)
-            if qualityMaxHealth - qualityMinHealth == 0 then
-                Cheat:logError("healthToCondition: division by zero")
-                return 0, quality_index -- Avoid division by zero if range is degenerate, should not happen in this setup, but for robustness
-            end
-            local condition = (100 * (health - qualityMinHealth)) / (qualityMaxHealth - qualityMinHealth)
-            --- TBD: might need to round condition instead of truncate
-            condition = Cheat:truncate(condition)
-            return Cheat:clamp(condition, 0, 100), quality_index
-        end
-    end
-
-    Cheat:logError("healthToCondition: failed to perform conversion.")
-    return nil, nil
-end
-
 function Cheat:initItemDatabase()
     local p_func = function (tag, attributes)
         if not Cheat.g_item_database_skip_tags[tag] then
@@ -297,14 +239,7 @@ function Cheat:initItemDatabase()
         end
 
         -- localize item database
-        local names = Cheat:getLocalizedItemNames(item)
-        if names then
-            item["l1name"] = names.field1
-            item["l2name"] = names.field2
-        else
-            item["l1name"] = nil
-            item["l2name"] = nil
-        end
+        item["lname"] = Cheat:getLocalizedItemName(item)
     end
 
     if Cheat.g_item_database_errors == 0 then
@@ -314,14 +249,90 @@ function Cheat:initItemDatabase()
     end
 end
 
-function Cheat:hasItem(id)
-    return player.inventory:GetCountOfClass(id) > 0
+---Converts condition to health.
+---@param condition number
+---@param quality integer
+---@param maxquality integer
+---@return number|nil
+function Cheat:conditionToHealth(condition, quality, maxquality)
+    if not condition or not quality or not maxquality then
+        Cheat:logError("conditionToHealth: invalid args condition [%s] quality [%s] maxquality [%s]", tostring(condition), tostring(quality), tostring(maxquality))
+        return nil
+    end
+
+    if not Cheat.g_item_health_quality_ranges[maxquality] then
+        Cheat:logError("conditionToHealth: invalid maxquality [%s]", tostring(maxquality))
+        return nil
+    end
+
+    if not Cheat.g_item_health_quality_ranges[maxquality][quality] then
+        Cheat:logError("conditionToHealth: invalid quality [%s] for maxquality [%s]", tostring(quality), tostring(maxquality))
+        return nil
+    end
+
+    local qualityMinHealth = Cheat.g_item_health_quality_ranges[maxquality][quality].min
+    local qualityMaxHealth = Cheat.g_item_health_quality_ranges[maxquality][quality].max
+
+    condition = Cheat:clamp(condition, 0, 100)
+    quality = Cheat:clamp(quality, 1, maxquality)
+
+    -- lerp condition range 0-100 into the quality range min-max
+    return qualityMinHealth + (qualityMaxHealth - qualityMinHealth) * (condition / 100)
 end
 
-function Cheat:getItemCount(id)
-    return player.inventory:GetCountOfClass(id)
+---Converts health to condition.
+---@param health number 0.0 - 1.0
+---@param maxquality integer 1 - 4
+---@return integer|nil condition 0-100
+---@return integer|nil quality 1-4
+function Cheat:healthToCondition(health, maxquality)
+    if not health or not maxquality then
+        Cheat:logError("healthToCondition: invalid args health [%s] maxquality [%s]", tostring(health), tostring(maxquality))
+        return nil, nil
+    end
+
+    if not Cheat.g_item_health_quality_ranges[maxquality] then
+        Cheat:logError("healthToCondition: invalid maxquality [%s]", tostring(maxquality))
+        return nil, nil
+    end
+
+    for quality_index, quality_range in ipairs(Cheat.g_item_health_quality_ranges[maxquality]) do
+        local qualityMinHealth = quality_range.min
+        local qualityMaxHealth = quality_range.max
+
+        if qualityMinHealth <= health and health <= qualityMaxHealth then
+            --print(qualityMinHealth .. " <= " .. health .. " <= " .. qualityMaxHealth)
+            if qualityMaxHealth - qualityMinHealth == 0 then
+                Cheat:logError("healthToCondition: division by zero")
+                return 0, quality_index -- Avoid division by zero if range is degenerate, should not happen in this setup, but for robustness
+            end
+            local condition = (100 * (health - qualityMinHealth)) / (qualityMaxHealth - qualityMinHealth)
+            --- TBD: might need to round condition instead of truncate
+            condition = Cheat:truncate(condition)
+            return Cheat:clamp(condition, 0, 100), quality_index
+        end
+    end
+
+    Cheat:logError("healthToCondition: failed to perform conversion.")
+    return nil, nil
 end
 
+---hasItem
+---@param itemId string
+---@return boolean
+function Cheat:hasItem(itemId)
+    return player.inventory:GetCountOfClass(itemId) > 0
+end
+
+---getItemCount
+---@param itemId string
+---@return number
+function Cheat:getItemCount(itemId)
+    return player.inventory:GetCountOfClass(itemId)
+end
+
+---getInventoryItemCount
+---@return number
 function Cheat:getInventoryItemCount()
     -- this isn't accurate, GetInventoryTable() probably isn't an array
     -- #player.inventory:GetInventoryTable()
@@ -332,25 +343,35 @@ function Cheat:getInventoryItemCount()
     return count
 end
 
-function Cheat:getLocalizedItemName(item)
-    local name = item.name
-    if item.l1name then
-        name = item.l1name
-    end
-    if item.l2name then
-        name = item.l2name
-    end
-    return name
+---Gets item from lookup table by ID
+---@param itemId string Item ID
+---@return table|nil item
+function Cheat:getItem(itemId)
+    return Cheat.g_item_lookup[itemId]
 end
 
-function Cheat:getItem(id)
-    return Cheat.g_item_lookup[id]
-end
-
+---addItemByName
+---@param itemName string exact item name (full name or id)
+---@param amount integer
+---@param condition integer
+---@param quality integer|nil
+---@param quest boolean
+---@param notify boolean
+---@param logSuccess boolean
+---@return boolean
 function Cheat:addItemByName(itemName, amount, condition, quality, quest, notify, logSuccess)
     return Cheat:addItem({ exact = true, searchKey = itemName }, amount, condition, quality, quest, notify, logSuccess)
 end
 
+---addItem
+---@param searchOperation table
+---@param amount integer
+---@param condition integer
+---@param quality integer|nil use nil to default item maxquality
+---@param quest boolean
+---@param notify boolean
+---@param logSuccess boolean
+---@return boolean
 function Cheat:addItem(searchOperation, amount, condition, quality, quest, notify, logSuccess)
     -- note that some items don't have condition (like lockpicks)
     -- some quest item cannot be added while others can
@@ -395,7 +416,7 @@ function Cheat:addItem(searchOperation, amount, condition, quality, quest, notif
         if not player.inventory:CreateItem(item.id, health, amount) then
             -- quest items that fail to be added will exit here
             Cheat:logError("Failed: name=%s amout=%s/%s cond=%s qual=%s/%s quest=%s id=%s",
-                Cheat:getLocalizedItemName(item),
+                Cheat:getLocalizedItemName(item) or "nil",
                 tostring(Cheat:getItemCount(item.id) - startingAmount),
                 tostring(endingAmount - startingAmount),
                 tostring(condition),
@@ -422,7 +443,7 @@ function Cheat:addItem(searchOperation, amount, condition, quality, quest, notif
 
     if logSuccess then
         Cheat:logInfo("Added: name=%s amout=%s cond=%s qual=%s/%s quest=%s id=%s",
-            Cheat:getLocalizedItemName(item),
+            Cheat:getLocalizedItemName(item) or "nil",
             tostring(amountAdded),
             tostring(condition),
             tostring(quality),
@@ -435,10 +456,24 @@ function Cheat:addItem(searchOperation, amount, condition, quality, quest, notif
     return true
 end
 
+---removeItemById
+---@param itemId string
+---@param amount number
+---@param quest boolean
+---@param notify boolean
+---@param logSuccess boolean
+---@return boolean
 function Cheat:removeItemById(itemId, amount, quest, notify, logSuccess)
     return Cheat:removeItem({ exact = true, searchKey = itemId }, amount, quest, notify, logSuccess)
 end
 
+---removeItem
+---@param searchOperation table
+---@param amount number
+---@param quest boolean
+---@param notify boolean
+---@param logSuccess boolean
+---@return boolean
 function Cheat:removeItem(searchOperation, amount, quest, notify, logSuccess)
     local item = Cheat:findItem(searchOperation)
     if not item then
@@ -476,10 +511,15 @@ function Cheat:removeItem(searchOperation, amount, quest, notify, logSuccess)
     return true
 end
 
+---removeAllItems
 function Cheat:removeAllItems()
     player.inventory:RemoveAllItems()
 end
 
+---removeAllItem
+---@param id string Item ID
+---@param notify boolean
+---@return number amount_removed total item instances removed
 function Cheat:removeAllItem(id, notify)
     local amount = Cheat:getItemCount(id)
     local amount_removed = player.inventory:DeleteItemOfClass(id, amount)
@@ -489,6 +529,9 @@ function Cheat:removeAllItem(id, notify)
     return amount_removed
 end
 
+---findItems
+---@param searchOperation table|nil
+---@return table items
 function Cheat:findItems(searchOperation)
     if searchOperation then
         return Cheat:findRows(Cheat.g_item_database, searchOperation, Cheat.g_item_database_search_fields)
@@ -497,20 +540,27 @@ function Cheat:findItems(searchOperation)
     end
 end
 
+---findItem
+---@param searchOperation table
+---@return table|nil item
 function Cheat:findItem(searchOperation)
     -- if the searchKey is an item ID (UUID) we can skip the DB scan
     local item = Cheat:getItem(searchOperation.searchKey)
-    if item then
-        return item
-    else
-        return Cheat:findRow(Cheat.g_item_database, searchOperation, Cheat.g_item_database_search_fields)
+    if not item then
+        item = Cheat:findRow(Cheat.g_item_database, searchOperation, Cheat.g_item_database_search_fields)
     end
+    return item
 end
 
-function Cheat:getUserItem(id, amount, condition)
+---getUserItem
+---@param itemId string Item ID
+---@param amount integer|nil amount to match on
+---@param condition integer|nil condition to match on
+---@return table|nil
+function Cheat:getUserItem(itemId, amount, condition)
     for _, userdata in pairs(player.inventory:GetInventoryTable()) do
         local item = Cheat:buildUserItem(userdata)
-        if item and item.id == id then
+        if item and item.id == itemId then
             local matches = true
 
             if amount and item.amount ~= amount then
@@ -529,6 +579,10 @@ function Cheat:getUserItem(id, amount, condition)
     return nil
 end
 
+---getUserItems
+---@return table userItems array of user items
+---@return integer totalItems total items in player inventory
+---@return integer backedupItems total items copied to the userItems array
 function Cheat:getUserItems()
     local items = {}
     local totalItems = 0;
@@ -546,6 +600,9 @@ function Cheat:getUserItems()
     return items, totalItems, backedupItems
 end
 
+---buildUserItem
+---@param userdata any
+---@return table|nil
 function Cheat:buildUserItem(userdata)
     local itemInstance = ItemManager.GetItem(userdata)
     if not itemInstance then
@@ -577,8 +634,7 @@ function Cheat:buildUserItem(userdata)
         maxquality = itemDefinition.maxquality,
         category_id = itemDefinition.category_id,
         uiname = itemDefinition.uiname,
-        l1name = itemDefinition.l1name,
-        l2name = itemDefinition.l2name,
+        lname = itemDefinition.lname,
         name = itemDefinition.name,
         owner = itemInstanceOwer,
         isquestitem = itemDefinition.isquestitem
@@ -587,21 +643,33 @@ function Cheat:buildUserItem(userdata)
     return userItem
 end
 
+---getItemDisplayText
+---@param item table The item to display.
+---@return string displayText The text representation of this item.
 function Cheat:getItemDisplayText(item)
     if not item then
         return "nil"
     end
-    -- Create a console friendly version of the item.
+
     local data = {}
     for k, v in pairs(item) do
-        if k ~= "id" and k ~= "l2name" and k ~= "l1name" then
+        if k ~= "id" and k ~= "lname" then
             data[k] = v
         end
     end
-    local name = Cheat:getLocalizedItemName(item)
-    return string.format("name=%s id=%s %s", tostring(name), tostring(item.id), Cheat:serializeTable(data))
+
+    return string.format("name=%s id=%s %s",
+        tostring(Cheat:getLocalizedItemName(item)) or "nil",
+        tostring(item.id),
+        Cheat:serializeTable(data))
 end
 
+---recreateItems
+---@param mode string
+---@param condition integer
+---@param quality integer|nil Use nil for default item maxquality.
+---@param quest boolean
+---@return boolean
 function Cheat:recreateItems(mode, condition, quality, quest)
     condition = Cheat:clamp(condition, 0, 100)
 
@@ -663,12 +731,12 @@ function Cheat:recreateItems(mode, condition, quality, quest)
         if not shouldSkip then
             if shouldDelete then
                 --Cheat:logDebug("shouldDelete [%s]", Cheat:serializeTable(item))
-                Cheat:removeItem({ exact = true, searchKey = item.id }, item.amount, false, true)
+                Cheat:removeItem({ exact = true, searchKey = item.id }, item.amount, quest, false, true)
             end
 
             if shouldRecreate then
                 --Cheat:logDebug("shouldRecreate [%s]", Cheat:serializeTable(item))
-                Cheat:addItem({ exact = true, searchKey = item.id }, item.amount, condition, quality, false, true)
+                Cheat:addItem({ exact = true, searchKey = item.id }, item.amount, condition, quality, quest, false, true)
             end
         end
     end
@@ -676,6 +744,9 @@ function Cheat:recreateItems(mode, condition, quality, quest)
     return true
 end
 
+---canCreateItem
+---@param itemId string Item ID
+---@return boolean
 function Cheat:canCreateItem(itemId)
     -- some items are block by inventory:CreateItem
     -- use this really stupid way to testing to see if an item is blocked
@@ -918,7 +989,7 @@ Cheat:createCommandLegacy("cheat_remove_stolen_items", "Cheat:cheat_remove_stole
     "Removes all stolen items from your inventory.",
     "Remove stolen items.", "cheat_remove_stolen_items")
 function Cheat:cheat_remove_stolen_items()
-    Cheat:recreateItems("removestolen", nil, nil, nil)
+    Cheat:recreateItems("removestolen", 0, nil, false)
     Cheat:logInfo("All stolen items removed.")
     return true
 end
@@ -930,7 +1001,7 @@ Cheat:createCommandLegacy("cheat_own_stolen_items", "Cheat:cheat_own_stolen_item
     "Makes you the owner of all stolen items in your inventory.\n$8This removes the stolen flag from the item.",
     "Take ownership of stolen items", "cheat_own_stolen_items")
 function Cheat:cheat_own_stolen_items()
-    Cheat:recreateItems("ownstolen", nil, nil, nil)
+    Cheat:recreateItems("ownstolen", 0, nil, false)
     Cheat:logInfo("All stolen items are now owned by the player.")
     return true
 end
@@ -1018,7 +1089,7 @@ function Cheat:cheat_backup_inventory()
                 Cheat:logInfo("Backup Item: %s", Cheat:getItemDisplayText(item))
             else
                 blockedCount = blockedCount + 1
-                Cheat:logWarn("Your inventory contains a blocked item that won't work with cheat_restore_inventory.")
+                Cheat:logWarn("Your inventory contains a blocked item that may not work with cheat_restore_inventory.")
                 Cheat:logWarn("Blocked Item: %s", Cheat:getItemDisplayText(item))
             end
         end
@@ -1050,7 +1121,7 @@ function Cheat:cheat_restore_inventory()
     local itemsRestored = 0
     for _, item in ipairs(Cheat.g_user_items) do
         totalItems = totalItems + 1
-        if Cheat:addItem({ exact = true, searchKey = item.id }, item.amount, item.condition, item.quality, true, true) then
+        if Cheat:addItem({ exact = true, searchKey = item.id }, item.amount, item.condition, item.quality, true, true, true) then
             itemsRestored = itemsRestored + 1
         else
             Cheat:logError("Failed to restore item: %s", Cheat:getItemDisplayText(item))
@@ -1065,7 +1136,7 @@ end
 -- test_core_items
 -- ============================================================================
 function Cheat:test_core_items()
-    Cheat:beginTest("test_core_items")
+    Cheat:beginTests("test_core_items")
 
     self:test_health_and_condition_conversions()
     self:test_cheat_find_items()
@@ -1080,7 +1151,7 @@ function Cheat:test_core_items()
     self:test_can_create_item()
     self:test_cheat_add_all_items()
 
-    Cheat:endTest()
+    Cheat:endTests()
 end
 
 function Cheat:test_health_and_condition_conversions()
@@ -1301,7 +1372,7 @@ function Cheat:test_cheat_add_item()
     for _, userItem in pairs(Cheat:getUserItems()) do
         Cheat:testAssert("cheat_add_item bulk 3", userItem.amount == 10)
         Cheat:testAssert("cheat_add_item bulk 4", userItem.condition == 100)
-        Cheat:testAssert("cheat_add_item bulk 4", string.find(userItem.l1name, "arrow", 1, true))
+        Cheat:testAssert("cheat_add_item bulk 4", string.find(userItem.lname, "arrow", 1, true))
     end
 end
 
@@ -1575,12 +1646,12 @@ function Cheat:test_cheat_add_all_items()
     -- cheat_add_all_items without quest flag
     Cheat:removeAllItems()
     Cheat:testAssert("cheat_add_all_items no quest 1", Cheat:cheat_add_all_items())
-    Cheat:testAssertEquals("cheat_add_all_items no quest 2", Cheat:getInventoryItemCount(), 4521)
+    Cheat:testAssertEquals("cheat_add_all_items no quest 2", Cheat:getInventoryItemCount(), 4528)
 
     -- cheat_add_all_items with quest flag
     Cheat:removeAllItems()
     Cheat:testAssert("cheat_add_all_items quest 1", Cheat:cheat_add_all_items())
-    Cheat:testAssertEquals("cheat_add_all_items quest 2", Cheat:getInventoryItemCount(), 4521)
+    Cheat:testAssertEquals("cheat_add_all_items quest 2", Cheat:getInventoryItemCount(), 4528)
 end
 
 -- ============================================================================

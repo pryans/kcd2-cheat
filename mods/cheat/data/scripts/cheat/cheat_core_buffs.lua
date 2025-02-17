@@ -2,18 +2,7 @@
 -- helpers
 -- ============================================================================
 Cheat.g_buff_database = nil
-Cheat.g_buff_database_search_fields = { "buff_id", "buff_name_localized", "buff_name" }
-
-function Cheat:getLocalizedBuffName(buff)
-    local names = Cheat:getLocalizedNames(Cheat.g_localization_soul_database, buff.buff_ui_name)
-    local name = buff.buff_name
-    if names and names.field1 then
-        name = names.field1
-    elseif names and names.field2 then
-        name = names.field2
-    end
-    return name
-end
+Cheat.g_buff_database_search_fields = { "buff_id", "buff_lname", "buff_name" }
 
 function Cheat:initBuffDatabase()
     Cheat:logDebug("initBuffDatabase: Started...")
@@ -21,7 +10,7 @@ function Cheat:initBuffDatabase()
     Cheat.g_buff_database = {}
     for _, buff in pairs(Cheat:loadDatabase("buff")) do
         if not Cheat:startsWith(buff.buff_name, "perk_") then
-            buff.buff_name_localized = Cheat:getLocalizedBuffName(buff)
+            buff.buff_lname = Cheat:getLocalizedBuffName(buff)
             table.insert(Cheat.g_buff_database, buff)
         end
     end
@@ -47,17 +36,20 @@ function Cheat:getBuffDisplayText(buff)
     if not buff then
         return "nil"
     end
-    -- Create a console friendly version of the item.
+
     local data = {}
     for k, v in pairs(buff) do
-        if k ~= "buff_id" and k ~= "buff_name_localized" then
+        if k ~= "buff_id" and k ~= "buff_lname" then
             if not Cheat:isBlank(v) then
                 data[k] = v
             end
         end
     end
-    local name = Cheat:getLocalizedBuffName(buff)
-    return string.format("name=%s id=%s %s", tostring(buff.buff_name_localized), tostring(buff.buff_id), Cheat:serializeTable(data))
+
+    return string.format("name=%s id=%s %s",
+        Cheat:getLocalizedBuffName(buff) or "nil",
+        tostring(buff.buff_id),
+        Cheat:serializeTable(data))
 end
 
 -- ============================================================================
@@ -357,7 +349,7 @@ end
 -- test_core_buffs
 -- ============================================================================
 function Cheat:test_core_buffs()
-    Cheat:beginTest("test_core_buffs")
+    Cheat:beginTests("test_core_buffs")
 
     Cheat:testAssert("cheat_find_buffs", Cheat:proxy("cheat_find_buffs", "exact:potion_aqua_vitalis_4"))
     Cheat:testAssert("cheat_find_buffs", Cheat:proxy("cheat_find_buffs", "any:potion_aqua_vitalis_4"))
@@ -395,7 +387,7 @@ function Cheat:test_core_buffs()
     Cheat:testAssert("cheat_add_potion_buff 10", Cheat:proxy("cheat_add_potion_buff", "id:10"))
     Cheat:testAssert("cheat_remove_all_buffs", Cheat:proxy("cheat_remove_all_buffs"))
 
-    Cheat:endTest()
+    Cheat:endTests()
 end
 
 -- ============================================================================

@@ -1,134 +1,3 @@
--- GetEntities
--- GetEntitiesByClass
--- GetEntitiesInSphere
--- GetEntitiesInSphere(self:GetPos(), 50);
-
---"Localization/english_xml/text_ui_soul_def.xml"
---Cheat:soulNames = CryAction.LoadXML("Localization/english_xml/text_ui_soul_def.xml","Localization/english_xml/text_ui_soul.xml");
--- Cheat:logInfo("soul name localization table loaded [%s]", tostring(Cheat.soulNames))
---Cheat:print_methods(Cheat.soulNames)
---Cheat:logInfo("--")
-
--- System.GetEntitiesInSphere(player:GetPos(), range)
-
--- cheat_eval return #System.GetEntitiesByClass("Hare")
-
---[[
-[DEBUG] inventory:
-[DEBUG]   __this: userdata: 000001D4D879B618
-[DEBUG] actor:
-[DEBUG]   __this: userdata: 000000000007FFA4
-[DEBUG] id: userdata: 000000000007FFA4
-[DEBUG] __this: userdata: 000001D3265CFF00
-[DEBUG] PropertiesInstance:
-[DEBUG] AI:
-[DEBUG] class: NPC
-[DEBUG] soul:
-[DEBUG]   __ThisWUID: userdata: 0500000000000594
-[DEBUG] InitialPosition:
-[DEBUG]   y: 2019.41
-[DEBUG]   x: 1986.8
-[DEBUG]   z: 64.2633
-[DEBUG] human:
-[DEBUG]   __this: userdata: 000000000007FFA4
-[DEBUG] this:
-[DEBUG]   id: userdata: 0500000000000594
-[DEBUG]   context:
-[DEBUG]     animation:
-[DEBUG]   name: taboryUCesty_archery_urs
-[DEBUG]   currentSUBB:
-[DEBUG] Properties:
-[DEBUG]   LipSync:
-[DEBUG]     TransitionQueueSettings:
-[DEBUG]   Script:
-[DEBUG]   CharacterSounds:
-[DEBUG]   Rendering:
-
-data.foodName = XGenAIModule.GetEntityByWUID(data.animal):GetName()
-XGenAIModule.GetEntityByWUID(x.soul)
-data.UIName = XGenAIModule.GetEntityByWUID(data.soul).soul:GetNameStringId()
-text_ui_soul.xml
-Database.LoadTable("text_ui_soul");Database.GetTableInfo(tableName)
-#Database.LoadTable("soul");Cheat:log(tostring(Database.GetTableInfo("soul").LineCount))
-
-for _,x in pairs(System.GetEntitiesInSphere(player:GetPos(), 20)) do Cheat:log(Cheat:getEntityName(x)) end
-
-#local xml = require "xml"; Cheat:log(type(xml))
-
-#Cheat:log(System.LoadTextFile("Localization/text_ui_soul.xml"))
-
--- Get UI Name ID:
-for _,x in pairs(System.GetEntitiesInSphere(player:GetPos(), 20)) do if x.class=="NPC" then System.Log(x.soul:GetNameStringId()) end end
-ex:
-char_HAJNY_HRUSKA_uiName
-soul_ui_name_huntsman
-
--- Get Entity Name ID:
-for _,x in pairs(System.GetEntitiesInSphere(player:GetPos(), 20)) do if x.class=="NPC" then System.Log(x:GetAIName()) end end
-for _,x in pairs(System.GetEntitiesInSphere(player:GetPos(), 20)) do if x.class=="NPC" then System.Log(x:GetName()) end end
-for _,x in pairs(System.GetEntitiesInSphere(player:GetPos(), 20)) do if x.class=="NPC" then System.Log(x.this.name) end end
-for _,x in pairs(System.GetEntitiesInSphere(player:GetPos(), 20)) do if x.class=="NPC" then Cheat:log(EntityUtils.GetName(x)) end end
-ex:
-taboryUCesty_archery_urs
-taboryUCesty_archery_urs_son
-
--- Skald Character:
-<skald_character
-    age="3"
-    body_type="4"
-    description_string_name="char_HAJNY_HRUSKA_description"
-    gender="0"
-    history_string_name="char_HAJNY_HRUSKA_history"
-    image1="true"
-    image2="false"
-    image3="false"
-    image4="true"
-    master_role_name="EVENT_TABORY_LUKOSTRELBA_URS"
-    mortality_id="0"
-    owner="Jan Zeman"
-    physical_description_string_name="char_HAJNY_HRUSKA_physicalDescription"
-    skald_character_full_name_string_name="char_HAJNY_HRUSKA_fullName"
-    skald_character_name="char_HAJNY_HRUSKA"
-    streaming_string_name="char_HAJNY_HRUSKA_streaming"
-    ui_name_string_name="char_HAJNY_HRUSKA_uiName"
-    unique_assets="7"
-    voice_categories="generic christian"
-    voice_id="234" />
-]]
-
---[[
-function Cheat:GetEntityName(entity)
-    if (type(entity) == "userdata") then
-        local e = System.GetEntity(entity)
-        if (e) then
-            return e:GetName()
-        end
-    elseif (type(entity) == "table") then
-        return entity:GetName()
-    end
-    return ""
-end
-
-System.GetEntityByName(name)
-
-function EntityUtils.DumpEntities()
-    local ents = System.GetEntities()
-    System.Log("Entities dump")
-    for idx, e in pairs(ents) do
-        local pos = e:GetPos()
-        local ang = e:GetAngles()
-        System.Log("[" .. tostring(e.id) .. "]..name=" .. e:GetName() .. " clsid=" .. e.class .. format(" pos=%.03f,%.03f,%.03f", pos.x, pos.y, pos.z) ..
-            format(" ang=%.03f,%.03f,%.03f", ang.x, ang.y, ang.z))
-    end
-end
-
-function EntityUtils.Teleport(entityName, targetName)
-    local entity = System.GetEntityByName(entityName)
-    local target = System.GetEntityByName(targetName)
-    entity:SetWorldPos(target:GetWorldPos())
-end
-]]
-
 -- ============================================================================
 -- helpers
 -- ============================================================================
@@ -184,7 +53,6 @@ local SOUL_CLASS = {
     SHEEP_RAM = 34
 }
 
-Cheat.g_souls_by_name = {}
 Cheat.g_soul_category_database = {}
 Cheat.g_soul_category_keys = {}
 table.insert(Cheat.g_soul_category_keys, "Boar")
@@ -387,8 +255,6 @@ function Cheat:getEntityInfo(entity)
         return nil
     end
 
-    local names = Cheat:getLocalizedEntityNames(entity)
-
     -- socialClass = npcEntity.soul:GetSocialClass().Name,
     -- factionID = npcEntity.soul:GetFactionID(),
 
@@ -396,8 +262,7 @@ function Cheat:getEntityInfo(entity)
         id = Cheat:getEntityId(entity) or "?",
         class = Cheat:getEntityClass(entity) or "?",
         name = Cheat:getEntityName(entity) or "?",
-        l1name = names and names.field1 or "?",
-        l2name = names and names.field2 or "?",
+        lname = Cheat:getLocalizedEntityName(entity) or "?",
         loc = Cheat:serializeTable(entity:GetWorldPos()),
         health = Cheat:getEntityHealth(entity)
     }
@@ -426,24 +291,27 @@ function Cheat:findEntities(searchOperation, range, classes)
         if not classes or Cheat:isClasses(entity, classes) then
             if searchKeyLower then
                 local names = {}
-                local localizedNames = Cheat:getLocalizedEntityNames(entity)
-                if localizedNames then
-                    table.insert(names, localizedNames.field1)
-                    table.insert(names, localizedNames.field2)
-                else
-                    local entityName = Cheat:getEntityName(entity)
-                    if entityName then
-                        table.insert(names, entityName)
-                    end
+
+                local lname = Cheat:getLocalizedEntityName(entity)
+                if lname then
+                    table.insert(names, lname)
+                end
+
+                local entityName = Cheat:getEntityName(entity)
+                if entityName and entityName ~= lname then
+                    table.insert(names, entityName)
                 end
 
                 for _, name in ipairs(names) do
                     local nameLower = Cheat:toLower(Cheat:trimToNil(name))
-                    local found = (searchOperation.exact and nameLower == searchKeyLower) or (not searchOperation.exact and string.find(nameLower, searchKeyLower, 1, true))
-                    if found then
-                        table.insert(matchingEntities, entity)
-                        Cheat:logDebug("Found: %s", Cheat:getEntityDisplayText(entity))
-                        break
+                    if nameLower then
+                        local foundExact = searchOperation.exact and nameLower == searchKeyLower
+                        local foundAny = not searchOperation.exact and string.find(nameLower, searchKeyLower, 1, true)
+                        if foundExact or foundAny then
+                            table.insert(matchingEntities, entity)
+                            Cheat:logDebug("Found: %s", Cheat:getEntityDisplayText(entity))
+                            break
+                        end
                     end
                 end
             else
@@ -590,15 +458,12 @@ function Cheat:getEntityInfoDisplayText(entityInfo)
         return "nil"
     end
 
-    local name = entityInfo.name
-    if entityInfo.l1name then
-        name = entityInfo.l1name
-    end
-    if entityInfo.l2name then
-        name = entityInfo.l2name
-    end
-
-    return string.format("name=%s class=%s loc=%s health=%s", tostring(name), tostring(entityInfo.class), tostring(entityInfo.loc), tostring(entityInfo.health))
+    return string.format("name=%s () class=%s loc=%s health=%s",
+        tostring(entityInfo.lname),
+        tostring(entityInfo.name),
+        tostring(entityInfo.class),
+        tostring(entityInfo.loc),
+        tostring(entityInfo.health))
 end
 
 function Cheat:getEntityDisplayText(entity)

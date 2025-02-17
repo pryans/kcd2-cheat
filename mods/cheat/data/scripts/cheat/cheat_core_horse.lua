@@ -33,6 +33,7 @@ function Cheat:getPlayerHorse()
     return XGenAIModule.GetEntityByWUID(horseWuid)
 end
 
+--[[
 function Cheat:findHorses(searchKey)
     local searchKeyUpper = Cheat:toUpper(searchKey)
     local horsesData = {}
@@ -74,6 +75,7 @@ function Cheat:findHorses(searchKey)
     Cheat:logDebug("Returning horse [%s].", tostring(horse_name))
     return horse_name
 end
+]]
 
 function Cheat:logHorseInfo(horse)
     if not horse then
@@ -81,7 +83,7 @@ function Cheat:logHorseInfo(horse)
         return
     end
 
-    local horseName = Cheat:getLocalizedName(horse)
+    local horseName = Cheat:getLocalizedEntityName(horse)
     local playerHorse = Cheat:getPlayerHorse()
     local isPlayerHorse = playerHorse and playerHorse.id == horse.id
     local info = {
@@ -140,7 +142,7 @@ function Cheat:cheat_horse_own(c)
     end
 
     player.player:SetPlayerHorse(target.id)
-    Cheat:logInfo("Set player horse to [%s].", Cheat:getLocalizedName(target))
+    Cheat:logInfo("Set player horse to [%s].", Cheat:getLocalizedEntityName(target))
     Cheat:logHorseInfo(target)
     return true
 end
@@ -180,7 +182,7 @@ function Cheat:cheat_horse_wash()
     end
 
     target.actor:WashDirtAndBlood(1, 1)
-    Cheat:logInfo("Horse %s all clean!", Cheat:getLocalizedName(target))
+    Cheat:logInfo("Horse %s all clean!", Cheat:getLocalizedEntityName(target))
     return true
 end
 
@@ -219,7 +221,7 @@ function Cheat:cheat_horse_new()
 
     local horse = Cheat:proxy("cheat_spawn", "id:6 radius:2 count:1")[1]
     player.player:SetPlayerHorse(horse.id)
-    Cheat:logInfo("You've got a brand new horse.", Cheat:getLocalizedName(horse))
+    Cheat:logInfo("You've got a brand new horse.", Cheat:getLocalizedEntityName(horse))
     return true
 end
 
