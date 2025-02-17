@@ -54,14 +54,15 @@ function Cheat:onInit()
     Cheat:loadFile("scripts/cheat/cheat_core_time.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_weather.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_storage.lua")
+    Cheat:loadFile("scripts/cheat/cheat_core_teleport.lua")
+    Cheat:loadFile("scripts/cheat/cheat_core_horses.lua")
 
     -- todo next
-    Cheat:loadFile("scripts/cheat/cheat_core_teleport.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_perks.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_skills.lua")
 
     --Cheat:loadFile("scripts/cheat/cheat_core_factions.lua")
-    --Cheat:loadFile("scripts/cheat/cheat_core_horses.lua")
+
     --Cheat:loadFile("scripts/cheat/cheat_core_merchants.lua")
     --Cheat:loadFile("scripts/cheat/cheat_core_physics.lua")
     --Cheat:loadFile("scripts/cheat/cheat_core_quests.lua")
