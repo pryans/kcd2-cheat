@@ -360,7 +360,6 @@ function Cheat:getEntityHealth(entity)
     end
 end
 
--- #Cheat:getEntityInfo(Cheat:getTargetedEntity())
 function Cheat:getTargetedEntity()
     local from = player:GetPos()
     from.z = from.z + 1.615
@@ -403,7 +402,7 @@ function Cheat:getEntityInfo(entity)
         health = Cheat:getEntityHealth(entity)
     }
 
-    Cheat:tprint(entity)
+    --Cheat:tprint(entity)
 
     Cheat:logDebug("EntityInfo: %s", Cheat:serializeTable(entityInfo))
     return entityInfo
@@ -557,6 +556,8 @@ function Cheat:spawnEntity(entityName, entityClass, entitySoulId, avoidSpawnCent
     else
         Cheat:logError("Failed to spawn entity: %s", Cheat:serializeTable(params))
     end
+
+    return entity
 end
 
 function Cheat:spawn()
@@ -607,35 +608,26 @@ end
 -- ============================================================================
 -- cheat_find_npc
 -- ============================================================================
-Cheat.cheat_find_npc_args = {
-    any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
-    exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
-    radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The search radius around player.") end,
-}
-Cheat:createCommandLegacy("cheat_find_npc", "Cheat:cheat_find_npc(%line)", Cheat.cheat_find_npc_args,
+Cheat:createCommand("cheat_find_npc", {
+        any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+        exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
+        radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The search radius around player.") end,
+    },
     "Finds NPCs loaded into the world.",
     "Find any NPC with 'hunt' in name", "cheat_find_npc any:hunt",
     "Find NPC with name exact matching 'Bara'", "cheat_find_npc exact:bara",
     "Find all NPCs near player.", "cheat_find_npc radius:5")
-function Cheat:cheat_find_npc(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_find_npc_args, "cheat_find_npc")
-    local any, anyErr = Cheat:argsGet(args, "any")
-    local exact, exactErr = Cheat:argsGet(args, "exact")
-    local radius, radiusErr = Cheat:argsGet(args, "radius")
-    if anyErr or exactErr or radiusErr then
-        return false, nil
-    end
-
+function Cheat:cheat_find_npc(c)
     local searchOperation = nil
-    if exact then
-        searchOperation = { exact = true, searchKey = exact }
-    elseif any then
-        searchOperation = { exact = false, searchKey = any }
+    if c.exact then
+        searchOperation = { exact = true, searchKey = c.exact }
+    elseif c.any then
+        searchOperation = { exact = false, searchKey = c.any }
     end
 
-    local npcs = Cheat:findNpcs(searchOperation, radius)
+    local npcs = Cheat:findNpcs(searchOperation, c.radius)
     if not npcs or #npcs == 0 then
-        Cheat:logWarn("No NPCs matching [%s] found in radius [%s].", Cheat:serializeTable(searchOperation), tostring(radius))
+        Cheat:logWarn("No NPCs matching [%s] found in radius [%s].", Cheat:serializeTable(searchOperation), tostring(c.radius))
         return false, nil
     end
 
@@ -648,35 +640,26 @@ end
 -- ============================================================================
 -- cheat_revive_npc
 -- ============================================================================
-Cheat.cheat_revive_npc_args = {
-    any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
-    exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
-    radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The resurrection radius around player. Default 5.") end,
-}
-Cheat:createCommandLegacy("cheat_revive_npc", "Cheat:cheat_revive_npc(%line)", Cheat.cheat_revive_npc_args,
+Cheat:createCommand("cheat_revive_npc", {
+        any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+        exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
+        radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The resurrection radius around player. Default 5.") end,
+    },
     "(Does not work yet) Revives dead NPCs by name or within the given radius of the player.",
     "Revive everything.", "cheat_revive_npc radius:200",
     "Revive Father Godwin.", "cheat_revive_npc exact:bara",
     "Revives all bandits near the player.", "cheat_revive_npc any:bandit radius:10")
-function Cheat:cheat_revive_npc(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_revive_npc_args, "cheat_revive_npc")
-    local any, anyErr = Cheat:argsGet(args, "any")
-    local exact, exactErr = Cheat:argsGet(args, "exact")
-    local radius, radiusErr = Cheat:argsGet(args, "radius")
-    if anyErr or exactErr or radiusErr then
-        return false, nil
-    end
-
+function Cheat:cheat_revive_npc(c)
     local searchOperation = nil
-    if exact then
-        searchOperation = { exact = true, searchKey = exact }
-    elseif any then
-        searchOperation = { exact = false, searchKey = any }
+    if c.exact then
+        searchOperation = { exact = true, searchKey = c.exact }
+    elseif c.any then
+        searchOperation = { exact = false, searchKey = c.any }
     end
 
-    local npcs = Cheat:findNpcs(searchOperation, radius)
+    local npcs = Cheat:findNpcs(searchOperation, c.radius)
     if not npcs or #npcs == 0 then
-        Cheat:logWarn("No NPCs matching [%s] found in radius [%s].", Cheat:serializeTable(searchOperation), tostring(radius))
+        Cheat:logWarn("No NPCs matching [%s] found in radius [%s].", Cheat:serializeTable(searchOperation), tostring(c.radius))
         return false, nil
     end
 
@@ -705,10 +688,11 @@ end
 -- ============================================================================
 -- cheat_target
 -- ============================================================================
-Cheat:createCommandLegacy("cheat_target", "Cheat:cheat_target()", nil, "shows information about your current target.")
+Cheat:createCommand("cheat_target", nil, "shows information about your current target.")
 function Cheat:cheat_target()
     local entity = Cheat:getTargetedEntity()
     if entity then
+        Cheat:tprint(entity)
         Cheat:logInfo("Targeted: %s", Cheat:getEntityDisplayText(entity))
     else
         Cheat:logWarn("You are not targeting anything.")
@@ -718,7 +702,7 @@ end
 -- ============================================================================
 -- cheat_kill
 -- ============================================================================
-Cheat:createCommandLegacy("cheat_kill", "Cheat:cheat_kill()", nil, "Kills the player's current target.")
+Cheat:createCommand("cheat_kill", nil, "Kills the player's current target.")
 function Cheat:cheat_kill()
     local entity = Cheat:getTargetedEntity()
     if entity then
@@ -738,35 +722,26 @@ end
 -- ============================================================================
 -- cheat_mass_kill
 -- ============================================================================
-Cheat.cheat_kill_npc_args = {
-    any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
-    exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
-    radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 10, showHelp, "The kill radius around player. Default 10.") end,
-}
-Cheat:createCommandLegacy("cheat_mass_kill", "Cheat:cheat_mass_kill(%line)", Cheat.cheat_kill_npc_args,
+Cheat:createCommand("cheat_mass_kill", {
+        any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+        exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
+        radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 10, showHelp, "The kill radius around player. Default 10.") end,
+    },
     "Kills all the killable entities within the given radius of the player.",
     "Kill everything within 200 units of player", "cheat_mass_kill radius:200",
     "Kill Bara", "cheat_mass_kill exact:bara",
     "Kills all bandits near the player", "cheat_mass_kill any:bandit radius:20")
-function Cheat:cheat_mass_kill(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_kill_npc_args, "cheat_mass_kill")
-    local any, anyErr = Cheat:argsGet(args, "any")
-    local exact, exactErr = Cheat:argsGet(args, "exact")
-    local radius, radiusErr = Cheat:argsGet(args, "radius")
-    if anyErr or exactErr or radiusErr then
-        return false, nil
-    end
-
+function Cheat:cheat_mass_kill(c)
     local searchOperation = nil
-    if exact then
-        searchOperation = { exact = true, searchKey = exact }
-    elseif any then
-        searchOperation = { exact = false, searchKey = any }
+    if c.exact then
+        searchOperation = { exact = true, searchKey = c.exact }
+    elseif c.any then
+        searchOperation = { exact = false, searchKey = c.any }
     end
 
-    local entities = Cheat:findEntities(searchOperation, radius)
+    local entities = Cheat:findEntities(searchOperation, c.radius)
     if not entities or #entities == 0 then
-        Cheat:logWarn("No entities matching [%s] found in radius [%s].", Cheat:serializeTable(searchOperation), tostring(radius))
+        Cheat:logWarn("No entities matching [%s] found in radius [%s].", Cheat:serializeTable(searchOperation), tostring(c.radius))
         return false, nil
     end
 
@@ -782,30 +757,20 @@ end
 -- ============================================================================
 -- cheat_spawn
 -- ============================================================================
-Cheat.cheat_spawn_args = {
-    id = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "The spawn type ID.") end,
-    count = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "Number of things to spawn. Default 1.") end,
-    radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 10, showHelp, "The spawn radius around the player. Default 10.") end
-}
-Cheat:createCommandLegacy("cheat_spawn", "Cheat:cheat_spawn(%line)", Cheat.cheat_spawn_args,
+Cheat:createCommand("cheat_spawn", {
+        id = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "The spawn type ID.") end,
+        count = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "Number of things to spawn. Default 1.") end,
+        radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 10, showHelp, "The spawn radius around the player. Default 10.") end
+    },
     "(Working in progress) Spawns entities. Enter the ID (number) from this list:\n" .. Cheat:formatArrayAsList(Cheat.g_soul_category_keys, 3),
     "Spawn 10 bandits", "cheat_spawn id:pig count:10")
-function Cheat:cheat_spawn(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_spawn_args, "cheat_spawn")
-    local id, idErr = Cheat:argsGet(args, "id")
-    local count, countErr = Cheat:argsGet(args, "count")
-    local radius, radiusErr = Cheat:argsGet(args, "radius")
-
-    if idErr or countErr or radiusErr then
+function Cheat:cheat_spawn(c)
+    if not Cheat.g_soul_category_keys[c.id] then
+        Cheat:logError("Spawn type ID [%s] does not exist.", tostring(c.id))
         return false
     end
 
-    if not Cheat.g_soul_category_keys[id] then
-        Cheat:logError("Spawn type ID [%s] does not exist.", tostring(id))
-        return false
-    end
-
-    local soulKey = Cheat.g_soul_category_keys[id]
+    local soulKey = Cheat.g_soul_category_keys[c.id]
     local soulsInfo = Cheat.g_soul_category_database[soulKey]
 
     if not soulsInfo then
@@ -814,17 +779,19 @@ function Cheat:cheat_spawn(line)
     end
 
     local soul = soulsInfo.souls[math.random(1, #soulsInfo.souls)]
-
-    for _ = 1, Cheat:max(count, 1) do
+    local spawned = {}
+    for _ = 1, Cheat:max(c.count, 1) do
         local entityName       = nil                   -- auto generate
         local entityClass      = soulsInfo.entityClass -- Lua class name: 'NCP', 'Horse', etc
         local entitySoul       = soul.soul_id          -- pick a random soul
         local avoidSpawnCenter = true                  -- don't spawn on top of player
         local spawnCenter      = player:GetWorldPos()  -- center of spawn area
-        local spawnRadius      = radius                -- size of spawn area
-        local spawnNear        = 2                     -- how far from the center we need to be
-        Cheat:spawnEntity(entityName, entityClass, entitySoul, avoidSpawnCenter, spawnCenter, spawnRadius, spawnNear)
+        local spawnRadius      = c.radius              -- size of spawn area
+        local spawnNear        = 0.2                   -- how far from the center we need to be
+        local entity           = Cheat:spawnEntity(entityName, entityClass, entitySoul, avoidSpawnCenter, spawnCenter, spawnRadius, spawnNear)
+        table.insert(spawned, entity)
     end
+    return spawned
 end
 
 -- ============================================================================
