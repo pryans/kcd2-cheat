@@ -39,10 +39,10 @@ function Cheat:onInit()
 
     Cheat:loadFile("scripts/cheat/cheat_util.lua")
     Cheat:loadFile("scripts/cheat/cheat_args.lua")
-    Cheat:loadFile("scripts/cheat/cheat_localization.lua")
     Cheat:loadFile("scripts/cheat/cheat_debug.lua")
-    Cheat:loadFile("scripts/cheat/cheat_stubs.lua")
     Cheat:loadFile("scripts/cheat/cheat_console.lua")
+
+    Cheat:loadFile("scripts/cheat/cheat_localization.lua")
 
     Cheat:loadFile("scripts/cheat/cheat_core_buffs.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_items.lua")
@@ -94,6 +94,8 @@ function Cheat:onGameplayStarted()
         Cheat:beginTestSuite(false)
 
         Cheat:test_args()
+        Cheat:test_localization()
+
         Cheat:test_core_player()
         Cheat:test_core_buffs()
         Cheat:test_core_skills()
