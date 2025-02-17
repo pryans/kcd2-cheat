@@ -1,8 +1,6 @@
 Cheat = {}
 Cheat.version = "__VERSION__"
-Cheat.isCommandLineBuild = false
-Cheat.devHome = "E:/KCD2Modding/kcd2-cheat"
-Cheat.commands = {}
+Cheat.runTests = "__RUNTESTS__"
 
 function Cheat:loadFile(file)
     System.LogAlways("Loading file [" .. tostring(file) .. "] ...")
@@ -37,7 +35,8 @@ function Cheat:autoexec()
 end
 
 function Cheat:onInit()
-    --System.LogAlways("Cheat:OnInit")
+    System.LogAlways("Cheat:OnInit")
+
     Cheat:loadFile("scripts/cheat/cheat_util.lua")
     Cheat:loadFile("scripts/cheat/cheat_args.lua")
     Cheat:loadFile("scripts/cheat/cheat_localization.lua")
@@ -62,25 +61,11 @@ function Cheat:onInit()
     Cheat:loadFile("scripts/cheat/cheat_core_skills.lua")
 
     --Cheat:loadFile("scripts/cheat/cheat_core_factions.lua")
-
     --Cheat:loadFile("scripts/cheat/cheat_core_merchants.lua")
     --Cheat:loadFile("scripts/cheat/cheat_core_physics.lua")
     --Cheat:loadFile("scripts/cheat/cheat_core_quests.lua")
 
     Cheat:logInfo("Loaded KCD2 Cheat version %s", Cheat.version)
-
-    --[[
-
-    Cheat:test_core_player()
-    Cheat:test_core_buffs()
-    Cheat:test_core_skills()
-    Cheat:test_core_items()
-    Cheat:test_core_time()
-    Cheat:test_core_weather()
-    Cheat:test_core_picking()
-    Cheat:test_core_storage()
-
-    ]]
 end
 
 function Cheat:onSystemStarted()
@@ -104,8 +89,25 @@ end
 
 function Cheat:onGameplayStarted()
     Cheat:logDebug("Cheat:onGameplayStarted")
-    Cheat:cheat_timer(true)
-    Cheat:autoexec()
+
+    if Cheat.runTests then
+        Cheat:beginTestSuite(false)
+
+        Cheat:test_args()
+        Cheat:test_core_player()
+        Cheat:test_core_buffs()
+        Cheat:test_core_skills()
+        Cheat:test_core_items()
+        Cheat:test_core_time()
+        Cheat:test_core_weather()
+        Cheat:test_core_picking()
+        Cheat:test_core_storage()
+
+        Cheat:endTestSuite()
+    else
+        Cheat:cheat_timer(true)
+        Cheat:autoexec()
+    end
 end
 
 function Cheat:onGamePause()
