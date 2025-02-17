@@ -55,7 +55,7 @@ function Cheat:onInit()
     Cheat:loadFile("scripts/cheat/cheat_core_weather.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_storage.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_teleport.lua")
-    Cheat:loadFile("scripts/cheat/cheat_core_horses.lua")
+    Cheat:loadFile("scripts/cheat/cheat_core_horse.lua")
 
     -- todo next
     Cheat:loadFile("scripts/cheat/cheat_core_perks.lua")

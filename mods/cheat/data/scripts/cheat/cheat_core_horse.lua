@@ -1,6 +1,6 @@
 --[[
 
--- take ownership of a horse?
+-- take ownership of a horse
 player.player:SetPlayerHorse(Cheat:getTargetedEntity().id)
 
 -- userdata:
@@ -197,7 +197,7 @@ function Cheat:cheat_horse_info()
     end
 
     if not target then
-        Cheat:logWarn("Nothing to show, target a horse or get your own.")
+        Cheat:logWarn("Nothing to know, target a horse or get your own.")
         return false
     end
 
@@ -237,6 +237,28 @@ function Cheat:cheat_horse_release()
 
     player.player:SetPlayerHorse(__null)
     Cheat:logInfo("Your horse has been released.")
+    return true
+end
+
+-- ============================================================================
+-- cheat_horse_inventory
+-- ============================================================================
+Cheat:createCommand("cheat_horse_inventory", nil,
+    "Opens inventory of targeted or owned horse.",
+    "Open horse inventory", "cheat_horse_inventory")
+function Cheat:cheat_horse_inventory()
+    local target = Cheat:getTargetedEntity()
+    if not target or target.class ~= "Horse" then
+        target = Cheat:getPlayerHorse()
+    end
+
+    if not target then
+        Cheat:logWarn("Target a horse or get your own.")
+        return false
+    end
+
+    target.actor:RequestItemExchange(player.id)
+    Cheat:logInfo("Trading with horse started.")
     return true
 end
 
