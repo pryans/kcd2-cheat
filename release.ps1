@@ -1,7 +1,7 @@
 $MOD_NAME = "cheat"
 $MOD_DESC = "KCD2 Cheat Mod https://www.nexusmods.com/kingdomcomedeliverance2/mods/114"
 $MOD_AUTHOR = "Othiden"
-$MOD_VERSION = "2.14"
+$MOD_VERSION = "2.15"
 $BUILD_DIR = "build"
 $PROPERTIES_FILE = "release.properties"
 $DEFAULT_KCD_MODS_DIR = "E:/Games/SteamLibrary/steamapps/common/KingdomComeDeliverance2/Mods"
