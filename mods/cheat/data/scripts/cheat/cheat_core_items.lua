@@ -54,12 +54,12 @@ Cheat.g_quality2_item_1_id = "0a218fa9-58c7-4696-b5a3-7954e639dd9e"
 Cheat.g_quality3_item_1_id = "eda316a4-59d9-49ae-b67b-f6837789bd0c"
 Cheat.g_quality4_item_1_id = "9e31a288-7de0-4c0d-81cd-5cf00548d2d5"
 
-Cheat.g_item_database = {}
+Cheat.g_item_database = nil
+Cheat.g_item_database_lookup = nil
 Cheat.g_item_database_search_fields = { "id", "lname", "name" }
 Cheat.g_item_database_skip_tags = { Image = true, DocumentContent = true, Phase = true, ItemClasses = true, NPCTool = true, database = true }
 Cheat.g_item_database_errors = 0
 Cheat.g_item_database_aliases = {}
-Cheat.g_item_lookup = {}
 
 Cheat.g_item_category_map = {
     MiscItem = 0,      --keys,flowers,skull,etc
@@ -149,6 +149,9 @@ Cheat.g_item_health_quality_ranges[4] = {
 }
 
 function Cheat:initItemDatabase()
+    Cheat.g_item_database = {}
+    Cheat.g_item_database_lookup = {}
+
     local p_func = function (tag, attributes)
         if not Cheat.g_item_database_skip_tags[tag] then
             if tag and attributes and attributes["Id"] and attributes["Name"] then
@@ -156,14 +159,14 @@ function Cheat:initItemDatabase()
                 local item = Cheat:lowercaseTableKeys(attributes)
 
                 -- ensure we haven't loaded this iteam already
-                if not Cheat.g_item_lookup[item.id] then
+                if not Cheat.g_item_database_lookup[item.id] then
                     local category_id = Cheat.g_item_category_map[tag]
                     if category_id then
                         item["category_name"] = tag
                         item["category_id"] = category_id
                         table.insert(Cheat.g_item_database, item)
                         --Cheat:logDebug("Adding item: %s:: %s", tag, Cheat:serializeTable(item))
-                        Cheat.g_item_lookup[item.id] = item
+                        Cheat.g_item_database_lookup[item.id] = item
                         return true
                     else
                         Cheat:logError("Item id [%s] has no category_id for [%s]", item.id, tag)
@@ -208,7 +211,7 @@ function Cheat:initItemDatabase()
                 UIName="ui_nm_huntingSwordBasic" />
         ]]
         if item.category_id == Cheat.g_item_category_map.ItemAlias then
-            local realItem = Cheat.g_item_lookup[item.sourceitemid] -- find real item
+            local realItem = Cheat.g_item_database_lookup[item.sourceitemid] -- find real item
             if realItem then
                 -- copy all keys from realItem to item alias table if the key doesn't exist on the alias
                 for k, v in pairs(realItem) do
@@ -344,7 +347,7 @@ end
 ---@param itemId string Item ID
 ---@return table|nil item
 function Cheat:getItem(itemId)
-    return Cheat.g_item_lookup[itemId]
+    return Cheat.g_item_database_lookup[itemId]
 end
 
 ---addItemByName
@@ -1574,7 +1577,7 @@ function Cheat:test_cheat_repair_gear()
 
     -- repair and alias weapon
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_repair_gear alias 28.1", Cheat.g_item_lookup["b867dd0e-1bfe-40e9-b114-4b126a3ff1b0"].wasAlias)
+    Cheat:testAssert("cheat_repair_gear alias 28.1", Cheat.g_item_database_lookup["b867dd0e-1bfe-40e9-b114-4b126a3ff1b0"].wasAlias)
     Cheat:testAssert("cheat_repair_gear alias 28.1", Cheat:cheat_add_item("exact:b867dd0e-1bfe-40e9-b114-4b126a3ff1b0 condition:50"))
     Cheat:testAssert("cheat_repair_gear alias 28.2", Cheat:getUserItem("b867dd0e-1bfe-40e9-b114-4b126a3ff1b0", 1, 50))
     Cheat:testAssert("cheat_repair_gear alias 28.3", Cheat:cheat_repair_gear("condition:100"))

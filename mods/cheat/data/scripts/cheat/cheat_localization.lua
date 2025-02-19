@@ -5,6 +5,14 @@ Cheat.g_localization_enabled = true
 
 -- ============================================================================
 -- database
+-- localization files have 3 columns/cells:
+--      1=lookup key(ui name)
+--      2=translators reference field? (l1name)
+--      3=the target language (l2name)
+--
+-- testing
+-- 1. set the lanuge to use for pak files with a console command: g_language = german
+-- 2. reload the cheat databases to fields can be relocalized: #Cheat:loadDatabases()
 -- ============================================================================
 Cheat.g_localization_soul_database = nil
 Cheat.g_localization_item_database = nil
@@ -151,10 +159,10 @@ function Cheat:getLocalizedSoulName(soul)
         local lnames = Cheat:findLocalizedNames({ Cheat.g_localization_soul_database }, { soul:GetNameStringId() })
 
         if lnames then
-            if lnames.l1name then
-                lname = lnames.l1name
-            elseif lnames.l2name then
+            if lnames.l2name then
                 lname = lnames.l2name
+            elseif lnames.l1name then
+                lname = lnames.l1name
             end
         end
     end
@@ -249,10 +257,10 @@ function Cheat:getLocalizedBuffName(buff)
         local lnames = Cheat:findLocalizedNames({ Cheat.g_localization_soul_database }, keys)
 
         if lnames then
-            if lnames.l1name then
-                lname = lnames.l1name
-            elseif lnames.l2name then
+            if lnames.l2name then
                 lname = lnames.l2name
+            elseif lnames.l1name then
+                lname = lnames.l1name
             end
         end
     end
@@ -281,10 +289,10 @@ function Cheat:getLocalizedPerkName(perk)
         local lnames = Cheat:findLocalizedNames({ Cheat.g_localization_soul_database }, keys)
 
         if lnames then
-            if lnames.l1name then
-                lname = lnames.l1name
-            elseif lnames.l2name then
+            if lnames.l2name then
                 lname = lnames.l2name
+            elseif lnames.l1name then
+                lname = lnames.l1name
             end
         end
     end

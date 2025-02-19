@@ -53,25 +53,8 @@ local SOUL_CLASS = {
     SHEEP_RAM = 34
 }
 
-Cheat.g_soul_category_database = {}
-Cheat.g_soul_category_keys = {}
-table.insert(Cheat.g_soul_category_keys, "Boar")
-table.insert(Cheat.g_soul_category_keys, "Pig")
-table.insert(Cheat.g_soul_category_keys, "Bull")
-table.insert(Cheat.g_soul_category_keys, "Cow")
-table.insert(Cheat.g_soul_category_keys, "Hare")
-table.insert(Cheat.g_soul_category_keys, "Horse")
-table.insert(Cheat.g_soul_category_keys, "Men")
-table.insert(Cheat.g_soul_category_keys, "Women")
-table.insert(Cheat.g_soul_category_keys, "Red Doe")
-table.insert(Cheat.g_soul_category_keys, "Roe Doe")
-table.insert(Cheat.g_soul_category_keys, "Red Stag")
-table.insert(Cheat.g_soul_category_keys, "Roe Buck")
-table.insert(Cheat.g_soul_category_keys, "Sheep")
-table.insert(Cheat.g_soul_category_keys, "Ram")
-table.insert(Cheat.g_soul_category_keys, "Wild Dog")
-table.insert(Cheat.g_soul_category_keys, "Dog")
-table.insert(Cheat.g_soul_category_keys, "Wolf")
+Cheat.g_soul_category_database = nil
+Cheat.g_soul_category_keys = nil
 
 function Cheat:addSoulToCategory(soulKey, entityClass, soul)
     -- entityClass is the name of the Lua class to use?
@@ -86,6 +69,26 @@ end
 
 function Cheat:initSoulsDatabase()
     Cheat:logDebug("initSoulsDatabase: Started...")
+
+    Cheat.g_soul_category_database = {}
+    Cheat.g_soul_category_keys = {}
+    table.insert(Cheat.g_soul_category_keys, "Boar")
+    table.insert(Cheat.g_soul_category_keys, "Pig")
+    table.insert(Cheat.g_soul_category_keys, "Bull")
+    table.insert(Cheat.g_soul_category_keys, "Cow")
+    table.insert(Cheat.g_soul_category_keys, "Hare")
+    table.insert(Cheat.g_soul_category_keys, "Horse")
+    table.insert(Cheat.g_soul_category_keys, "Men")
+    table.insert(Cheat.g_soul_category_keys, "Women")
+    table.insert(Cheat.g_soul_category_keys, "Red Doe")
+    table.insert(Cheat.g_soul_category_keys, "Roe Doe")
+    table.insert(Cheat.g_soul_category_keys, "Red Stag")
+    table.insert(Cheat.g_soul_category_keys, "Roe Buck")
+    table.insert(Cheat.g_soul_category_keys, "Sheep")
+    table.insert(Cheat.g_soul_category_keys, "Ram")
+    table.insert(Cheat.g_soul_category_keys, "Wild Dog")
+    table.insert(Cheat.g_soul_category_keys, "Dog")
+    table.insert(Cheat.g_soul_category_keys, "Wolf")
 
     local souls = Cheat:loadDatabase("soul")
 

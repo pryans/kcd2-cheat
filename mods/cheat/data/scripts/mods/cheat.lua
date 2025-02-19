@@ -68,9 +68,7 @@ function Cheat:onInit()
     Cheat:logInfo("Loaded KCD2 Cheat version %s", Cheat.version)
 end
 
-function Cheat:onSystemStarted()
-    Cheat:logDebug("Cheat:onSystemStarted")
-
+function Cheat:loadDatabases()
     Cheat:initLocalizationDatabase()
 
     -- these databases use the localization database
@@ -79,6 +77,30 @@ function Cheat:onSystemStarted()
     Cheat:initPerkDatabase()
     Cheat:initSkillDatabase()
     Cheat:initItemDatabase()
+end
+
+function Cheat:runTestSuite()
+    Cheat:beginTestSuite(false)
+
+    Cheat:test_args()
+    Cheat:test_localization()
+
+    Cheat:test_core_player()
+    Cheat:test_core_buffs()
+    Cheat:test_core_perks()
+    Cheat:test_core_skills()
+    Cheat:test_core_items()
+    Cheat:test_core_time()
+    Cheat:test_core_weather()
+    Cheat:test_core_picking()
+    Cheat:test_core_storage()
+
+    Cheat:endTestSuite()
+end
+
+function Cheat:onSystemStarted()
+    Cheat:logDebug("Cheat:onSystemStarted")
+    Cheat:loadDatabases()
 end
 
 function Cheat:onQuickLoadingStart()
@@ -93,22 +115,7 @@ function Cheat:onGameplayStarted()
     Cheat:logDebug("Cheat:onGameplayStarted")
 
     if Cheat.runTests then
-        Cheat:beginTestSuite(false)
-
-        Cheat:test_args()
-        Cheat:test_localization()
-
-        Cheat:test_core_player()
-        Cheat:test_core_buffs()
-        Cheat:test_core_perks()
-        Cheat:test_core_skills()
-        Cheat:test_core_items()
-        Cheat:test_core_time()
-        Cheat:test_core_weather()
-        Cheat:test_core_picking()
-        Cheat:test_core_storage()
-
-        Cheat:endTestSuite()
+        Cheat:runTestSuite()
     else
         Cheat:cheat_timer(true)
         Cheat:autoexec()
