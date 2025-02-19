@@ -770,6 +770,7 @@ function Cheat:endTests()
             tostring(Cheat.g_cheat_test_info.fail),
             tostring(Cheat.g_cheat_test_info.pass))
 
+        Cheat:log(Cheat.g_cheat_test_info.result)
         for _, message in ipairs(Cheat.g_cheat_test_info.failures) do
             Cheat:log(message)
         end
@@ -778,9 +779,9 @@ function Cheat:endTests()
             tostring(Cheat.g_cheat_test_info.name),
             tostring(Cheat.g_cheat_test_info.fail),
             tostring(Cheat.g_cheat_test_info.pass))
+        Cheat:log(Cheat.g_cheat_test_info.result)
     end
 
-    Cheat:log(Cheat.g_cheat_test_info.result)
     Cheat.g_cheat_test_info = nil
 end
 
