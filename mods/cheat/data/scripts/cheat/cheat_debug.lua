@@ -150,7 +150,7 @@ end
 -- #dump(x)
 ---@diagnostic disable-next-line: lowercase-global
 function dump(value)
-    if not value then
+    if value == nil then
         Cheat:logDebug("nil")
     elseif type(value) == "table" then
         local count = 0
