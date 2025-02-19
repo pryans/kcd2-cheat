@@ -87,9 +87,6 @@ Cheat.g_item_category_map = {
     ItemAlias = 99
 }
 
-Cheat.g_player_data_m = "userdata: 050000000000024E" --male?
-Cheat.g_player_data_f = "userdata: 050000000000024E" --female? don't know if you can play as a woman in KCD2 yet
-
 Cheat.g_removestolen_cat_ids = Cheat:createLookupTable(0, 1, 2, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 27, 29)
 Cheat.g_ownstolen_cat_ids = Cheat:createLookupTable(0, 1, 2, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 27, 29)
 Cheat.g_repairall_cat_ids = Cheat:createLookupTable(
@@ -358,7 +355,9 @@ end
 ---@param quest boolean
 ---@param notify boolean
 ---@param logSuccess boolean
----@return boolean
+---@return boolean sucess true if item was added
+---@return string|nil itemId id of added item
+---@return integer amountAdded
 function Cheat:addItemByName(itemName, amount, condition, quality, quest, notify, logSuccess)
     return Cheat:addItem({ exact = true, searchKey = itemName }, amount, condition, quality, quest, notify, logSuccess)
 end
@@ -371,7 +370,9 @@ end
 ---@param quest boolean
 ---@param notify boolean
 ---@param logSuccess boolean
----@return boolean
+---@return boolean sucess true if item was added
+---@return string|nil itemId id of added item
+---@return integer amountAdded
 function Cheat:addItem(searchOperation, amount, condition, quality, quest, notify, logSuccess)
     -- note that some items don't have condition (like lockpicks)
     -- some quest item cannot be added while others can
@@ -380,17 +381,17 @@ function Cheat:addItem(searchOperation, amount, condition, quality, quest, notif
     local item = Cheat:findItem(searchOperation)
     if not item then
         Cheat:logError("Item [%s] not found.", Cheat:serializeTable(searchOperation))
-        return false
+        return false, nil, 0
     end
 
     if not quest and item.isquestitem then
         Cheat:logWarn("Won't add quest item: %s", Cheat:getItemDisplayText(item))
-        return false
+        return false, nil, 0
     end
 
     if item.isquestitem and not Cheat:canCreateItem(item.id) then
         Cheat:logWarn("Won't add blocked item: %s", Cheat:getItemDisplayText(item))
-        return false
+        return false, nil, 0
     end
 
     if quality and quality > 3 then
@@ -424,7 +425,7 @@ function Cheat:addItem(searchOperation, amount, condition, quality, quest, notif
                 tostring(item.maxquality),
                 tostring(item.isquestitem),
                 tostring(item.id))
-            return false
+            return false, nil, 0
         end
 
         local currentAmount = Cheat:getItemCount(item.id)
@@ -453,7 +454,7 @@ function Cheat:addItem(searchOperation, amount, condition, quality, quest, notif
         )
     end
 
-    return true
+    return true, item.id, amountAdded
 end
 
 ---removeItemById
@@ -462,7 +463,9 @@ end
 ---@param quest boolean
 ---@param notify boolean
 ---@param logSuccess boolean
----@return boolean
+---@return boolean sucess true if item was removed
+---@return string|nil itemId id of removed item
+---@return integer amountRemoved
 function Cheat:removeItemById(itemId, amount, quest, notify, logSuccess)
     return Cheat:removeItem({ exact = true, searchKey = itemId }, amount, quest, notify, logSuccess)
 end
@@ -473,23 +476,25 @@ end
 ---@param quest boolean
 ---@param notify boolean
 ---@param logSuccess boolean
----@return boolean
+---@return boolean sucess true if item was removed
+---@return string|nil itemId id of removed item
+---@return integer amountRemoved
 function Cheat:removeItem(searchOperation, amount, quest, notify, logSuccess)
     local item = Cheat:findItem(searchOperation)
     if not item then
         Cheat:logError("No item matching [%s] found in item database.", Cheat:serializeTable(searchOperation))
-        return false
+        return false, nil, 0
     end
 
     local itemCount = Cheat:getItemCount(item.id)
     if itemCount == 0 then
         Cheat:logError("Item [%s] not found in player's inventory.", tostring(item.name))
-        return false
+        return false, nil, 0
     end
 
     if not quest and item.isquestitem then
         Cheat:logWarn("Won't remove quest item: %s", Cheat:getItemDisplayText(item))
-        return false
+        return false, nil, 0
     end
 
     local amountToRemove = Cheat:clamp(amount, 1, itemCount)
@@ -497,7 +502,7 @@ function Cheat:removeItem(searchOperation, amount, quest, notify, logSuccess)
 
     if amountRemoved == 0 then
         Cheat:logError("Failed to removed item [%s].", tostring(item.name))
-        return false
+        return false, nil, 0
     end
 
     if notify then
@@ -508,7 +513,7 @@ function Cheat:removeItem(searchOperation, amount, quest, notify, logSuccess)
         Cheat:logInfo("Removed [%s] of item [%s] from player's inventory.", tostring(amountRemoved), tostring(item.name))
     end
 
-    return true
+    return true, item.id, amountRemoved
 end
 
 ---removeAllItems
@@ -665,28 +670,39 @@ function Cheat:getItemDisplayText(item)
 end
 
 ---recreateItems
+---@param items table item array from Cheat:getUserItems()
 ---@param mode string
 ---@param condition integer
 ---@param quality integer|nil Use nil for default item maxquality.
 ---@param quest boolean
 ---@return boolean
-function Cheat:recreateItems(mode, condition, quality, quest)
+---@return table
+function Cheat:recreateItems(items, mode, condition, quality, quest)
     condition = Cheat:clamp(condition, 0, 100)
 
-    for _, item in ipairs(Cheat:getUserItems()) do
+    -- ownership is based on the player's soul WUID which can change due to different region/character/gender
+    -- player ID = player.soul.__ThisWUID = player.this.id
+    local playerId = player.this.id
+
+    local actions = {
+        deleted = {},
+        recreated = {}
+    }
+
+    for _, item in ipairs(items) do
         local shouldSkip = false
         local shouldDelete = false
         local shouldRecreate = false
 
         if mode == "removestolen" then
-            if Cheat.g_removestolen_cat_ids[item.category_id] and item.owner ~= Cheat.g_player_data_m and item.owner ~= Cheat.g_player_data_f then
+            if Cheat.g_removestolen_cat_ids[item.category_id] and item.owner ~= playerId then
                 shouldDelete = true
                 shouldRecreate = false
             end
         end
 
         if mode == "ownstolen" then
-            if Cheat.g_ownstolen_cat_ids[item.category_id] and item.owner ~= Cheat.g_player_data_m and item.owner ~= Cheat.g_player_data_f then
+            if Cheat.g_ownstolen_cat_ids[item.category_id] and item.owner ~= playerId then
                 shouldDelete = true
                 shouldRecreate = true
                 -- we'll change ownership but keep the condition and quality
@@ -731,17 +747,19 @@ function Cheat:recreateItems(mode, condition, quality, quest)
         if not shouldSkip then
             if shouldDelete then
                 --Cheat:logDebug("shouldDelete [%s]", Cheat:serializeTable(item))
-                Cheat:removeItem({ exact = true, searchKey = item.id }, item.amount, quest, false, true)
+                local result, itemId, amountRemoved = Cheat:removeItem({ exact = true, searchKey = item.id }, item.amount, quest, false, true)
+                table.insert(actions.deleted, { result = result, itemId = itemId, amountRemoved = amountRemoved })
             end
 
             if shouldRecreate then
                 --Cheat:logDebug("shouldRecreate [%s]", Cheat:serializeTable(item))
-                Cheat:addItem({ exact = true, searchKey = item.id }, item.amount, condition, quality, quest, false, true)
+                local result, itemId, amountAdded = Cheat:addItem({ exact = true, searchKey = item.id }, item.amount, condition, quality, quest, false, true)
+                table.insert(actions.recreated, { result = result, itemId = itemId, amountAdded = amountAdded })
             end
         end
     end
 
-    return true
+    return true, actions
 end
 
 ---canCreateItem
@@ -995,7 +1013,7 @@ Cheat:createCommandLegacy("cheat_remove_stolen_items", "Cheat:cheat_remove_stole
     "Removes all stolen items from your inventory.",
     "Remove stolen items.", "cheat_remove_stolen_items")
 function Cheat:cheat_remove_stolen_items()
-    Cheat:recreateItems("removestolen", 0, nil, false)
+    Cheat:recreateItems(Cheat:getUserItems(), "removestolen", 0, nil, false)
     Cheat:logInfo("All stolen items removed.")
     return true
 end
@@ -1007,7 +1025,7 @@ Cheat:createCommandLegacy("cheat_own_stolen_items", "Cheat:cheat_own_stolen_item
     "Makes you the owner of all stolen items in your inventory.\n$8This removes the stolen flag from the item.",
     "Take ownership of stolen items", "cheat_own_stolen_items")
 function Cheat:cheat_own_stolen_items()
-    Cheat:recreateItems("ownstolen", 0, nil, false)
+    Cheat:recreateItems(Cheat:getUserItems(), "ownstolen", 0, nil, false)
     Cheat:logInfo("All stolen items are now owned by the player.")
     return true
 end
@@ -1032,7 +1050,7 @@ function Cheat:cheat_repair_gear(line)
     if conditionErr or qualityErr or questErr then
         return false
     end
-    Cheat:recreateItems("repairall", condition, quality, quest)
+    Cheat:recreateItems(Cheat:getUserItems(), "repairall", condition, quality, quest)
     Cheat:logInfo("All items repaired to at least [%d] condition and [%s] quality.", condition, quality or "default")
     return true
 end
@@ -1057,7 +1075,7 @@ function Cheat:cheat_damage_gear(line)
     if conditionErr or qualityErr or questErr then
         return false
     end
-    Cheat:recreateItems("damageall", condition, quality, quest)
+    Cheat:recreateItems(Cheat:getUserItems(), "damageall", condition, quality, quest)
     Cheat:logInfo("All items damaged to at most [%d] condition and [%s] quality.", condition, quality or "default")
     return true
 end
@@ -1589,37 +1607,94 @@ function Cheat:test_cheat_repair_gear()
 end
 
 function Cheat:test_cheat_remove_stolen_items()
+    local mockItems = nil
+
     Cheat:removeAllItems()
-    Cheat:testAssert("remove all items before testing", Cheat:getInventoryItemCount() == 0)
+    Cheat:testAssertEquals("remove all items before testing", Cheat:getInventoryItemCount(), 0)
 
-    -- TODO: See if we can change an items owner.
+    -- doesn't do anything other can ensure the command is wire up
+    Cheat:testAssert("cheat_remove_stolen_items 1", Cheat:proxy("cheat_remove_stolen_items"))
 
+    -- mock item list with stolen item q4 item
     -- Add a dagger1, which is in g_removestolen_cat_ids
-    Cheat:testAssert("cheat_remove_stolen_items setup 12.1", Cheat:cheat_add_item("exact:" .. Cheat.g_dagger1_id))
-    Cheat:testAssert("cheat_remove_stolen_items setup 12.2", Cheat:getInventoryItemCount() == 1)
+    Cheat:testAssert("cheat_remove_stolen_items setup 2", Cheat:cheat_add_item("exact:" .. Cheat.g_dagger1_id))
+    mockItems = Cheat:getUserItems()
+    for _, item in ipairs(mockItems) do
+        item.owner = __null
+        item.quality = 4
+    end
 
-    -- Execute cheat_remove_stolen_items
-    Cheat:testAssert("cheat_remove_stolen_items 12.3", Cheat:cheat_remove_stolen_items())
+    local result, actions = Cheat:recreateItems(mockItems, "removestolen", 0, nil, false)
+    Cheat:testAssert("cheat_remove_stolen_items 3", result)
+    Cheat:testAssertEquals("cheat_remove_stolen_items 4", actions and #actions.deleted, 1)
+    Cheat:testAssertEquals("cheat_remove_stolen_items 5", actions and actions.deleted[1].result, true)
+    Cheat:testAssertEquals("cheat_remove_stolen_items 6", actions and actions.deleted[1].itemId, Cheat.g_dagger1_id)
+    Cheat:testAssertEquals("cheat_remove_stolen_items 7", actions and actions.deleted[1].amountRemoved, 1)
+    Cheat:testAssertEquals("cheat_remove_stolen_items 8", actions and #actions.recreated, 0)
+    Cheat:testAssertEquals("cheat_remove_stolen_items 9", Cheat:getInventoryItemCount(), 0)
 
-    -- Assert that the item count is now 1
-    Cheat:testAssert("cheat_remove_stolen_items 12.4", Cheat:getInventoryItemCount() == 1)
+    -- shouldn't be possible to have a stolen quest item... so not testing that.
 end
 
 function Cheat:test_cheat_own_stolen_items()
+    local mockItems = nil
+
     Cheat:removeAllItems()
-    Cheat:testAssert("remove all items before testing", Cheat:getInventoryItemCount() == 0)
+    Cheat:testAssertEquals("remove all items before testing", Cheat:getInventoryItemCount(), 0)
 
-    -- TODO: See if we can change an items owner.
+    -- doesn't do anything other can ensure the command is wire up
+    Cheat:testAssert("cheat_own_stolen_items 1", Cheat:proxy("cheat_own_stolen_items"))
 
+    -- mock item list with stolen item
     -- Add a dagger1, which is in g_ownstolen_cat_ids
-    Cheat:testAssert("cheat_own_stolen_items setup 13.1", Cheat:cheat_add_item("exact:" .. Cheat.g_dagger1_id))
-    Cheat:testAssert("cheat_own_stolen_items setup 13.2", Cheat:getInventoryItemCount() == 1)
+    Cheat:testAssert("cheat_own_stolen_items setup 2", Cheat:cheat_add_item("exact:" .. Cheat.g_dagger1_id))
+    mockItems = Cheat:getUserItems()
+    for _, item in ipairs(mockItems) do item.owner = __null end
 
-    -- Execute cheat_own_stolen_items
-    Cheat:testAssert("cheat_own_stolen_items 13.3", Cheat:cheat_own_stolen_items())
+    local result, actions = Cheat:recreateItems(mockItems, "ownstolen", 0, nil, false)
+    Cheat:testAssert("cheat_own_stolen_items 3", result)
+    Cheat:testAssertEquals("cheat_own_stolen_items 4", actions and #actions.deleted, 1)
+    Cheat:testAssertEquals("cheat_own_stolen_items 5", actions and actions.deleted[1].result, true)
+    Cheat:testAssertEquals("cheat_own_stolen_items 6", actions and actions.deleted[1].itemId, Cheat.g_dagger1_id)
+    Cheat:testAssertEquals("cheat_own_stolen_items 7", actions and actions.deleted[1].amountRemoved, 1)
+    Cheat:testAssertEquals("cheat_own_stolen_items 8", actions and #actions.recreated, 1)
+    Cheat:testAssertEquals("cheat_own_stolen_items 9", actions and actions.recreated[1].result, true)
+    Cheat:testAssertEquals("cheat_own_stolen_items 10", actions and actions.recreated[1].itemId, Cheat.g_dagger1_id)
+    Cheat:testAssertEquals("cheat_own_stolen_items 11", actions and actions.recreated[1].amountAdded, 1)
+    Cheat:testAssertEquals("cheat_own_stolen_items 12", Cheat:getInventoryItemCount(), 1)
 
-    -- Assert that the item count is still 1 (item not removed, ownership changed, assuming function logic works)
-    Cheat:testAssert("cheat_own_stolen_items 13.4", Cheat:getInventoryItemCount() == 1)
+    -- test quest item and quest items skipped
+    Cheat:removeAllItems()
+    Cheat:testAssert("cheat_own_stolen_items setup quest", Cheat:cheat_add_item("exact:" .. Cheat.g_dagger1_id))
+    mockItems = Cheat:getUserItems()
+    for _, item in ipairs(mockItems) do item.isquestitem = true end
+
+    local result, actions = Cheat:recreateItems(mockItems, "ownstolen", 0, nil, false)
+    Cheat:testAssert("cheat_own_stolen_items quest 1", result)
+    Cheat:testAssertEquals("cheat_own_stolen_items quest 2", actions and #actions.deleted, 0)
+    Cheat:testAssertEquals("cheat_own_stolen_items quest 3", actions and #actions.recreated, 0)
+
+    -- test quest item and quest items not skipped
+    Cheat:removeAllItems()
+    Cheat:testAssert("cheat_own_stolen_items setup quest", Cheat:cheat_add_item("exact:" .. Cheat.g_dagger1_id))
+    mockItems = Cheat:getUserItems()
+    for _, item in ipairs(mockItems) do item.isquestitem = true end
+
+    local result, actions = Cheat:recreateItems(mockItems, "ownstolen", 0, nil, true)
+    Cheat:testAssert("cheat_own_stolen_items quest 1", result)
+    Cheat:testAssertEquals("cheat_own_stolen_items quest 2", actions and #actions.deleted, 1)
+    Cheat:testAssertEquals("cheat_own_stolen_items quest 3", actions and #actions.recreated, 1)
+
+    -- test quality 4 item
+    Cheat:removeAllItems()
+    Cheat:testAssert("cheat_own_stolen_items setup q4", Cheat:cheat_add_item("exact:" .. Cheat.g_dagger1_id))
+    mockItems = Cheat:getUserItems()
+    for _, item in ipairs(mockItems) do item.quality = 4 end
+
+    local result, actions = Cheat:recreateItems(mockItems, "ownstolen", 0, nil, false)
+    Cheat:testAssert("cheat_own_stolen_items q4 1", result)
+    Cheat:testAssertEquals("cheat_own_stolen_items q4 2", actions and #actions.deleted, 0)
+    Cheat:testAssertEquals("cheat_own_stolen_items q4 3", actions and #actions.recreated, 0)
 end
 
 function Cheat:test_cheat_inventory_backup_restore()
