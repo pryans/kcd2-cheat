@@ -724,6 +724,7 @@ function Cheat:endTestSuite()
             Cheat:log(message)
         end
     end
+    Cheat:logDebug("=== End Suite Results ===")
     Cheat:logDebug("")
 
     Cheat.g_cheat_test_info = nil
@@ -801,6 +802,9 @@ function Cheat:testFail(message)
     Cheat:log(message)
 end
 
+---testAssert
+---@param message string
+---@param value any
 function Cheat:testAssert(message, value)
     if value then
         Cheat:testPass(message)
@@ -809,6 +813,9 @@ function Cheat:testAssert(message, value)
     end
 end
 
+---testAssertFalse
+---@param message string
+---@param value any
 function Cheat:testAssertFalse(message, value)
     if not value then
         Cheat:testPass(message)
@@ -817,6 +824,10 @@ function Cheat:testAssertFalse(message, value)
     end
 end
 
+---testAssertEquals
+---@param message string
+---@param actualValue any
+---@param expectedValue any
 function Cheat:testAssertEquals(message, actualValue, expectedValue)
     message = string.format("%s: actual[%s] expected[%s]", message, tostring(actualValue), tostring(expectedValue))
     if actualValue == expectedValue then
@@ -826,6 +837,11 @@ function Cheat:testAssertEquals(message, actualValue, expectedValue)
     end
 end
 
+---testAssertEqualsFloat
+---@param message string
+---@param actualValue number|nil
+---@param expectedValue number|nil
+---@param maxDifference number
 function Cheat:testAssertEqualsFloat(message, actualValue, expectedValue, maxDifference)
     local diff = nil
 
