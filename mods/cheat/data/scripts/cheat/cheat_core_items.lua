@@ -941,7 +941,13 @@ function Cheat:cheat_remove_item(line)
     end
 
     if bulk then
-        for _, item in pairs(Cheat:getUserItems()) do
+        local items = Cheat:findItems(searchOperation)
+        if not items then
+            Cheat:logError("Item [%s] not found.", Cheat:serializeTable(searchOperation))
+            return false
+        end
+
+        for _, item in pairs(items) do
             if Cheat:getItemCount(item.id) >= amount then
                 Cheat:removeItem({ exact = true, searchKey = item.id }, amount, quest, true, true)
             end
@@ -1448,13 +1454,14 @@ function Cheat:test_cheat_remove_item()
 
     -- cheat_remove_item bulk
     Cheat:removeAllItems()
+    Cheat:testAssert("cheat_remove_item bulk 0", Cheat:cheat_add_item("exact:" .. Cheat.g_bread_id .. " amount:3"))
     Cheat:testAssert("cheat_remove_item bulk 1", Cheat:cheat_add_item("any:" .. Cheat.g_long_ranged_arrow_id .. " amount:10"))
     Cheat:testAssert("cheat_remove_item bulk 2", Cheat:cheat_add_item("any:" .. Cheat.g_enhanced_long_range_arrow_id .. " amount:10"))
-    Cheat:testAssert("cheat_remove_item bulk 3", Cheat:getInventoryItemCount() == 2)
+    Cheat:testAssert("cheat_remove_item bulk 3", Cheat:getInventoryItemCount() == 3)
     Cheat:testAssert("cheat_remove_item bulk 4", Cheat:cheat_remove_item("any:arrow amount:5 bulk:true"))
-    Cheat:testAssert("cheat_remove_item bulk 5", Cheat:getInventoryItemCount() == 2)
+    Cheat:testAssert("cheat_remove_item bulk 5", Cheat:getInventoryItemCount() == 3)
     Cheat:testAssert("cheat_remove_item bulk 6", Cheat:cheat_remove_item("any:arrow amount:5 bulk:true"))
-    Cheat:testAssert("cheat_remove_item bulk 7", Cheat:getInventoryItemCount() == 0)
+    Cheat:testAssert("cheat_remove_item bulk 7", Cheat:getInventoryItemCount() == 1)
 end
 
 function Cheat:test_cheat_remove_items()
