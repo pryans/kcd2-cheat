@@ -39,15 +39,16 @@ function Cheat:getBuffDisplayText(buff)
 
     local data = {}
     for k, v in pairs(buff) do
-        if k ~= "buff_id" and k ~= "buff_lname" then
+        if k ~= "buff_id" and k ~= "buff_lname" and k ~= "buff_name" then
             if not Cheat:isBlank(v) then
                 data[k] = v
             end
         end
     end
 
+    local name = Cheat:getFormattedNames(buff.buff_name, buff.buff_lname)
     return string.format("name=%s id=%s %s",
-        Cheat:getLocalizedBuffName(buff) or "nil",
+        name,
         tostring(buff.buff_id),
         Cheat:serializeTable(data))
 end
@@ -148,11 +149,14 @@ Cheat:createCommand("cheat_add_potion_buff", {
     },
     "Adds a potion buff to the player.")
 function Cheat:cheat_add_potion_buff(c)
-    for k, v in pairs(Cheat.potion_buffs) do
-        if k == c.id or string.find(v.name, c.id) then
-            player.soul:AddBuff(v.id)
-            Cheat:logInfo("Added Potion [%s] to player.", tostring(v.name))
-            return true
+    for potionIndex, potion in pairs(Cheat.potion_buffs) do
+        if potionIndex == c.id or string.find(potion.name, c.id) then
+            local buff = Cheat:findBuff({ exact = true, searchKey = potion.id })
+            if buff then
+                player.soul:AddBuff(potion.id)
+                Cheat:logInfo("Used Potion: %s", Cheat:getBuffDisplayText(buff))
+                return true
+            end
         end
     end
 
@@ -217,7 +221,7 @@ function Cheat:cheat_remove_all_buffs()
     for _, buff in ipairs(buffs) do
         if player.soul:RemoveAllBuffsByGuid(buff.buff_id) > 0 then
             buffs_removed = buffs_removed + 1
-            Cheat:logInfo("Removed Buff: %s", tostring(buff.buff_name))
+            Cheat:logInfo("Removed Buff: %s", Cheat:getBuffDisplayText(buff))
         end
     end
     Cheat:logInfo("Removed [%s] buffs from player.", tostring(buffs_removed))
