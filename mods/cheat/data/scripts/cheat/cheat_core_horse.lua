@@ -83,7 +83,7 @@ function Cheat:logHorseInfo(horse)
         return
     end
 
-    local horseName = Cheat:getLocalizedEntityName(horse)
+    local horseName = Cheat:getFormattedNames(Cheat:getEntityName(horse), Cheat:getLocalizedEntityName(horse))
     local playerHorse = Cheat:getPlayerHorse()
     local isPlayerHorse = playerHorse and playerHorse.id == horse.id
     local info = {

@@ -653,13 +653,13 @@ function Cheat:getItemDisplayText(item)
 
     local data = {}
     for k, v in pairs(item) do
-        if k ~= "id" and k ~= "lname" then
+        if k ~= "id" and k ~= "lname" and k ~= "name" then
             data[k] = v
         end
     end
 
     return string.format("name=%s id=%s %s",
-        tostring(Cheat:getLocalizedItemName(item)) or "nil",
+        Cheat:getFormattedNames(item.name, item.lname),
         tostring(item.id),
         Cheat:serializeTable(data))
 end
