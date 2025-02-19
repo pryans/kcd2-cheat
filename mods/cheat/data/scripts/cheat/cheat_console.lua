@@ -34,6 +34,7 @@ end
 
 function Cheat:createCommand(cmdName, cmdArgsSet, cmdDocs, ...)
     if not Cheat.g_command_registry[cmdName] then
+        -- create console help
         local cmdHelp = "$8" .. cmdDocs .. "$8\n"
 
         if cmdArgsSet then
@@ -55,7 +56,16 @@ function Cheat:createCommand(cmdName, cmdArgsSet, cmdDocs, ...)
             end
         end
 
-        Cheat.g_command_registry[cmdName] = { cmdName = cmdName, cmdArgsSet = cmdArgsSet, cmdHelp = cmdHelp }
+        -- create bbcode/nexus help
+        local bbcodeHelp = " \n \n[size=4][b]" .. cmdName .. "[/b][/size]" .. "\n" .. cmdHelp
+        bbcodeHelp = bbcodeHelp:gsub("$8Arguments:$8", "[b]Arguments:[/b]")
+        bbcodeHelp = bbcodeHelp:gsub("$8Examples:$8", "[b]Examples:[/b]")
+        for i = 1, 9 do
+            bbcodeHelp = bbcodeHelp:gsub("$" .. tostring(i), "")
+        end
+
+        -- setup command proxy
+        Cheat.g_command_registry[cmdName] = { cmdName = cmdName, cmdArgsSet = cmdArgsSet, cmdHelp = cmdHelp, bbcodeHelp = bbcodeHelp }
 
         local proxyFunctionName = "g_command_proxies_" .. cmdName
         Cheat[proxyFunctionName] = function (self, line)
@@ -63,6 +73,7 @@ function Cheat:createCommand(cmdName, cmdArgsSet, cmdDocs, ...)
             Cheat:proxy(cmdName, line)
         end
 
+        -- register command proxy
         local proxyFunction = "Cheat:" .. proxyFunctionName .. "(%line)"
         System.AddCCommand(cmdName, proxyFunction, cmdHelp)
     else
@@ -92,6 +103,28 @@ function Cheat:createCommandAlias(aliasName, aliasTarget)
     return true
 end
 
+function Cheat:logDocumentation()
+    System.LogAlways("")
+    System.LogAlways("Documentation for KCD2 Cheat version " .. tostring(Cheat.version))
+    System.LogAlways("")
+
+    for _, commandName in ipairs(Cheat:getSortedKeys(Cheat.g_command_registry)) do
+        System.LogAlways(commandName)
+    end
+
+    for _, commandName in ipairs(Cheat:getSortedKeys(Cheat.g_command_registry)) do
+        System.LogAlways("")
+        System.LogAlways("")
+        System.LogAlways("")
+        local help = Cheat.g_command_registry[commandName].bbcodeHelp
+        if help then
+            System.LogAlways(tostring(help))
+        else
+            System.LogAlways(string.format("Command [%s] has no help.", commandName))
+        end
+    end
+end
+
 function Cheat:createCommandLegacy(cmdName, cmdFunc, cmdArgsSet, cmdDocs, ...)
     if not Cheat.g_command_registry[cmdName] then
         local cmdHelp = "$8" .. cmdDocs .. "$8\n"
@@ -115,7 +148,15 @@ function Cheat:createCommandLegacy(cmdName, cmdFunc, cmdArgsSet, cmdDocs, ...)
             end
         end
 
-        Cheat.g_command_registry[cmdName] = { cmdName = cmdName, cmdFunc = cmdFunc, cmdArgsSet = cmdArgsSet, cmdHelp = cmdHelp }
+        -- create bbcode/nexus help
+        local bbcodeHelp = " \n \n[size=4][b]" .. cmdName .. "[/b][/size]" .. "\n" .. cmdHelp
+        bbcodeHelp = bbcodeHelp:gsub("$8Arguments:$8", "[b]Arguments:[/b]")
+        bbcodeHelp = bbcodeHelp:gsub("$8Examples:$8", "[b]Examples:[/b]")
+        for i = 1, 9 do
+            bbcodeHelp = bbcodeHelp:gsub("$" .. tostring(i), "")
+        end
+
+        Cheat.g_command_registry[cmdName] = { cmdName = cmdName, cmdFunc = cmdFunc, cmdArgsSet = cmdArgsSet, cmdHelp = cmdHelp, bbcodeHelp = bbcodeHelp }
         System.AddCCommand(cmdName, cmdFunc, cmdHelp)
     else
         Cheat:logError("Console command [%s] is already registered to function [%s].", tostring(cmdName), tostring(cmdFunc))
