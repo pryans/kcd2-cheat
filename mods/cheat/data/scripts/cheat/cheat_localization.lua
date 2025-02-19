@@ -117,8 +117,29 @@ function Cheat:findLocalizedNames(databases, keys)
 end
 
 -- ============================================================================
+-- helpers
+-- ============================================================================
+
+---getFormattedNames
+---@param name string|nil
+---@param lname string|nil
+---@return string
+function Cheat:getFormattedNames(name, lname)
+    if Cheat.g_localization_enabled then
+        if lname ~= name then
+            return tostring(lname) .. "(" .. tostring(name) .. ")"
+        end
+    end
+    return tostring(name)
+end
+
+-- ============================================================================
 -- soul
 -- ============================================================================
+
+---getLocalizedSoulName
+---@param soul table|nil
+---@return string|nil
 function Cheat:getLocalizedSoulName(soul)
     if not soul then
         return nil
@@ -144,6 +165,10 @@ end
 -- ============================================================================
 -- item
 -- ============================================================================
+
+---getLocalizedItemName
+---@param item table|nil
+---@return string|nil
 function Cheat:getLocalizedItemName(item)
     if not item then
         return nil
@@ -173,6 +198,10 @@ end
 -- ============================================================================
 -- entity
 -- ============================================================================
+
+---getLocalizedEntityName
+---@param entity table|nil
+---@return string|nil
 function Cheat:getLocalizedEntityName(entity)
     if not entity then
         return nil
@@ -202,6 +231,10 @@ end
 -- ============================================================================
 -- buff
 -- ============================================================================
+
+---getLocalizedBuffName
+---@param buff table|nil
+---@return table|nil
 function Cheat:getLocalizedBuffName(buff)
     if not buff then
         return nil
@@ -213,6 +246,70 @@ function Cheat:getLocalizedBuffName(buff)
         local keys = {}
         if buff["buff_ui_name"] then table.insert(keys, buff.buff_ui_name) end
         if buff["buff_name"] then table.insert(keys, buff.buff_name) end
+        local lnames = Cheat:findLocalizedNames({ Cheat.g_localization_soul_database }, keys)
+
+        if lnames then
+            if lnames.l1name then
+                lname = lnames.l1name
+            elseif lnames.l2name then
+                lname = lnames.l2name
+            end
+        end
+    end
+
+    return lname
+end
+
+-- ============================================================================
+-- perk
+-- ============================================================================
+
+---getLocalizedPerkName
+---@param perk table|nil
+---@return table|nil
+function Cheat:getLocalizedPerkName(perk)
+    if not perk then
+        return nil
+    end
+
+    local lname = perk.perk_name
+
+    if Cheat.g_localization_enabled then
+        local keys = {}
+        if perk["perk_ui_name"] then table.insert(keys, perk.perk_ui_name) end
+        if perk["perk_name"] then table.insert(keys, perk.perk_name) end
+        local lnames = Cheat:findLocalizedNames({ Cheat.g_localization_soul_database }, keys)
+
+        if lnames then
+            if lnames.l1name then
+                lname = lnames.l1name
+            elseif lnames.l2name then
+                lname = lnames.l2name
+            end
+        end
+    end
+
+    return lname
+end
+
+-- ============================================================================
+-- skill
+-- ============================================================================
+
+---getLocalizedSkillName
+---@param skill table|nil
+---@return table|nil
+function Cheat:getLocalizedSkillName(skill)
+    if not skill then
+        return nil
+    end
+
+    local lname = skill.skill_name
+
+    if Cheat.g_localization_enabled then
+        local keys = {}
+        if skill["ui_string_name"] then table.insert(keys, skill.ui_string_name) end
+        if skill["skill_name"] then table.insert(keys, skill.skill_name) end
         local lnames = Cheat:findLocalizedNames({ Cheat.g_localization_soul_database }, keys)
 
         if lnames then
@@ -402,6 +499,66 @@ function Cheat:test_localization()
     -- Test case 4: Cheat.g_localization_enabled is true, database does not have entry
     local mockBuff4 = { buff_name = "buff_name_not_found", buff_ui_name = "buff_uiname_not_found" }
     Cheat:testAssertEquals("getLocalizedBuffName localization enabled, not found", Cheat:getLocalizedBuffName(mockBuff4), "buff_name_not_found")
+
+
+    -- ========================================================================
+    -- Cheat:getLocalizedPerkName(perk)
+    -- ========================================================================
+
+    -- Test case 1: perk is nil
+    Cheat:testAssert("getLocalizedPerkName nil perk", Cheat:getLocalizedPerkName(nil) == nil)
+
+    -- Test case 2: Cheat.g_localization_enabled is false
+    Cheat.g_localization_enabled = false
+    Cheat:testAssertEquals("getLocalizedPerkName localization disabled",
+        Cheat:getLocalizedPerkName({ perk_name = "perk_name_1", perk_ui_name = "perk_uiname_1" }), "perk_name_1")
+    Cheat.g_localization_enabled = true -- Re-enable for other tests
+
+    -- Test case 3: Cheat.g_localization_enabled is true, database has entry
+    Cheat:testAssertEquals("getLocalizedPerkName localization enabled, found l1name",
+        Cheat:getLocalizedPerkName({ perk_name = "perk_name_2", perk_ui_name = "soul_key_1" }), "LS1")
+
+    Cheat:testAssertEquals("getLocalizedPerkName localization enabled, found l2name",
+        Cheat:getLocalizedPerkName({ perk_name = "perk_name_3", perk_ui_name = "soul_key_2" }), "LS2")
+
+    Cheat:testAssertEquals("getLocalizedPerkName find l1 with uiname", Cheat:getLocalizedPerkName({ perk_ui_name = "soul_key_1" }), "LS1")
+    Cheat:testAssertEquals("getLocalizedPerkName find l2 with uiname", Cheat:getLocalizedPerkName({ perk_ui_name = "soul_key_3" }), "LS3")
+    Cheat:testAssertEquals("getLocalizedPerkName find l1 with name", Cheat:getLocalizedPerkName({ perk_name = "soul_key_1" }), "LS1")
+    Cheat:testAssertEquals("getLocalizedPerkName find l2 with name", Cheat:getLocalizedPerkName({ perk_name = "soul_key_3" }), "LS3")
+
+    -- Test case 4: Cheat.g_localization_enabled is true, database does not have entry
+    local mockPerk4 = { perk_name = "perk_name_not_found", perk_ui_name = "perk_uiname_not_found" }
+    Cheat:testAssertEquals("getLocalizedPerkName localization enabled, not found", Cheat:getLocalizedPerkName(mockPerk4), "perk_name_not_found")
+
+
+    -- ========================================================================
+    -- Cheat:getLocalizedSkillName(skill)
+    -- ========================================================================
+
+    -- Test case 1: skill is nil
+    Cheat:testAssert("getLocalizedSkillName nil skill", Cheat:getLocalizedSkillName(nil) == nil)
+
+    -- Test case 2: Cheat.g_localization_enabled is false
+    Cheat.g_localization_enabled = false
+    Cheat:testAssertEquals("getLocalizedSkillName localization disabled",
+        Cheat:getLocalizedSkillName({ skill_name = "skill_name_1", ui_string_name = "skill_uiname_1" }), "skill_name_1")
+    Cheat.g_localization_enabled = true -- Re-enable for other tests
+
+    -- Test case 3: Cheat.g_localization_enabled is true, database has entry
+    Cheat:testAssertEquals("getLocalizedSkillName localization enabled, found l1name",
+        Cheat:getLocalizedSkillName({ skill_name = "skill_name_2", ui_string_name = "soul_key_1" }), "LS1")
+
+    Cheat:testAssertEquals("getLocalizedSkillName localization enabled, found l2name",
+        Cheat:getLocalizedSkillName({ skill_name = "skill_name_3", ui_string_name = "soul_key_2" }), "LS2")
+
+    Cheat:testAssertEquals("getLocalizedSkillName find l1 with uiname", Cheat:getLocalizedSkillName({ ui_string_name = "soul_key_1" }), "LS1")
+    Cheat:testAssertEquals("getLocalizedSkillName find l2 with uiname", Cheat:getLocalizedSkillName({ ui_string_name = "soul_key_3" }), "LS3")
+    Cheat:testAssertEquals("getLocalizedSkillName find l1 with name", Cheat:getLocalizedSkillName({ skill_name = "soul_key_1" }), "LS1")
+    Cheat:testAssertEquals("getLocalizedSkillName find l2 with name", Cheat:getLocalizedSkillName({ skill_name = "soul_key_3" }), "LS3")
+
+    -- Test case 4: Cheat.g_localization_enabled is true, database does not have entry
+    local mockSkill4 = { skill_name = "skill_name_not_found", ui_string_name = "skill_uiname_not_found" }
+    Cheat:testAssertEquals("getLocalizedSkillName localization enabled, not found", Cheat:getLocalizedSkillName(mockSkill4), "skill_name_not_found")
 
 
     -- ========================================================================
