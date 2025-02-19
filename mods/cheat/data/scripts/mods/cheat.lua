@@ -74,9 +74,11 @@ function Cheat:onSystemStarted()
     Cheat:initLocalizationDatabase()
 
     -- these databases use the localization database
-    Cheat:initBuffDatabase()
-    Cheat:initItemDatabase()
     Cheat:initSoulsDatabase()
+    Cheat:initBuffDatabase()
+    Cheat:initPerkDatabase()
+    Cheat:initSkillDatabase()
+    Cheat:initItemDatabase()
 end
 
 function Cheat:onQuickLoadingStart()
@@ -98,6 +100,7 @@ function Cheat:onGameplayStarted()
 
         Cheat:test_core_player()
         Cheat:test_core_buffs()
+        Cheat:test_core_perks()
         Cheat:test_core_skills()
         Cheat:test_core_items()
         Cheat:test_core_time()
