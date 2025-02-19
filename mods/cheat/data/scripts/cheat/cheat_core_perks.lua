@@ -1,122 +1,312 @@
 -- ============================================================================
--- find_perk
+-- helpers
 -- ============================================================================
-function Cheat:find_perk(searchKey, returnAll, findAny)
-    local tableName = "perk"
-    Database.LoadTable(tableName)
-    local tableInfo = Database.GetTableInfo(tableName)
-    local rows = tableInfo.LineCount - 1
-    local searchKeyUpper = Cheat:toUpper(searchKey)
-    local perk_id = nil
-    local perk_name = nil
-    local perks = {}
+Cheat.g_perk_database = nil
+Cheat.g_perk_database_search_fields = { "perk_id", "perk_lname", "perk_name" }
 
-    for i = 0, rows do
-        local rowInfo = Database.GetTableLine(tableName, i)
-        local found = false
+function Cheat:initPerkDatabase()
+    Cheat:logDebug("initPerkDatabase: Started...")
 
-        if not Cheat:isBlank(searchKeyUpper) then
-            if Cheat:toUpper(rowInfo.perk_id) == searchKeyUpper then
-                found = true
+    Cheat.g_perk_database = {}
+    for _, perk in pairs(Cheat:loadDatabase("perk")) do
+        perk.perk_lname = Cheat:getLocalizedPerkName(perk)
+        table.insert(Cheat.g_perk_database, perk)
+    end
+
+    if Cheat.g_perk_database then
+        Cheat:logDebug("Done loading perk database (%s)", tostring(#Cheat.g_perk_database))
+    else
+        Cheat:logError("Failed to load perk database.")
+    end
+
+    Cheat:logDebug("initPerkDatabase: Done")
+end
+
+function Cheat:findPerks(searchOperation)
+    return Cheat:findRows(Cheat.g_perk_database, searchOperation, Cheat.g_perk_database_search_fields)
+end
+
+function Cheat:findPerk(searchOperation)
+    return Cheat:findRow(Cheat.g_perk_database, searchOperation, Cheat.g_perk_database_search_fields)
+end
+
+function Cheat:getPerkDisplayText(perk)
+    if not perk then
+        return "nil"
+    end
+
+    local data = {}
+    for k, v in pairs(perk) do
+        if k ~= "perk_id" and k ~= "perk_lname" and k ~= "perk_name" then
+            if not Cheat:isBlank(v) then
+                data[k] = v
             end
-
-            if string.find(Cheat:toUpper(rowInfo.perk_name), searchKeyUpper, 1, true) then
-                found = true
-            end
-        else
-            found = true
-        end
-
-        if found and (findAny or rowInfo.visibility ~= 0) then
-            perk_id = rowInfo.perk_id
-            perk_name = rowInfo.perk_name
-
-            if returnAll then
-                local perk = {}
-                perk.perk_id = perk_id
-                perk.perk_name = perk_name
-                table.insert(perks, perk)
-            end
-
-            Cheat:logInfo("Found perk [%s] with id [%s].", tostring(perk_name), tostring(perk_id))
         end
     end
 
-    if returnAll then
-        Cheat:logDebug("Returning [%s] perks.", tostring(#perks))
-        return perks
+    local name = Cheat:getFormattedNames(perk.perk_name, perk.perk_lname)
+    return string.format("name=%s id=%s %s",
+        name,
+        tostring(perk.perk_id),
+        Cheat:serializeTable(data))
+end
+
+-- bugged via hasPerkId
+function Cheat:hasPerkName(perkName)
+    local perk = Cheat:findPerk({ exact = true, searchKey = perkName })
+    if perk then
+        return Cheat:hasPerkId(perk.perk_id)
     else
-        Cheat:logDebug("Returning perk [%s] with id [%s].", tostring(perk_name), tostring(perk_id))
-        return perk_id, perk_name
+        return false
+    end
+end
+
+-- bugged. only works on 97 or 865 perks.
+-- the rest will always report false even when player has it.
+function Cheat:hasPerkId(perkId)
+    return player.soul:HasPerk(perkId, false);
+end
+
+-- bugged via hasPerkId
+function Cheat:getPerks()
+    local perks = {}
+    for _, perk in pairs(Cheat:findPerks()) do
+        if Cheat:hasPerkId(perk.perk_id) then
+            table.insert(perks, perk)
+        end
+    end
+    return perks
+end
+
+-- bugged via hasPerkId
+function Cheat:getPerkCount()
+    return #Cheat:getPerks()
+end
+
+-- bugged via hasPerkId
+function Cheat:addPerk(idOrName)
+    local perk = Cheat:findPerk({ exact = true, searchKey = idOrName })
+    if perk then
+        player.soul:AddPerk(perk.perk_id) -- doesn't return anything
+        return Cheat:hasPerkId(perk.perk_id)
+    end
+    return false
+end
+
+function Cheat:addAllPerks()
+    for _, perk in pairs(Cheat:findPerks()) do
+        player.soul:AddPerk(perk.perk_id)
+    end
+end
+
+-- bugged via hasPerkId
+function Cheat:removePerk(idOrName)
+    local perk = Cheat:findPerk({ exact = true, searchKey = idOrName })
+    if perk then
+        player.soul:RemovePerk(perk.perk_id) -- doesn't return anything
+        return not Cheat:hasPerkId(perk.perk_id)
+    end
+    return false
+end
+
+function Cheat:removeAllPerks()
+    for _, perk in pairs(Cheat:findPerks()) do
+        player.soul:RemovePerk(perk.perk_id)
+    end
+    return true
+end
+
+function Cheat:setupPerkTest()
+    -- pick 2 of the 97 perks that Cheat:hasPerkId works on
+    return Cheat:removeAllPerks()
+        and Cheat:addPerk("Escape artist")
+        and Cheat:addPerk("Red Herring")
+        and Cheat:getPerkCount() >= 2 -- there are unremovable perks
+        and Cheat:hasPerkName("Escape artist")
+        and Cheat:hasPerkName("Red Herring")
+end
+
+-- bugged via hasPerkId
+function Cheat:logPerkCVS()
+    for _, perk in pairs(Cheat:findPerks()) do
+        local owned = Cheat:hasPerkId(perk.perk_id)
+        Cheat:logDebug("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", tostring(owned), tostring(perk.perk_lname or ""), tostring(perk.autolearnable or ""), tostring(perk.visibility or ""), tostring(perk.icon_id or ""), tostring(perk.parent_id or ""), tostring(perk.metaperk_id or ""), tostring(perk.ui_priority or ""), tostring(perk.perk_name or ""), tostring(perk.perk_id or ""), tostring(perk.exclude_in_game_mode or ""), tostring(perk.level or ""), tostring(perk.perk_ui_desc or ""), tostring(perk.stat_selector or ""), tostring(perk.perk_ui_name or ""), tostring(perk.perk_ui_lore_desc or ""), tostring(perk.skill_selector or ""))
     end
 end
 
 -- ============================================================================
 -- cheat_find_perks
 -- ============================================================================
-Cheat.cheat_find_perks_args = {
-    token = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a the perk's name. Leave empty to list all perks.") end,
-    any = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "Whether to not filter out perks you can't select yourself") end
-}
-Cheat:createCommandLegacy("cheat_find_perks", "Cheat:cheat_find_perks(%line)", Cheat.cheat_find_perks_args,
-    "Finds all of the perks that match the given token.",
-    "Show all perks", "cheat_find_perks token:",
-    "Show all perks with 'hunt' in their name", "cheat_find_perks token:hunt")
-function Cheat:cheat_find_perks(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_find_perks_args)
-    local token, tokenErr = Cheat:argsGet(args, "token")
-    local any = Cheat:argsGet(args, "any")
-    if not tokenErr then
-        Cheat:find_perk(token, nil, any)
-        return true
+Cheat:createCommand("cheat_find_perks", {
+        any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+        exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
+    },
+    "Displays all perks that match the given query.\n" ..
+    "$4NOTE: This command shows all perks in the database.\n" ..
+    "$4Some perks may be part of quests or other game\n" ..
+    "$4mechanics or not intented for the player to use.",
+    "Show all perks", "cheat_find_perks",
+    "Shows all perks with 'Hands' in their names", "cheat_find_perks any:Hands",
+    "Shows the perk named 'Viper II'", "cheat_find_perks exact:Viper II")
+function Cheat:cheat_find_perks(c)
+    local searchOperation = nil
+    if c.exact then
+        searchOperation = { exact = true, searchKey = c.exact }
+    elseif c.any then
+        searchOperation = { exact = false, searchKey = c.any }
     end
-    return false
+
+    local perks = Cheat:findPerks(searchOperation)
+    if not perks or #perks == 0 then
+        Cheat:logError("No perks found matching [%s].", Cheat:serializeTable(searchOperation))
+        return false, nil
+    end
+
+    for _, perk in ipairs(perks) do
+        Cheat:logInfo("Perk: %s", Cheat:getPerkDisplayText(perk))
+    end
+    return true, perks
 end
 
 -- ============================================================================
 -- cheat_add_perk
 -- ============================================================================
-Cheat.cheat_add_perk_args = {
-    id = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.") end,
-    any = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "Whether to not filter out perks you can't select yourself") end
-}
-Cheat:createCommandLegacy("cheat_add_perk", "Cheat:cheat_add_perk(%line)", Cheat.cheat_add_perk_args,
-    "Adds the given perk to the player.",
-    "Adds the last perk with 'hunt' in its name", "cheat_add_perk id:hunt",
-    "Adds the perk juggler perk by ID", "cheat_add_perk id:09a5f2a0-d59f-42c2-a80c-bec9ad7ca168",
-    "Adds the perk general_speech perk by full name", "cheat_add_perk id:general_speech")
-function Cheat:cheat_add_perk(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_add_perk_args)
-    local id, idErr = Cheat:argsGet(args, "id")
-    local any = Cheat:argsGet(args, "any")
-    if not idErr then
-        local perk_id, perk_name = Cheat:find_perk(id, nil, any)
-        if not Cheat:isBlank(perk_id) then
-            player.soul:AddPerk(perk_id)
-            Cheat:logInfo("Added perk [%s] to player.", tostring(perk_name))
-            return true
-        else
-            Cheat:logError("Perk [%s] not found.", tostring(id))
-        end
+Cheat:createCommand("cheat_add_perk", {
+        i_know_what_i_am_doing = function (args, name, showHelp) return Cheat:argsGetRequiredBoolean(args, name, showHelp, "Enables this command.") end,
+        any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+        exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
+    },
+    "Adds matching perks to the player.\n" ..
+    "$4NOTE: It isn't possible to know exact what perks the player has or were added/removed.\n" ..
+    "$4This command will just log the perks it tried to add.\n" ..
+    "$4Some perks may be part of quests or other game mechanics or not intented for the player to use.",
+    "Adds the perk 'Deft hands II' by ID", "cheat_add_perk exact:b4b0c345-e8c3-4b9e-890a-e77549596131",
+    "Adds the perk 'Viper' perk by full name", "cheat_add_perk exact:Viper",
+    "Adds all perks with 'Hands' in their names", "cheat_add_perk any:Hands")
+function Cheat:cheat_add_perk(c)
+    if not c.i_know_what_i_am_doing then
+        Cheat:logError("IQ test failed.")
+        return false
     end
+
+    local searchOperation = nil
+    if c.exact then
+        searchOperation = { exact = true, searchKey = c.exact }
+    elseif c.any then
+        searchOperation = { exact = false, searchKey = c.any }
+    end
+
+    if not searchOperation then
+        Cheat:logError("Must provide one of: exact, any")
+        System.ExecuteCommand("cheat_add_perk ?")
+        return false
+    end
+
+    local perks = Cheat:findPerks(searchOperation)
+    if not perks or #perks == 0 then
+        Cheat:logWarn("No perk found matching [%s].", Cheat:serializeTable(searchOperation))
+        return false
+    end
+
+    for _, perk in pairs(perks) do
+        Cheat:addPerk(perk.perk_id)
+        Cheat:logInfo("Added Perk: %s", Cheat:getPerkDisplayText(perk))
+    end
+
+    Cheat:logInfo("Added perks matching [%s].", Cheat:serializeTable(searchOperation))
+    return true
+end
+
+-- ============================================================================
+-- cheat_remove_perk
+-- ============================================================================
+Cheat:createCommand("cheat_remove_perk", {
+        i_know_what_i_am_doing = function (args, name, showHelp) return Cheat:argsGetRequiredBoolean(args, name, showHelp, "Enables this command.") end,
+        any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+        exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end
+    },
+    "Removes matching perks from the player.\n" ..
+    "$4NOTE: It isn't possible to know exact what perks the player has or were added/removed.\n" ..
+    "$4This command will just log the perks it tried to remove.\n" ..
+    "$4Some perks may be part of quests or other game mechanics or not intented for the player to use.",
+    "Removes the perk 'Deft hands II' by ID", "cheat_remove_perk exact:b4b0c345-e8c3-4b9e-890a-e77549596131",
+    "Removes the perk 'Viper' perk by full name", "cheat_remove_perk exact:Viper",
+    "Removes all perks with 'Hands' in their names", "cheat_remove_perk any:Hands")
+function Cheat:cheat_remove_perk(c)
+    if not c.i_know_what_i_am_doing then
+        Cheat:logError("IQ test failed.")
+        return false
+    end
+
+    local searchOperation = nil
+    if c.exact then
+        searchOperation = { exact = true, searchKey = c.exact }
+    elseif c.any then
+        searchOperation = { exact = false, searchKey = c.any }
+    end
+
+    if not searchOperation then
+        Cheat:logError("Must provide one of: exact, any")
+        System.ExecuteCommand("cheat_remove_perk ?")
+        return false
+    end
+
+    local perks = Cheat:findPerks(searchOperation)
+    if not perks or #perks == 0 then
+        Cheat:logWarn("No perks found matching [%s].", Cheat:serializeTable(searchOperation))
+        return false
+    end
+
+    for _, perk in pairs(perks) do
+        Cheat:removePerk(perk.perk_id)
+        Cheat:logInfo("Removed Perk: %s", Cheat:getPerkDisplayText(perk))
+    end
+
+    Cheat:logInfo("Removed perks matching [%s].", Cheat:serializeTable(searchOperation))
+    return true
+end
+
+-- ============================================================================
+-- cheat_remove_all_perks
+-- ============================================================================
+Cheat:createCommand("cheat_remove_all_perks", {
+        i_know_what_i_am_doing = function (args, name, showHelp) return Cheat:argsGetRequiredBoolean(args, name, showHelp, "Enables this command.") end,
+    },
+    "Removes all possible perks from the player.\n" ..
+    "$4This commands 1st calls cheat_reset_perks to remove visible perks and refund perk points.\n" ..
+    "$4Then we attempt to remove each perk from the perk database from the player.\n" ..
+    "$4There is no way to know what perks were removed.\n" ..
+    "$4Some perks may be part of quests or other game mechanics or not intented for the player to use.",
+    "Remove all perks", "cheat_remove_all_perks")
+function Cheat:cheat_remove_all_perks(c)
+    if not c.i_know_what_i_am_doing then
+        Cheat:logError("IQ test failed.")
+        return false
+    end
+
+    -- try and refund everything theen brute force remove the rest
+    if Cheat:cheat_reset_perks() and Cheat:removeAllPerks() then
+        Cheat:logInfo("All possible perks removed.")
+        return true
+    else
+        Cheat:logError("Failed to remove all perks.")
+    end
+
     return false
 end
 
 -- ============================================================================
 -- cheat_add_all_perks
 -- ============================================================================
-Cheat.cheat_add_all_perks_args = {
-    exclude = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true then negative, test, and obsolete of perks are excluded.") end,
-    any = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "Whether to not filter out perks you can't select yourself") end
-}
-Cheat:createCommandLegacy("cheat_add_all_perks", "Cheat:cheat_add_all_perks(%line)", Cheat.cheat_add_all_perks_args,
+--[[
+Cheat:createCommand("cheat_add_all_perks", {
+        exclude = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true then negative, test, and obsolete of perks are excluded.") end,
+        any = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "Whether to not filter out perks you can't select yourself") end
+    },
     "Adds all perks to the player.",
     "Add all perks", "cheat_add_all_perks exclude:true",
     "Add all perks including negative, test, and obsolete perks", "cheat_add_all_perks exclude:false")
-function Cheat:cheat_add_all_perks(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_add_all_perks_args)
-    local exclude, excludeErr = Cheat:argsGet(args, "exclude")
-    local any = Cheat:argsGet(args, "any")
+function Cheat:cheat_add_all_perks(c)
     local gender = player.soul:GetGender()
 
     if gender ~= 2 then
@@ -182,7 +372,7 @@ function Cheat:cheat_add_all_perks(line)
         excludes["084dd7fd-daee-4041-bae1-c58a0c132292"] = true -- Relieved
         excludes["0dd2c3df-9f61-4743-b5ca-8c3ac39fb57d"] = true -- Resistance
 
-        local perks = Cheat:find_perk(nil, true, any)
+        local perks = Cheat:findPerk(nil, true, any)
         if perks then
             for i, perk in pairs(perks) do
                 if not exclude or not excludes[perk.perk_id] then
@@ -202,67 +392,99 @@ function Cheat:cheat_add_all_perks(line)
     return true
 end
 
--- ============================================================================
--- cheat_remove_perk
--- ============================================================================
-Cheat.cheat_remove_perk_args = {
-    id = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.") end,
-    any = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "Whether to not filter out perks you can't select yourself") end
-}
-Cheat:createCommandLegacy("cheat_remove_perk", "Cheat:cheat_remove_perk(%line)", Cheat.cheat_remove_perk_args,
-    "Removes the given perk from the player.",
-    "Removes the last perk with 'hunt' in its name", "cheat_remove_perk id:hunt",
-    "Removes the perk juggler by ID", "cheat_remove_perk id:09a5f2a0-d59f-42c2-a80c-bec9ad7ca168",
-    "Removes the perk golden_tongue by full name.", "cheat_remove_perk id:golden_tongue")
-function Cheat:cheat_remove_perk(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_remove_perk_args)
-    local id, idErr = Cheat:argsGet(args, "id")
-    local any = Cheat:argsGet(args, "any")
-    if not idErr then
-        local perk_id, perk_name = Cheat:find_perk(id, nil, any)
-        if not Cheat:isBlank(perk_id) then
-            player.soul:RemovePerk(perk_id)
-            Cheat:logInfo("Removed perk [%s] from player.", tostring(perk_name))
-            return true
-        else
-            Cheat:logError("Perk [%s] not found.", tostring(id))
-        end
-    end
-    return false
-end
-
--- ============================================================================
--- cheat_remove_all_perks
--- ============================================================================
-Cheat:createCommandLegacy("cheat_remove_all_perks", "Cheat:cheat_remove_all_perks()", nil,
-    "Removes all perks from the player.",
-    "Remove all perks", "cheat_remove_all_perks")
-function Cheat:cheat_remove_all_perks(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_remove_perk_args)
-    local any = Cheat:argsGet(args, "any")
-    local perks = Cheat:find_perk(nil, true, any)
-    if perks then
-        for i, perk in pairs(perks) do
-            player.soul:RemovePerk(perk.perk_id)
-            Cheat:logInfo("Removed perk [%s] from player.", tostring(perk.perk_name))
-        end
-        Cheat:logInfo("All perks removed.")
-    else
-        Cheat:logError("No perks found in perk database.")
-    end
-    return true
-end
+]]
 
 -- ============================================================================
 -- cheat_reset_perks
 -- ============================================================================
-Cheat:createCommandLegacy("cheat_reset_perks", "Cheat:cheat_reset_perks()", nil,
-    "Resets all visible Perks.",
-    "Reset all Perks", "cheat_reset_perks")
+Cheat:createCommand("cheat_reset_perks", nil,
+    "Added a buff that will removed all perks visible on the player's perk sheet.\n" ..
+    "This will refund perk points, up to the max you're earned.")
 function Cheat:cheat_reset_perks()
-    Cheat:cheat_add_buff("id:c8b0d038-a503-44cc-85a5-7f753a09eb6e")
-    Cheat:logInfo("All perks have been reset.")
+    if Cheat:proxy("cheat_add_buff", "exact:c8b0d038-a503-44cc-85a5-7f753a09eb6e") then
+        Cheat:logInfo("All perks have been reset.")
+        return true
+    else
+        return false
+    end
+end
+
+-- ============================================================================
+-- cheat_add_all_codex_perks
+-- ============================================================================
+Cheat:createCommand("cheat_add_all_codex_perks", nil, "Adds all perks related to the codex.")
+function Cheat:cheat_add_all_codex_perks()
+    player.soul:AddAllCodexPerks()
+    Cheat:logInfo("All codex perks added.")
     return true
+end
+
+-- ============================================================================
+-- test_core_perks
+-- ============================================================================
+function Cheat:test_core_perks()
+    Cheat:beginTests("test_core_perks")
+
+    local result, perks, perk, count = nil, nil, nil, nil
+
+    -- findPerks all
+    perks = Cheat:findPerks(nil)
+    Cheat:testAssert("findPerks all perks", #perks > 400)
+
+    -- findPerk not found
+    perk = Cheat:findPerk({ exact = true, searchKey = "this perk doesn't exist" })
+    Cheat:testAssert("findPerk fakeperk", perk == nil)
+
+    -- findPerk found
+    perk = Cheat:findPerk({ exact = true, searchKey = "headbutt" })
+    Cheat:testAssert("findPerk headbutt 1", perk ~= nil)
+    if perk then
+        Cheat:testAssertEquals("findPerk headbutt 2", perk.perk_id, "29904729-cd69-498a-bdfc-0fb1c69aed44")
+        Cheat:testAssertEquals("findPerk headbutt 3", perk.perk_lname, "Headbutt")
+    end
+
+    -- cheat_find_perks exact
+    Cheat:testAssert("cheat_find_perks exact 1", Cheat:proxy("cheat_find_perks", "exact:Heavy Duty"))
+
+    -- cheat_find_perks any
+    result, perks = Cheat:proxy("cheat_find_perks", "any:head")
+    Cheat:testAssert("cheat_find_perks any 1", result and perks and #perks >= 3)
+
+    -- cheat_add_perk invalid
+    Cheat:testAssertFalse("cheat_add_perk invalid 1", Cheat:proxy("cheat_add_perk", nil))
+
+    -- cheat_add_perk valid
+    Cheat:testAssert("cheat_add_perk valid 1", Cheat:removeAllPerks())
+    Cheat:testAssert("cheat_add_perk valid 2", Cheat:hasPerkName("Escape artist") == false)
+    Cheat:testAssert("cheat_add_perk valid 3", Cheat:proxy("cheat_add_perk", "exact:Escape artist i_know_what_i_am_doing:true"))
+    Cheat:testAssert("cheat_add_perk valid 4", Cheat:hasPerkName("Escape artist"))
+
+    -- cheat_remove_perk invalid
+    Cheat:testAssertFalse("cheat_remove_perk invalid 1", Cheat:proxy("cheat_remove_perk", nil))
+
+    -- cheat_remove_perk valid
+    Cheat:testAssert("cheat_remove_perk 1", Cheat:setupPerkTest())
+    Cheat:testAssert("cheat_remove_perk 2", Cheat:proxy("cheat_remove_perk", "exact:Escape artist i_know_what_i_am_doing:true"))
+    Cheat:testAssert("cheat_remove_perk 3", Cheat:hasPerkName("Escape artist") == false)
+
+    -- cheat_remove_all_perks
+    Cheat:testAssert("cheat_remove_all_perks 1", Cheat:setupPerkTest())
+    count = Cheat:getPerkCount()
+    Cheat:testAssert("cheat_remove_all_perks 2", Cheat:proxy("cheat_remove_all_perks", "i_know_what_i_am_doing:true"))
+    Cheat:testAssert("cheat_remove_all_perks 3", Cheat:getPerkCount() == count - 2)
+
+    -- cheat_reset_perks
+    Cheat:testAssert("cheat_reset_perks 1", Cheat:setupPerkTest())
+    count = Cheat:getPerkCount()
+    Cheat:testAssert("cheat_reset_perks 2", Cheat:proxy("cheat_reset_perks", nil))
+    Cheat:testAssert("cheat_reset_perks 3", Cheat:getPerkCount() == count - 1) -- only removes the vis=2 perk from setupPerkTest
+
+    -- cheat_add_all_codex_perks
+    Cheat:testAssert("cheat_add_all_codex_perks 1", Cheat:removeAllPerks())
+    Cheat:testAssert("cheat_add_all_codex_perks 2", Cheat:proxy("cheat_add_all_codex_perks", nil))
+    Cheat:testAssertEquals("cheat_add_all_codex_perks 3", Cheat:getPerkCount(), 0) -- none of the added entries show in the count
+
+    Cheat:endTests()
 end
 
 -- ============================================================================
