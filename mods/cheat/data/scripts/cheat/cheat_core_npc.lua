@@ -273,6 +273,11 @@ function Cheat:getEntityInfo(entity)
     return entityInfo
 end
 
+---findEntities
+---@param searchOperation table|nil
+---@param range number|nil
+---@param classes table|nil
+---@return table
 function Cheat:findEntities(searchOperation, range, classes)
     if not searchOperation then
         searchOperation = { exact = false, searchKey = nil }
@@ -324,6 +329,10 @@ function Cheat:findEntities(searchOperation, range, classes)
     return matchingEntities
 end
 
+---findNpcs
+---@param searchOperation table|nil
+---@param range number|nil
+---@return table
 function Cheat:findNpcs(searchOperation, range)
     return Cheat:findEntities(searchOperation, range, { "NPC", "NPC_Female", "Horse" })
 end
@@ -458,9 +467,9 @@ function Cheat:getEntityInfoDisplayText(entityInfo)
         return "nil"
     end
 
-    return string.format("name=%s () class=%s loc=%s health=%s",
-        tostring(entityInfo.lname),
-        tostring(entityInfo.name),
+    local name = Cheat:getFormattedNames(entityInfo.name, entityInfo.lname)
+    return string.format("name=%s class=%s loc=%s health=%s",
+        name,
         tostring(entityInfo.class),
         tostring(entityInfo.loc),
         tostring(entityInfo.health))
@@ -604,7 +613,7 @@ function Cheat:cheat_mass_kill(c)
         searchOperation = { exact = false, searchKey = c.any }
     end
 
-    local entities = Cheat:findEntities(searchOperation, c.radius)
+    local entities = Cheat:findEntities(searchOperation, c.radius, nil)
     if not entities or #entities == 0 then
         Cheat:logWarn("No entities matching [%s] found in radius [%s].", Cheat:serializeTable(searchOperation), tostring(c.radius))
         return false, nil
