@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="barbora" xsi:noNamespaceSchemaLocation="../database.xsd">
 	<buffs version="1">
-		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="a218b534-b2a5-11ed-afa1-0242ac120002" buff_lifetime_id="0" buff_name="cheat_invisibility" buff_params="con=-100,evi=-100,lpv=-100,nbi=-10,noi=-100,ors=-10" duration="-1" icon_id="0" implementation="Cpp:Constant" is_persistent="true" />
+		<!-- <buff buff_class_id="1" buff_exclusivity_id="1" buff_id="a218b534-b2a5-11ed-afa1-0242ac120002" buff_lifetime_id="0" buff_name="cheat_invisibility" buff_params="con=-100,evi=-100,lpv=-100,nbi=-10,noi=-100,ors=-10" duration="-1" icon_id="0" implementation="Cpp:Constant" is_persistent="true" /> -->
 		
 		<!--
 
@@ -35,7 +35,36 @@
 
 		<buff_lifetime buff_lifetime_id="0" buff_lifetime_name="ShortTerm" />
 		<buff_lifetime buff_lifetime_id="1" buff_lifetime_name="LongTerm" />
+
+		<buff_ui_type buff_ui_type_id="1" buff_ui_type_name="Buff" />
+		<buff_ui_type buff_ui_type_id="2" buff_ui_type_name="Debuff" />
+		<buff_ui_type buff_ui_type_id="3" buff_ui_type_name="InjuryDebuff" />
+		<buff_ui_type buff_ui_type_id="4" buff_ui_type_name="Perk" />
+
+		<buff_ui_visibility buff_ui_visibility_id="0" buff_ui_visibility_name="None" />
+		<buff_ui_visibility buff_ui_visibility_id="1" buff_ui_visibility_name="HUD" />
+		<buff_ui_visibility buff_ui_visibility_id="2" buff_ui_visibility_name="Inventory" />
+		<buff_ui_visibility buff_ui_visibility_id="3" buff_ui_visibility_name="HUDandInventory" />
+		<buff_ui_visibility buff_ui_visibility_id="4" buff_ui_visibility_name="OnLocationEntered" />
 		-->
-		<buff buff_class_id="4" buff_exclusivity_id="0" buff_id="e4fc62ef-683d-4f8d-b02c-cca23d364f35" buff_lifetime_id="1" buff_name="cheat_carry_capacity" buff_params="cps+10" buff_ui_type_id="4" duration="-1" icon_id="replaceme" implementation="Cpp:Constant" is_persistent="true" />
+
+		<!-- non stacking -->
+		<buff buff_class_id="13" buff_exclusivity_id="1" buff_id="a218b534-b2a5-11ed-afa1-0242ac120002" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="3" duration="-1" icon_id="perk_night_crawler" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_invisibility" buff_ui_name="Cheat Invisibility" buff_params="con=-100,evi=-100,lpv=-100,nbi=-10,noi=-100,ors=-10"/>
+
+		<buff buff_class_id="13" buff_exclusivity_id="1" buff_id="e4fc62ef-683d-4f8d-0002-cca23d364f35" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="3" duration="-1" icon_id="perk_never_surrender" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_immortal" buff_ui_name="Cheat Immortal" buff_params="imm=1,health+100/s" />
+		
+		<!-- stacking -->
+		<buff buff_class_id="13" buff_exclusivity_id="1" buff_id="e4fc62ef-683d-4f8d-0010-cca23d364f35" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_carry_capacity_base" buff_ui_name="Cheat Carry Capacity" buff_params="cps+10" />
+		<buff buff_class_id="13" buff_exclusivity_id="0" buff_id="e4fc62ef-683d-4f8d-0011-cca23d364f35" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="0" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_carry_capacity" buff_ui_name="Cheat Carry Capacity" buff_params="cps+10" />
+
+		<buff buff_class_id="13" buff_exclusivity_id="1" buff_id="e4fc62ef-683d-4f8d-0020-cca23d364f35" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_xp_multiplier_base" buff_ui_name="Cheat XP Multiplier" buff_params="xpm*1.5" />
+		<buff buff_class_id="13" buff_exclusivity_id="0" buff_id="e4fc62ef-683d-4f8d-0021-cca23d364f35" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="0" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_xp_multiplier" buff_ui_name="Cheat XP Multiplier" buff_params="xpm*1.5" />
+
 	</buffs>
 </database>

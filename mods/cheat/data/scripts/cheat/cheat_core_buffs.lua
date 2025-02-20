@@ -255,11 +255,12 @@ end
 -- cheat_add_buff_immortal
 -- ============================================================================
 Cheat:createCommand("cheat_add_buff_immortal", nil,
-    "Adds permanent buff to make the player immortal plus fast healing (health 100/s).\n$3Use cheat_remove_buff_immortal to remove this.",
+    "Adds a custom non-persistent buff to make the player immortal. Buff visible on HUD & Buffs.\n" ..
+    "$3Use cheat_remove_buff_immortal to remove this buff or restart the game.",
     "Add immortality", "cheat_add_buff_immortal")
 function Cheat:cheat_add_buff_immortal()
     Cheat:proxy("cheat_add_buff_heal")
-    if Cheat:proxy("cheat_add_buff", "exact:6cf0aa39-e09c-42fa-bf67-10f2d03991b7") then
+    if Cheat:proxy("cheat_add_buff", "exact:e4fc62ef-683d-4f8d-0002-cca23d364f35") then
         Cheat:logInfo("Immortality buffs added.")
         return true
     else
@@ -274,7 +275,7 @@ Cheat:createCommand("cheat_remove_buff_immortal", nil,
     "Removes the buffs making the player immortal.",
     "Remove immortality", "cheat_remove_buff_immortal")
 function Cheat:cheat_remove_buff_immortal()
-    if Cheat:proxy("cheat_remove_buff", "exact:6cf0aa39-e09c-42fa-bf67-10f2d03991b7") then
+    if Cheat:proxy("cheat_remove_buff", "exact:e4fc62ef-683d-4f8d-0002-cca23d364f35") then
         Cheat:logInfo("Immortality buffs removed.")
         return true
     else
@@ -286,7 +287,9 @@ end
 -- cheat_add_buff_invisible
 -- ============================================================================
 Cheat:createCommand("cheat_add_buff_invisible", nil,
-    "Adds permanent invisible buff to player.\n$8Set visibility, conspicuousness and noise to zero.\n$3Use cheat_remove_buff_invisible to remove this.",
+    "Adds a custom non-persistent invisible buff to player. Buff visible on HUD & Buffs.\n" ..
+    "$8Set visibility, conspicuousness and noise to zero.\n" ..
+    "$3Use cheat_remove_buff_invisible to remove this buff or restart the game.",
     "Add invisible buff to player", "cheat_add_buff_invisible")
 function Cheat:cheat_add_buff_invisible()
     if Cheat:proxy("cheat_add_buff", "exact:a218b534-b2a5-11ed-afa1-0242ac120002") then
@@ -316,9 +319,10 @@ end
 -- cheat_add_buff_carry_weight
 -- ============================================================================
 Cheat:createCommand("cheat_add_buff_carry_weight", {
-        amount = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "Carry weight in pounds, rounded to nearest 10 pounds, caps at 120.") end
+        amount = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "Carry weight in pounds, rounded to nearest 10 pounds.") end
     },
-    "Applies a custom persistent buff to the player's carry weight per point of strength (CPS).",
+    "Applies a custom non-persistent carry weight buff. Cap 120.\n" ..
+    "Uses carry weight per strength (CPS) derived stat. Buff visible in inventory.",
     "Adds 100 pounds per str to player's carry weight.", "cheat_add_buff_carry_weight amount:100",
     "Remove the buff.", "cheat_add_buff_carry_weight amount:0")
 function Cheat:cheat_add_buff_carry_weight(c)
@@ -327,25 +331,70 @@ function Cheat:cheat_add_buff_carry_weight(c)
     -- carry weight cap 600?
 
     -- custom buff cheat_carry_capacity_1 that adds +100 carry weight
-    local buff_id = "e4fc62ef-683d-4f8d-b02c-cca23d364f35"
+    local buff_id_base = "e4fc62ef-683d-4f8d-0010-cca23d364f35"
+    local buff_id = "e4fc62ef-683d-4f8d-0011-cca23d364f35"
     local buff_multiplier = 10
 
     -- remove all stacks of the buff
-    local removedAmount = player.soul:RemoveAllBuffsByGuid(buff_id)
-    Cheat:logDebug("removed " .. tostring(removedAmount))
+    player.soul:RemoveAllBuffsByGuid(buff_id_base)
+    player.soul:RemoveAllBuffsByGuid(buff_id)
 
     -- add multiple stacks to add "amount" pounds of capacity to the nearest multiple of buff_multiplier
     local amount = Cheat:clamp(c.amount, 0, 120)
     local scaled_number = amount / buff_multiplier
     local rounded_scaled_number = math.floor(scaled_number + 0.5)
-    for i = 1, rounded_scaled_number do
+    for i = 1, rounded_scaled_number - 1 do
         player.soul:AddBuff(buff_id)
+    end
+
+    if rounded_scaled_number > 0 then
+        player.soul:AddBuff(buff_id_base)
     end
 
     Cheat:logInfo("Carry weight increased by [%s] (%s*%s) pounds per strength.",
         tostring(rounded_scaled_number * buff_multiplier),
         tostring(rounded_scaled_number),
         tostring(buff_multiplier))
+    return true
+end
+
+-- ============================================================================
+-- cheat_add_buff_xp
+-- ============================================================================
+Cheat:createCommand("cheat_add_buff_xp", {
+        amount = function (args, name, showHelp) return Cheat:argsGetRequiredNumber(args, name, showHelp, "Percentage increase in XP gain. Rounded to nearest 50% increment.") end
+    },
+    "Adds a custom non-persistent XP multiplier buff. Cap 500%\n",
+    "Uses XP multiplier (XPM) derived stat. Buff visible in inventory.",
+    "Adds 200% XP multiplier.", "cheat_add_buff_xp amount:200",
+    "Remove the buff.", "cheat_add_buff_xp amount:0")
+function Cheat:cheat_add_buff_xp(c)
+    -- custom xpm 1.5 multiplier buff
+    local buff_id_base = "e4fc62ef-683d-4f8d-0020-cca23d364f35"
+    local buff_id = "e4fc62ef-683d-4f8d-0021-cca23d364f35"
+    local buff_multiplier = 50
+
+    -- remove all stacks of the buff
+    player.soul:RemoveAllBuffsByGuid(buff_id_base)
+    player.soul:RemoveAllBuffsByGuid(buff_id)
+
+    -- add multiple stacks to add "amount" to the nearest multiple of buff_multiplier
+    local amount = Cheat:clamp(c.amount, 0, 500)
+    local scaled_number = amount / buff_multiplier
+    local rounded_scaled_number = math.floor(scaled_number + 0.5)
+    for i = 1, rounded_scaled_number - 1 do
+        player.soul:AddBuff(buff_id)
+    end
+
+    if rounded_scaled_number > 0 then
+        player.soul:AddBuff(buff_id_base)
+    end
+
+    Cheat:logInfo("XP multiplier set to [%s] (%s*%s) (xpm=%s).",
+        tostring(rounded_scaled_number * buff_multiplier),
+        tostring(rounded_scaled_number),
+        tostring(buff_multiplier),
+        tostring(player.soul:GetDerivedStat("xpm")))
     return true
 end
 
