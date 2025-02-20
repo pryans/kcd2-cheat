@@ -417,6 +417,8 @@ function Cheat:addItem(searchOperation, amount, condition, quality, quest, notif
     while true do
         -- some items seem like they can only be added 1 at a time?
         -- Cheat:logDebug("player.inventory:CreateItem(%s, %f, %d)", item.id, health, amount)
+        -- q4 sword 3858560f-cf48-436f-8815-4426003288fb
+        -- player.inventory:CreateItem("3858560f-cf48-436f-8815-4426003288fb", 1, 1)
         if not player.inventory:CreateItem(item.id, health, amount) then
             -- quest items that fail to be added will exit here
             Cheat:logError("Failed: name=%s amout=%s/%s cond=%s qual=%s/%s quest=%s id=%s",

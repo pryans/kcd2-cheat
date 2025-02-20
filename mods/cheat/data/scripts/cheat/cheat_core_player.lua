@@ -97,10 +97,10 @@ end
 -- ============================================================================
 -- cheat_loc
 -- ============================================================================
-Cheat:createCommandLegacy("cheat_loc", "Cheat:loc()", nil,
+Cheat:createCommand("cheat_loc", nil,
     "Shows player's world location.",
     "Type to console", "cheat_loc")
-function Cheat:loc()
+function Cheat:cheat_loc()
     local loc = player:GetWorldPos();
     Cheat:logInfo("Player's location x=%d y=%d z=%d", loc.x, loc.y, loc.z)
     return loc
