@@ -53,7 +53,7 @@
 			buff_name="cheat_invisibility" buff_ui_name="Cheat Invisibility" buff_params="con=-100,evi=-100,lpv=-100,nbi=-10,noi=-100,ors=-10"/>
 
 		<buff buff_class_id="13" buff_exclusivity_id="1" buff_id="e4fc62ef-683d-4f8d-0002-cca23d364f35" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="3" duration="-1" icon_id="perk_never_surrender" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
-			buff_name="cheat_immortal" buff_ui_name="Cheat Immortal" buff_params="imm=1,health+100/s" />
+			buff_name="cheat_immortal" buff_ui_name="Cheat Immortal" buff_params="imm=1,upr=1,health+100/s" />
 		
 		<!-- stacking -->
 		<buff buff_class_id="13" buff_exclusivity_id="1" buff_id="e4fc62ef-683d-4f8d-0010-cca23d364f35" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 

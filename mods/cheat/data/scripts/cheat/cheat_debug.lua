@@ -200,7 +200,7 @@ function Cheat:entityDumper(entity)
     bld = bloodiness
     charisma
     frg = fragrance
-
+    upr = unconscious protection
     sco = stamina consumption, used on companion/horse buffs like perk_fast_as_a_wind_ii_companion to lower rate of consumption va sco*0.95, small is better
     ]]
     -- player.soul:GetDerivedStat('hac', {}, self.secondChancesPerks)
