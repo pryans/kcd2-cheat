@@ -192,7 +192,7 @@ function Cheat:initItemDatabase()
     Cheat:xmlLoadDatabase("libs/tables/item/item__aux.xml", p_func)
     Cheat:xmlLoadDatabase("libs/tables/item/item__alchemy.xml", p_func)
     --Cheat:xmlLoadDatabase("libs/tables/item/item__autotests.xml", p_func)
-    --Cheat:xmlLoadDatabase("libs/tables/item/item__test.xml", p_func)
+    Cheat:xmlLoadDatabase("libs/tables/item/item__test.xml", p_func) -- Tin Doppelganger Badge part of normal gameplay
     Cheat:xmlLoadDatabase("libs/tables/item/item__unique.xml", p_func)
 
     for _, item in pairs(Cheat.g_item_database) do
