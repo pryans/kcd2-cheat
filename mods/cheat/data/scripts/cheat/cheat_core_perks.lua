@@ -126,14 +126,6 @@ function Cheat:setupPerkTest()
         and Cheat:hasPerkName("Red Herring")
 end
 
--- bugged via hasPerkId
-function Cheat:logPerkCVS()
-    for _, perk in pairs(Cheat:findPerks()) do
-        local owned = Cheat:hasPerkId(perk.perk_id)
-        Cheat:logDebug("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", tostring(owned), tostring(perk.perk_lname or ""), tostring(perk.autolearnable or ""), tostring(perk.visibility or ""), tostring(perk.icon_id or ""), tostring(perk.parent_id or ""), tostring(perk.metaperk_id or ""), tostring(perk.ui_priority or ""), tostring(perk.perk_name or ""), tostring(perk.perk_id or ""), tostring(perk.exclude_in_game_mode or ""), tostring(perk.level or ""), tostring(perk.perk_ui_desc or ""), tostring(perk.stat_selector or ""), tostring(perk.perk_ui_name or ""), tostring(perk.perk_ui_lore_desc or ""), tostring(perk.skill_selector or ""))
-    end
-end
-
 -- ============================================================================
 -- cheat_find_perks
 -- ============================================================================

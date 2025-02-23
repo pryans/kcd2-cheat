@@ -202,6 +202,33 @@ function Cheat:entityDumper(entity)
     frg = fragrance
     upr = unconscious protection
     sco = stamina consumption, used on companion/horse buffs like perk_fast_as_a_wind_ii_companion to lower rate of consumption va sco*0.95, small is better
+    xpm = xp multiplier
+    sdn = crime_punishment_brand sdn+1
+    brn = crime_punishment_brand brn+0.5 (brand)
+    grm = perk_sympatak grm*1.1 | crime_punishment_brand grm*0.5  (good reputation multiplier)
+    brm = perk_oportunista brm-0.1 = If you lose your Reputation, the drop will be 10% less. (bad reputation multiplier)
+    itd = perk_art_of_preservation itd*0.5 = The raw food and herbs you have in your inventory will spoil 50% slower. (item decary)
+    # wud
+WeaponUsageDamageMod
+-- lerp(1, MaxFencingWeaponUsageMod, Fencing / SkillCap)
+
+# edm
+EquipmentUseDamageMultiplier
+
+# ewd
+EquippedWeaponUseDamageMultiplier
+
+# itd
+Item spoil decay rate
+
+# cdw
+ClinchDamageToWeapon
+
+# dee
+DamageToEnemyEquipment
+
+# dew
+DamageToEnemyWeapon
     ]]
     -- player.soul:GetDerivedStat('hac', {}, self.secondChancesPerks)
     local derivedStats = { "charisma", "rch", "cse", "vib", "evi", "con", "mst", "mhs", "hlt", "sdt", "fov", "vir", "tsr", "dtf", "dbf", "pt1", "pt5", "dai", "bnc", "hac", "hde", "lfu", "lio", "cap", "alo", "oad", "owa", "wud", "lvl", "noi", "fsm", "nrs", "rsb", "rsa", "ble", "ibi", "bow", "cow", "aco", "caw", "rcw", "mor", "dem", "mcf", "obe", "psr", "xpm", "osl", "mos", "ore", "caf", "rdq", "erq", "sle", "coc", "ufo", "mut", "prb", "fpa", "apa", "cag", "def", "dru", "poi", "pos", "ran", "iex", "hcm", "was", "grm", "brm", "drt", "sml", "smi", "frg", "hko", "enc", "fdm", "sma", "bma", "hgs", "pds", "sha", "pbm", "rml", "hml", "bso", "bld", "bba", "arr", "jrm", "sur", "imm", "apr", "ppr", "ltp", "upr", "skpr", "kopr", "cds", "edm", "prc", "cdw", "eqw", "pla", "wbc", "cbi", "nbi", "alc", "map", "adm", "alm", "hov", "btw", "owl", "rms", "deb", "ach", "prs", "imp", "drd", "crc", "dmt", "mgt", "bad", "nrv", "vag", "mag", "aag", "red", "drv", "pmc", "sdn", "brn", "plr", "bea", "kko", "sse", "ies", "lrm", "prm", "uvh", "uva", "StaminaCooldownDefault", "StaminaCooldownWeaponRaised", "StaminaCooldownAttack", "StaminaCooldownDodge", "StaminaCooldownHit", "StaminaCooldownBlock", "StaminaCooldownBrokenBlock", "StaminaCooldownCollisionHit", "StaminaCooldownJump", "StaminaCooldownFallDamage", "StaminaCooldownArcherySelfHarm", "StaminaCooldownSharpeningDoPedal", "StaminaCooldownBlacksmithingStroke", "StaminaCooldownBlacksmithingExhaustingStroke", "cnp", "cbp", "csp", "slp", "cep", "icp", "crp", "dfe", "csc", "hvp", "pqe", "sks", "sst", "sss", "xst", "xag", "xvi", "xsw", "xcr", "xsu", "xhw", "xma", "xsc", "srr", "bap", "alp", "atd", "ams", "rcx", "lfb", "tba", "nrw", "fac", "ahe", "apo", "ano", "fpd", "eph", "rpd", "rpr", "rpa", "hla", "rpp", "efd", "aml", "lgp" }

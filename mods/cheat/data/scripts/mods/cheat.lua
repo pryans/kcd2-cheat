@@ -79,6 +79,91 @@ function Cheat:loadDatabases()
     Cheat:initItemDatabase()
 end
 
+function Cheat:dumpDatabases()
+    local getCSVSafeString = function (value)
+        value = Cheat:trimToNil(tostring(value))
+        if value then
+            -- value = string.gsub(value, ",", "\\,") -- not needed with double quotes
+            value = string.gsub(value, "\"", "")
+            return "\"" .. value .. "\""
+        else
+            return ""
+        end
+    end
+
+    local getLocalizedDesc = function (database, soulNameKey, soulDescKey)
+        local soulDescSearchKeys = {}
+        if soulDescKey then
+            table.insert(soulDescSearchKeys, soulDescKey)
+        elseif soulNameKey then
+            local soulDescKey1 = soulNameKey .. "_desc"
+            local soulDescKey2 = string.gsub(soulNameKey, "_name", "_desc")
+            table.insert(soulDescSearchKeys, soulDescKey1)
+            table.insert(soulDescSearchKeys, soulDescKey2)
+        else
+            return ""
+        end
+
+        local lnames = Cheat:findLocalizedNames({ database }, soulDescSearchKeys)
+        local lname = ""
+        if lnames then
+            if lnames.l2name then
+                lname = lnames.l2name
+            elseif lnames.l1name then
+                lname = lnames.l1name
+            end
+        end
+        return lname
+    end
+
+    -- buffs
+    System.LogAlways("_BEGIN_BUFFS_")
+    System.LogAlways(string.format("id,name,params,description"))
+    for _, buff in ipairs(Cheat.g_buff_database) do
+        local id = getCSVSafeString(buff.buff_id)
+        local name = getCSVSafeString(Cheat:getLocalizedBuffName(buff))
+        local params = getCSVSafeString(buff.buff_params)
+        local desc = getCSVSafeString(getLocalizedDesc(Cheat.g_localization_soul_database, nil, buff.buff_desc))
+        System.LogAlways(string.format("%s,%s,%s,%s", id, name, params, desc))
+    end
+    System.LogAlways("_END_BUFFS_")
+
+    -- perks
+    System.LogAlways("_BEGIN_PERKS_")
+    System.LogAlways(string.format("id,name,description"))
+    for _, perk in ipairs(Cheat.g_perk_database) do
+        local id = getCSVSafeString(perk.perk_id)
+        local name = getCSVSafeString(Cheat:getLocalizedPerkName(perk))
+        local desc = getCSVSafeString(getLocalizedDesc(Cheat.g_localization_soul_database, nil, perk.perk_ui_desc))
+        System.LogAlways(string.format("%s,%s,%s", id, name, desc))
+    end
+    System.LogAlways("_END_PERKS_")
+
+    -- skills
+    System.LogAlways("_BEGIN_SKILLS_")
+    System.LogAlways(string.format("id,name,description"))
+    for _, skill in ipairs(Cheat.g_skill_database) do
+        local id = getCSVSafeString(skill.skill_id)
+        local name = getCSVSafeString(Cheat:getLocalizedSkillName(skill))
+        local desc = getCSVSafeString(getLocalizedDesc(Cheat.g_localization_soul_database, nil, skill.skill_desc_nolevel))
+        System.LogAlways(string.format("%s,%s,%s", id, name, desc))
+    end
+    System.LogAlways("_END_SKILLS_")
+
+    -- items
+    System.LogAlways("_BEGIN_ITEMS_")
+    System.LogAlways(string.format("id,name,description"))
+    for _, item in ipairs(Cheat.g_item_database) do
+        local id = getCSVSafeString(item.id)
+        local name = getCSVSafeString(Cheat:getLocalizedItemName(item))
+        local desc = getCSVSafeString(getLocalizedDesc(Cheat.g_localization_item_database, nil, item.uiinfo))
+        System.LogAlways(string.format("%s,%s,%s", id, name, desc))
+    end
+    System.LogAlways("_END_ITEMS_")
+
+    System.LogAlways("Dump Finished")
+end
+
 function Cheat:runTestSuite()
     Cheat:beginTestSuite(false)
 

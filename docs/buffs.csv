@@ -1,0 +1,562 @@
+id,name,params,description
+"01807959-3249-40f3-a25b-9983b3d9e5cb","Tortured","strength*0.25\,agility*0.25\,vitality*0.25\,srg*0.25","You were tortured at Trosky\, and as a result your Strength\, Agility and Vitality are reduced."
+"04218e40-e756-476b-914e-03d67a24e733","Poison","poi=1","You've been poisoned."
+"053b4122-6dfa-44d1-9a7c-70bf14c67506","inDialog","vision*0.8\, hearing*0.8",
+"0606c003-7419-4e83-b359-59d1ff5ca8f5","svatba_tournamentBuffForNpc","hlh*0.1\,slh*0.1\,ade*1.2",
+"061d9f55-6652-461f-bb64-471a631f2d21","item_bridle","vitality+5\,agility+3",
+"0648c02b-ebe8-4a77-85a5-23b43f625dc5","Well Rested","mst*1.2","You slept well\, so you have 20% more Stamina."
+"068143cd-45b5-4c44-8c6c-9d2c622b75de","blacksmithing_stamina",,
+"072de769-e653-4191-80e6-8c1fcd207d59","Saliva",,"You have a mild alcohol habit\, but so far it's had no consequences for you. Long-term abstinence will cure you."
+"076c2e93-347d-4996-bef9-016c3d890008","not_so_tough_guy","hlh*2.5",
+"07db9dfd-0e0c-4cbe-bf8a-10aaa1add262","test_invisible","ors=-1",
+"083704b7-e238-41c3-9996-8ebd5cde89e1","boar_easyKill_permanent","hlh=30\,slh=100\, ble*3",
+"084023c1-a396-4d48-aaeb-7e0f7981b66d","prepadeni_ptacekBoostSpeed","agility=30",
+"0873fbf3-a245-4e3e-9b4a-bb2f2df09c02","prepadeniVlasskehoDvora_alcoholAntidoteBooster","apa=0.05",
+"087ae30d-5484-4223-8814-0bc946a07172","Stamina Frenzy","hlh*0.5\,slh*1.8",
+"0902c0be-711b-40be-bc76-78d93de970aa","meat_str_exp_test","xst*1.1",
+"09fd5ffb-4972-4b70-8c2e-02c35bd15602","combat_passivity","cag=0",
+"0a00cd37-3769-4d0f-8f82-088d5a3f9b1b","mlynaruvUcen_stealthTakedownDebuff","fencing=1",
+"0ba907a9-780f-4427-ba8a-a3b2a788d0bc","unstream_protection_nonpersistent",,
+"0c903899-fcc9-4cf2-9ee3-1130ac08b0fc","Bleeding",,"You're bleeding. Unless you bandage your wounds\, you'll slowly lose health and die. The bleeding won't stop on its own."
+"0d256673-3b7a-4125-a069-b40c20d5071f","boar_charge","cow+1200",
+"0d635e3e-757d-477a-8196-f504f8afce46","Time Well Spent","strength+1\,agility+1\,vitality+1\,deb+1","You've had some sweet moments which no one can take away from you. You feel refreshed and invigorated.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;Your Strength\, Agility and Vitality are temporarily increased by 1."
+"0d7ada24-d3fc-4dc9-abc8-5e57bdf747bc","test_nighthawk_visual","owl+1",
+"0dcc7c4f-6ea3-4bd7-8f80-79249c4f5a66","haggle_denial","hde+1",
+"0e553f9a-5da8-4050-912e-0506e4a95c18","Tortured","strength*0.8\,agility*0.8\,vitality*0.8","You were tortured at Trosky\, and as a result your Strength\, Agility and Vitality are reduced."
+"0f6bc79a-fc67-4aab-a797-4a9d4e4c2dc5","death_protection_nonpersistent","imm=1\,upr=1",
+"0fc57667-2401-467a-82ec-90c402c22769","Golden Egg","charisma=20\,rcw=3\,pt1+0.5\,pt5+0.5\,dtf+0.75\,dbf+0.25","You ate the golden egg! They say it brings an enormous amount of luck. On the other hand\, gold is pretty heavy."
+"10fc25ca-c095-44c6-b88b-d54ad58ab0a6","Injured Left Leg","Run-1\,Walk-0.5\,LimitSprint","Your left leg is injured.&lt;br/&gt;&amp;nbsp;&lt;br/&gt; Once the injury level reaches 60% or more\, you will not be able to run and your walk will slow down.&lt;br/&gt;&amp;nbsp;&lt;br/&gt; You can heal your wound by renewing your health\, e.g. by sleep\, visiting a bathhouse or a imbibing a healing potion. On the contrary\, if the level of injury increases\, you risk bleeding."
+"117fe105-5c31-4e45-9e77-50993dae4472","quest_utokNebakov_blur_short",,
+"1191c7f4-2dea-4c1c-8b7d-e1c808871e78","test_extreme_digestion","dig*100",
+"11f44a76-21e3-4e1a-9b25-4b9341d4b8ef","visualBleeding_protection","btd*0",
+"1385b27e-0d22-4a92-806b-3a0c94f6a813","combat_morale_context",,
+"13d87f0e-fc80-489b-97b6-ad31458e93e3","prepadeni_vorechMorale","dmd*0\, dmh*0\, drn*0",
+"14353495-866f-471a-b446-7a3e1099c35c","quest_kumaniNaTrosecku_campDrinkingSecondPhaseNotSoDrunk","fpd+0.6",
+"151ace61-70fb-409e-8b95-57b35d6ad83f","posledniPomazani_healthLossBoost","hlh*10",
+"1524fad6-ef2e-450c-9f96-b37a8947c025","Anti-alcohol Food.","apa=0.06","Anti-alcohol Food."
+"1524fad6-ef2e-450c-9f96-b5d88947c025","Anti-alcohol Food.","apa=0.03","Anti-alcohol Food."
+"1524fad6-ef2e-458c-9f96-b5d88947c025","Anti-alcohol Food.","apa=0.025","Anti-alcohol Food."
+"1524fad6-ef2e-483c-9f96-b5d88947c025","Anti-alcohol Food.","apa=0.04","Anti-alcohol Food."
+"1524fad6-ef2e-495c-9f96-b5d88947c025","Anti-alcohol Food.","apa=0.04","Anti-alcohol Food."
+"1524fad6-ef2e-589c-9f96-b5d88947c025","Anti-alcohol Food.","apa=0.025","Anti-alcohol Food."
+"1524fad6-ef2e-752c-9f96-b5d88947c025","Anti-alcohol Food.","apa=0.025","Anti-alcohol Food."
+"1524fad6-ef2e-853c-9f96-b5d88947c025","Anti-alcohol Food.","apa=0.01","Anti-alcohol Food."
+"16aac08d-aed6-46cd-9794-d90b836d1c01","thirty_heal","health+30/t",
+"17899ec7-4801-4d38-8fe7-f02b8a8fa48d","horse_moraleDebuff_mountedByPlayer","mor*1.0",
+"187d87c7-e97a-4558-ab7c-5318e441e065","archery_stamina",,
+"18a0bd7c-214f-4107-bbc1-9e9bc09ce9db","unmute_nonpersistent","mut=0",
+"1951e0bc-532d-4813-a64d-38ef635b3fd5","interrupt_deafness","hearing=0",
+"196d18f7-46a7-4ad3-99ff-dd6ccd29da77","infinite_unconsciousness","ufo*0",
+"1a42e06f-41c2-4d0a-bcf7-935b0c87a56a","test_huge_inventory","cap+1000",
+"1aa6a7cc-4cee-4b73-8080-562bebc21443","Perfume Effect","charisma+1;charisma-3","This tincture makes you the best smelling bloke North of the Alps and East of the Rhine\, but only for a short period of time."
+"1ab50a60-821b-4c19-ace3-c296d73566da","Disgraced","charisma-4\,con+0.4\,plr+2","You were put in the pillory for your crimes. Being publicly humiliated will have an effect on your reputation. You will temporarily be more noticeable and less charismatic.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;&lt;p&gt;Your Charisma is temporarily decreased by 4.&lt;/p&gt;&lt;p&gt;Your Conspicuousness is temporarily increased by 20.&lt;/p&gt;"
+"1ad1650e-e565-40bf-9e99-01cefea90c2f","healthEatSleep_instant","health+1000/s\,hunger+1000/s\,exhaust=1000/s",
+"1ae8375c-5027-4f37-b09f-02f39de3cb0a","hare_oneshot_permanent","hlh=1000\,slh=1000",
+"1b562bab-88fc-4e84-83fd-a5ac465c18a8","sniffing",,
+"1b569025-da7e-44d4-a167-fa7972050085","item_gloves","craftsmanship+2",
+"1c13fe26-3766-4f50-829f-080bb9d543b8","forced_skiptime_protection","exh=0\,dig=0\,ble=0",
+"1f50033a-475f-42c8-94df-6c98b1d982a8","erik_erikAngryDebuff","fencing*0.85\,defense*0.85\,strength*0.85\,agility*0.85\,weapon_sword*0.85",
+"1fe1dee3-d749-4a2d-b36f-4a6b9a0c412a","autotest_min_might","mgt=0",
+"2140972b-095a-40a8-909e-c1b46e261504","branding","brn+0.5;brn+0.5",
+"21c300a6-552c-46e5-9f52-ad89f452187c","disableMasterStrike","ams=0",
+"227015bf-ba96-4e11-874d-5f3874b1cb3c","Pepa's Sauerkraut Effect","vitality+1\, health+10","Pepa's sauerkraut has beneficial effects. You get a +1 vitality bonus."
+"228f7520-d160-436a-8d37-97f677a21591","test_suppressArmorLoad_low","alo=-0.2",
+"2290487b-ec89-47c1-8ac0-f1decb9cd32f","Damaged Arms",,"Some of your weapons are in a bad shape. You'd better take care of that\, else you risk permanent reduction in quality."
+"22a77241-ab4c-456a-9596-ba158154ece1","quest_zikmunduvTabor_ditrichBoost","strength*1.2\,agility*1.2\,vitality*1.2\,fencing*1.2\,defense*1.2\,weapon_sword*1.2\,heavy_weapons*1.2\,weapon_large*1.2\,weapon_unarmed*1.2\,marksmanship*1.2",
+"231cf355-1fc4-48f4-b694-ccd9363a2e5e","mikes_kozlik_nebakov_stats","strength=18\,agility=14\,vitality=14\,vision=16\,hearing=16\,courage=18\,fencing=14\,defense=14\,weapon_sword=14\,weapon_unarmed=14\,weapon_large=14\,heavy_weapons=14\,marksmanship=14",
+"24beca1b-ceee-40b0-9138-6955acdf557e","autotest_min_impress","imp=0",
+"25222af4-f519-4baa-ac87-803e5f974d62","mikes_kozlik_oblehani_suchdole_stats","strength=25\,agility=25\,vitality=25\,vision=30\,hearing=30\,courage=30\,fencing=25\,defense=25\,weapon_sword=25\,weapon_unarmed=25\,weapon_large=25\,heavy_weapons=25\,marksmanship=25",
+"25f95783-b9a6-4554-aab2-48b43dd9280b","closed_visor_debuff","srg*0.95",
+"261fc53f-3ef2-4e0a-a7c8-e46bc8528977","horse_throwdown_protection","hml=0",
+"26ddafa9-42ff-4416-bf7d-2d9aa4075ad0","Appetite","strength-1","You have an alcohol habit. Your strength decreases by 1 until you have a drink. Long-term abstinence will cure you."
+"26e0501f-c2d6-463f-b9b8-1946e5e9b1c3","robbed_angriness","ran+1",
+"27f2305e-8b64-4426-ae2f-203ddf38b80b","Marigold Potion Effect","health+50/t","Marigold concoction is regenerating your health by half."
+"27f46b49-dbe7-4b42-b8f8-470e4f28fb35","Increased Morale","strength*1.2\,agility*1.2\,vitality*1.2\,fencing*1.2\,defense*1.2\,weapon_sword*1.2\,heavy_weapons*1.2\,weapon_large*1.2\,weapon_unarmed*1.2\,marksmanship*1.2","Your morale is boosted. The Italian Court will not fall! Not today!"
+"29336a21-dd76-447b-a4f0-94dd6b9db466","poor_hearing","hearing*0.3",
+"2a37002d-b6c3-4323-a139-f2eb5ada6087","quest_noBlood","bld=0",
+"2aef664e-3b40-4a59-bedf-6af5a83a2720","item_horsePlate","courage+5\,agility-5",
+"2c04557c-b6cf-4bfd-b815-a0204f57d3cf","combat_fall_damage_enable","efd+1",
+"2c0cd734-d506-459b-a4ea-507c9e8a1074","thirty_heal_instant","health+30/s",
+"2c14d546-1993-4b77-946f-004d63c686ec","npc_meal","health+2/t",
+"2c5a7879-8fa0-4fb2-a6d4-3f66bbd51021","alcoholAddictionBohuta","aml+4",
+"2c6f5c04-087b-4a7d-9b0e-0d7e07c38483","meat_agi_exp_test","xag*1.1",
+"2d71ec02-4257-479e-a8fa-a1a8fda667dc","test_realspeed","rms*1",
+"2e9634d8-a7e4-4cdb-a5a5-eba2ca54ce16","stealth_lowerVisibilityArea","vib-0.3\,con-0.3",
+"30750623-dc45-4fa2-b82d-ae1ef8c52a8a","item_spectacles","scholarship+5",
+"3139a69b-a65b-4056-a95e-6eeadc499a81","companion_infinite_morale","mor+1.0\, dmd*0.0\, dmh*0.0\, drn*0.0",
+"3190c8ba-5aa2-4825-9e96-03387983f9cd","Henry's Mintha Perfume Effect","charisma+5;charisma-5","Increases Charisma by 5. However\, if used in combination with another perfume\, it decreases Charisma by 5."
+"325c9978-f592-42f2-96d5-a196139ee742","pogrom_wagonInvisibility","ors=-1",
+"3277268b-60f2-47c6-8130-ddca6bea82a1","combat_close_threat_morale_context",,
+"32bcd798-bc87-4947-bb7e-ad07f4e9fe30","unstream_protection",,
+"3339697b-c4de-4df1-b49e-9a57c8c0bb7f","item_horsePadded","courage+5\,vitality-3\,agility-5\,strength+5",
+"33d328b8-9567-41f4-b2d2-67058da639e2","autotest_min_badassness","bad=0",
+"34f0885b-7287-4881-907f-f19751a5e831","Injured Left Arm","asp%0.8","Your left arm is injured. &lt;br/&gt;&amp;nbsp;&lt;br/&gt; Once the level of injury reaches 60% or more\, the speed of your attacks will reduce by 20%. &lt;br/&gt;&amp;nbsp;&lt;br/&gt; You can heal your wound by renewing your health\, e.g. by sleep\, visiting a bathhouse or a imbibing a healing potion. On the contrary\, if the level of injury increases\, you risk bleeding."
+"358e6a61-66a5-468a-8588-e93f2f17c1f0","prepadeni_initialBoostedHenry","lvl+10\,strength+10\,speech+10\,agility+10\,vitality+10\,fencing+10\,defense+10\,weapon_sword+10\,heavy_weapons+10\,weapon_large+10\,weapon_unarmed+10\,marksmanship+10\,alchemy+10\,craftsmanship+10\,drinking+10\,horse_riding+10\,houndmaster+10\,scholarship+10\,stealth+10\,survival+10\,thievery+10",
+"360e7fef-1051-446a-b133-7f5970af00f7","vip_attackprot","apr+1\,kopr+1\,skpr+1",
+"362c7a34-218d-46dd-a001-f46095cb091a","drunk_nonpersistent",,
+"363e7fef-1251-466a-b133-7f5970af00f7","vip_attackprot_fading","apr+1\,kopr+1\,skpr+1",
+"3702b27b-2591-4dd7-9353-4ae569151d98","permanent_corpse_persistent","pmc+1",
+"37d59205-3782-446d-b32e-89a9f786725d","Injured Torso","strength*0.75\,agility*0.75","Your torso is injured.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;Once the level of injury reaches 60% or more\, your strength and agility will be reduced by 25%.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;You can heal your wound by renewing your health\, e.g. by sleep\, visiting a bathhouse or a imbibing a healing potion. On the contrary\, if the level of injury increases\, you risk bleeding."
+"389302cb-5a3c-49cc-be4c-14579cdd4e72","owned dog","bba+2\,uat+2\,hearing+5;bba-1\,uat-1\,hearing-5",
+"3a48b1ca-7668-437f-89ce-b20ce5d56bac","New Haircut","charisma+1","You've used the bathhouse services. The bathwenches' skill with scissors and razor has made a new man of you. Your charisma is temporarily increased by 1."
+"3abfb65b-ec73-4f52-9bf9-c0a6a044b687","prepadeni_XpGainNullifier","xpm*0.0001",
+"3b753f2f-0290-4962-ae6f-fa1ded8d2284","nebakovObrana_boost_allies","agility+10\,vitality+10\,marksmanship+10\,fencing+10\,defense+10",
+"3be64de4-dca5-4580-ac24-7553e3c89b05","unconsciousness_protection_cutscene","upr=1",
+"3c815093-4d43-40f3-9cdc-accb5c9e07ca","low_pickpocketing","thievery=1",
+"3cd19fea-f99c-41d8-a8ec-66ff545e1f4d","not_immortal_nonpersistent","imm=0",
+"3d4e4e2a-3d1c-4d1c-9131-9b12b21f65a5","autotest_max_charisma","charisma=30",
+"3d530e43-375f-4739-a6ee-3bbcf9292601","injured_tag",,
+"3e0d4151-c06f-4f5b-b4a6-cd8be1aa35f3","event_chase_slow_debuff","rms*0.9",
+"3e330171-aa47-4a93-80e4-bc3d26d3650c","Thunderstone Charm","srg*1.1\, srb*1.05\, sra*1.05\, sco*0.9","The Thunderstone protects its bearer from disasters and brings them good fortune."
+"3e6e8dc6-3851-419f-b1e9-1f32524dcb06","targeted by opponent (ranged wpn)","cag+0.5\,map*0.75",
+"3f92a272-3469-46aa-b9f3-fdb5b6aa8588","utokNaMalesov_malesovVillagersBoost","strength+10\,agility+10\,vitality+10\,fencing+10\,defense+10\,weapon_sword+10\,weapon_unarmed+10\,weapon_large+10\,heavy_weapons+10\,marksmanship+10\, bba+60",
+"3f96e766-9e2c-4d3c-b86c-62ad7b6f1970","defense_debuff","defense*0.1",
+"3f98693d-43d6-4c09-bec7-2498c40ea908","combatTutorial_preventHealthDamage","hlh=0\,slh=0\,sco=0\,srg=100\,StaminaCooldownDefault=0\,StaminaCooldownAttack=0\,StaminaCooldownDodge=0\,StaminaCooldownHit=0\,StaminaCooldownBlock=0\,StaminaCooldownWeaponRaised=0",
+"3fc3bea1-81e6-4620-8ad7-887714193126","full_heal","health+100/t",
+"401598d4-9e5b-4a5c-8917-afe2aad4cc6f","red_deer_easyKill_permanent","hlh=35\,slh=100\, ble*4",
+"404a26eb-cc2d-46cc-8989-ca40fd0d56e1","quest_weak_attacker","wat*0.25",
+"41e625ec-7783-46fd-8409-e2f05d93d023","item_horse_shoe","agility+5",
+"43873196-0efc-48ee-81d2-30909c3700eb","vigilant","vision*1.65\, hearing*1.33",
+"43c56ec5-676e-4ab4-b7e3-f2765f479b83","quest_kumaniNaTrosecku_onIslandVision","owl+0.3",
+"43cd3832-7a94-45e2-95f9-a8632fc861b8","Strong Mintha Perfume Effect","charisma+3;charisma-5","Increases Charisma by 3. However\, if used in combination with another perfume\, decreases Charisma by 5."
+"443e14f2-0b9c-4be5-a1ab-b62faae938b1","buff_infinite_blindness","vision*0",
+"44c61b30-c20e-4267-ab01-a1e39342731e","test_script","{{Name='strength'\,Modifier='AddAbs'\,Value=5}\,{Name='agility'\,Modifier='AddBaseRel'\,Value=1.2}}",
+"44e1ccc9-9252-48a9-922d-2ae4523c69a3","player_immortality_nonpersistent","imm=1\,upr=1",
+"45166775-a225-47aa-bcee-338105a687d3","test_constant",,
+"45c2c8d9-dd12-4da9-97ed-d93f0ca03b23","quest_bohutovaVlozka_bohutaLeftFightBanditsStats","strength*1.5\,agility*1.5\,vitality*1.5\,fencing*1.5\,defense*1.5\,weapon_sword*1.5\,heavy_weapons*1.5\,weapon_large*1.5\,weapon_unarmed*1.5\,marksmanship*1.5\,courage*1.5",
+"46683e3b-e261-412f-b402-99ee17dda62a","remove_injuries",,
+"46ad1d94-bce0-4d2b-be23-7d6c827616cb","disable_perks_ui","hvp=0",
+"4757340d-214a-4188-8526-a58bcb0704e1","test_suppressArmorLoad_zero","alo=0",
+"478f33b9-c1e3-42d3-908a-e73e6d75e8c8","Nightmares","strength-2\,agility-2\,speech-2\,vitality-2","Your sleep was troubled by nightmares. You're shaken and your stats are temporarily reduced by 2."
+"479a82c7-89e8-47e1-b9b3-7544762bc822","stealthkill_protection","skpr=1",
+"47b12127-c5b3-43a8-a729-070db79a219a","vip_attackprotonly_remove","apr=0",
+"48562e8c-f292-4c1a-a307-e63bcf0b00f2","Reading Spot","rdq>1","You are in a good place to read a book. Reading will be faster and you will learn more from your books."
+"48afa86f-2515-422f-b2c0-f9f05f11190a","combat_stat_skill_debuff","strength-7\,agility-5\,vitality-8\,speech-5\,charisma-5.fencing-6\,defense-7",
+"4ad6bb79-f2a0-4656-bfe6-cbf4141adbc2","unconscious_fall_damage_enable","efd+1",
+"4add60ab-9015-4e56-9f7a-cb19345d6d49","test_invincible","hlh=0\,slh=0",
+"4bc0b081-a57e-4e6e-8297-6d9db58b39b2","fall_damage","fdm=0",
+"4ce909c2-93d3-4b37-887d-c62a79eb5890","combat_riposte_probability_penalty_on_master_strike","rpp+0.3",
+"4d1ec44e-5d1a-436b-a8d9-973d386b48d1","test_mst","mst+20",
+"4e029081-a402-41ef-bfc5-7a01afdc391b","disable_sprint_persistent","LimitSprint",
+"4e5149ff-974e-4e9d-a3fa-b51aa94d243f","budovaniLazni_visionBoost","vision+5",
+"4eb14ea6-2ad6-420d-bba6-670d05601cce","autotest_no_exhaustion_digestion","exh=0\,dig=0",
+"512c510f-12c2-404d-9c13-df1e43133ec8","autotest_max_dominate","dmt=30",
+"5145bb5c-ac08-43b9-92a7-0a6766516d53","unmute","mut=0",
+"519fcbcc-bd4a-4e08-a996-ab6f8bfab68a","rutinaAVypad_battleBadPairDebuff","defense*0.6\,weapon_sword*0.8\,heavy_weapons*0.8\,weapon_large*0.8\,weapon_unarmed*0.8\,marksmanship*0.8\,hlh*1.2",
+"526b44bf-c119-4b26-9218-fed39d034d0e","defense_debuff_nonpersistent","defense*0.1",
+"529f69fb-3da9-4971-b128-4e4bf8c55fe6","Demand","strength-3\,agility-3\,vitality-3\,srg*0.9","You're an alcoholic. Your Strength\, Speed and Vitality are reduced by 3 until you have a drink\, plus your stamina is a little slower to recover. Long-term abstinence will cure you."
+"52ada4a7-b8a2-466c-a3ef-bcba8daf18e1","horse_regeneration","health+0.05/s",
+"52e578c8-608f-44e5-b6c0-e79673cfd4a0","immortality_fast_heal_nonpersistent","imm=1\,health+100/s",
+"5334ee91-1d9b-4e03-8678-9cd19647b51b","fasttravel_scriptInitiated","ors=-1\,vision=1",
+"53a52200-e84e-4e26-99ba-d84f151cadb4","Poor Vision","vision*0.3",
+"549119f2-d5c9-43f7-ab52-487b0a262d47","combat_moraleHit_large","mor-1",
+"549889f2-d5c9-43f7-ab52-487b0a262d47","quest_stealthMiseZaJindru_brabant_moraleHit","mor-0.5",
+"559ec27d-1c69-48d6-9ccb-da33a9b23124","temp_deaf","hearing=0",
+"5601746a-f692-4e65-a498-8102ed42cbcf","item_apron","craftsmanship+3",
+"5664cd2c-d113-42e6-b71b-5ea789dfc4e3","Damaged armour",,"Some parts of your equipment are in bad shape. You better take care of that\, else you risk permanent reduction in quality."
+"567ba83f-fc83-40fb-a8c6-ac42bc4a7201","test_state_delta","health-10/t",
+"57095908-1351-40a3-b8c2-c3f8216b77ad","Obsession","strength-10\,agility-10\,vitality-10\,speech-10\,vision-10\,hearing-10\,barter-10\,courage-10\,srg*0.6","You're a heavy drinker. All your attributes are reduced by 10 until you have a drink\, plus your stamina is significantly slower to recover. Long-term abstinence will cure you."
+"57e07f55-0cc5-4318-abd9-693df4a232a4","quest_setkaniVRatbori2_noDamage","hlh=0\,slh=0",
+"58558161-bed7-4af5-902d-6978c8d21c5e","actor_illuminance_meter","vib-0.57;vib-0.47;vib-0.37;vib-0.27;vib-0.17;;vib+1",
+"5ae26f31-1783-44cd-a40b-503c62c867af","autotest_stamina_regen","srg*10\,StaminaCooldownDefault*0.1\,StaminaCooldownAttack*0.1\,StaminaCooldownDodge*0.1\,StaminaCooldownHit*0.1\,StaminaCooldownBlock*0.1\,StaminaCooldownWeaponRaised*0.1",
+"5d070c0b-5891-4e1e-83c5-72120a90b015","surrendering","sur=1",
+"5d07a436-c01f-4062-b5c4-0c3ec3c8185d","Weak Mintha Perfume Effect","charisma+1;charisma-5","Increases Charisma by 1. However\, if you're using another perfume\, decreases Charisma by 5."
+"5d3175c5-4064-4270-bd48-92fa9bbc6944","horse_moraleDebuff_heardGunshot","mor-0.30",
+"5eb76853-4423-47d8-ab0b-f505f243c4c2","autotest_max_persuade","prs=30",
+"5fc4d5d0-6589-4df2-b585-3899a681fb56","debuffSpeed","asp*0.1",
+"60c6aca4-a5a9-442b-9cc8-7f0e31ecfd43","ridden_horse",,
+"60e8260f-026a-491e-90c3-b3738aae3c8a","test_zero_morale","mor=0",
+"61bf5b0d-aa94-45cc-9cdd-dd76d3903189","morale_max","mor=1",
+"62ae725e-56d9-46fa-a09a-794480b757a5","Spurs","horse_riding+5","Wearing spurs increases your horsemanship skill to an extent that depends on their quality."
+"62bf2a7f-bddb-4bec-9a1c-071e472ae607","quest_kumaniNaTrosecku_campDrinkingFirstPhase_nonpersistent","fpd+0.4",
+"62eeb23f-ccbf-4af9-8f8d-de57da75c50e","Fading Buff Test","strength*0.2\,vitality+8\,agility-5\,speech*3.1",
+"63edd356-a11b-4701-b560-ac39bfb8f42f","vip_stealprot_persistent","ppr+1",
+"64ad3583-161b-4fb0-97ad-56b826ed2480","monk",,
+"64c27976-ed6a-589b-2191-cc586082aee6","quest_stealthMiseZaJindru_brabant_hearingBoost","hearing+5",
+"651130c8-540c-45ac-a8cf-734a334320ef","HC perk Numbskull","xpm*0.6",
+"6685629b-f174-440a-a7f8-0b6a22a0ac88","additional_weight",,
+"66a4bda4-a8d6-47ac-a4d1-b166ce62aea9","quest_kumaniNaTrosecku_campDrinkingSecondPhase_nonpersistent","fpd+0.95",
+"671df15c-3341-440a-ad0e-e3f3eed603cc","Strange Potion Effect","health-110/t","As soon as you took a swig of that strange potion\, you could taste death on your tongue. If you don't get some digestive potion inside you quick\, you're done for!"
+"677cbe60-d88f-4313-9bc9-985aa59e5e1d","short_term_nutrition_food",,
+"67ad3acc-5e8b-4f73-a226-7c093632b4ee","boost_stealth","stealth+15",
+"68a05048-1c56-43d3-95fd-75c36125c76a","Disgraced","charisma-6\,con+0.6\,plr+3","You were put in the pillory for your crimes. Being publicly humiliated will have an effect on your reputation. You will temporarily be more noticeable and less charismatic.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;&lt;p&gt;Your Charisma is temporarily decreased by 6.&lt;/p&gt;&lt;p&gt;Your Conspicuousness is temporarily increased by 30.&lt;/p&gt;"
+"690ed604-ebe9-448a-b87c-b9d1df82a527","drunk",,
+"6a61a139-4ae5-49e1-9b7f-31b72ff2e1e5","disabled_revive","drv+1",
+"6ad5711f-8727-4e9a-9607-c36ab5cea256","test_stealth_kill_fail","skp=0",
+"6b5db01c-0e65-4b5f-b9f6-f091f3bea121","test_poison_visual",,
+"6b861ae1-7d80-4e5d-9fe6-df5833dc4750","prepadeni_ptacekInDuel","fencing-30\,weapon_sword=15\,defense=15\,vitality-10",
+"6cf0aa39-e09c-42fa-bf67-10f2d03991b7","immortality_fast_heal","imm=1\,health+100/s",
+"6e4087dc-26a6-478f-bd64-6727e24c330b","prepadeni_weakCapon","fencing-30\,weapon_sword-15\,defense-15\,vitality-10",
+"6ecc9124-b0bb-4a37-a9e9-ca0d78e76a5e","Reeky",,"You stink. This is not only unpleasant for people around you\, but your stench can even give you away if you're trying to pass unnoticed. You can easily get rid of the smell by visiting the baths or washing yourself at a trough."
+"6ed245f0-7882-49d9-b074-41e25c13753e","quest_zachranaPtacka_PtacekCombatBoost","strength=24\,agility=24\,vitality=24\,vision=24\,hearing=24\,courage=24\,fencing=24\,defense=24\,weapon_sword=24\,weapon_unarmed=24\,weapon_large=24\,heavy_weapons=24\,marksmanship=24\, bba+50",
+"6f4d327d-2d97-4339-a9d2-679b02aee5e6","autotest_max_badassness","bad=1",
+"6f706644-e28a-41a9-9674-5f19dea03bf1","death_protection_cutscene","imm=1\,upr=1",
+"6f8d0939-90cb-47dc-9352-33a9cb2e6bf0","disable_run","LimitRun",
+"7028ef11-7dbf-44ad-b3b6-e8795e0a7f2d","quest_setkaniVRatbori2_drunkBohuta","fpd+0.77",
+"70d29ce9-cf46-40b4-b0b7-803307c45c42","test_suppressArmorLoad_high","alo=0.2",
+"714a027c-b5d4-4816-a1d3-f89764997bde","Strong Lion Perfume Effect","charisma+7;charisma-7","Increases Charisma by 7. However\, if you use it in combination with another perfume\, it decreases Charisma by 7."
+"717abd8d-86a8-4399-91df-8fbeb536a2d2","Smitten","charisma+3","When you're smitten by love\, the world seems more beautiful than before. And maybe you seem more beautiful to the world. After spending time with your beloved\, your Charisma is temporarily increased by 3."
+"7296d3c1-fca0-48ef-b8af-c2bfad31598c","quest_hledaniLichtenstejna_udo_drunkenness","vision-1\,thievery-2",
+"730503bf-735a-4f47-baae-c2d84ee77524","immortality_nonpersistent","imm=1",
+"73094e4b-b127-4112-854f-3a6885cbb8de","quest_kumaniNaTrosecku_campDrinkingFirstPhase","fpd+0.4",
+"738f8a07-c5fd-4687-9408-34ffb0bcd17e","Injured Right Leg","Run-1\,Walk-0.5\,LimitSprint","Your right leg is injured.&lt;br/&gt;&amp;nbsp;&lt;br/&gt; Once the injury level reaches 60% or more\, you will not be able to run and your walk will slow down.&lt;br/&gt;&amp;nbsp;&lt;br/&gt; You can heal your wound by renewing your health\, e.g. by sleep\, visiting a bathhouse or a imbibing a healing potion. On the contrary\, if the level of injury increases\, you risk bleeding."
+"7481f890-237d-4312-b647-f056c880edc2","disable_sprint","LimitSprint",
+"74cf0c29-d03e-4233-9352-b91ca5ea69ea","infinite_unconsciousness_nonpersistent","ufo*0",
+"7524aadc-7819-4c55-a3cf-8caec0d0f437","unconsciousness_protection","upr=1",
+"75746cba-af72-40d0-bc33-843769e0ab43","HC perk Shakes","lcs*1.6\,was*1.6\,ptp*1.6",
+"75ad69c0-51be-451f-a455-00ea054b5da0","Hangover",,"You have a splitting headache and a feeling of great regret.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;A hangover reduces your Strength\, Agility\, Vitality\, Speech and Charisma and makes you more conspicuous. The degree of these negative effects depends on how much you drank\, and how long the hangover lasts is determined by your Drinking skill - the more experienced you are\, the shorter the hangover. It will dissipate eventually or can be cured with a Marigold Decoction or Hair o' the Dog potion."
+"7619b2ea-3d11-49b0-b001-3e69283555b8","quest_prepadeniVlasskehoDvora_alliesBoost","strength*1.5\,agility*1.5\,vitality*1.5\,fencing*1.5\,defense*1.5\,weapon_sword*1.5\,heavy_weapons*1.5\,weapon_large*1.5\,weapon_unarmed*1.5\,marksmanship*1.5",
+"761f5b41-5e11-44a3-bcca-815cf4ddbd2e","horse_moraleDebuff_heardGunFire","mor-0.2",
+"77273b1c-a974-4512-b59e-017b19788f54","nonpersitent_tough_guy","hlh*0.33",
+"7747812b-253d-42fd-bd7a-0e50b65e6b27","near_level_barrier","LimitSprint\,rms*0.4",
+"7750688b-21f7-4ab2-a89d-f975cc4ce277","Tortured","strength*0.5\,agility*0.5\,vitality*0.5\,srg*0.5","You were tortured at Trosky\, and as a result your Strength\, Agility and Vitality are reduced."
+"77f9e797-3bca-4bbe-871b-b83b587d6b92","stomach_pain",,
+"78dab124-7126-493c-b651-66258042570f","item_caparison","courage+5\,agility-5\,strength-5",
+"78dc0d01-337e-47f5-b7b5-14b25d9b251f","Hunger",,"You're hungry.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;Your stamina is decreased and eventually you will start losing health."
+"79cffcfa-2769-4424-aad2-181b08bf9aed","HC perk Haemophilia","ibi*0.5",
+"79efdca6-1992-44df-ada4-9c2ae1710bf1","Testing Buff","charisma+20",
+"7a0f4cea-6033-4d91-81ac-657d30eedad6","theresa_hardcore","speech-2",
+"7a61a139-4ae5-49e1-9b7f-31b72ff2e1e6","permanent_corpse","pmc+1",
+"7a7f5bdf-2b9d-4d84-9290-e09d3ce8d3d8","test_bane_visual",,
+"7d411bf8-42de-4ef4-bebf-abe704af601f","deer_doe_easyKill_permanent","hlh=40\,slh=100\, ble*5",
+"7d6a30e4-c6fe-470f-b8c9-f8b226ee44cf","combatTutorial_preventDamage","hlh=0\,slh*0.01",
+"7e252c71-5e41-472c-ad32-f223a664faab","Hangover",,"You have a splitting headache and a feeling of great regret.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;A hangover reduces your Strength\, Agility\, Vitality\, Speech and Charisma and makes you more conspicuous. The degree of these negative effects depends on how much you drank\, and how long the hangover lasts is determined by your Drinking skill - the more experienced you are\, the shorter the hangover. It will dissipate eventually or can be cured with a Marigold Decoction or Hair o' the Dog potion."
+"7ead0083-026d-4567-80b3-68ac82693b77","resistent_fella","hlh=0\,slh*0.01",
+"7ead0083-026d-4567-80b3-68ac82693b78","quest_utokNebakov_noDamage","hlh=0\,slh=0",
+"7f0e2530-abc9-4800-8ae1-5db8a9aa86b1","unconscious_alcohol","vision=0\,hearing=0\,srg=0\,coc=0",
+"7fa46759-36ce-49e3-8a37-99081c07ca05","percept_combat","prb>5",
+"7ffc7b0d-ca9f-46f6-9fe4-bf0187f898a7","meat_vit_exp_test","xvi*2",
+"819df34d-1c14-44b7-b02c-d2f5f13aeb2c","Reduced Morale","strength*0.8\,agility*0.8\,vitality*0.8\,fencing*0.8\,defense*0.8\,weapon_sword*0.8\,heavy_weapons*0.8\,weapon_large*0.8\,weapon_unarmed*0.8\,marksmanship*0.8","Your morale is lowered. Your enemies' superior numbers seem insurmountable."
+"81b4a2f5-914f-4778-b4ee-40fa0f24d375","boost_str_agi_marksmanship","strength+15\,agility+15\,marksmanship+15",
+"81d476d4-3c68-40cf-8c85-b62a4102cb76","morale_context",,
+"82dfb051-bd76-4681-abc1-185350e09eac","prepadeni_perfectBlockForCapon","fencing-11\,defense+30",
+"82fd15ef-4117-4094-88d9-ca15f7fe033e","fasttravel","ors*3\,vision+4",
+"8371d6b9-aecf-4b40-a0eb-84ed6ede3fd6","hladAZmar_horseMoraleDebuff","mor=0",
+"83ef27f9-4ce2-4894-bd42-d2cc61a6f758","injured_tag_persistent",,
+"844445e2-300b-4750-9cf4-a1f5c0e1beef","autotest_max_might","mgt=30",
+"8448dd2a-2f0f-45e6-ab54-e14c517f12eb","vigilant_nonAlerted","vision*1.65\, hearing*1.33",
+"8544ebca-1e30-400c-b31c-2a1839f1cab8","Poison","health-150/t","You've been poisoned."
+"85aca9c5-ec41-400d-a563-53df7b2399e8","immortality","imm=1",
+"8607dd71-e4b1-4234-a4d3-532c9e2504c1","Disgraced","charisma-2\,con+0.2\,plr+1","You were put in the pillory for your crimes. Being publicly humiliated will have an effect on your reputation. You will temporarily be more noticeable and less charismatic.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;&lt;p&gt;Your Charisma is temporarily decreased by 2.&lt;/p&gt;&lt;p&gt;Your Conspicuousness is temporarily increased by 10.&lt;/p&gt;"
+"87b33bd6-c3bc-4974-8c34-01fd14ad7a36","quest_utokNebakov_blur_long",,
+"87dede4e-88e1-4cca-95de-545d0523d5fd","limited_combat","dsl=0\,cos=0\,pbs*2\,cag=1",
+"88a11846-ffe2-49f0-b88b-1980a6e3791e","HC perk Claustrophobic","wat*0.85",
+"88e6cb97-af82-4b75-8d4f-388246cd7489","carrying_load",,
+"8938ac5f-35d3-44dc-8251-97df7570b672","item_halberd","LimitSprint",
+"89739dbc-fb20-4a28-8b70-986ab9b5f79a","player_immortalityOnly_nonPersistent","imm=1",
+"8a4eec60-a667-4921-806f-05e3592c2de2","temporary_immortality_onMercy","imm=1",
+"8a5dd3a2-04e1-4ce7-8833-9252b410662b","item_shield","pbs+0.3",
+"8a9b72c9-5591-418c-83dd-3b87b785d4c4","battle_accuracy_debuff","was*10",
+"8af7dac3-3cfd-4a0e-aa7f-58db4311660d","deafness","hearing=0",
+"8c8a9c48-db38-4914-8e41-5a435c9b1dac","HC perk Tapeworm","dig*1.5",
+"8e56612f-30b7-447c-b331-c7e4be807717","remove_all",,
+"8e87a286-712b-49b9-82eb-f47805ec5d08","Test buff x",,"In-house test xx"
+"8e9cb93a-eb5f-4846-be2c-2c7010872704","vip_attackprot_remove","apr-1\,kopr-1\,skpr-1",
+"9155cc2e-0af1-449b-acf2-58379c0e6115","vip_attackprot_persistent","apr+1\,kopr+1\,skpr+1",
+"91fe879a-2881-426b-984c-0f49b551a76f","quest_zbranePanaSemina_seminDuel","fencing*0.6\,defense*0.6\,strength*0.6\,agility*0.6\,srg*0.8",
+"943bb91d-52a2-42e9-bbd5-66cf48179224","overread",,
+"945430c5-be04-4f3c-bb83-7951e7e13996","mute_cutscene","mut=1",
+"950fcd4d-fbb5-449d-bdd3-f0895da89168","caffeine",,
+"95afeef3-bfe4-4697-801e-ff92671f8110","autotest_healing","health+60/s",
+"972b0d5a-6fab-4e28-b59c-a3697f7c05c3","jail_recovery_theresa","speech*0.6",
+"973a0f71-595d-48ca-91d2-d770951fd5d6","quest_prepadeniVlasskehoDvora_bohutaDrunkenness_nonpersistent","fpd+0.25",
+"97746824-30b5-4b8a-8168-8f218bf2661d","test_stealth_kill_success","skp=1",
+"97828156-42a0-40e2-b772-7c328d2ead98","vip_unconprot_remove_persistent","upr=0",
+"988fef54-920a-44a7-b771-2caa66a0219a","Really Slow Movement","rms=0.2",
+"98d2764a-bdbf-473f-903a-1209813d2e15","player_immortality","imm=1\,upr=1",
+"98e072dc-43be-472d-a8b5-a8e9a024bbe2","zranenyLovci_pullDownProtection","pdp=0",
+"999b783c-90ff-4054-bb5a-9f4f9b1da7cb","vip_stealprot_remove","ppr=0",
+"9a2d3b9d-cdd9-4113-aeeb-764e12b3ba86","test_encumber","caw+20",
+"9b281555-f071-4a9c-aedc-41b5015ee702","after_sleep",,
+"9b308d86-b3c5-4b85-b6fc-c1a4c4af2abf","on_washed",,
+"9be2617e-61e0-4a0c-976b-1dbb216bef15","reading","vision=0\,hearing*0.22",
+"9c5eb897-0432-4b41-8fbd-2607d0629b44","low_health",,
+"9d1be500-79ee-4b31-8a38-6d91f5b64b4e","boost_agility_big_nonpersistent","agility+10",
+"9ff367d5-0b08-4020-8428-9ab08290d031","Time Well Spent","strength+1\,agility+1\,vitality+1\,deb+1","You've had some sweet moments which no one can take away from you. You feel refreshed and invigorated.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;Your Strength\, Agility and Vitality are temporarily increased by 1."
+"a047a33e-4715-41c1-977f-1a5f454e30e7","Lion Perfume Effect","charisma+4;charisma-7","Increases Charisma by 4. However\, if you use it in combination with another perfume\, it decreases Charisma by 7."
+"a05916dd-634b-4c11-81b6-6dc8e4bd52cd","quest_kejkliri_drunkLuteCrusher","fpd+0.6",
+"a2088337-e015-4c28-8ab2-043f6925c087","bleeding_protection","hin=0",
+"a2261902-5204-4e9d-b15e-b3b8d8495f40","melee_hit_debuff","rms*0.1",
+"a2604dae-292b-44cf-be15-e7d1ef5ef0fa","autotest_min_dread","drd=0",
+"a3dd717a-5b53-41de-b417-53e0798d10a7","quest_noDirt","cds=0\,drt=0",
+"a40f5d6c-ef6e-456b-bfef-cb0f5d26ac6a","vezniNaTroskach_drunkSoldiers","hearing*0.75\,vision*0.75",
+"a40fff68-9051-48af-a599-54f3667a3065","Stench of the Plague","vitality-1","You dug up a plague pit and now you don't feel very well. Hopefully you didn't catch anything."
+"a5e4791a-f5a6-403e-9161-5b8a22966751","oversleep",,
+"a679d85a-dbad-4607-8982-1e1a11a6d2eb","quest_sermiri_arne_debuff","agility=20\,vitality=20\,strength=20\,defense=20\,weapon_sword=20\,fencing=20",
+"a8b03550-5e68-417a-9d10-2064b289a7e5","jail","dig*0\,exh*0\,jrm*0\,health+100/s",
+"a933d97c-698c-41cf-a935-e0fb687d7970","test_boost_charisma","charisma+5",
+"aa483616-9328-4e86-8b43-76ddfa559cf7","zranenyLovci_onTree","ors=-1",
+"aa59e6c0-9233-4aab-8a6f-c1c02bd17924","Needs","strength-8\,agility-8\,vitality-8\,srg*0.8","You're an alcoholic. Your Strength\, Speed and Vitality are reduced by 8 until you have a drink\, plus your Stamina is slower to recover. Long-term abstinence will cure you."
+"aa8eb327-77c8-47c4-80a3-38bf70576dc4","Secret Herb","strength+2\,agility+2\,vitality+2\,deb+1","At Nebakov you got to know the healer Klara and decided to pass time while waiting for Capon by going for a stroll with her. After collecting some medicinal herbs\, you spent a few pleasant moments in a forest glade. You feel blissful and you will  for quite some time.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;Your Strength\, Agility and Vitality are temporarily increased by 2."
+"aaba4c77-f834-4971-bcc4-ef444477c817","autotest_min_coerce","crc=0",
+"ab827233-116c-4366-ab1f-704de01d628b","knockout_protection","kopr=1",
+"ab97ed6c-e830-4fc6-a45a-261117cd5c85","very_tough_guy","hlh*0.13",
+"abcdefab-ffff-ffff-ffff-aaffaaffaaff","mounted_player_buff",,
+"ac563832-a5d6-427c-86c0-564c119c7948","test_turtle_skin","ade*1.2",
+"ac6db9f1-254e-488a-9e45-759fd8cc7088","vip_unconprot_remove","upr=0",
+"acae1f4d-f766-4ccb-b081-44bda51f779c","sharpening_pressure",,
+"adddf52a-4c53-49e2-aa22-bd11ae452eca","crouch","vib-0.5\,fsm*0.3\,con-0.5\,noi*0.5",
+"ae3d6454-5ae8-4662-9bea-deebebac82e8","test_wormwood_visual",,
+"ae62df54-a5cc-4018-a4e1-247259b3fa6d","Good Appetite","dig*3\,exh*2\,vitality+10",
+"aea172fe-0217-4c17-b37b-c029568b4e07","autotest_min_morale","mor=0",
+"aeef8e78-896a-4106-ab2f-62bec1d98378","Food Poisoning",,"You've got food poisoning. Next time\, be more careful what you eat.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;Your Health gradually depletes along with your Strength\, Agility and Vitality in proportion to the degree of poisoning."
+"af197e82-54c1-44e4-a21c-21e83a8c273e","simulatedKnockout","kko=1",
+"b0247507-ca18-4277-a037-ee3a9274e625","test_bleeding","ble=1",
+"b0b520e9-a85f-4698-ad8c-e46ea32d7d65","Weak Lion Perfume Effect","charisma+3;charisma-7","Increases Charisma by 3. However\, if you used in combination with another perfume\, it decreases Charisma by 7."
+"b152dbb8-d883-4e67-acba-b89829542e3e","Released Prisoner","strength*0.6\,vitality*0.6\,agility*0.6","Your stay in jail has left you malnourished and in an overall weak condition. Your Strength\, Agility and Vitality are lowered. The longer you've been in jail\, the worse the penalties."
+"b17748f4-da00-44ab-a5ff-d0081e8cd308","oblehaniSuchdole_augment_damage_received","hlh*4\,slh*4",
+"b2a1ddda-26f3-436f-b902-1af34094e3c0","post_combat_protection","hlh=0\,slh*0.01",
+"b2f86f72-b8f7-458f-9358-dd2ed7b01a9f","quest_utokNaNebakov_zizkaLowerStats","strength*0.3\,agility*0.3\,vitality*0.3\,defense*0.3\,weapon_sword*0.3",
+"b4594a5d-7f5e-4317-93f0-8d850e3ac16d","Anti-alcohol Food.","apa=0.06","Anti-alcohol Food."
+"b562abfc-2b45-45b7-824c-62fbd10dc123","Hangover",,"You have a splitting headache and a feeling of great regret.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;A hangover reduces your Strength\, Agility\, Vitality\, Speech and Charisma and makes you more conspicuous. The degree of these negative effects depends on how much you drank\, and how long the hangover lasts is determined by your Drinking skill - the more experienced you are\, the shorter the hangover. It will dissipate eventually or can be cured with a Marigold Decoction or Hair o' the Dog potion."
+"b5e6123f-dcb3-4c7e-8096-5b584fbc87f6","mucirnaVypaleniSemina_resistent_victim","hlh=0\,slh=50",
+"b6163c06-1ba8-4db5-859d-d58cfad9a3f9","horse_pulldown_protection","pdp=0",
+"b6ab81fb-5c59-47ac-8ca1-a4f9a97f1828","Henry's Lion Effect","charisma+10;charisma-7","Increases Charisma by 10. However\, if you used in combination with another perfume\, it decreases Charisma by 7."
+"b8175a93-aee3-4bd1-9cbe-de691c34cd1b","Beaten Like a Dog","strength*0.6\,agility*0.6\,vitality*0.6\,courage*0.6\,srg*0.6\,hlt*0.6\,bea+3","You were caned for your crimes\, leaving you injured and weakened.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;&lt;p&gt;Your Strength\, Agility and Vitality are temporarily reduced by 40%&lt;/p&gt;&lt;p&gt;Your Stamina regeneration rate is also temporarily reduced by 40%.&lt;/p&gt;"
+"b8f6812f-fb42-475d-b630-72dcf2516877","Hangover",,"You have a splitting headache and a feeling of great regret.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;A hangover reduces your Strength\, Agility\, Vitality\, Speech and Charisma and makes you more conspicuous. The degree of these negative effects depends on how much you drank\, and how long the hangover lasts is determined by your Drinking skill - the more experienced you are\, the shorter the hangover. It will dissipate eventually or can be cured with a Marigold Decoction or Hair o' the Dog potion."
+"b919d148-056c-41e4-10a8-127715b0e855","equipment_deterioration_reduction","edm=0.15\,wud=0",
+"b9564fae-880a-4e44-9c29-61af452b8038","rutinaAVypad_battleGoodPairBuff","defense*1.2\,weapon_sword*1.1\,heavy_weapons*1.1\,weapon_large*1.1\,weapon_unarmed*1.1\,marksmanship*1.1\,hlh*0.9",
+"b989d448-056c-4be4-b0a8-727775b0e855","test_drunkness_blackout","fpd+1",
+"b9c82b6a-55f2-43dc-b481-8ce28a373a56","vip_lootprot_remove","ltp=0",
+"b9f062d3-c06e-4698-90d4-e642e863337b","slow_movement","rms*0.95",
+"bbe946c9-a6d6-4ba7-96e2-6a884bb66fe3","cutscene_stopTime","adm=0",
+"bc2be2ea-c588-4c32-b155-d96c646cb689","roadside_corpse_npc_triggered","speech-1\,bad-1\,chr-1",
+"bc753c63-6c91-4789-9d4a-9e3674759fa8","test_stamina_boost","srg*2\,src*0.5",
+"bc7ec5a9-e0d5-4c38-a091-7779ca7241f8","Freshly Branded","grm*0.5\,sdn+1\,brn+0.5","&lt;p&gt;You've been branded for your crimes. Until your brand heals and people's memories fade\, you will be treated like an outcast.&lt;/p&gt;&lt;p&gt;The worst effects of the brand will pass with time or after you make a penitential pilgrimage.&lt;/p&gt;&lt;br/&gt;&lt;p&gt;Your positive reputation gain is temporarily reduced by 50%.&lt;/p&gt;&lt;p&gt;If you commit another serious crime\, you may be executed!&lt;/p&gt;"
+"bd22f98a-e61f-4d83-b39c-79d1d85b6b91","remove_unconsciousness",,
+"bee2ec16-7993-4c41-b94f-1ca3ad273c62","percept_prio_medium_boost","prb>5",
+"bf1ed388-e1a5-4688-8563-05895e529e7a","autotest_stamina_boost_infinite","sdt+1000",
+"c01b06d6-1003-43f6-a92d-1685d12b24c8","Tortured","strength*0.7\,agility*0.7\,vitality*0.7\,srg*0.75","You were tortured at Trosky\, and as a result your Strength\, Agility and Vitality are reduced."
+"c1db1812-e3cf-4faa-a337-b34495f3b817","utokNaMalesov_certDuelDebuff","hlh*1.1\,wat*0.85",
+"c207b0b5-1911-4975-8d53-45f962e80a21","prepadeni_nervousGuard","nrv+1000",
+"c37ab134-a443-433f-92a9-51ff6f08999c","fasttravel_immortality","hlh=0",
+"c3b0ab94-8e7a-4c96-ae74-53b919ffc052","poustevnik_excited_konrad","vision*1.5\,prb*1.5\,fov*1.2",
+"c467caae-bce9-4bb8-bf57-4e7a5ba01b20","percept_prio_big_boost","prb>10",
+"c46c670f-0d0a-4664-9df0-922ae5cd7d3f","percept_prio_small_boost","prb>1",
+"c48e48e2-ae85-4429-9dd6-4fb94c388001","Injured Head","srg*0.75","Your head is injured. &lt;br/&gt;&amp;nbsp;&lt;br/&gt; Once the level of injury reaches 60%\, your stamina recovery will slow down by 25%. &lt;br/&gt;&amp;nbsp;&lt;br/&gt; You can heal your wound by renewing your health\, e.g. by sleep\, visiting a bathhouse or a imbibing a healing potion. On the contrary\, if the level of injury increases\, you risk bleeding."
+"c4deabe7-4375-4114-82ff-3d0c04d86cb0","socky_drunkard_onehit_permanent","hlh=1000\,slh=1000",
+"c502b267-8084-40b4-9cbd-ee76cf52b37a","sprint","fsm*2\,noi+0.1\,noi*1.5",
+"c61da6da-01bc-4f55-8152-7165f46590b3","npc_drunkenness_nonpersistent","dru+1\,vision-1\,thievery-2",
+"c75aa0db-65ca-44d7-9001-e4b6d38c6875","unconscious_permanent","vision=0\,hearing=0\,srg=0\,coc=0",
+"c795a2ad-b1c0-44c8-93d8-bb1a9d39993d","mlynaruvUcen_stealthTakedownBuff","fencing+30",
+"c7b61a3c-b619-4c7c-9857-8cc8c97f5676","kovar_tutorialInvisibility","ors=-1",
+"c7c79394-cd16-4d86-a029-f8a5f6623f9d","death_protection","imm=1\,upr=1",
+"c7e37c48-bd84-4838-9f96-a2025e15cded","test_negation","strength!20",
+"c7f2c0f0-776a-43e3-a504-31870afc3710","Tiredness",,"You're exhausted. Your physical capabilities are hindered and you can't concentrate\, meaning your Speech is less persuasiave than usual. Your Charismas has also taken a hit. Eventually\, you will start fainting.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;Your Strength\, Agility\, Speech and Charismas are lowered based on your level of exhaustion."
+"c8b0d038-a503-44cc-85a5-7f753a09eb6e","respec",,
+"c9a62a45-b044-42a0-969e-1e77be655a5c","Beaten Like a Dog","strength*0.7\,agility*0.7\,vitality*0.7\,courage*0.7\,srg*0.7\,hlt*0.7\,bea+2","You were caned for your crimes\, leaving you injured and weakened.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;&lt;p&gt;Your Strength\, Agility and Vitality are temporarily reduced by 40%&lt;/p&gt;&lt;p&gt;Your Stamina regeneration rate is also temporarily reduced by 30%.&lt;/p&gt;"
+"caf16a25-b138-46bf-b7d3-63f8b2e9bb91","Mintha Perfume Effect","charisma+2;charisma-5","Increases Charisma by 2. However\, if you're using another perfume\, decreases Charisma by 5."
+"cbb45bf5-a8fa-4615-a9ea-fc72f517b87f","quest_cart_tag",,
+"cbbedb16-8ab8-4583-b740-a0e8a2521d95","sleep","vision=0\,hearing=1\,sle=1",
+"cc3a1a4a-ef7d-4a55-821b-dc2567d1290e","rutinaAVypad_healthLossBoost","hlh*2",
+"ccc546e2-5a5f-428b-8c79-5d7953218180","Desire","strength-1\,vitality-1","You have an alcohol habit. Your strength and vitality decrease by 1 until you have a drink. Long-term abstinence will cure you."
+"ccf87599-202c-49e0-ab36-baa62e5fa05b","tough_guy","hlh*0.75",
+"cd5bad62-1eb0-0732-e62c-9118964ca626","quest_stealthMiseZaJindru_guard_inattentive","vision*0.65\, hearing*0.65",
+"cd727cba-0507-4e97-bab9-ae4fe6d55d07","alcoholism","alc+1",
+"ce3737db-b0a3-459d-8d47-d58695d58be3","Injured Right Arm","asp%0.8","Your right arm is injured. &lt;br/&gt;&amp;nbsp;&lt;br/&gt; Once the level of injury reaches 60% or more\, the speed of your attacks will reduce by 20%. &lt;br/&gt;&amp;nbsp;&lt;br/&gt; You can heal your wound by renewing your health\, e.g. by sleep\, visiting a bathhouse or a imbibing a healing potion. On the contrary\, if the level of injury increases\, you risk bleeding."
+"cebe4d7b-d7fe-46e6-85d1-d62c8c9d16e6","autotest_min_charisma","charisma=0",
+"cf787871-d151-43b7-a7c9-39acac116f0f","invisibility","vib=-10\,con=-10",
+"cfe6b977-2c6c-40dc-9924-c8c9176a0070","HC perk Brittle bones","fdm*1.20",
+"d096efbd-54cd-4ebd-b6e9-669802ec5f03","vip_lootprot","ltp+1",
+"d37f94bd-5337-483e-8c53-45ac015c429f","standing_still_archery_boost","marksmanship+3",
+"d38c9301-2b8a-45b1-a0b3-5fd11119a211","autotest_max_coerce","crc=30",
+"d41d5f5f-caa1-4207-8a02-bc6f7f7b911f","quest_kumaniNaTrosecku_campDrinkingSecondPhase","fpd+0.95",
+"d42c87f2-9b51-48e3-831e-9ad449a4f100","test_playBandageMyselfOnRepeat",,
+"d46dfbbf-3f14-4477-b639-fd5508fc7dfc","autotest_max_morale","mor=1",
+"d491b2d0-c2f8-4a20-9a9d-f11db82ca5db","autotest_max_impress","imp=30",
+"d4969aad-6ac6-4940-b458-71e5348a1792","Cooked Blue Crayfish Effect","vitality+1\,xvi*1.1","The tender flesh of the blue crayfish has beneficial effects. You gain a +1 bonus and 10% more exp to Vitality."
+"d4a4ffe8-f4a3-4abe-a784-784e27c2e37c","erik_duelBuff","hlh*0.8\,slh*0.8\,wat*1.16",
+"d53e09a0-1b8a-43eb-8be3-673108ed2569","quest_fistfightsChampion_drinkingWithBarnabas_alcoholStartState","fpd+0.4",
+"d5744c88-7cde-405f-811a-55fc502236b6","prepadeniVlasskehoDvora_alcoholDigestBooster","adm*3",
+"d5996d8b-611d-4cc8-bfbd-7ab2c8884cf6","vip_stealprot","ppr+1",
+"d61a0120-6087-4116-9645-2a3abe1f11fd","crime_interrupt_confronting","nrb+1\,res*2\,vision+5",
+"d6707e6d-bd5f-4e09-ae0d-40dc65ba983e","quest_erik_forceDrunkenness0","fpd=0.0001",
+"d81cbd73-3b9d-4fd7-b437-f2648b540202","test_e3_pickpocket_for_player","thievery+15",
+"d8ef78c6-c535-4436-b9df-5d9e86e153ac","food_heal",,
+"d9711484-b2cd-4982-ac1f-e44a7ce9b548","Beaten Like a Dog","strength*0.8\,agility*0.8\,vitality*0.8\,courage*0.8\,srg*0.8\,hlt*0.8\,bea+1","You were caned for your crimes\, leaving you injured and weakened.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;&lt;p&gt;Your Strength\, Agility and Vitality are temporarily reduced by 40%&lt;/p&gt;&lt;p&gt;Your Stamina regeneration rate is also temporarily reduced by 20%.&lt;/p&gt;"
+"d9cfb9e0-7949-49e0-b6b5-b7cd6a51dd27","nonpersistent_very_tough_guy","hlh*0.13",
+"daa26974-e5ce-41be-88cb-bbcef56e6452","Overloaded","LimitSprint\,Run-1\,Walk-0.1\,wac*2\,asp-0.5\,dsl*0.1;LimitRun","You're carrying too much. Your maximum speed is lowered. Offload some items into your horse's inventory\, or just drop them on the ground.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;You can't run and you walk slower.&lt;p&gt;In combat\, your attacks are and dodges are slower\, and attacks cost more stamina.&lt;/p&gt;&lt;p&gt;When you're overencumbered\, you can't Fast travel\, and you can't mount horses.&lt;/p&gt;"
+"dbc47939-2de8-4c3e-add9-6875461a1877","disableDodger","atd=0",
+"dc4be505-46d6-4ca4-857b-59cfa36adc2a","crime_instantRecognition","ors*11",
+"dcbee361-3936-46d8-a06c-50d5b0c51265","quest_stealthMiseZaJindru_guard_visionBoost","vis+5",
+"dcca27c8-0d73-4aa8-8464-c00a6be820f0","hladAZmar_sermonBattleBuff","fencing*1.2\,defense*1.2\,weapon_sword*1.1\,heavy_weapons*1.1\,weapon_large*1.1\,weapon_unarmed*1.1\,marksmanship*1.1",
+"de68e56a-a74c-4447-874b-487b03c3fc6e","remove_all_posions",,
+"dea88883-e54d-4946-b586-78975597752e","test_weapon_poison_deadly","LimitSprint\,health-100/t",
+"decf1ab0-d222-4073-8e11-fb101b6b1eb6","hladAZmar_sermonBattleDebuff","fencing*0.8\,defense*0.8\,weapon_sword*0.9\,heavy_weapons*0.9\,weapon_large*0.9\,weapon_unarmed*0.9\,marksmanship*0.9",
+"dfeb773e-6270-4ffa-92c7-09772a914dcb","quest_kumaniNaTrosecku_campDrinkingSecondPhaseNotSoDrunk_nonpersistent","fpd+0.6",
+"e064e816-cc15-4e53-a036-cdf573421302","imba_combat_guy","hlh*0.13\,slh*0.13\,srg*5\,sco=0\,src=0\,health+10/s",
+"e0efefa6-d79b-4cae-988c-b9fd5a78f575","combat_stamina",,
+"e211967c-e1de-4041-a0ea-d48d99ddb62b","test_berserker_visual",,
+"e2f2e0c7-b1d0-4ec5-8f1f-9f412f547f2d","item_horse_saddle","cap+200\,agility-5",
+"e3453dfa-70f9-49dc-9c0c-8426a7c532c2","quest_budovaniLazni_drunkAfterParty","fpd=0.5",
+"e3701f28-11f8-40fb-a026-2b90a9b939f8","svatba_roastedPigletAlcoholAntidote","apa=0.8\,adm=0.9",
+"e3b8e7dc-0a1b-4e6c-a0ce-ffc1519c40ec","test_owl","owl+1",
+"e4165c2f-39ff-4a0a-9133-c4f82fcd95ba","test_padfoot_visual",,
+"e4b76425-4bc5-492a-9d5f-3575b4fab1be","fasttravel_invisibility","ors=-1",
+"e5260d2e-430b-47c7-8503-a9b1a14cb500","event_chase_slower_debuff","rms*0.8",
+"e5ff5b8f-c764-44d8-b156-a884233150e1","remove_drunkness_constant","dru=0",
+"e6a5dc1c-ccf5-453f-bffc-3e874ac84165","autotest_max_dread","drd=30",
+"e719142d-5438-4cc4-b640-6124b8c8869d","prepadeni_preventDamageDuringTrainingDuel","hlh*0",
+"e737ed03-c53b-4535-b0b1-f701756c4b79","test_agi","agility+11\,vitality+5\,strength-5",
+"e7952613-5660-419c-988d-ac973ed13c5d","crime_interrupt_searching","nrb+1\,res*2\,vision+5",
+"e7afc162-6c81-4bac-84f5-fa06d236894f","setkaniVRatbori2_bohuta_alcoholDigestBooster","adm*2",
+"e7e0eda4-a76c-49af-aa3e-43ccea14297c","remove_drunkness","dru=0",
+"e8541aae-07e1-87ca-8cfd-a462a12a8080","quest_zikmunduvTabor_dedrunk","fpd=0.01",
+"e855944d-493e-4a25-b77c-005dcdf503fe","Overeating","rst<0.8","You have gorged too much food and you feel sick. Your maximum Stamina is lowered."
+"e860a7b2-dce1-4a77-a746-971ed8f537cf","instant_cure","health+200/t",
+"e87bf450-36ae-4c37-a01c-1ff2a141cb83","Greater Attack","wat*2",
+"e8ba6719-baba-48b2-9442-d737ef443148","god_mode","imm=1\,hlh=0\,slh=0\,sco=0\,src=0\,wac=0\,asp=1\,wat=100\,strength=100\,agility=100\,vitality=100\,defense=100\,fencing=100\,weapon_sword=100\,weapon_unarmed=100\,srg=100\,health+100/s",
+"e8bb8423-3c1d-483d-9af7-6b27835216b5","Hangover",,"You have a splitting headache and a feeling of great regret.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;A hangover reduces your Strength\, Agility\, Vitality\, Speech and Charisma and makes you more conspicuous. The degree of these negative effects depends on how much you drank\, and how long the hangover lasts is determined by your Drinking skill - the more experienced you are\, the shorter the hangover. It will dissipate eventually or can be cured with a Marigold Decoction or Hair o' the Dog potion."
+"e928b585-1391-4cbd-84b2-4ed573263efa","player_remove_drunkness","fpd=0.0001",
+"eab9a787-9460-4c90-96ec-8e69c4a82d8d","reading_regen",,
+"eca9aa28-9c54-4af1-9fac-c10b439c5a8b","test_witch_visual",,
+"ed59af7c-6d7e-4454-8ffb-f16935bf5130","not_immortal","imm=0",
+"ede2a6b3-7475-4596-ab05-2362655ee2b8","posledniPomazani_boostedBohuta","strength+10\,agility+10\,vitality+10\,fencing+10\,defense+10\,weapon_sword+10\,heavy_weapons+10\,weapon_large+10\,weapon_unarmed+10\,marksmanship+20\,hlh*0.33",
+"ee15a8e3-85f0-4d59-bb7b-27f882960b3d","HC perk Consumption","srg*0.85",
+"eeddf516-3f10-4988-8b97-5ee130f47163","quest_mapaKPokladu_banditCourage","courage=25",
+"f053ee01-aade-4a13-a776-597c97d34bab","zranenyLovci_wolfHealthLossBoost","hlh*1.6\,slh*1.6",
+"f16d86e9-230d-4f75-b2ce-cfc6765e9608","quest_utokNebakov_half_movement","rms*0.65",
+"f18772f9-99fc-550d-9725-4fddd8574068","quest_bohutovaVlozka_startQuestDrinkingInPub","fpd+0.2",
+"f18dbed4-0e86-427d-9ba1-a5a4331d8872","autotest_min_persuade","prs=0",
+"f29ee947-a131-4597-8ed7-6f06aca0a4a2","miraculous_cure","health+100/t",
+"f2c8fc57-43a4-4593-acb7-0bbbbe4854d6","crime_interrupt_looking","nrb+0.3",
+"f2d371a0-feab-4f9e-b0d2-43a331b41520","prepadeni_customBleedingSpeed","ibi*2",
+"f32f52ad-64a8-4a77-a118-707f7c86a7cc","item_torch","vision+5\,vib+3.5",
+"f446ed8b-e69b-4616-8b43-1678093ea493","test_reg","srg+5",
+"f46120bf-b45f-4ec5-95c6-03d526cb40bf","unconsciousness_protection_nonpersistent","upr=1",
+"f4909c8f-d3ff-4886-aa6f-f3eca996fc1c","horse_moraleDebuff_onMountByPlayer","mor-0.00",
+"f4d0347e-40b1-4a21-8c1f-d422aaceea32","zachranaPtacka_malesovAlarmNervousness","nrv+1000",
+"f59911d3-52de-4e36-961d-27794857c426","autotest_min_dominate","dmt=0",
+"f6c604fd-66fb-47db-9e9e-1506d5a8e414","roe_deer_easyKill_permanent","hlh=50\,slh=100\, ble*6",
+"f6d618ff-6361-4a20-b7d4-ea8e55f35321","svatba_tournamentBuffForPlayer","ade*0.5\,slh*1.7",
+"f8180af4-ce59-41c2-b038-e4d72b68366f","vip_knockoutprot_remove","kopr=0",
+"f8558fe2-f4cd-4899-932b-82e0e15fa964","bow_self_harm_attack","sha=5",
+"f8d60fe4-e2c1-420a-946a-213e1cd09264","unconscious","vision=0\,hearing=0\,srg=0\,coc=0",
+"f8d60fe4-e2c1-420a-946a-213e1cd09265","unconscious_nonpersistend","vision=0\,hearing=0\,srg=0\,coc=0",
+"f964e339-a3d5-4e50-83c5-1d74a6e0ea41","test_str","strength*1.5",
+"f97fd5a3-edec-490f-b94b-46ec0f1a32b2","healthEatSleep","dig*0\,exh*0\,jrs*0\,health+100/s",
+"f99b83d8-0fda-4869-8060-40ddb6a98989","zachranaPtacka_boostedVavak","hlh=0\,slh=0",
+"fa71d1ee-10de-4835-8d77-688558d4d033","quest_sedmStatecnych2_drinkingSecondPhaseDrunk_nonpersistent","fpd+0.6",
+"fb737451-20e9-4338-a8d3-5121b50804a8","weak_guy_nonpersistent","hlh*5",
+"fb737451-20e9-4338-a8d3-5121b50804b7","very_weak_guy_nonpersistent","hlh*500",
+"fbda778d-108a-9fe8-9cdf-322c1124358e","quest_zikmunduvTabor_drunkHard","fpd=0.6",
+"fc781bef-900d-40d8-9d8d-edb58abc930c","alchoholDigestionBoost","adm=2000",
+"fdb86906-e4c2-4ef4-b0b9-ce64470fe13a","quest_kocovnickaCest_moraleHitExtreme","mor-1",
+"fdb86907-1899-4868-a0f0-e7a76050f9eb","quest_kocovnickaCest_movementSpeed_debuff","agility*0.35\,vitality*0.35",
+"fdb86908-efb7-4e8e-a378-47f9362b18df","quest_kocovnickaCest_fightingCapabilities_debuff","strength*0.7\,agility*0.7\,vitality*0.7\,fencing*0.7\,defense*0.7\,weapon_sword*0.7\,heavy_weapons*0.7\,weapon_large*0.7\,weapon_unarmed*0.7\,marksmanship*0.7",
+"fdba522c-558a-8ed7-2acf-259a6873279d","quest_zikmunduvTabor_drunkLight","fpd=0.4",
+"fe9ca784-46f1-4bb4-9efc-1abe7e96a99a","fistfights_fightInvisibility","ors=-1",
+"feb6ee6a-781b-4367-976d-3a21ba56fc9a","near_death_experience","hlh=1000\,slh=1000",
+"feedbeef-dead-babe-f00d-be9dad6abed9","player_horse_stamina_modifier",,
+"ff92671b-2a82-4def-8d59-51627e0ecfc7","Drunkenness",,"&lt;p&gt;Drinking alcohol induces drunkenness and it depends on the amount whether it helps or hurts you. Drunkenness has two phases.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Positive phase&lt;/strong&gt;&lt;br&gt;The ongoing positive phase of drunkenness gradually increases your Speech\, Strength\, Agility\, and Charisma up to a maximum of +4.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Negative phase&lt;/strong&gt;&lt;br&gt;If the drunkenness moves into the negative phase of drunkenness\, it begins to gradually reduce your Strength\, Agility\, Vitality\, Speech\, Charisma\, and Scholarship to a maximum of -2. In addition\, you will become dizzy and you will have trouble seeing. If you've had too much alcohol\, you could pass out.&lt;br&gt;The length of the positive and negative phases of drunkenness is determined by your &lt;strong&gt;Drinking skill&lt;/strong&gt;. The higher it is\, the longer the positive phase lasts and the negative phase is shorter. The drunkenness starts to decrease when all the alcohol is absorbed.&lt;/p&gt;&lt;p&gt;If you drink frequently\, you can develop an addiction that is hard to break.&lt;/p&gt;"
+"ffc20521-134d-4811-8bc5-e932b74b7075","constant_speed","Walk=1\,rms=1",
+"ffc20521-134d-4811-8bc5-e932b74b7076","barbora_mercy_morale_debuff","mor-0.1",
+"ffc20521-134d-4811-8bc5-e932b74b7077","barbora_flee_morale_debuff","mor-0.1",
+"ffc20521-134d-4811-8bc5-e932b74b7078","dog_stealth","vib=0.0",
+"ffc20522-134d-4811-8bc5-e933b74b7081","npc_drunkenness","dru+1\,vision-1\,thievery-2",
+"ffda724a-762e-4de6-9cac-209c6084512b","slow_attack_rate","cag=0.5",
+"ffda734a-763e-4de6-9cac-309c6084513b","training_experience_debuff","xpm=0.2",
+"03845da1-2125-45dd-a315-cf7dba569e54","Strong Dollmaker Potion Effect","alp+1\,LimitRun\,weapon_sword-4\,marksmanship-4\,heavy_weapons-4\,weapon_large-4\,weapon_unarmed-4\,poi=1\,health-30/t","You cannot run and all your weapon skills are decreased by 4. You are also gradually losing 30 Health points."
+"0514be45-7ace-4c34-9d12-cd3d8c83bae4","Bane Poison Effect","alp+1\,poi=1\,LimitRun\,health-110/t","You are gradually losing 110 Health points. You can't run either. If you don't do something about it\, you will die."
+"085e7b12-8b53-462a-83c0-ccb34217af0f","Strong Fox Effect","alp+1\,speech+5\,rdq>1","Increases Speech by 5 and increases your reading speed."
+"0e94d82b-50ec-4d25-8ea5-438478ec5e31","Henry's Cockerel Potion Effect","alp+1\,exh*0.5","Energy decreases 50% slower."
+"122c0e62-747e-4bb3-9650-1a14d0420b08","Weak Buck's Blood Effect","alp+1\,mst*1.15","Increases Stamina by 15%."
+"15387b1a-7f7e-4462-8ce6-ea652f0e182e","Weak Lullaby Potion Effect","exhaust-100/s\,vision*0.75\,hearing*0.75","Decreases Energy to 0."
+"15bfe81a-1c4e-41ce-91da-fa345129cc92","Artemisia Potion Effect","alp+1\,strength+4\,","Increases Strength by 4."
+"19b9bd34-f153-4e2b-a56c-207a2a2f9f3a","Henry's Artemisia Potion Effect","alp+1\,strength+6\,wac*0.65\,sls*0.65","Increases Strength by 6 and both attack and defence cost 30% less Stamina."
+"1f398bd2-05ea-4a56-b883-9ac3ba3ad01a","Weak Fox Effect","alp+1\,speech+3","Increases Speech by 3."
+"1ff0e4a0-c09c-40be-b31e-fcb98b8ae0df","Henry's Aesop Potion Effect","alp+1\,horse_riding+7\,houndmaster+7;ors=-1","Increases Horsemanship and Houndmaster by 7 and decreases animal attentiveness. Dogs don't notice you."
+"24c8edfc-a310-4f98-8adc-37de87514c38","Henry's Saviour Schnapps Effect","alp+1\,strength+3\,vitality+3\,agility+3\,health+30","Increases Strength\, Agility and Vitality by 3."
+"25bdbc39-c19a-4a11-8c0f-6e16c432846f","Weak Dollmaker Potion Effect","LimitRun\,fencing-2\,weapon_sword-2\,heavy_weapons-2\,marksmanship-2\,weapon_large-2\,weapon_unarmed-2\,","You cannot run and your weapon skills are decreased by 2."
+"2608543a-bb2f-41f0-b6a3-8140c9e6ac0e","Buck's Blood Effect","alp+1\,mst*1.3","Increases Stamina by 30%."
+"27c2fd6a-9b87-4d1f-b434-44f5ec3fa426","Weak Aqua Vitalis Effect","alp+1\,hlh*0.85\,slh*0.85\,fdm-0.15","You lose 15% less Health."
+"27e0c970-cf34-428a-91ff-35c1da071665","Strong Cockerel Potion Effect","alp+1\,exh*0.8","Energy decreases 20% slower."
+"2f76aa98-165f-4105-be87-61b630fe70b8","Henry's Painkiller Brew Effect","alp+1\,ies=1\,rst%1.75","Suppresses the effects of injury and your maximum Stamina decreases with health 75% less."
+"3010a853-a9bb-4a0c-8d85-8b510e1b2ea6","Embrocation Effect","alp+1\,agility+4\, StaminaSprint*0.9","Increases Agility by 4 and sprinting costs 10% less Stamina."
+"336b5fe9-ec7f-442f-a9d1-b8bb2a6d3fa1","Weak Painkiller Brew Effect","alp+1\,ies=1\,rst%1.15","Suppresses the effects of injury and your maximum Stamina decreases with Health 15% less."
+"34adf873-92b4-4166-b85b-a0fcaacb760c","Henry's Chamomile Brew Effect","alp+1\,shr*5\,ser*3","Sleeping heals you five times faster and increases Energy three times faster."
+"35effd0b-b401-43c6-8195-b502d67ebe63","Strong Dollmaker Potion Effect","alp+1\,LimitRun\,fencing-4\,weapon_sword-4\,marksmanship-4\,heavy_weapons-4\,weapon_large-4\,weapon_unarmed-4\,poi=1\,health-30/t","You cannot run and all your weapon skills are decreased by 4. You are also gradually losing 30 Health points."
+"3a323f98-5d10-421f-accc-553a1b759100","Strong Hair o' the Dog Potion Effect","alp+1\,apa+1\,hod=0","Eliminates drunkenness and hangover."
+"3a818f56-ff68-4aa4-bfc0-6437c3e73703","Strong Bane Poison Effect","alp+1\,poi=1\,LimitRun\,health-110/t","You are quickly losing 110 Health points. You can't run either. If you don't do something about it\, you will die."
+"40b35ed9-a09a-47c2-b163-a4019340a52a","Henry's Dollmaker Potion Effect","alp+1\,LimitRun\,fencing-5\,weapon_sword-5\,marksmanship-5\,heavy_weapons-5\,weapon_large-5\,weapon_unarmed-5\,poi=1\,health-50/t","You cannot run and your weapon skills are decreased by 5. You are also gradually losing 50 Health points."
+"43292c72-7261-44e3-be02-6e0ef355dd6c","Dollmaker Potion Effect","alp+1\,LimitRun\,fencing-3\,weapon_sword-3\,marksmanship-3\,heavy_weapons-3\,weapon_large-3\,weapon_unarmed-3\,poi=1\,health-20/t","You cannot run and your weapon skills are decreased by 3. You are also gradually losing 20 Health points."
+"436e58bd-a715-4009-b305-a4c25f4e6759","Nighthawk Effect","alp+1\,vision*1.5\,owl+1\,exh*0.75","You can see better in the dark and Energy decreases 25% slower."
+"45275677-0808-4d4a-bcad-e78aa77ae612","Henry's Lullaby Potion Effect","alp+1\,exhaust-100/s\,vision*0.75\,hearing*0.75\,srg*0.5\,mst*0.5","Decreases Energy to 0. Maximum Stamina and its regeneration is decreased by 50%."
+"58138b68-0c86-4d5e-8823-417106d08d3c","Weak Bane poison Effect","poi=1\,LimitRun\,health-110/t","You are slowly losing 110 Health points. You can't run either. If you don't do something about it\, you will die."
+"59ead0ed-6514-4b45-8a57-d3a95b75d7ba","Strong Bowman's Brew Effect","alp+1\,marksmanship+5\,ard*0.5","Increases Marksmanship by 5 and decreases Stamina loss when aiming by 50%."
+"6026810f-22fe-49e5-8811-b233722f44b2","Strong Artemisia Potion Effect","alp+1\,strength+4\,wac*0.85\,sls*0.85","Increases Strength by 4 and both attack and defence cost 15% less Stamina."
+"612f0945-9933-47f0-9083-2db00be0e830","potion_savegame",,
+"6451a511-4c57-4aff-9e81-c7d9cd02fd2d","Henry's Bane Poison Effect","alp+1\,poi=1\,LimitRun\,health-110/t","You are very quickly losing 110 Health points. You can't run either. If you don't do something about it\, you will die."
+"689753d8-56a1-4012-822d-3d169d9504da","Lullaby Potion Effect","alp+1\,exhaust-100/s\,vision*0.75\,hearing*0.75\,srg*0.9\,mst*0.9","Decreases Energy to 0. Maximum Stamina and its regeneration are decreased by 10%."
+"69c7ab9c-18e3-4919-8154-54fec286f03f","Digestive Potion Effect","alp+1\,hunger-20\,vitality+1","Decreases Nourishment by 20\, cures food poisoning and increases Vitality by 1."
+"6aa19cd2-5426-46b2-a5c4-f6124eb512f8","Lullaby Potion Effect","alp+1\,exhaust-100/s\,vision*0.75\,hearing*0.75\,srg*0.9\,mst*0.9","Decreases Energy to 0. Maximum Stamina and its regeneration are decreased by 10%."
+"71afe0a0-fa45-42f1-a07d-acd3d02bfc0f","Henry's Bowman's Brew Effect","alp+1\,marksmanship+8\,ard=0","Increases Marksmanship by 8 and stops Stamina loss when aiming."
+"736fcb09-5554-4e6b-b3e0-f9bc6cc4fd0a","Weak Bowman's Brew Effect","alp+1\,marksmanship+3","Increases Marksmanship by 3."
+"743b8ca4-6538-4c00-9903-29ab2050c8e8","Bane Poison Effect","alp+1\,poi=1\,LimitRun\,health-110/t","You are gradually losing 110 Health points. You can't run either. If you don't do something about it\, you will die."
+"78c21c77-dc76-4464-ac62-a37ececa1974","Strong Buck's Blood Effect","alp+1\,mst*1.3\,srg*1.15","Increases Stamina by 30% and Stamina regeneration by 15%."
+"79285ce3-21f3-4aa6-a824-68c42c37732a","Strong Bane Poison Effect","alp+1\,poi=1\,LimitRun\,health-110/t","You are quickly losing 110 Health points. You can't run either. If you don't do something about it\, you will die."
+"7a94771c-98bd-445f-bf48-ee24bf235c95","Henry's Dollmaker Potion Effect","alp+1\,LimitRun\,fencing-5\,weapon_sword-5\,marksmanship-5\,heavy_weapons-5\,weapon_large-5\,weapon_unarmed-5\,poi=1\,health-50/t","You cannot run and your weapon skills are decreased by 5. You are also gradually losing 50 Health points."
+"7b37ac9b-840f-40d2-8397-b62313d2239e","potion_insomia_2","alp+1\,exhaust-20",
+"7f16793c-4d42-4d63-a912-d93d51b92289","Henry's Nighthawk Potion Effect","alp+1\,vision*1.5\,owl+1\,exh=0.0","You can see better in the dark and not lose Energy at all."
+"7f89c355-d3c6-4f61-9774-3a3898372ab7","Henry's Aqua Vitalis Effect","alp+1\,hlh*0.4\,slh*0.4\,ibi*1.6\,fdm-0.6","You lose 60% less Health and and slows bleeding by 60%."
+"81886e93-8aba-4480-aa3b-d2c0a86447d7","Weak Digestive Potion Effect","hunger-20\,","The ingredients in this potion reduce nourishment by 20 and cure food poisoning."
+"81e733a3-4bfd-4573-a895-6d8613e444d5","Fox Effect","alp+1\,speech+3\,rdq>1","Increases Speech by 3 and increases your reading speed."
+"8503216a-a34c-49f0-aefa-54d4502046f9","Weak Marigold Decoction Effect","alp+1\,health+15/t\,hod*0.75","Gradually heals 15 Health points and hangover goes away 50% faster."
+"88b0cf2b-516e-4d73-adba-c67517d278c3","Strong Digestive Potion Effect","alp+1\,hunger-20\,pim=1\, vitality+2","Decreases Nourishment by 20\, cures all poisoning and increases Vitality by 2."
+"8cc1d023-1c9d-43bc-8662-144499904a6e","Strong Aesop Potion Effect","alp+1\,horse_riding+5\,houndmaster+5;ors=-1","Increases Horsemanship and Houndmaster by 5 and decreases animal attentiveness. Dogs don't notice you."
+"9186f153-b18e-4e04-8b39-411268d24476","Strong Saviour Schnapps Effect","alp+1\,strength+2\,vitality+2\,agility+2\,health+20","Increases Strength\, Agility and Vitality by 2."
+"940b16f1-d2ef-4874-a915-8122a7d4392a","Weak Artemisia Potion Effect","alp+1\,strength+2","Increases Strength by 2."
+"96083a8f-cdb5-42ec-9bb1-3caf40386ea2","Marigold Decoction Effect","alp+1\,health+25/t\,hod*0.5","Gradually heals 25 Health points and hangover goes away 100% faster."
+"ad53097a-b18d-4b05-9a4d-4d14176b2740","Aesop Potion Effect","alp+1\,horse_riding+3\,houndmaster+3;ors*0.5","Increases Horsemanship and Houndmaster by 3 and decreases animal attentiveness."
+"adcc7caf-447f-4450-83cb-77ce46f0b056","Quickfinger Potion Effect","alp+1\,thievery+4\,craftsmanship+4","Craftmanship and Thievery are increased by 4."
+"b1075629-edcd-4be0-bbbc-28c63a7f61be","Henry's Embrocation Effect","alp+1\,agility+6\, StaminaSprint*0.7","Increases Agility by 6 and sprinting costs 30% less Stamina."
+"b1697366-d4cf-4133-9736-97c3f512f9e6","Dollmaker Potion Effect","alp+1\,LimitRun\,fencing-3\,weapon_sword-3\,marksmanship-3\,heavy_weapons-3\,weapon_large-3\,weapon_unarmed-3\,poi=1\,health-20/t","You cannot run and your weapon skills are decreased by 3. You are also gradually losing 20 Health points."
+"b56d79e6-156c-4803-8d91-73a82f01926e","Weak Bane poison Effect","poi=1\,LimitRun\,health-110/t","You are slowly losing 110 Health points. You can't run either. If you don't do something about it\, you will die."
+"b6bd097c-f092-469d-984a-e673f4cdd03c","Henry's Marigold Decoction Effect","alp+1\,health+60/t\,hod=0","Gradually heals 60 Health points and cures hangover."
+"bb7bfaed-fad9-4f27-a9be-731c3b141285","Strong Lullaby Potion Effect","alp+1\,exhaust-100/s\,vision*0.75\,hearing*0.75\,srg*0.7\,mst*0.7","Decreases Energy to 0. Maximum Stamina and its regeneration are decreased by 30%."
+"bec61738-f8ed-4429-b9ae-482f5512e442","Chamomile Brew Effect","alp+1\,shr*3","Sleeping heals you three times faster."
+"c0662fdb-9bd1-44ce-9a89-a6e83ec8063a","Strong Aqua Vitalis Effect","alp+1\,hlh*0.7\,slh*0.7\,ibi*1.3\,fdm-0.3","You lose 30% less Health and slows bleeding by 30%."
+"c14174d4-a381-4129-a935-62bb031901d3","Henry's Quickfinger Potion Effect","alp+1\,thievery+8\,craftsmanship+8","Craftmanship and Thievery are increased by 8."
+"ceb70cbf-9c4e-491a-8d75-7e8ab874db54","Weak Embrocation Effect","alp+1\,agility+2","Increases Agility by 2."
+"cf87b636-408a-403e-b0ac-87eb323aabd4","Henry's Hair o' the Dog Effect","alp+1\,hod=0\,ald=0\, apa+1","Eliminates drunkenness and hangover and temporarily reduces effects of alcoholism."
+"cf9b4526-29f1-40ce-b95d-0299974e39ba","Saviour Schnapps Effect","alp+1\,strength+1\,vitality+1\,agility+1\,health+10","Increases Strength\, Agility and Vitality by 1."
+"d6079f34-4b7e-4afd-afe1-eee36f4674c6","Strong Lullaby Potion Effect","alp+1\,exhaust-100/s\,vision*0.75\,hearing*0.75\,srg*0.7\,mst*0.7","Decreases Energy to 0. Maximum Stamina and its regeneration are decreased by 30%."
+"d97eea3c-162b-4537-a156-8d984b3a90a1","Strong Embrocation Effect","alp+1\,agility+4\, StaminaSprint*0.8","Increases Agility by 4 and sprinting costs 20% less Stamina."
+"dab8a783-c391-4925-860b-8162eb2f2642","Strong Painkiller Brew Effect","alp+1\,ies=1\,rst%1.5","Suppresses the effects of injury and your maximum Stamina decreases with Health 50% less."
+"db397470-27c5-4a3a-9717-1b3b5f42377a","Weak Dollmaker Potion Effect","LimitRun\,fencing-2\,weapon_sword-2\,heavy_weapons-2\,marksmanship-2\,weapon_shield-2\,weapon_large-2\,weapon_unarmed-2\,","You cannot run and your weapon skills are decreased by 2."
+"dd2612e4-0e4a-4092-867b-8728f45dcfc5","Lullaby Potion Effect","alp+1\,exhaust-100/s\,vision*0.75\,hearing*0.75\,srg*0.9\,mst*0.9","Decreases Energy to 0. Maximum Stamina and its regeneration are decreased by 10%."
+"dff536bc-9472-4754-9851-8656b5b18247","Weak Chamomile Brew Effect","alp+1\,shr*2","Sleeping heals you two times faster."
+"e223597e-8005-4464-8948-9b30b3ef293e","Strong Marigold Decoction Effect","alp+1\,health+40/t\,hod=0","Gradually heals 40 Health points and cures hangover."
+"e300b5f3-9d1f-4dfd-8285-c872bb3ed85b","Strong Chamomile Brew Effect","alp+1\,shr*4\,ser*2","Sleeping heals you four times faster and increases Energy two times faster."
+"e3a88c22-4058-4bf2-9000-043fff49f332","potion_insomia","alp+1\,exhaust-10",
+"e3dfbf21-e1c1-43db-9270-078c0c2b3611","Strong Quickfinger Potion Effect","alp+1\,thievery+6\,craftsmanship+6","Craftmanship and Thievery are increased by 6."
+"e8b7b563-f15b-487f-aa28-35b790ad98e4","Henry's Digestive Potion Effect","alp+1\,hunger-30\,pim=1\, vitality+3","Decreases Nourishment by 30\, cures all poisoning and increases Vitality by 3."
+"ea76c3af-bfb1-4e89-9157-d82f028b8572","Henry's Fox Effect","alp+1\,speech+7\,rdq>1\,xpm*1.5","Increases Speech by 7\, increases reading speed and increases the amount of experience gained by 50%."
+"eacbd986-ad07-4698-bf81-59df608b56a1","Weak Quickfinger Potion Effect","alp+1\,thievery+2\,craftsmanship+2","Craftmanship and Thievery are increased by 2."
+"eaf0b14c-e2a4-4ace-bb89-e33ea2dedcd6","Aqua Vitalis Effect","alp+1\,hlh*0.85\,slh*0.85\,ibi*1.15\,fdm-0.15","You lose 15% less Health and slows bleeding by 10%."
+"ebd30789-f788-493d-8bf3-ed830446e7aa","Bowman's Brew Effect","alp+1\,marksmanship+3\,ard*0.8","Increases Marksmanship by 3 and decreases Stamina loss when aiming by 20%."
+"ed10dd29-b177-4d04-a330-3cbe76fe04b2","Henry's Bane Poison Effect","alp+1\,poi=1\,LimitRun\,health-110/t","You are very quickly losing 110 Health points. You can't run either. If you don't do something about it\, you will die."
+"efd07a19-ef79-4454-bbb3-a2a09af1ce0f","Henry's Buck's Blood Effect","alp+1\,mst*1.6\,srg*1.3","Increases Stamina by 60% and Stamina regeneration by 30%."
+"f08512d7-03f5-4312-b3a2-5e8574fc6188","Painkiller Brew Effect","alp+1\,ies=1\,rst%1.3","Suppresses the effects of injury and your maximum Stamina decreases with Health 30% less."
+"f13d37c1-5524-4822-9515-48e1ccb0dde4","Weak Lullaby Potion Effect","exhaust-100/s\,vision*0.75\,hearing*0.75","Decreases Energy to 0."
+"f23dda25-6450-49c8-86f3-fc7bc1236199","Weak Aesop Potion Effect","alp+1\,horse_riding+3\,houndmaster+3;ors*0.8","Increases Horsemanship and Houndmaster by 3 and decreases animal attentiveness."
+"f4b3ffd4-8a48-41af-bbae-1f7d50121ab4","Henry's Lullaby Potion Effect","alp+1\,exhaust-100/s\,vision*0.75\,hearing*0.75\,srg*0.5\,mst*0.5","Decreases Energy to 0. Maximum Stamina and its regeneration is decreased by 50%."
+"f5e6a217-25b5-4b95-88d4-abc7d15a2203","Hair o' the Dog Effect","alp+1\,apa+0.08\,hod=0\,","Decreases drunkenness or removes hangover."
+"fa2ad41e-5701-4fe7-8630-5cee49eb304f","Weak Nighthawk Potion Effect","alp+1\,vision*1.5\,owl+1","You can see better in the dark."
+"fca19318-7d59-4645-bb7d-01fa9e6c925f","Weak Hair o' the Dog Effect","alp+1\,apa+0.05\,","Decreases drunkenness."
+"fe0d144f-2fe0-4cda-bbb1-61e593ece413","Strong Nighthawk Potion Effect","alp+1\,vision*1.5\,owl+1\,exh*0.5","You can see better in the dark and Energy decreases 50% slower."
+"0a886758-b222-42f1-a5c5-c5f3d840e913","heavy_weapon_combo_finished_dummy",,
+"26524ef2-ef50-4bc5-a149-262880922b82","sword_combo_finished_dummy",,
+"3e9b2099-d1e5-493d-8fe4-8de9ea9e9e8a","Bleeding","ibi*2","You are bleeding. Unless you treat your wounds with a bandage\, you will slowly lose health and die\, but since you have the Thickblooded perk\, it will be slower. The bleeding will not stop on its own though."
+"993dba95-0683-4cf1-9c57-48edefaa382f","clean_cut_debuff","agility-5",
+"ae48b141-6946-4714-9818-a253f81e792d","heavy_bleeding","ibi*0.75",
+"bf861d60-b892-42a3-9c3b-d3787362f88b","Arm of Beowulf","wac*1.2\,wat*0.8\,asp-0.3","Using a longsword with just one hand is difficult even for a strongman like yourself. Attacks are therefore 30&amp;nbsp;% slower\, 20&amp;nbsp;% weaker and will cost you 20&amp;nbsp;% more Stamina"
+"c2d02711-353a-4f9f-918f-bc17faf515b2","only_antidote",,
+"46769b14-d592-4a7c-a6bc-811e3366affa","Renegade Brand","strength*0.8\,vitality*0.8\,agility*0.8","You just got out of jail\, but having the Renegade Brand means the penalties to your stats are 20% lower.&lt;br/&gt;&amp;nbsp;&lt;br/&gt;Strength -20%&lt;br/&gt;Agility -20%&lt;br/&gt;Vitality -20%"
+"bd0dcc02-f7ed-4ebf-bdf0-b2bd7358aac2","test_profiling_slow_death","health-100/t",
+"a218b534-b2a5-11ed-afa1-0242ac120002","cheat_invisibility","con=-100\,evi=-100\,lpv=-100\,nbi=-10\,noi=-100\,ors=-10",
+"e4fc62ef-683d-4f8d-0002-cca23d364f35","cheat_immortal","imm=1\,upr=1\,health+100/s",
+"e4fc62ef-683d-4f8d-0010-cca23d364f35","cheat_carry_capacity_base","cps+10",
+"e4fc62ef-683d-4f8d-0011-cca23d364f35","cheat_carry_capacity","cps+10",
+"e4fc62ef-683d-4f8d-0020-cca23d364f35","cheat_xp_multiplier_base","xpm*1.5",
+"e4fc62ef-683d-4f8d-0021-cca23d364f35","cheat_xp_multiplier","xpm*1.5",

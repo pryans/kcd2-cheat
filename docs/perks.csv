@@ -1,0 +1,878 @@
+id,name,description
+"0133008f-09cf-4b68-a434-ea7f7b0283b3","Burial",
+"01c3b32a-5751-4c98-b6ab-258d02370382","Hardcore Mode - Constants",
+"01e845c3-34ca-4bd1-9f08-72ac0e19af57","Kitchens",
+"0298f5cd-21e3-4284-95ff-87114609832b","Rabbi",
+"029ab094-21b6-45f2-a242-557a6d340eb0","Mint Masters",
+"032ecad8-f7fd-48d6-b268-573025598e37","Witchcraft",
+"0335c283-6c1b-402d-acd8-0edd48ef38ae","The Conquest of Kuttenberg",
+"051028ac-d94c-4538-99be-fc76c1abdfbf","Jail",
+"06940cc6-0c96-421a-ae90-1c4079f87c0f","Negotiator",
+"0731a146-6220-43aa-989b-f2993d3390a7","Holy Roman Empire",
+"075e3563-168f-481b-8a25-d0566763a05c","John II of Liechtenstein",
+"07bda032-e4b0-45b7-a462-6e525b2ba69c","Ius Regale Montanorum",
+"084dd7fd-daee-4041-bae1-c58a0c132292","Relieved","You've confessed to all your wrongdoing\, made reparation to Virgin Mary and undertaken a pilgrimage of repentance. You have succeeded in cleansing yourself of your sins. Try to keep it that way! Now\, when you get a good sleep (at least 4 hours)\, you'll subsequently learn new things faster and improve in skills you already have."
+"0856ace1-3956-4cec-8283-f3c5374f5d1a","Sir Hanush of Leipa",
+"09d81b58-1a30-4d96-8eb4-80db04446870","Miners",
+"0a3d5815-b962-4198-b003-1eb0a7459903","Gamekeeper Rules the Woods",
+"0b129319-de62-41f2-97ef-4b9c10f370c9","Player Theresa - fader protection",
+"0c358b88-0305-497e-89ea-8637c67b6209","Taverns\, Inns and Innkeepers",
+"0d3322fe-5b3f-47c5-8a21-1fa5e5cffe36","Charcoal-Burners",
+"0ef3b73a-3c20-4f82-981e-e1fc57a4f1f6","Player Theresa - companion-horse",
+"0f22368c-4d37-4250-b536-0c0b707b00fd","Silver mining",
+"0f783667-e997-4211-83fe-bfbaa29c9a49","Towns and Cities",
+"118def30-4fc4-4fbe-96ac-01f7d1626204","Swordsmiths and Armourers",
+"12bbb8f4-4d0e-440a-8adf-9563120a2389","Invective",
+"12c75fff-d00d-4cb0-8c27-4a8e4838dc14","test_dummy_perk",
+"148c15e7-9be5-4b05-8db6-548823f7a800","Dragon Bones",
+"14c9a9c7-84ef-426b-8fae-1fe98b3bb048","Prokop of Luxembourg",
+"15e3f93f-7a6f-4895-91f6-458a762858eb","Ponds of the Trosky Region",
+"1627a1b6-64c5-422f-ac2d-3a6abc071690","Hunt attack",
+"1672a664-8b97-42b5-b390-84378bdefbf3","Clothing and Fashion",
+"169e4028-ccef-4ff1-b89f-b14d4ba2853e","Arabian Blood",
+"18460049-f8c3-488c-a2df-6cac92762bb1","Windmills",
+"191fa81a-fb9d-42d3-a2bf-d161a54eebb9","Books and Libraries",
+"1944cf3a-3048-4ab0-ad70-063961007e02","Construction works",
+"194658be-facc-4e14-bac9-9cff09de36eb","Player Theresa - Jail Recovery",
+"1a306045-415a-438d-b612-6f354b8717e2","Bakers",
+"1a775793-dc9b-4d14-b2b6-5dde2f314322","Zimburg Family",
+"1acdcbbd-c47d-45a1-a839-4a292cb9e646","Fabrics",
+"1b86388a-99d5-4321-9f8c-345eb6f5e62b","Jews",
+"1b879096-d118-46d9-8e0f-281045f50e30","Courtliness",
+"1ba52d97-abef-4e36-8d2f-71d4a3c61123","Municipal Finances",
+"1baabb30-8619-4fe9-a8ea-5322b6d13e77","Sedletz Ossuary",
+"1bb2892a-43a1-40c0-88cb-0f8753ea92dc","Gothic Architecture",
+"1c52755d-c0b3-49e2-8af4-89d308f4df91","first_aid_I_ability",
+"1c8ff24a-e3fb-48db-90c9-f2034c129886","Noble Officials",
+"1d8d37bf-67fb-41d1-9661-edfebbc9b0d2","Prague",
+"1e481442-0ea3-4af1-8ea4-47d579ffa51a","Charity",
+"1e53b07d-8012-44b1-ace6-3504558f04aa","Hardcore Mode",
+"1e7c2255-b068-47a0-9447-4e0fe5205e8c","Hardcore Mode - Buff",
+"1f0caa02-f824-4421-8621-97cc4d6baafb","Jitka of Kunstadt",
+"1f8a2070-c21e-4d11-b3e0-f379c5394291","Stonemason",
+"1fe29784-4e8a-4e1f-9f78-06ee76bd7e93","Tools",
+"200a9a17-be64-437d-9354-d993f97b8182","Armoury",
+"21cf8626-284c-4f85-a1ed-0eaaeae8d6ed","tackle - companion",
+"2381b050-5d9d-4f8b-977f-c20d70b6759c","Noble Marriages",
+"23d8345b-a8f0-4bf2-84de-f6a5ce232822","Alchemy",
+"245b6b57-655a-4b04-a5af-8679dd7cb3ed","Hygiene",
+"24a9b014-9415-44af-9053-40c224ce7f42","Locksmiths",
+"24e01c3b-eba8-47fa-a74b-1132fcbda216","Diseases",
+"2542f0bd-ebb1-4dc7-a13a-08deb50f1204","Gardens",
+"25ab34de-54a5-4400-9968-7870340a186b","Highborn Prisoners",
+"27c70159-3e9a-4cca-8715-9dca1f4ab805","Musa of Mali",
+"27c8fc49-d465-48fe-87a9-0417ec507fc0","Chronicles",
+"280c4479-84cc-4936-b03b-a094bafc1ca0","first_aid_I_script",
+"2946fd76-7278-47e0-8078-92de62e0b94f","Baths and Bathmaids",
+"296aeca5-029e-4bd3-9e25-59d2bff762da","St. Wenceslas' Crown",
+"2a4a3b49-7b74-4e00-8e03-58ecfcbd481a","Childbirth and Obstetrics",
+"2b024592-efdc-4282-916a-e5ceb0197bd8","Heavyduty pony Companion",
+"2ccea5e0-5a8d-4c48-b219-79554b377d9e","Sigismund of Luxembourg",
+"2cf779bd-b04e-4bf8-83f6-ea4ecf93f3f5","Miskowitz",
+"2cfb52ff-05f8-4277-bcb8-c10e821b2a78","Beggars",
+"2d3236c2-08c8-41f1-999a-10d73a5e2b96","Water-Driven Sawmills",
+"2eb5a46b-3d1e-460a-b4b8-f8373bad96c6","Painters",
+"2f446df8-79ba-4f94-93f3-d679a670e025","The Burning of Skalitz",
+"300440d6-e9c8-4386-94e2-6b93e9eddb98","Brotherhood of Corpus Christi",
+"31446b2c-2973-48e2-93a9-95204b17e85b","Heraldry",
+"31a75f15-af01-4d5d-bae6-cb979cfc874b","Faith and Devotion",
+"31b80a19-1dce-413b-bdc6-10f1744de599","closed_visor_debuff",
+"348ec66f-2a5c-4995-9a32-084c271a28e4","Mesoles",
+"34d15c53-dfcb-4a44-af90-96bd52467b35","Islam",
+"34d9159a-69b0-4476-a6a7-9739feaec657","Permit to carry a weapon in Kuttenberg","For your help to the Kuttenberg swordfighting brotherhood\, you were granted permission to carry weapons for personal protection\, inside the city walls. The permit applies only to melee weapons\, not to ranged weapons or the wearing of armour."
+"35c6cae3-59a1-44d2-b39f-5314d9ba5141","Music",
+"366b32c0-42c7-4166-850f-7c6cdb6e2e97","Albich of Uniczow",
+"37433f7b-9c2e-48e2-bce7-af8d34b403c8","Nightmares","Since childhood you have been troubled by a recurring nightmare in which you are being chased by a colourful jester. Although the dream is repeated night after night\, it still frightens you as much as when you were little. You awake so shook up that all your stats are lowered for a while."
+"386fd13a-bf90-4ad1-88b3-20ce22aa9f3b","Kuttenberg",
+"3a67532c-5d97-4c05-a68e-a1fe0ce124ba","Charles IV",
+"3a67ecae-81cc-4fa6-8119-97078b44aad2","Player fader protection",
+"3ac224b1-465b-4c69-a00c-539d13fb90c6","Villages of the Trosky Region",
+"3c063202-799a-4c5e-b46a-be706f99805f","Prostitution",
+"3c934831-99c9-44e5-9f1c-7c3ace7b3b37","Feudalism",
+"3d375b13-001f-449c-b186-f49ed22c5fb7","Winegrowers",
+"3d58547a-bd9b-4260-9013-12d3e49f681c","Arma Diaboli",
+"3d9c9a1b-dee4-4d9f-b756-1cbf5e5f06cb","Life in a Military Camp",
+"3da4731a-76c4-42b0-8680-2f4a64ee2333","alarm - companion",
+"3db58f16-0f80-42e3-bf20-03965465ce62","Coin Minting",
+"3e22265b-5db8-4ab2-878d-940fab2e97fa","Woodcutter",
+"3e45a6d5-f5e3-464e-858c-c63f3eb2a10c","Beverages",
+"3e664a4c-7d5f-439f-a73c-e0359671575c","Ratter","Other dogs don't react or bark at yours. Enemy dogs will still attack however."
+"4029a057-492c-4b6c-9a47-1616bc658f81","Player",
+"42a1dca4-3506-41f2-a67f-dd658cf214c0","Town Gates",
+"431c61fb-c0ca-4dba-af80-d13219db8657","Damascus steel",
+"43412723-c906-474a-a8de-3711a011a8c7","Tithes",
+"43e912f3-a202-4cd0-b45d-beadf0e61ef6","Wenceslas IV",
+"4435a68a-f420-4f0c-9c1d-dd4134c8a795","Counterfeiting",
+"44cc5f4b-3341-4e64-9ae9-1de47a60d07d","Smugglers",
+"4562bdc8-054c-43c6-b625-f133c88e6465","Vineyards and Wine Production",
+"45cf9c16-5767-4587-bbef-e833553f4cdd","Sedletz Monastery",
+"46f3ea9c-2564-4801-99d4-8ac2d8903ff0","Sir Markvart von Aulitz",
+"47323406-0e0a-4f0e-babb-4f8d4b24f7d9","Thunderstone",
+"473a83f2-e34b-4cf2-8ae0-8a0e33eb87b6","Katherine",
+"48136e07-2fe8-47ae-af70-e00102a8b0b9","Camping",
+"49d8f31c-f10f-4497-b1db-764e5ae99ca8","Mine Leaseholders",
+"4c0ce4cc-689a-4f92-b8a0-bf0de2c54bf2","Jewish Quarter in Kuttenberg",
+"4c4453fb-d0e2-43e8-9a05-b5b62464b409","Gunpowder",
+"4c7fcec4-0daf-47f6-8473-03d13ee5087a","Crime and Punishment",
+"4c9a9491-cb87-46c4-985b-f37f1a2b2501","Combat Technique",
+"4d06a3d0-c7b6-4959-9662-9ba9437c8e3c","Player - companion - dog",
+"4d51ba41-2c10-4281-9308-fcfed1fe0276","Woman in a Man's World","Although you've been taking care of your whole family since you were little\, it's often difficult to make it in a male-dominated world. It's as if all the men expect you to just obediently stir the pot and have babies. Because a man's word carries more weight locally\, it's harder to persuade them of anything. You have a -2 penalty in Speech in conversations with men."
+"4e2c4279-6b16-4a62-8ff2-3e989c6f8946","First Aid I","Enables you to use bandages."
+"4e385c28-769a-4a19-a678-e61e19e5f930","Shepherds",
+"4ed2a735-fe93-4111-af89-1e8932598be8","Tailors and Drapers",
+"4eeded19-e917-4ae9-af73-d716e053378a","Priests",
+"4f884fad-268c-4892-89f1-a3458ecc3749","Italian Court",
+"4f8bdd50-36e4-4364-8ab8-bb2313ffc917","has_damaged_armor_debuff",
+"519db599-76d4-4703-8c31-486fae00e473","test_recipe",
+"539ec93b-2d70-4558-a1fe-a68b33f0ca0c","Konrad of Vechta",
+"53cc1685-63c4-4c79-8dac-73a56242f23f","Toilets",
+"5563df98-8153-44df-bad4-4eff58cb8f1c","Names and Surnames",
+"55b0c75d-22b8-4cc0-99f4-059d05318234","Bylany",
+"56eab3d1-5e03-4091-a4cc-a2403bcff69b","distract - companion",
+"58c99fa7-5308-4563-bccb-437348a47b4f","Horse-riding",
+"5a3fd8d6-a647-4343-9d61-6ff9d80d4212","Loretz",
+"5b4fafc7-085d-44f2-95ed-171bb79f17da","Furniture",
+"5c900b84-286f-43b8-be4f-3d5f53b15e40","Skeleton in the Tavern",
+"5cd456bd-fa64-401d-8d2e-9a69e56f2b7d","Apothecaries",
+"5ec8cc9f-b1dd-45b6-b846-b320cd367986","Player Theresa - companion - dog",
+"5ef31fc4-244e-40ac-b088-03e5730ff5c1","Claustrophobia","When you were a child\, you got your head stuck inside a pail and couldn't get it off all day\, until your father took an axe to it. Ever since then\, you've had a fear of enclosed spaces. Wearing a helmet with the visor down makes you so anxious that your attacks are weakened."
+"5f712362-63cd-4159-b9fe-e9933dcd8fd3","Schools",
+"60435334-e158-429a-9a8d-89d418dd90e5","Italy",
+"62611fd2-33c4-4e8a-b31d-a7c8ccde399e","St. Barbara's Cathedral",
+"62a1ba24-53a2-4e3f-9160-33cbd5912af1","Trosky Region",
+"62c6a774-2412-4a42-8f1c-ffdb76039fe8","Town Garrison",
+"63067fb0-76d9-40bb-ae6c-d8f7627d24f7","Player Companion Immortality",
+"63568d40-c0c4-4dcc-b43e-18fd620449ce","Millers",
+"63a9291e-ed5e-4ab3-87f2-12d0494f10b8","Execution Place",
+"6402905d-6cfa-4666-80bf-2a70b0b82bd1","Haemophilia","Like your father and his father before him\, you are afflicted with the family curse. All it takes is a scratch and you start to bleed like a stuck pig. Once it starts\, the bleeding is faster and is harder to stop."
+"64485ae9-3a6d-4bd8-927e-c96a6727d3f8","Cumans",
+"65be21cb-8e4f-4e23-bdd3-e65e7b68fa1e","Language and Literature",
+"66ee5e70-730d-4d1a-a952-7f46590bbaee","Medieval Literature",
+"684f8059-377f-42ec-a607-3927e3e3f58c","Churches",
+"698d7c46-9c25-4f38-9907-3d52db536c5e","Italians at Sigismund's Court",
+"6c62c41f-6b74-44f6-b566-5d1ac0d0425e","Nomads",
+"6e91b970-4ab6-47ca-bed1-edb962261076","Crisis of the Late Middle Ages",
+"703e2ddf-0b3f-42e3-9955-60953ce06ddb","Venoms and Poisons",
+"70aa202d-c0ed-49f6-94df-21cc1cda7a42","Skalitz",
+"70b2ef94-1a6b-4690-8acc-967573feca40","Healing Herbs",
+"7282b98c-627d-48dc-a976-8e2bac3e2fb1","Land Army",
+"734c075b-5354-4a72-b35c-21efa9c938cb","Armour",
+"740a92fe-3db3-4783-b42f-bd43cde854df","Tournaments",
+"742184a2-3cc8-49eb-a1a2-ec6b527b043f","Educated Women",
+"759d2a63-8a83-45d4-8158-d0f4a9e8848f","Forgery",
+"75cd2efe-4648-4161-a7c6-368f505b4d57","The Western Schism",
+"76e6a383-9a9c-4e87-a75c-e4c968833d5f","Abductions of Wenceslas IV",
+"788aaa24-f4d2-4b68-b4f5-6af1a921e72f","Black Chronicle",
+"792d0de8-eee7-466e-9321-902967524574","Devils",
+"7a398ef7-79d5-46c7-b598-f1811c902790","University",
+"7a5f8665-78b2-49f4-91d9-70dacb9db978","Hospitals and Almshouses",
+"7a920bbd-fda0-4027-bcd4-43a3b9042ad5","Sources of Light",
+"7af7a28b-be5b-44b8-b44f-cd933bea2bf7","Tanners",
+"7d11de17-847c-46b3-b4f1-79b6aa7cf68b","Slaughterhouse",
+"7dca9b23-783d-41b4-9c07-59c3564ce660","The Abduction of Margrave Prokop",
+"7de76b3e-0d80-4174-b031-4a616959497e","Apollonia",
+"80825cd9-7d7b-440f-aa57-75807e83aed9","Always drunk",
+"80b829ea-b5a3-4ac3-ac0e-e611716eb674","Pillory",
+"815729ff-0dc4-4746-8fdd-d5e7c5d51b26","Weaponmaster I script",
+"81c5d5ad-01bd-4f7b-a08f-71bb91f9ffaf","Ore Merchants",
+"82dd4343-8faf-4dad-a96d-c6bdbd17c497","Journeymen and Apprentices",
+"838339fc-c61b-4b75-9370-11b74b53158f","Jobst of Moravia",
+"83d79374-903c-46ce-84a2-3f826e75f70f","Racing horse Companion",
+"840f43d6-ff7b-416b-87e2-5fbaa8f221bb","Radzig Kobyla",
+"84191018-df9a-4afb-b502-e753d53e671f","Old Kutna",
+"8521c9ba-e8f9-4f3e-bd75-9f8a68ba061e","Executioners",
+"855594e8-f71c-4e0e-8e17-7c922c380755","Armoursmiths",
+"85b2b5a4-fac9-4463-ab91-ffb2d7ef7500","Scholar","Your momentary Reading level increased by 3. But your Strength and Warfare skills have each incurred a -1 penalty."
+"86594607-3dbd-4ebf-a4f2-fa961d926799","Saint John's Eve",
+"8952aeda-b15d-4253-864d-c9093b648608","Locks",
+"8b861dc2-5fd0-4a15-aa78-3351bd862060","Morgue",
+"8c76c38b-d4f8-4bb5-afec-170cbc9ae28a","Woods",
+"8ce92f2a-f330-43ea-b53e-5f12c392d72e","John Sokol of Lamberg",
+"8ced42ae-afe5-4739-9ae7-eb3374e95fa0","Weaponmaster II script",
+"8de0320d-5080-4355-9aa6-d497151b5994","Kuttenberg Councillors",
+"8e467c11-d262-4c80-a1f9-7ea875265308","Weaponmaster I meta",
+"8ec08e6c-6f43-41e5-91ae-008952c15ee3","Semine",
+"8ec2e96a-651e-4a4a-be51-b5b46eb952da","Dread steed Companion",
+"90cce987-8878-442c-bf66-bfc1d539b28a","Johannes von Gelnhausen",
+"912f7529-767e-4b3f-8246-d3fd73327bc0","Village",
+"91bb2d0e-dfff-4ead-9c4b-cd79702115bc","Otto III von Bergow",
+"92b0f7ae-0001-4ee7-a2bc-8418de7a4811","Drinking Water",
+"94e23a88-cbbe-4f63-a02b-318ecb1d9fb8","Opatowitz",
+"9533bcec-0ded-4263-9702-8d54e32ad058","Player - companion - horse",
+"95616222-6542-4fc9-927b-17750001b54f","Warhorse Companion",
+"95b4fb60-8e89-4499-af24-e32283ef50b2","Dogs and Cats",
+"98ec77dc-d4f0-4669-bcc6-b2cfd7e31fc9","Army",
+"991da35c-e3d7-47bc-a607-627645424049","Raborsch Fortress",
+"9930a43e-789a-41ad-8396-b5ee0c3e7a78","lightImpactsVisibility",
+"996f6baa-b380-483b-9fd3-df6f2ac13698","Distract","DLC - You can send a dog to lure a person away. (obsolete)"
+"9a1e9047-b08d-48d9-be86-1de3c837d7bc","Heykal / Wild Man",
+"9babbe52-36cb-455d-b36c-2b4d8d21c722","Food",
+"9bfc70bb-0afe-45bf-bc03-2bc9c588d4eb","Minstrels and Musicians",
+"9e52592e-769d-4146-8e9d-84d23f6dabf9","Blacksmiths",
+"9ea485a9-97e8-4d1b-97a9-d911db6b75d5","Monks and Monastic Life",
+"a1179d3e-67cb-48e2-b471-735631790616","has_damaged_weapon_debuff",
+"a239ee84-7f22-403c-aa63-fdc66b3d340b","Metallurgy",
+"a3ccba11-61b2-402e-8c6a-9e6a7c985fc0","The Concept of Honour",
+"a4a05350-4353-4259-846c-3678909cc6af","Poland",
+"a66149e3-71a7-440a-b287-60c23efbe6a9","Cuman Killer","You've killed so many Cumans that your reputation precedes you  - Cumans are afraid of you and there's a 50% greater chance they'll flee from combat with you. Your strikes against them will also be a lot more effective."
+"a6742f6f-9cd7-4c10-af5e-229dc569fd9a","The Lords of Kunstadt",
+"a80a08ab-0211-419e-ad19-8d10f0d2db6a","The Golden Age of Charles IV",
+"aa714222-45de-4763-8fdb-e2bce5ad462d","Conciliation Crosses",
+"aa725966-98eb-4db2-8cd5-ad3d43b13f14","Numbskull","Your mother dropped you on the head as a baby. She kissed it better and the bump soon faded\, but ever since then\, you're a little slow at getting the hang of things. This lowers your acquisition of experience."
+"ab30ac89-3dfc-4afc-ab7b-fa49ac3415e1","Otto IV von Bergow",
+"ace2b39c-fc2c-4a97-9726-c262e0541473","Kuttenberg",
+"ad2d4107-9b6a-46db-b1cc-5e1258b1e423","Liturgy",
+"adb9b74b-a55b-402e-a726-00b97522ae18","Farming",
+"ae1553b7-9433-43a4-97be-1b20f19b97d5","Huntsmen",
+"b06ac099-9cc2-42c0-ae86-b33b8ab53b33","Pschitoky",
+"b3890081-841f-492f-8bdf-b3ae40f07694","Butchers",
+"b3e2c5d0-a7d3-4eb0-991d-27b89a27cdd6","Synagogue",
+"b4c56e39-f13b-4b2a-b0aa-0ceda4d7e727","Mercy kill",
+"b549ff10-26c9-4cca-96a7-759f9178d65b","Weaponmaster II meta",
+"b59a2f39-faf4-4a1d-88c2-c059dadc6abb","Shakes","When you were too little to know any better\, you fell into the well. It was hours before they heard you crying and got you out. Ever since then\, you get the shakes from time to time\, as if you were back again in the dark\, chilly well. Obviously\, that's not good for archery\, pickpocketing or lockpicking."
+"b643c608-ab63-463b-9777-ea6c9a7cba31","Kunzlin Ruthard",
+"b76f723d-b187-4661-b527-16beb6c9ba71","Grund",
+"b83629b0-f173-48eb-ba75-432f67ec3f50","Bezoar",
+"b8adc80a-7ce4-4923-bf69-f54bc3a32ff2","Nobility",
+"b93eb1ce-34bf-4188-909a-03f2b56b40b7","Knighthood Training",
+"b96bb32c-4cd7-4416-a124-69854c15571c","Head shots",
+"b9aa28f1-ccbb-4c0c-9718-c218f01d749b","Consumption","You once caught a nasty chill and ended up with a persistent cough. Many thought you'd never survive\, but eventually you healed. Nevertheless\, since that time\, you don't breathe very well and your stamina regenerates more slowly."
+"ba7354ea-e609-442a-8b71-33c807e5a994","Entertainment and Games",
+"bc29793d-4f74-40a3-9c0f-4f5d81821f56","Pennants and Banners",
+"bc66340b-c5e8-4d64-9a51-794b9cc4e682","Foreigners",
+"bce94290-1e66-4e30-ad29-ee035a3deeb4","Jan Hus",
+"be09500d-13ac-4810-ab58-a8956953ff2c","Danemark Mill",
+"c0db80b8-123f-4531-a021-6abc3efbedca","Carts and Wagons",
+"c1854a5e-daa5-48c5-ae70-712abcb5c46a","Rathouse and Town Hall",
+"c3c4c774-5759-4e68-80fc-c70a295f183d","BS recipe - r_horseshoeRacing",
+"c40fa7f7-a486-47da-a3de-5b02384b931c","Houses and Dwellings",
+"c494f161-422a-4b5c-86ce-3043c514dfef","Mining Officials",
+"c533c01d-a2bb-47e6-9aa2-928fdd0bfd2b","Burghers",
+"c5abe66e-4989-4058-8c65-57545d25cb2b","Animal Husbandry",
+"c5ce87a8-433d-483d-9d3d-754d766cdb59","Maleshov",
+"c63bd90e-bd62-40e9-9bb4-8736f9a38e13","Jan Ptáček (Hans Capon)",
+"c6c0f9b3-d193-47e5-87fe-95bc43f21406","Zimburg",
+"c724eb62-bdb3-4888-8e3b-34eac85ce72b","Glissade","Your armour and shields will suffer 20% less wear and tear in combat."
+"c8420025-210f-4d20-bedb-7c4acea0dd84","Prayers",
+"c87664af-cdd9-4c47-8c59-17824b14479c","Safe Conduct",
+"c9520013-df96-4b8c-8fa8-3b5a81847667","Murals",
+"c9f2e81b-80eb-4b4e-b4e8-a3d3707524c2","Ringen",
+"ca838416-bab6-4b87-8614-edac24c3e7f1","Beekeeping",
+"cb42ba49-d375-4ddb-bf70-2717b4dbd2e3","Burglars and Robbers",
+"cb7b1507-77dc-41a5-9cbd-6add9487928c","The Battle of Nicopolis",
+"cb7d3b28-157a-49c2-baae-ad5e47483696","Ore tax",
+"cb9c2cf9-66e9-4dbd-b8f1-54fd5b738ef0","Hunting",
+"cba68de3-7546-4d45-8d5b-454cad40d83b","Merchants",
+"cbb5eda6-b349-4b49-8db8-675145312b95","Amiable Customer",
+"cbfe8abe-7fc9-4192-aed3-919051383706","Horschan",
+"cc9b2714-a7b3-43f7-9674-2f26a5ae1cef","Chivalric Orders",
+"cd1756c2-c873-4fb0-989a-b3017e4ee7ab","Horsenip_horse",
+"cd5d6a7b-8be7-4e38-9ff0-b247d004103e","Wysoka",
+"ce2fe289-4c26-45c0-803b-32627d288765","Tapeworm","When you've got an appetite\, you'll eat anything you can get your hands on. Folk say you eat enough for two. It's like you have a visitor in your guts who's eating you out of house and home. You get hungry faster\, so you have to eat more often."
+"cf761fd6-197e-4593-92c0-3ec6211cc061","Old silver mining",
+"cfc89b16-f3d2-4fb2-8978-858b64e14f80","Trosky Castle",
+"d05ecea8-edc8-4ca9-a65d-2f37e852f99f","Latin",
+"d092fbec-b011-479e-80db-7433bc55dacb","Bailiff and City Council",
+"d141a526-0ade-40c9-8b10-1934aca7489d","Firearms",
+"d1d2b402-8b12-40de-b9a2-e53c664426aa","Baptism",
+"d2105041-120b-4c06-8e61-1948a5fdf65d","Somnambulant","You've always been a restless sleeper\, sometimes so much so that you get up from your bed and go walking. It's not unusual for you to wake up somewhere else than where you went to bed."
+"d3d75e11-5ced-49cc-8c49-b8517dbb139a","Dry Devil",
+"d482fcbf-72ad-4cdf-ac6a-4c6bb1486909","Suchdol",
+"d566ca42-329c-4913-b10a-8b8f449647a3","Guilds and Crafts",
+"d625cb71-305e-45bd-86fa-3113cb1851a6","Ecumenical Council",
+"d6a15dfa-25df-4a42-8c00-d95f11694edf","Romani people",
+"d9a87c38-75a4-43de-9e00-a01d41e1efe3","Scribe",
+"dc744495-333c-458b-88b8-a4fbd5efcc67","Weapons",
+"dcbe5794-5bd9-42dc-b232-0f387a668723","Jan Zizka",
+"dce595c7-5d2b-4344-bae0-8a4a4e965b2a","Carpenters and Joiners",
+"dd4260a9-158f-49b5-b0d0-6f93812c519f","BS recipe - r_horseshoeNoble",
+"de1d052c-ee5f-4f4b-8247-9a729a416e1f","Rosa Ruthard",
+"de7e49fc-301b-40fb-9d58-180fa3b6ee48","Player Theresa",
+"df811a2e-2425-4e3a-b9e0-379327ed15c0","Roman Catholic Church",
+"e090eb68-b408-4ae7-9698-7421762c210b","Kuttenberg Families",
+"e1b86b90-ecda-4825-9b41-ccef658ea9ff","Fishermen",
+"e23cee67-1fd9-487c-9012-7a11d961e938","Gord",
+"e2907d0b-7d1f-4244-b5fb-3770e1bd8798","Malters and Brewers",
+"e3d3f5b8-0772-493a-9f43-33270f9f533c","The Popes",
+"e47198f9-6710-4513-b7ac-43e01288e3dd","Dugout Shelters",
+"e4809754-0ced-4843-b4e3-1e3e6f9eb767","Maypole",
+"e74b092b-8f95-468e-aaa0-8178a6342d5f","Money",
+"e8284dca-72b8-412d-8699-ea52ba68908d","The Devil's Den",
+"eb43dcb0-b723-4a39-9a68-2c9ac2638630","Garbage and Waste in Cities",
+"eb95fa4d-6e36-40d5-8268-e6edd7bc39a2","Astrology",
+"ecf06bb2-f5ff-4f40-a126-888df42d5965","Inquisition",
+"edac71f9-fca7-496b-9fb4-2933cdd2098c","Greetings",
+"ede2054e-2ebc-4210-a057-aeeb05ac8595","Nebakov",
+"ee1bc867-b0c6-48ad-8192-b641b0c9e278","Duchy of Brabant",
+"ef2039dd-c893-4eb2-b41e-2d84b4cc1117","Trial by Ordeal",
+"f1c32c23-bcda-4d37-a6be-cdb4030b04e6","Farmer",
+"f21034f8-fcea-4a79-983a-0dd9adbc99b8","BS recipe - r_horseshoeNomad",
+"f4fac40b-39d4-4d4f-a453-31c42ab670fa","Pilgrimages",
+"f52c2b84-9434-41d7-ad81-bd8cc5869ca2","Water Mills",
+"f57d426c-28cf-4f67-83cc-a9fce88efac6","Women in the Middle Ages",
+"f5eade31-0ecb-4d64-a190-eff5e30333b8","Rabstein",
+"f6585ed6-2826-42c7-b3b5-8c50082f1a3f","Gravediggers",
+"f66ef922-6f2b-4735-8af8-4ab5f17d7890","The Three States of Man",
+"f761cc60-eec9-4b89-8acc-97da57f50eb5","Paganism",
+"f811cd17-ba87-4d0c-a756-3a64405b578f","Golden Horde",
+"f88633f3-ce65-4939-b424-ba6147208029","Zavish the Black of Garbow",
+"f94de479-0aec-45e3-9743-a120f5076f93","Liturgical Items",
+"fa299718-b1eb-4664-8769-25f82fb95de9","LimitSprint",
+"fbedb426-410c-4614-952a-1086b6f6554f","Brittle Bones","Ever since you were little\, stairs and ladders have been your worst enemies. All it takes is a little fall and your bones break with an awful crack. You suffer much worse injuries than others when you fall."
+"fc3c4d7a-40b6-40da-b9dc-468a9cffa516","Papal Legate",
+"fc87570c-3c8e-4a8e-b457-b8d5681a2e9d","Popinjay Shoot",
+"fd9f9913-f924-4e45-a3ba-ecc2dca9b150","Donor",
+"fe543779-f290-428a-acd5-f99d19208e87","Folk Songs",
+"ff1723f4-79fb-4d24-9cc6-78945f26a2a0","Ulrich Vavak of Neuhaus",
+"fffd2b9b-188b-4dbd-8cd4-a57747cade77","Travel and Trade Abroad",
+"010f8643-105c-447d-bc02-7e086a948a02","Shoulder Throw","After two direct punches\, you can flip your opponent to the ground with a punch from the right."
+"03d70183-216b-428f-9f8c-e9b76882acdd","Elbow Uppercut","After two punches from the left\, finish your attack with a right elbow to the opponent's chin."
+"04c2833f-a9e5-4b89-95a5-4ea32bcae12f","Crushing Blow","After an upper and then left strike\, finish with a strike from the right\, hitting your opponent in the face with the edge of your shield."
+"05425c4c-16af-47d1-8fbf-a0d74a0b5c36","Lower Left","After a left and then right strike\, finish your attack with another left strike to slip past your opponent's weapon."
+"065e82a4-2339-40bc-82ca-3ad76a6ae762","Left Hook","After a left and then a right punch\, you can finish the attack with another left punch to your opponent's face."
+"08193537-25c5-41dc-b819-a61d1662c401","Hammer","After a right punch then a straight punch\, finish the attack with another right punch to the opponent's face."
+"12c11e0d-dd87-41ee-9e02-43a96e13a71c","Knee Crusher","After an overhead slash then two quick left slashes\, finish with a strike from the right directly into the opponent's knee."
+"16cc1b40-d9a6-4f6e-ab05-c4696853ed76","Crushing Blow","After an upper and then left strike\, finish with a strike from the right\, hitting your opponent in the face with the edge of your shield."
+"17cf1cf8-278e-4b31-af19-a7804ea5f65e","Shield Deflect","After a right slash and two quick left slashes\, finish the attack with another right strike\, hitting the opponent hard in the ribs with your shield."
+"19b028c2-5750-4ab6-bf91-f16bb2ed6f3b","Mittelhaw High","After a straight thrust and two quick right slashes\, finish the attack with a left slash across the opponent's neck."
+"21a87571-93f8-44c5-b1ad-a8b9946e3904","Mittelhaw High","After a straight thrust and two quick right slashes\, finish the attack with a left slash across the opponent's neck."
+"226d8009-a0da-4b2b-8a90-62ce709a1eae","Lower Right Strike","After a right and then left strike\, finish your attack with another right strike to slip past your opponent's weapon."
+"2482ca95-50f3-4a58-b52c-5ce11c86464a","Lower Left Strike","After a left and then right strike\, finish your attack with another left strike to slip past your opponent's weapon."
+"25403625-7c0b-4476-ae71-410a3be88d60","False Edge","After a direct thrust and an overhead slash\, finish the attack with a left slash\, passing along the opponent's blade."
+"29904729-cd69-498a-bdfc-0fb1c69aed44","Headbutt","After a sequence of two right punches followed by a left punch\, finish your attack with another right punch\, driving your opponent's face into your elbow."
+"316cd845-eb2a-4aa2-b746-a1d919200b43","Knee Strike","After a left and an overhead slash\, finish the attack from the left side with a thrust to the opponent's knee."
+"3386aba6-5325-4ee5-a7c5-87fcef473af6","Mittelhaw","After an overhead and a right slash\, finish the attack with a left slash across the opponent's abdomen"
+"3ab6a961-022f-47bd-bb05-981ab2a7fa8e","Lower Right Strike","After a right and then left strike\, finish your attack with another right strike to slip past your opponent's weapon."
+"459b4242-5225-484d-8245-40d84fa85c91","Fiore Halbschwerten","After an overhead and left slash\, finish the attack with a right slash\, stabbing the opponent in the chest with both hands."
+"4675152d-a104-4a07-bdd5-1299339f44e5","Pommel Strike","After two direct thrusts\, finish the attack with a right slash\, driving the sword pommel into your opponent's face."
+"4a16d632-4ec7-4357-95ea-b0af663f2e17","Lower Left Strike","After a left and then right strike\, finish your attack with another left strike to slip past your opponent's weapon."
+"4ce6ceda-03b8-4448-98a7-abdbd41e3ea3","Lower Left Strike","After a left and then right strike\, finish your attack with another left strike to slip past your opponent's weapon."
+"547edd64-219e-4240-9257-cf406cdbe8b3","Strong Edge","After performing a left and right slash followed by a direct thrust\, finish the attack with a right slash\, cutting the opponent’s throat."
+"5e645502-903b-44e3-bb8a-96290d4fac22","Crushing Blow","After an overhead and left slash\, finish your attack with a right slash\, hitting the opponent’s face with the pommel of your sword"
+"602a92b9-c44b-4edf-980a-756cddbc78b9","Mittelhaw","After an overhead and a right slash\, finish the attack with a left slash across the opponent's abdomen"
+"866c5520-1eeb-4f15-b611-d21ef7792d90","Bohemian Backhand","After a left and then straight punch\, finish your attack with a right punch\, smacking the opponent's face with the back of your hand."
+"8964d9b0-bd61-4d5b-8453-f02e6eabbe3c","Lower Left Strike","After a left and then right strike\, finish your attack with another left strike to slip past your opponent's weapon."
+"8a9d7b1b-a500-448c-a4f0-0b294b1d1e49","Scissor Strike","After performing a direct\, left\, and then right punch\, finish the attack with another left punch\, hitting the opponent's neck."
+"8ff575a1-4534-49b7-99d1-4aec54bbdfdc","Knee Crusher","After an overhead slash then two quick left slashes\, finish with a strike from the right directly into the opponent's knee."
+"909e2aa4-b6b4-4ccc-97b3-2b38fb5e5e74","Knee Strike","After a left and an overhead slash\, finish the attack from the left side with a thrust to the opponent's knee."
+"9780ac36-f75e-448f-8165-0e882f6ce0ad","Lower Left Strike","With a right strike\, a left strike and another right strike\, you’ll complete your attack from the left and bypass the opponent’s weapon."
+"a10204e3-5e34-4030-a2f3-a31ff3054471","Mittelhaw","After an overhead and a right slash\, finish the attack with a left slash across the opponent's abdomen"
+"a16d865f-507c-44c2-a870-6294495576bf","Oben Abnehmen","After a left strike and a feigned direct thrust\, finish the attack with a right strike that slices along the opponent's blade."
+"a39a4d76-ea8c-4c5a-bcf2-1a45216d0072","Undercut","After a direct thrust and a left strike\, finish the attack with a right strike that trips the opponent's leg."
+"af57c258-c714-4d32-9883-2193c6af8184","Kurzhaw","After attacking twice from above\, finish your attack with a left strike to slip past your opponent's weapon."
+"b578e5b0-ef24-41ee-98d4-3cdf847df04f","Lower Right Strike","After a right and then left strike\, finish your attack with another right strike to slip past your opponent's weapon."
+"c2507281-6300-4b5b-8528-6631968c4791","Crushing Blow","After an overhead and left slash\, finish your attack with a right slash\, hitting the opponent’s face with the handle."
+"c6c2e508-5d38-46de-ad21-1fc794fd86c2","Brutal Uppercut","After strikes from the left\, right and then from above\, you can strike your opponent under the chin with another left strike."
+"da7adcc1-13b2-4aff-9da3-3ada0e585504","Knee Strike","After a left and an overhead slash\, finish the attack from the left side with a thrust to the opponent's knee."
+"dcd735c3-0e22-4fdd-b6a9-97499d2fb461","Rossen","After a sequence of a strike from above and two left strikes\, finish the attack with a right strike. This will deflect the opponent's sword and hit their head."
+"decfdab9-3422-4d31-b54c-e4a51aa36af5","Durchlauffen","After attacking twice from above\, finish your attack with a left strike to hit your opponent in the face with the pommel of your sword."
+"dfc3139d-f783-4465-9555-5311bb691d77","Mittelhaw","After an overhead and a right slash\, finish the attack with a left slash across the opponent's abdomen"
+"e300e732-8fdc-4810-aad0-7ffc68b297e9","Lower Right Strike","With a left strike\, a right strike and another left strike\, you’ll complete your attack from the right and bypass the opponent’s weapon."
+"e7b38b92-a552-489b-ac28-f623278f638d","Brutal Uppercut","After attacks from the left\, right and then from above\, you can strike your opponent under the chin with another left strike."
+"e966c6b5-db69-4680-bb9c-441d7ee761a3","Zorn Ort","After a sequence of three right strikes\, finish your attack with a left strike\, stabbing your opponent in the face."
+"f0f8f7cc-0b18-415c-a143-22d433360ccf","Direct Strike","After a straight punch and a right punch\, finish your attack with a left punch to the opponent's face."
+"f1391b7f-2d96-4415-9789-aae4669a7a8d","Lower Right Strike","After a right and then left strike\, finish your attack with another right strike to slip past your opponent's weapon."
+"f3764568-1c4c-446f-b1a9-2c9348b1077e","Stomach Slice","After a right strike and a direct thrust\, finish the attack with another direct thrust to the opponent's unprotected abdomen"
+"f5b46efe-8b68-41f1-94e4-9ecf9893223b","Lower Right Strike","After a right and then left strike\, finish your attack with another right strike to slip past your opponent's weapon."
+"f5e64098-afda-45ec-8b7f-f8009773ad7a","Mittelhaw","After an overhead and a right slash\, finish the attack with a left slash across the opponent's abdomen"
+"f809063a-d1e6-452e-8319-f5678a936568","False Edge","After a direct thrust and an overhead slash\, finish the attack with a left slash\, passing along the opponent's blade."
+"010b08c7-5346-402c-a7cb-a084d624b62e","Featherweight","Fall damage is reduced by 30&amp;nbsp;%"
+"0226c7e3-e4fe-4baa-a466-8cb1d305dc8c","Onslaught","After performing a combo with a heavy weapon subsequent attacks will cost only half the stamina! The effect lasts for 10 seconds."
+"03154d4b-8a33-425f-ac1a-7520a6d1e138","Cistota pul zdravi_ability",
+"0371017d-17fb-456d-8a01-63a0c63d811b","Basic law fine",
+"04bf7be9-2df7-465f-af94-7cccef48d19a","Locksmith - thievery",
+"05cd7404-a721-40b3-a235-8178e5c7ef2d","Final Offer","When a merchant loses his patience while haggling\, instead of calling off the deal altogether\, he'll give you one last chance to offer a fair price."
+"060689eb-852a-4a76-952d-b356626aa251","Steadfast","Blocks will cost you 20&amp;nbsp;% less stamina and your shield and weapon will wear down 20&amp;nbsp;% slower by blocking."
+"0686a79e-b295-4fa3-b59b-a938a952edad","Against All Odds","When fighting against superior numbers\, you gain a +2 bonus on Strength\, Agility\, and Warfare skills."
+"06dea4f8-a1fc-40f9-9850-e53ad79d2e0a","The Harder They Fall","If you fight unarmed against an opponent with a weapon\, your Unarmed Combat skill will count as 5 points higher."
+"07c9dd68-8858-450c-9a43-285bf7fed5be","Jack of All Trades","You get a bonus of +2 to skill checks. You'll also get twice the amount of experience from these skill checks."
+"08594654-8b42-4f94-b313-f1ab6d2457d8","Lehka hlava tvrdy zada - kocovina",
+"0a19f89e-0888-4e4b-96e0-af42b832432c","Let'em come! Buff",
+"0c0ec830-d87f-4a2d-a720-f23021cd77b8","Silent Fiddler","You're almost silent when using a lockpick\, and if it happens to break\, the sound will be 75&amp;nbsp;% quieter."
+"0d23bab8-b1eb-4175-b26b-fc1f307f57c9","Train Hard\, Fight Easy!","The required Strength for all weapons will be 2 less for you. In general\, if you have a lower strength than the weapon requires\, you will do less damage with it. Conversely\, if your strength is higher\, you'll do more damage. With this perk\, you'll reach that state sooner."
+"0dd2c3df-9f61-4743-b5ca-8c3ac39fb57d","Resistance","Your Vitality has permanently increased by 2."
+"0e31656e-9b9d-4f54-979a-48848eb0810b","Master Thief","You can unlock simple locks almost instantly\, without the need for mini-game activation or committing a crime. Still\, be careful because looting an unlocked chest like this is still a crime."
+"0f3cffa7-d80b-4688-934d-784a09269f60","Driven by Vengeance","After killing an opponent in close combat\, you gain 10&amp;nbsp;% more attack damage and faster stamina recovery. The effect lasts for 30 seconds."
+"0f6d8058-cef9-4d2b-b4cf-4c428b1626ef","loyal companion - companion",
+"1024560b-50c6-4ab1-8e2d-d63050b7c09b","Infantryman","When attacking with a fully charged attack\, such an attack will be slightly faster and 5&amp;nbsp;% stronger."
+"1071e935-a667-47c1-8b2d-e0818434a471","Water of Life","Healing potions heal you 25&amp;nbsp;% faster."
+"10b3e4d8-86e9-463c-9a25-ef17b20842cc","Trafficker",
+"11b18b4f-eca4-4f5c-ad0e-4bf87fc579d0","Blood of Siegfried","In combat\, you're far more resilient than a mere mortal. Your armour will be 10 points higher at all times."
+"1208b27e-5877-4173-b179-05ac12973e3f","Grand Slam II","Blunt damage of all melee weapons is increased by additional 5&amp;nbsp;%."
+"13b5ac08-4944-4229-86e9-7fa96d1c31f6","Wonders of Nature","You will improve faster in the skills of Survival and Alchemy\, as all experience gained will be 20&amp;nbsp;% higher."
+"143077b3-0e11-43c4-ac84-7c7d2d7d66b6","Poison Specialist","You can poison more arrows from a single dose of poison\, and it will last on your weapon for more hits."
+"170757df-5808-4ca4-b710-f646a823ed13","Revenant","Your health will gradually regenerate up to 50 health points. This effect does not apply if you are in combat or bleeding."
+"1a87ea8b-3704-4e91-990f-dc528656701d","Tlama plna zubu - companion",
+"1a9bdccd-4cfa-4262-a6b5-6dce77987cc8","Hidden Pockets","If a guard searches you\, there's a 33&amp;nbsp;% chance he won't find stolen items on you."
+"1c552f64-9ce2-4946-8d65-525003008d26","attack order - companion",
+"1ce700fd-40d4-4ee7-8088-c233b620ae88","Heavy Duty","When you're in the positivite phase of drunkenness\, you gradually gain up to a +4 bonus on your Craftsmanship skill."
+"1d2e4036-e1a0-4679-b472-f5b59e886a8e","Wildrider","When riding off road\, your horse will consume stamina 5&amp;nbsp;% slower."
+"1e1e2783-a37f-4afb-8589-2fb8bdeb8294","Thief's Eyes","You can tell which stolen items are considered stolen in the location you’re currently in.  
+
+&lt;p&gt;The red hand icon indicates items considered stolen in your current location.&lt;/p&gt;&lt;p&gt;The grey hand indicates those that are not considered stolen in this location. Such items can be sold to a merchant without worry\, and guards won’t confiscate them during a search.&lt;/p&gt;"
+"1f2be184-d704-49c1-9d7d-ea4c49366d49","Master Cook","If you cook\, dry or smoke an unspoiled ingredient or food\, after processing it will have a 100&amp;nbsp;% condition. It does not apply to herbs\, as they always have a 100&amp;nbsp;% condition after drying\, regardless of the perk."
+"1fa70400-84c8-4897-aa66-5b7c8510b26b","Surprise Attack","If you hit someone who doesn't know of your presence with a ranged weapon\, your target will suffer a combat skill debuff\, making them easier to deal with. They might even panic and flee."
+"1ffaeabf-cc1c-4857-b04b-3781f81b319d","Looter - dead bodies loot",
+"20551103-eb34-4e61-9050-65df1432616b","Sting Like a Bee","After the first 30 seconds of a combat in which you are unarmed\, your attacks will be 30&amp;nbsp;% stronger and your stamina will recover 30&amp;nbsp;% faster."
+"20b0715b-9b83-4d26-839f-f39dfe209ed0","Locksmith","When picking locks\, your Thievery skill will count as 3 higher\, so it'll be a lot easier. Plus\, you can also make use of scrap iron\, so you'll get an extra 1-3 lockpicks for each item you successfully forge."
+"234615f0-2e62-4977-aeaf-da2da47e7847","Black arts apprentice - alchemy",
+"236731d4-7db7-41da-bf30-ef1603be0f42","Heightened Scent","Mutt can sniff out enemies and other potential trouble at a much greater distance. This makes it easier to spot and avoid an ambush or other events during fast travel."
+"24300733-0e09-4e57-a5c2-54a929ce1592","Heroic Vigour","Each level of Vitality adds 1 extra Stamina point. The effect also applies retroactively."
+"249b10e9-23df-4055-9e2c-93ebf959967d","Special Powder","When using ammunition and powder of your own making\, the efficiency of firearms increases by 20&amp;nbsp;% and the weapon suffers less damage from firing."
+"25fa2cc7-3a63-4599-b041-f4398a7bccf2","One Man Army","When you're outnumbered in a fight\, you deal 10&amp;nbsp;% more damage."
+"2621dd1d-2919-4418-ac72-30f4544aacb4","Swordmakers wisdom - craftsmanship",
+"2721f0d0-6360-41e1-baa9-ddb9f077fb43","Body Heat","When sleeping in the wilderness\, your dog keeps you warm. The bed quality will therefore increase by 20&amp;nbsp;% but not exceeding 50&amp;nbsp;% of the bed quality."
+"2993585c-40c9-42e3-ac45-b837f3bc50f7","Master Strike","To perform a master strike\, you must attack at the moment of the enemy's attack from the opposite direction. This stops their attack and hits them with your own."
+"2994ed8d-2edd-4bc9-82c0-5c5cd7ffadbd","Heracles","For every 5 levels of Strength\, your Charisma increases by 1."
+"29bab126-6661-4365-8a4f-02b4681e7036","Cushion",
+"2b9f3c56-d5f4-49b0-a259-8a89a67c8f0d","Pacifist","As long as you don't kill anyone\, your non-combat skills will be increased by 2 and your Speech by 3. If you kill someone\, you lose the bonus but can regain it if you don't kill anyone for 12 game hours."
+"2bb0c41e-a7a4-4ada-8b24-fb077ec38e1f","Defender","In combat\, Mutt will be tougher and will take 10&amp;nbsp;% less damage from enemies."
+"2bdc2918-bdb2-4079-a398-a409f7abc4d8","Iron Harvest","After performing a combo you regain some of your stamina so you can continue fighting more easily."
+"2c2bae14-2880-46ce-ae3f-25a93b120811","Vanguard","Shield blocks cost you 30&amp;nbsp;% less stamina."
+"2c502363-29b0-49c9-ba78-a024120dcbfb","Knight Training","Melee attacks from horseback will cost you 15&amp;nbsp;% less stamina and it will be harder for enemies to unseat you."
+"2cd86a68-776f-4d9b-ae3f-a0273dfff1f6","Diehard","A wound that would normally kill you won't\, and you'll recover 25&amp;nbsp;% of your health. Once used\, there is a cooldown before the perk can be activated again."
+"2dee44cb-616e-47f4-a1f0-82e77a198a36","Flower Power","If you have more than 30 fresh or dried herbs (not spoiled) in your inventory\, your Charisma will count as 2 more."
+"2e8cc5bb-69f3-4baf-8fa6-7a5447787e22","Rapid Flight","If you fail to successfully return through the doorway box during the thieving minigame\, you won't steal anything\, but your victim won't notice you. After using the perk\, the effect will have a 3 minute cooldown before it can be used again."
+"3085f466-6c85-4890-95b1-3b4c654df47b","Concussing Blow","After performing a combo with a warhammer\, mace or club\, the affected enemy will not be able to perform a Dodge or a Master strike\, and generally his ability to defend himself will be greatly reduced. The effect will last for 20 seconds."
+"30d99c8b-d6d3-4969-a087-4fb36f9d1229","Trhej - companion",
+"31634489-c3ac-47cf-beae-b4d3c12fc65e","Crippling Hit II","If you deal damage to an enemy with a ranged weapon\, their stamina will regenerate significantly slower\, and their combat effectiveness will be further reduced. The negative effect will also last longer."
+"317467a3-9d2f-49d3-8d9f-a072acd6f205","Thrasher","Charged attacks deal 5&amp;nbsp;% more damage."
+"31f0a49b-8aec-49b5-ad71-39e4b7309fd9","Night Crawler","At night\, you have a +2 bonus on Strength\, Agility and Vitality and a +3 bonus on Stealth."
+"32863aba-9f6f-42e1-baf4-ef6337bec094","Head Protection","If you are wearing a helmet\, blows to the head will cause 20&amp;nbsp;% less damage."
+"331d80bf-c846-4f87-8b6b-4fd21848e897","Polished Wares","When selling weapons\, armour or clothing that are in near-perfect or perfect condition (98-100&amp;nbsp;%)\, you'll gain 10&amp;nbsp;% more money for them."
+"331ea8b5-35f9-410f-83ee-b02996e035db","Next to Godliness","Washing at a tub or pier or taking a bath in a bathhouse will cure 10 points of your health. Plus\, if you go to bed clean\, you'll heal 25&amp;nbsp;% faster while you sleep."
+"340c8390-bf67-4123-bcb1-f5ce5c759576","Magister Dimicator","When you perform a combo\, you gain +5 to your Swordsmanship skill\, making subsequent attacks easier to perform and more powerful. The effect lasts for 30 seconds."
+"341eb3ca-3964-4bde-b904-b548984eea80","Mischief Artist","After successfully picking a lock or pickpocketing\, you gain a +3 bonus in Thievery and a +3 bonus in Stealth. The effect lasts for 120 seconds\, or until you break a lockpick or fail at pickpocketing."
+"34416bb4-4c76-428a-bf6b-cb46823f0736","Na zdravi - leceni",
+"34e03c47-de53-482f-b3f5-555e7e36d70c","Explorer","The entire map is revealed\, showing all settlements\, fast travel spots\, hunting grounds\, caves and other interesting places."
+"35de102d-f29d-4a7c-b09d-9bd6d1806d00","Hal Shot First II","Your first shot will deal 15&amp;nbsp;% more damage\, for a total of 30&amp;nbsp;% with the first perk level. The rest of the effect remains unchanged."
+"361a6a2c-ccd2-460c-be8d-a8bb9111fe2a","Opportunist","If you lose Reputation\, the drop will be 10&amp;nbsp;% less."
+"36ad7dba-d088-439f-bb19-af7a1a7a46a3","Totentanz_ability",
+"3707dd4a-4fe4-469a-a21c-c8f56173775e","Hunt!","You can command Mutt to hunt and send him after wild game. You'll find that he's a great help to you!"
+"3846a4f4-6a81-4fbf-ad3c-61cfec7149d6","Finesse II","The slashing damage of all melee weapons is increased by an additional 5&amp;nbsp;%."
+"386fdb31-a9d3-4b8e-955a-442cc19016be","Fundamentals of Medicine II","The effects of healing potions will be 20&amp;nbsp;% stronger."
+"39059b80-aeb3-4bea-80b1-ccbedb010cb4","Wonders of Man","You will improve faster in Craftsmanship and Thievery skills as all experience gained will be 20&amp;nbsp;% higher."
+"39a75105-edcf-4d5e-b784-9d2a28ca6bf8","Disarming Strike","Allows you to perform an unarmed Master Strike against an armed opponents to disarm them."
+"3a246ac8-e7cb-440c-900b-898e9acfe5a6","Eagle Eye","When aiming with a bow or crossbow\, the action around you slows down considerably for a moment\, making it easier to aim. The effect lasts for 3 seconds or until you fire."
+"3a4c60fe-a34a-4444-aafb-ede6d7a94adf","Hidden pockets script perk",
+"3be2e263-b02d-43da-8047-d47c92ee6778","Good Natured - skillcheck bonus",
+"3cdd51ee-d004-4f31-8107-399af6759ade","Lucky Day","The more drunk you are\, the higher chance you have of not wasting your badge when you use it."
+"3da9a3d8-fff9-4455-9fc8-87287a9ccae7","Leshy II","You can move through the forest as if you were a forest spirit yourself. Your Stamina will regenerate 25&amp;nbsp;% faster\, your Strength and Agility will count as 2 higher\, and your Stealth skill will count as 4 higher. The rest of the effects remain the same."
+"3dcced66-9540-4e97-b5b2-3f1a90a09e59","Drunken Fool","If you commit a minor crime while drunk\, you can try to excuse yourself by claiming your impaired state."
+"3e7534e4-8eb2-46a6-b798-2a44f6a14def","Ride Like the Wind II","Your horse will consume stamina 10&amp;nbsp;% slower while galloping."
+"3ea42b1b-4982-4733-9f9a-e13948957fb1","Shieldbreaker","Your heavy weapon attacks will be harder for opponents to block with a shield. Additionally\, it will take less time to completely destroy an opponent's shield with your blows."
+"409ee796-abac-4e05-ae45-1c3950136a11","Bounty of the Wild","You can also get fur\, trophies\, selected cuts of meat and offal from killed game."
+"426a594e-98a0-4168-939c-48c868357099","Dreaded Warrior II","The effect of the Dreaded Warrior perk will be even more powerful!"
+"42a163b5-17ac-4f4f-96bf-2d12fc4107a5","Fast as wind - companion",
+"42e69c2a-7ebf-4ff7-9849-3792609438a7","War Horse","Every enemy killed from the saddle increases your horse's morale\, so it won't falter easily\, in battle."
+"43977278-751b-487a-aeac-5e35b3f275cd","Impaler","You'll get 10&amp;nbsp;% more piercing damage."
+"45746246-2498-4585-a68f-0b3bdfba9367","Kurzkampf II","All attacks made during a clinch will deal an additional 15&amp;nbsp;% more damage."
+"47709bf7-3bd8-493f-aca3-05b005f166d8","Feint","If you move to attack from one direction but quickly change direction just before your attack\, your opponent will have less chance to parry the attack."
+"477ed838-e641-4d03-8969-f491f73075d0","Militia Training","The Strength and Agility required to use pole weapons will be reduced by 3."
+"47a2cb9d-1932-4eba-aaf5-cd21f3a2ffe2","Enthusiast","While brewing potions\, your Energy will slowly replenish and your Nourishment will not decrease."
+"47abe44c-5296-4eef-8ba1-4a0bce34882e","Wonders of Beasts","You will improve faster in Houndmaster and Horsemanship skills\, because all experience you gain will be 20&amp;nbsp;% higher."
+"47fb20c9-544d-4c66-beaf-2f7c5fa2cd7d","Ambusher","Hitting a target unaware of you will deal 20&amp;nbsp;% more damage."
+"48dbe4f2-620a-46bc-b821-54cb9538e319","Sagittarius","If you're in the saddle\, the Stamina depletion for aiming with a ranged weapon will be halved."
+"4b050c9b-c1b0-4f16-8207-9054de505bd6","Tlama pln? zub? - companion",
+"4c1faec3-a257-4246-b6d8-bec277ce9507","Purple Haze II","For each Potion or Alcohol effect that is active on you at one time\, your Vitality increases by a 2."
+"4c6b08f5-85ad-48d2-b8d1-e03f2b06bcde","Totentanz","After performing a Perfect dodge (a dodge in the window for a Perfect block) you get a 15&amp;nbsp;% weapon attack bonus. The effect lasts for 5 seconds."
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc00","Combo Leg destroyer meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc01","Combo Knock Knock meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc02","Combo Lower Left Halberd",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc03","Combo Lower Right Halberd",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc04","Combo Stomachache Halberd meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc05","Combo Get back up Halberd meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc06","Combo Hammer Unarmed meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc07","Combo Backhand Unarmed meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc08","Combo Zvedak loktem Unarmed",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc09","Combo Strih Unarmed meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc0a","Combo Left Hook Unarmed meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc0b","Combo Direct Unarmed meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc0c","Combo Narazeni Unarmed meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc0d","Combo Prehoz Unarmed",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc0e","Combo Knock Knock",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc0f","Combo Knee cut",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc10","Combo Hammer Unarmed",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc11","Combo Kurtzhau",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc12","Combo Blunt",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc13","Combo Stomachache Halberd",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc14","Combo Backhand Unarmed",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc15","Combo Push away",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc16","Combo Mittle high",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc17","Combo Flying man",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc18","Combo Get back up Halberd",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc19","Combo Left Hook Unarmed",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc1a","Combo Pommel strike",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc1b","Combo False edge",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc1c","Combo Leverage",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc1d","Combo Strih Unarmed",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc1e","Combo Scissors",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc1f","Combo Fiore Halfswrd",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc20","Combo Leg destroyer",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc21","Combo Narazeni Unarmed",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc22","Combo Rossen",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc23","Combo Direct Unarmed",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc24","Combo Mittlehau",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bc25","Combo Oben ahnemen",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bcd0","Combo LowerLeft",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bcd1","Combo LowerRight",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bcd2","Combo Mittlehau meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bcd3","Combo Oben ahnemen meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bcd4","Combo Knee cut meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bcd5","Combo Push away meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bcd6","Combo Kurtzhau meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bcd7","Combo Fiore Halfswrd meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bcd8","Combo Pommel strike meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bcd9","Combo Rossen meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bcda","Combo Blunt meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bcdb","Combo Mittle high meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bcdc","Combo False edge meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bcdd","Combo Scissors meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bcde","Combo Leverage meta",
+"4cfff8f5-85ad-48d2-b8d1-e03fff06bcdf","Combo Flying man meta",
+"4d045aa1-e15e-4e99-b47d-869a116b5f4e","Ratman_crimeDoor",
+"4fbfab40-4c6d-4c0a-a02a-a29a37814916","Infantryman",
+"4fda87dc-15fd-430b-8ebd-39a9f9770129","Martin's Secret","Now you will be able to forge weapons of the fourth\, i.e. the highest quality. Weapons of this quality cannot be obtained in any other way than by forging them yourself\, and their strength and effectiveness is unmatched."
+"4ffd3edb-268a-4444-a185-1a552d81e7f6","Hardened Steel","The weapons you forge will have excellent properties and will therefore take damage 20&amp;nbsp;% slower."
+"50defff5-451f-464e-9e9c-ae4f1c2e5f7d","Head Start","If you use a quick start $sprint; $sprint;\, your horse will briefly run faster than the wind! The effect will last 10 seconds."
+"51d93e46-383b-4391-b79a-7d0c6b269f25","Lawbreaker","If you are wanted for a crime\, you gain bonuses of +3 on Strength and Warfare and +1 on Agility. Effect lasts 120 seconds."
+"522dc497-df0a-4f87-8e46-e35fb4b64246","Leg Day","When collecting herbs\, you'll also gain a small amount of experience in Strength skill."
+"526948d7-82b1-4ab3-a9c9-f8a0bc0471df","Good Old Pebbles","Pebbles' stats are considerably increased."
+"5315b6ae-74cd-4a37-b147-08df52e3c643","Good Natured","It's easier for you to convince others the nice way. You gain +2 to Persuasion\, Impression and Presence. People are also more likely to try to solve crimes with you in person rather than going straight for the guard. But beware\, the more dangerous you look\, the more likely they still choose to go for the guard instead."
+"53204b2d-20a0-4d94-874c-f351ec203e99","Hustler","It's easier for you to sell stolen goods. If you succeed in doing so\, you'll gain some Stealth and Thievery experience."
+"5488b9c9-f2dc-4475-81d9-6d7ef3c81773","Secret of Matter II","Each time you successfully brew a potion\, you get 2 more of the same quality. If you also have the first level of the perk\, you get an extra 3 potions."
+"550db16e-b917-4057-b3ac-39bf401d1157","Red Mist","When your health drops below 25 health points during combat\, you gain a +3 bonus on Strength and Agility for a time\, and your Stamina regenerates 4 times faster."
+"5559dc93-628d-4170-aeaf-7730dd03589e","Nightcap","If you were meant to get a hangover while sleeping\, now you won't. Plus\, when you're drunk\, all the beds are 10&amp;nbsp;% more comfortable\, so you sleep like a king."
+"55ae0147-365e-43c5-ae42-8c6f04a5bb0f","Slice and Dice","Each of your subsequent sword strikes in an unbroken series will deal more damage than the previous one. A series of strikes can be interrupted by a successful block\, dodge on the opponent's side\, by too much delay between attacks or by a wound on your side."
+"5693169d-c28a-4e18-af95-770927d363cd","Adept of the Mystic Arts","You buy and sell potions\, herbs\, recipes\, books and alchemy-related items at 10&amp;nbsp;% better prices."
+"57391775-41d3-457a-ade4-c7e95e5bafab","Weapon Master","If you face an opponent with the same type of weapon as you\, you gain a +3 bonus on that weapon skill. For example\, if you have a short sword and your opponent has a long sword\, or a sword and shield\, this perk will not take effect."
+"5951286e-f3eb-4094-8e46-da8fdd66ace7","Skirmishing cavalry player",
+"5b0145e3-e542-4da6-8f0d-5e4b64d470ed","Skirmishing cavalry - companion",
+"5b76b323-306a-4029-b602-c4843cc6f721","Burgher","In towns\, villages and their surrounding areas\, you gain a +1 bonus on Strength\, Agility\, Vitality and Speech."
+"5d1d322c-7c05-455f-954d-bd7b49b8b72c","Trafficker","Stolen items in your inventory will lose their stolen status a quarter faster."
+"5e27bdfb-c96d-4d2f-ade1-fb939ce6ad79","Dark Arts Apprentice","When brewing potions between midnight and dawn (0:00 - 4:30)\, you'll work better - the whole process will be less susceptible to minor mistakes and you'll more easily achieve a higher quality product. In addition\, you have a +2 bonus on Coercion\, Domination\, and Intimidation stats when talking to commoners."
+"5ebc0272-8ffe-4fc9-b6e7-34ea88d07d26","Warmonger","After the end of the fight\, you gain a +2 bonus on Strength\, Agility and Combat skills. The effect lasts for 6 game hours. To renew it\, you must enter combat again."
+"5ede4471-40c6-4af5-a4e8-71898bf64923","Weasel Boy","You'll make 35&amp;nbsp;% less noise when sneaking outdoors."
+"5fc9d8d0-1493-46cc-9553-5fc86aed08e4","Hledej-companion",
+"6092eafd-e7e2-4b84-9bb9-83b3f4f7cec5","Bring 'em On!","If you defeat an opponent unarmed\, your Unarmed Combat skill will count as 3 more and your stamina will recover 25&amp;nbsp;% faster\, making the rest easier to deal with. The effect will last for 30 seconds."
+"61210951-7d08-4dbd-9d51-c264b5da9ee2","Creative Soul","Your Energy will slowly replenish while doing Alchemy\, Sharpening\, Blacksmithing or playing Dice."
+"61238790-d336-4e29-b85c-ee0dc216bf7f","Hellhound","If you have your dog with you\, you will appear more threatening and tough to others. This will show in the Presence and Intimidation skillchecks\, but also in combat\, as enemies are more likely to give up or run away. And if they don't\, they'll have a harder time fighting you."
+"61826147-3c68-42a6-ae44-d76f46ef556a","Tendon Slicer","Each successful sword combo significantly reduces your opponent’s agility and strength\, making it harder for them to keep fighting and easier for you to defeat them."
+"61d5f53a-de28-4092-bc78-849b12fe1350","No Pain No Gain","When fighting unarmed\, you will gain 15&amp;nbsp;% more experience in Strength\, Agility and Vitality."
+"62800529-6cc3-4d4e-968d-f548e78d37e2","Cheers!","Drinking wine or beer will heal you for 5 health points and spirits can cure poisoning. Bottoms up!"
+"62aa7aca-83b1-48c7-8155-110ae7377d66","Tight Grip","The higher your Strength skill\, the easier it'll be for you to knock someone out or kill them stealthily."
+"62c2e9dc-1d5f-43e9-affa-1b03f895f399","Charming lad - discounts",
+"636f75c0-8f7e-4942-8928-4e1a84d79298","Bailman","You can unhorse opponents."
+"65fe8f5e-e041-4572-8533-f9e65152c1a3","Criminal - stat bonus",
+"69508c6e-b718-4df2-8b09-41563b6fb3f3","Ascetic","Your Nourishment will decrease 30&amp;nbsp;% slower\, in other words you will last longer without food before hunger starts to bother you."
+"69d3ea69-8c0e-47fe-a2cb-d5ad856bf6a8","Secret of Equilibrium II","In the brewing process\, tolerance for your mistakes will be considerable. If you also have the first level of this perk\, the effects stack and the resulting advantage will be even greater."
+"6a32670e-9b0a-44df-bfcd-192d92b5c91e","Experienced Reveller","When you're drunk\, life is just somehow nicer. The bonuses of the positive phase of drunkenness come into full effect earlier."
+"6a32be0f-8a74-4354-b785-4af96b9bb28b","Contemplative","As long as you remain still\, your Energy and Nourishment will reduce much more slowly."
+"6af26051-9739-4dfd-846b-92699d3f9c63","Sedlar - repairkit",
+"6ce5cd8b-360f-40f3-88d3-7647dd1b6f11","Thunderous Blast","Your first gun shot during combat will cause nearby opponents to take a temporary combat skill and morale penalty\, making them less of a threat to you."
+"6d2084b0-de71-462e-8fe6-baa8b8f7f75c","Saint Vivian's Grace","Under the influence of alcohol\, you'll be less likely to be injured by falling from a height because the patron saint of drinkers has a protective hand over you."
+"6d862f90-120b-4f78-bb38-ec320cd10982","Hidden pockets buff",
+"6dd70c8e-6f98-4fb3-8009-6e79788342c2","Natural Camouflage","The dirtier you are\, the harder it will be for others to spot you. But beware\, they can still smell you if the dirt is accompanied by a corresponding odor."
+"6ee145c6-e7a6-46c4-a7a9-3049e8adf0ca","Battle cry","If you use a Battle cry during combat\, you deal 10&amp;nbsp;% more damage. The effect lasts for 20 seconds."
+"6ef70c3e-aac3-4368-8b75-d37d9910cf6e","Dog's Best Friend","Strange dogs won't react to you by barking\, just growling. This can come in handy\, for example\, if you're trespassing in someone's yard\, because the owner of the house might not even notice a growling dog. However\, if you attack the dog\, it will probably bark and then go and tear your braies off."
+"6fd8c84c-fc4b-4eef-9d9f-97146f56d71a","Navr  tilec - companion",
+"70c790bd-798e-47d0-adde-61c99c2265bf","Tool Master","Your lockpicks will be more durable and last 15&amp;nbsp;% longer before breaking. If you still manage to break a lockpick\, once you've successfully overcome the lock\, a lockpick will be returned to your inventory."
+"70e5d9ba-3b26-4196-864f-755c1b51ea7d","Fundamentals of Theology","You will be able to pray at shrines\, crosses and similar places. If you do so\, you will receive a buff that can protect you from mortal injury in combat and restore 25&amp;nbsp;% of your health. The effect lasts for 12 game hours or until you use it."
+"7117a4ec-fbba-4a7b-8068-00cbde826cf6","Towering Menace","Rearing your horse frightens your enemies much more than before."
+"71411569-cab4-4ab0-af6b-c40f900ff64e","Weapon Master II","If you fight an opponent armed with the same type of weapon as you\, you gain a +3 bonus on that weapon skill. The perk will also work if the enemy has a sword and shield and you have\, for example\, a long sword or just a short sword."
+"71ce79a0-87df-4a08-9c13-0fa686ff4aad","Partner in Crime","You can now sell stolen goods to anyone without fear of detection."
+"71ef363c-7f44-4952-8df3-05740c18e347","Rip and Tear","If your dog inflicts a bleeding wound on an enemy\, the bleeding will accelerate and they will fall sooner."
+"734ed21b-bf1c-4824-9a42-189caa9f2810","Unbreakable","If you are outnumbered in a fight\, your stamina will recover 20&amp;nbsp;% faster."
+"74a0160c-1106-42b1-af40-dec4e5a1bd95","Fundamentals of Law II","If a guard wants to arrest you for your crimes\, you can use your Scholarship in skillcheck to try to interpret the law to your advantage and possibly escape punishment."
+"74a24f40-4b45-4afe-9323-b901d0e2960b","Start me up!","After executing a combo or master strike in unarmed combat\, you immediately regain some of your stamina back."
+"7540b34f-5ee3-40f8-a689-9fe6c679d518","Whirlwind","If you fight with a short sword (not a hunting sword or saber) its defense will be 30&amp;nbsp;% higher and your attacks and blocks will cost you 20&amp;nbsp;% less stamina."
+"7581b26a-5e6c-4d06-8253-33ff9ad585ac","Quickhand","You can be very stealthy when picking locks or pickpocketing people. From a distance\, no one will notice anything."
+"77a321e6-5c3f-4bf7-8e2f-c91a356cf11d","Let'em come! Ability",
+"797fe463-8656-4652-bce0-9e0f32bc6f7e","Purple Haze","For each potion or alcohol effect you have active at one time\, your Vitality increases by 1."
+"79fff3fc-04ed-4706-8217-023717f8c09d","Final Stretch II","If you spur your horse\, it will recover much more stamina than before! The rest of the effect remains the same."
+"7aa46261-461a-457f-86b8-e982c0e520a0","Fleeting Shadow","When you're wanted for a crime\, you gain a +3 Stealth bonus and a +2 on Agility and Vitality\, making it easier to escape. The effect lasts for 120 seconds."
+"7ad34a39-3aff-4d07-a0d4-c2f6bf9fd2be","Indomitable Drunk","The negative effects of drunkenness will be milder for you."
+"7af21523-2aae-4989-9cb2-992758da51d7","Bushman","You'll make 50&amp;nbsp;% less noise when moving in bushes."
+"7b90eaab-f24d-4b62-813e-fd729714daf5","Hardworking lad_carrying_body",
+"7c6dbaa9-0e96-48bc-b19f-0164c794c4be","Hardworking lad_inv_capacity",
+"7c804de3-ed00-4cd3-aa99-4220a66c7036","Evade","In combat\, you can use a evasive maneuver. You can perform it by pressing the jump key along with a directional key. You can use it to quickly dodge attacks\, move to a safe distance\, or even move closer to your opponent. What's more\, if you perform a dodge in the timeframe for a Perfect Block\, your opponent will lose his balance\, and it will be easier to break his defense."
+"7e97354d-2c85-454b-a2f8-d05f7f467319","Skirmishing cavalry - companion forward",
+"8023018c-ff3b-452e-ac56-13231f19f45e","Inconspicuous","The person you’re robbing may not see you\, so you can reach even into their front pouch\, but while you're rummaging through their pockets\, they might still feel your presence."
+"81403aa9-ec4f-4d64-8544-e7eb31201468","Deceptive Stance","If you're not wearing very heavy armour\, you can feint with your body and keep your opponent unsure. This will make your Warfare skill count as 3 higher."
+"814e5759-afa4-4fbb-a10c-4d071dff471b","Liberal arts",
+"81d38988-0f59-4a68-b097-47ee1cb5968d","Final Stretch","When your horse is nearly out of stamina\, you can spur it on with $horse_perk_no_rest_for_the_wicked; to recover some of it. Perk has a 120 second cooldown before you can use it again."
+"82440248-8e4b-4e3e-995b-21ae76e87fb4","Equestrian Explorer","Your horse will deplete stamina 5&amp;nbsp;% slower\, you will see 15&amp;nbsp;% further when using fast travel and you will have a better chance to react to events on the road or avoid them altogether."
+"82b4f95e-5c89-47e9-983e-3b449134c2ae","Spiritual guidance - traveni alkoholu",
+"83a8b86a-9ff1-4e2f-a4ba-fc6530dce122","Pack Mule","Your carrying capacity is increased by 12 pounds."
+"842f6ba5-2f02-4807-ab26-e5aad5cc7d19","Potion Seller","You can sell the potions you brew for 30&amp;nbsp;% more."
+"850f67a7-8b5b-48ab-8b9a-fc8ce4b04437","Seven-League Boots II","If you put on self-repaired boots\, the sprint will cost you  50&amp;nbsp;% less stamina\, so you can sprint longer and run further."
+"85e9756f-7b18-4842-bf94-004aceec5af5","Local Hero","If you are in an area where you have a good reputation (60 or more)\, you gain a +2 bonus on Strength\, Agility\, Vitality\, and Speech."
+"865621be-da3f-4b28-bd59-14939f6a0d1b","Aim to maim!","If your axe attack causes your opponent to bleed\, they'll bleed a quarter faster\, making it easier to finish them off and they won't run far from you."
+"86bd028b-6397-4cdf-b31d-f22c6adf3069","Razor-Sharp","If you sharpen a weapon on the grindstone to a condition of 98&amp;nbsp;% or higher\, the weapon gains a bonus effect that increases its slashing damage by 10&amp;nbsp;%.This effect will remain active as long as the weapon’s condition stays above 75&amp;nbsp;%."
+"88258f92-4052-461a-b4d7-3ac3bc0f74bb","Helping Hand","Repairs by craftsmen will be 20&amp;nbsp;% cheaper for you."
+"88bd2788-3621-4af3-88ff-3ab2f9c082af","Fundamentals of Theology II","Reputation recovery for undertaking the Penitential Pilgrimage will be more effective and the buff from the first level of this perk will now last for 24 game hours."
+"89c3284a-805d-48a4-a8d1-d3478d2e227e","Cutting Edge","If you cause bleeding with a saber attack\, the target will bleed a quarter faster\, making them easier to deal with."
+"8c708734-d820-4a84-95bb-ed34141ca227","Cushion","The buff from sitting has an increased Comfort effect of 50&amp;nbsp;%\, so you can study faster."
+"8d9050f2-fd42-4ebf-ba84-e4082a62d9f7","Train Hard\, Fight Easy! II","The required Strength for all weapons will be 5 lower for you. In general\, if you have a lower Strength than the weapon requires\, you will do less damage with it. On the other hand\, if it's higher\, you'll do slightly more damage. With this perk\, you'll reach that state sooner."
+"8f74208e-e08c-4b54-937a-79cc65fdfb4d","Lehka hlava tvrdy zada - kvalita posteli",
+"8fb48e9f-77ed-4bd9-8370-a993320715f6","Ranger Run","After 10 seconds of fast sprinting\, you will briefly get a big bonus on stamina recovery. When you slow down afterwards\, you'll quickly regain your strength and can start running again."
+"9056b3fb-e7b4-47af-a3e8-3532a6b29275","Tavern Brawler","When you're in the positive phase of drunkenness\, you'll get a bonus of up to +4 to your Unarmed combat skill."
+"91208236-3b09-4918-9ee2-95c4a3bc52c4","Stealth kill","If you have a dagger equipped\, you can perform a stealth kill maneuver. All you have to do is sneak up behind your unsuspecting victim and initiate a chokehold. Then be ready to press the attack to deliver the killing blow. May God have mercy on your soul."
+"9188fec8-1ca3-4d31-a0a3-943ff98a2ca8","Strong as a Bull","Your carrying capacity will be increased by 20 pounds."
+"91d1061f-007d-46d1-be7a-413c05505419","Hardened Veteran","In combat\, your stamina will regenerate 10&amp;nbsp;% faster."
+"91f67efc-12e2-479f-964c-f10a3d9e4bf2","Escape Artist II","If someone unsuccessfully searches for you\, they'll give up a lot sooner."
+"92501954-61b7-4206-9fe0-878f476c0460","Undaunted Cavalier","If your Charisma is higher than 20\, your armour will be considered 15 higher."
+"92f35342-63d7-4d11-80ea-6ab7f5a3c3bc","Radzig's Heritage","You will improve faster in Heavy Weapon\, Shooting and Scholarship skills as all experience gained will be 10&amp;nbsp;% higher."
+"93c51b1e-5179-4bc1-a188-1df22ce5b6cd","Wild Man","The effects of the Leshy and Leshy II perks will now apply not only in the forest\, but in any wilderness\, i.e. essentially anywhere outside of human settlements and lands directly adjacent to them."
+"956ee9dd-212d-4352-a701-f41413693704","Green Knight","After performing a combo with an axe\, attacks will deal 20&amp;nbsp;% more damage. The effect lasts for 5 seconds."
+"95a87180-1b7f-4b37-acb7-bc28b303ec20","Forbidden Weapon","If you inflict a bleeding wound on an opponent with a crossbow bolt\, bleeding will be faster and stronger\, so they will weaken or die sooner."
+"95eedb8a-64ba-4269-b5ce-a7e420a6febb","Charming Man","If you gain Reputation\, the increase will be 10&amp;nbsp;% higher."
+"96ae1df4-5836-46ec-8eae-9ade83f967d1","Sandman","It'll generally be easier for you to knock out or to stealth kill someone."
+"995620bb-c65e-4d3d-98bc-2ecdfb3875d0","Deft Hands","The required Agility for all weapons will be 2 lower for you. In general\, if you have a lower Agility than the weapon requires\, you will find it more difficult to fight with. But if you have a higher Agility\, the stamina consumption will drop. With this perk\, you will reach that state sooner."
+"99da9f60-09ec-436b-b436-8a696ee85d98","Keeping a Distance","Blocking while using a polearm will be easier\, more effective\, and will cost you less stamina."
+"9a272510-e2e7-4884-b881-9494cfbf3bf4","Swordmaker's Wisdom","Your Craftsmanship level will count as 3 levels higher during blacksmithing\, and all sword-like weapons will get 25&amp;nbsp;% less damaged in combat."
+"9a5363f2-4f2c-4f40-b828-abdda6a2f638","Airgiyn Tav","While riding a horse\, your ranged attacks will deal 10&amp;nbsp;% more damage."
+"9aa8c4d9-9f45-4885-8b90-bcbcad07672b","On the Poacher's Trail","You can sell herbs\, game\, hides and trophies for double the price!"
+"9b6cdb3b-5bf0-4526-9fdd-ae5e2a00a439","Opening strike","If you successfully wound an opponent by a strike to an uncovered zone (i.e. a zone your opponent isn't blocking from)\, it will be more difficult for the opponent to block your subsequent attacks."
+"9bf2f471-79e7-43d1-97a4-8bf238c5ddfd","Frejir_clean_improvement",
+"9c0cc5d7-304d-465f-af3c-c61d82d687aa","Opening Strike II","The effect of a successful opening strike will be greatly enhanced."
+"9d22e416-b481-411c-b3cc-b26d56b605a8","Tormenting Strike","After a combo\, the target opponent's stamina will regenerate slower\, thus their fighting ability will be reduced."
+"9ddb6329-3793-480e-a8d3-2b0f69371ea6","Thorough Maintenance","Your gear will be damaged 10&amp;nbsp;% slower\, so you don't have to repair it as often."
+"9e17072e-6583-45ae-ba26-95bca7319e6f","One Shot at Glory","If you kill an enemy with a ranged weapon\, your next shot will deal 50&amp;nbsp;% more damage."
+"9e55e361-2eff-4971-9be6-98f31b652927","Search!","You can command Mutt to sniff out places of interest or hunted game. To do this\, select the Free! command. He'll alert you by barking if he finds something. Thanks to your loyal companion\, you won't miss a thing."
+"9e719bef-9756-46c8-b6bc-a035643ee6fb","Sic 'em!","Your dog's attacks will be 20&amp;nbsp;% stronger\, making it easier and faster for him to deal with enemies."
+"9ec959e1-da0a-42fb-a3f6-430eaa746395","Seven-League Boots","If you wear boots repaired by yourself\, sprinting will cost you 25&amp;nbsp;% less Stamina\, so you can run longer and go further."
+"9f04a33e-bd86-4afd-b304-ba54d6cf7841","Never Surrender","If your health drops below 25 points during combat\, you get a +25 bonus on your armour\, increasing your chance of survival. The effect lasts until your health rises above 25 points again\, or until combat is over."
+"9f4d1e10-651d-40a2-8320-830683d116e1","Crippling Shot","If you deal damage to an enemy with a ranged weapon\, their stamina will recover more slowly and their combat ability will be reduced."
+"9f72a6fe-2f93-4721-8fb6-7d05e6e56544","Fundamentals of Law","When dealing with guards\, your Speech and Charisma will count as 2 higher. The total fine will be 20&amp;nbsp;% lower."
+"9f7534a0-dd8d-49fc-8471-be4673b893a0","Criminal Element","Criminal brands disappear a quarter faster. With the brand scar\, you'll sell stolen goods for 10&amp;nbsp;% more\, look more menacing\, and gain a +2 bonus on Coerce\, Dominate\, and Dread."
+"9fd0318a-a2d3-4376-acf6-95e71c15da79","Grand Slam","Blunt damage of all melee weapons is increased by 5&amp;nbsp;%."
+"a0de88f9-ccb8-41a2-82b5-b2cc495d633b","Boid friend",
+"a1cbca41-3005-4fe1-929d-e77186d86b6f","Viper II","The piercing damage of all melee weapons is increased by an additional 5&amp;nbsp;%."
+"a383bea3-a158-4de2-975f-f0396e988984","Criminal - price bonus",
+"a3a6efe2-e771-4a66-8b53-5afb008af6ab","Thorough Maintenance II","Your gear will take 20&amp;nbsp;% less damage."
+"a42c63ae-d21d-440b-b632-2d485c8dc60b","Ride Like the Wind","Your horse will consume stamina 5&amp;nbsp;% slower while galloping."
+"a51cc53f-634c-40f3-b727-1a2990d24bc7","Saddler","Repairs with a Cobbler's kit will be 20&amp;nbsp;% more efficient. Additionally\, because you know pouches and satchels well\, you have a +1 bonus on the Thievery skill if you pick pockets."
+"a6e23fa2-85c3-43de-9b70-cdfbf6720897","Fundamentals of Medicine","Bandages will be 25&amp;nbsp;% more effective and the healing effects of food will be doubled. You will recover faster when sleeping\, so you will take less time to fully heal."
+"a7096e82-8e3d-4325-9552-6827374697cd","Silver tongue script",
+"a722d194-33b8-4ec7-934c-12170f5591ac","Bowyer","Bows and crossbows that you repair yourself with the Bowyers kit are 10&amp;nbsp;% more powerful. Thus your shots will fly farther and have more penetration."
+"a7739924-c7f5-4db8-9a6f-fe6daf21e49d","Creeping Phantom","When sneaking\, your movement will be 15&amp;nbsp;% faster."
+"a804853c-f8dc-4b52-a093-78ddcc690b3b","Lucky Find","When collecting herbs\, you have a chance to find an additional herb or a small treasure."
+"a9b97681-8f67-45a8-b48c-006bae3a8cb2","On the Road companion",
+"a9eafb4f-4230-4de4-87d2-4b1a957e41d8","Creeping Phantom II","When sneaking (crouch) your movement is 35&amp;nbsp;% faster."
+"a9f2ea49-54b5-425a-b70e-cfb4c46ca510","Beerfoot","Amazingly\, when you're drunk\, you make 20&amp;nbsp;% less noise when moving indoors."
+"aa6a9503-b05f-418f-8c61-55990f6c2ac8","Lab Dweller","The effects of potions and alcohol will last longer\, and your eventual hangovers will be a little shorter."
+"aae987d5-dd52-43dd-b093-7b9f752ab92d","Menacing Presence","When clad in armour and equipped with a heavy weapon\, enemies are more likely to flee or surrender. And if they dare to face you\, it will be harder for them to fight you. It's also easier to succeed in Might and Dread skillcheck."
+"abca2d7c-2358-4cec-a14f-f039156374df","Well-Fitted","Armour and clothing that you repair yourself with the Armourer's kit will make less noise when worn. The effect lasts until the item's quality level drops."
+"ac6372e0-4cc2-4683-ab7a-4b4d7189bb57","Black arts apprentice - dialog",
+"ac90a350-03aa-493d-8a41-2c6061eab74d","Charming lad - spa discounts",
+"acbf3b3d-6c93-4db8-86c2-656838fab776","Ratman_crouch",
+"ad840150-ca47-4c8f-8e05-fd9ef632e685","Hard-Working Lad","If you carry a sack or even a dead or unconscious body\, the weight only counts as a half. Therefore\, they will hardly burden you\, and carrying them will no longer cost you extra stamina.&lt;BR&gt;Additionally\, your carrying capacity is permanently increased by 8 pounds."
+"ade74063-5b16-48fa-aa93-d126f2dde18f","Brute Force II","You deal an additional 5&amp;nbsp;% more damage with Heavy weapons."
+"ae1f7b64-6fb0-4fd9-97de-829aa7ba2d5c","Defender - companion",
+"ae858de6-9b23-410c-b215-79603e604ee4","Long Reach II","Attacks with Polearms will cost you an additional 10&amp;nbsp;% less stamina."
+"b0bff2e5-248e-408c-8e59-07d2af97b11d","Charming lad - skillchecks",
+"b258197e-ed04-4f4b-9a68-e03f854a19b0","Head Start II","When using the fast start $sprint; $sprint;\, the horse will start even faster than before and will not lose stamina. The effect will last 10 seconds."
+"b34174af-a388-4df7-89f5-75353ef72e75","Battering Ram","If you successfully execute an unarmed combo\, your opponent will be badly shaken and their stamina will recover 50% slower\, making them much more vulnerable."
+"b3d90d8e-18b0-4c06-8fe6-3b69b2eedf0b","Cistota pul zdravi_buff",
+"b444e235-3b8b-49f6-af5e-0a568d2cc5fc","Ladies' Man","When dealing with women\, you gain a +2 bonus on all skill checks\, a 15% discount on purchases\, and a 25% discount on bathhouse services."
+"b4b0c345-e8c3-4b9e-890a-e77549596131","Deft Hands II","The required Agility for all weapons will be reduced by 5 overall. In general\, if you have a lower Agility than the weapon requires\, you will find it more difficult to fight with. If\, on the other hand\, you have a higher Agility\, the stamina difficulty will drop. With this perk\, you will reach that state sooner."
+"b551bddc-1bab-4704-b5c3-eac889ff1764","Hardened Veteran II","In combat\, your stamina will recover an additional 10&amp;nbsp;% faster."
+"b722962c-bbdb-4cc4-8afc-48f5e48d96c8","Stamping Ground","When you are in human settlements or their immediate vicinity\, your Stealth skill will count as 3 higher."
+"b7fe7fad-ba8c-4325-aeac-09a286162e42","Locksmith - lockpicks",
+"b865c86e-569e-4018-9e3f-40838bb3387a","Fast as wind II - companion",
+"b8fe14a2-59af-4acb-b11e-a5ff04bfccc1","Knight in Shining Armour","When you wear plate armour\, you gain a bonus on Charisma ranging from +1 to +4."
+"b9655dd5-a99a-4bd6-a85c-7ebc141d3340","Poison Specialist II","When using a dose of poison on arrows\, you can poison more of them\, and it lasts longer on your weapon."
+"bb9150e3-37c3-441a-868d-79d55a0f1f47","Kurzkampf","All attacks made during a clinch will deal 10&amp;nbsp;% more damage."
+"bb98140d-952f-4e3a-b2a4-58c5bd4f51ec","Hammerer","Attacks and blocks made with heavy weapons consume 10&amp;nbsp;% less stamina."
+"bc29dce7-f5b4-42ee-ae56-3598ce7b3519","Balanced Diet","If you don't overeat\, get drunk or starve for 3 consecutive days\, your stamina will recover 20&amp;nbsp;% faster and you will gain 10&amp;nbsp;% more experience in the Vitality stat. If you overeat\, get drunk or starve\, you will lose the perk effect and will need to reactivate it."
+"bd1344ca-87a2-49e6-8d6e-74e68d7e3de4","First Strike","In every fight\, your first attack with the Polearm weapon will be 35&amp;nbsp;% stronger."
+"be583461-d371-47d0-94fe-4565307bc2b5","Steady Aim II","If you don't move for 2 or more seconds while aiming\, your shot will be 30&amp;nbsp;% stronger."
+"be975f36-f5fd-44a7-b42e-f6a0f84695cc","Cleaver","You know how to make good use of this\, and deal 15&amp;nbsp;% more crushing damage with hunting swords."
+"beca7769-0259-4e8f-9c10-aa9a10847cea","Battle cry II","If you use a Battle cry during combat\, you deal 15&amp;nbsp;% more damage in total. The effect lasts for 20 seconds."
+"bf300cac-d630-47c3-8010-42e3b9bff699","Evening the Odds","Your unarmed attacks are 10&amp;nbsp;% stronger."
+"bf886546-1e88-4ff8-b3ea-85386a8ace08","Furor Teutonicus","Your attacks will be stronger the more injured you are. The effect will only work if you have 75 points of health or less."
+"c016b259-1aac-4d08-90fb-72b9c769fcbe","Master Fletcher","Your arrows and bolts have better ballistic properties\, so they fly faster\, travel farther and have more penetration."
+"c0284d3a-4145-4543-839a-df82ba325e06","Wildrider companion",
+"c03389ad-31c1-41b7-80cc-7d60265b5a80","Beer Belly","Beer sates you twice as much\, so if you’re not afraid of drunkenness\, you can more easily replace food with it. However\, potions sate you half as much\, so you can drink more of them."
+"c0353c07-fce7-4262-8a06-2ed4fd04e634","Faithful Companion","Mutt's obedience will decrease 25&amp;nbsp;% slower over time."
+"c0b4b50b-5eb7-4726-bef8-a40b76ca0644","Hack and Slash","Each of your subsequent heavy weapon attacks in an uninterrupted sequence will thus cause greater damage than the previous one. The sequence can be interrupted by a successful block or dodge on the opponent's side\, or by too much delay between attacks\, or injury on your side."
+"c285857c-8b74-4b03-89b0-ef1dc12a1b1c","Hardwood","Polearms will take damage 25&amp;nbsp;% slower."
+"c29824ec-a35e-4296-a841-b51d16ca0a9b","Keen Eye","If you get your gear repaired by a craftsman\, you'll gain a little experience in Craftsmanship. The experience you gain will increase along with the repair price."
+"c418bac1-66ac-4cc9-b8e2-612e1993b5a3","Enhanced Mixture","When you're drunk\, using any potion will heal you in addition to its own effect. The healing effect will be stronger the drunker you are (in the positive phase of drunkenness)\, but will never exceed 20 Health."
+"c4949eae-537a-4453-aa48-a31168bbf23b","Heartseeker","If you hit your target in the chest\, your shot will do 10&amp;nbsp;% more damage. The effect will also apply when hitting from behind."
+"c4fd575b-0d24-41b4-b4f5-1a2550f2593c","Showtime","After performing a sword combo or a master strike\, you instantly regain some of your stamina and can attack again!"
+"c61a9b80-93a1-4f45-a090-371f001fe8e9","Well-Built","As your Strength increase\, your carrying capacity increases faster. For each level of strength\, you gain 12 points of carrying capacity instead of the usual 10."
+"c700e630-c9d2-4296-87a0-8fb36574dc12","hunt - companion",
+"c70a8872-fba8-4fa9-82c0-13febddb4b44","Basic law skillcheck",
+"c7e2a2ed-45a2-4794-9c20-b8fddc1c6000","Liberal Arts","You're able to recognize the difficulty of skillchecks\, but not your chances of succeeding. You'll still have to decide for yourself whether it's worth the risk. The effect of your reputation isn't taken into account in the displayed difficulty."
+"c85ac0b2-c7b9-49d1-9c82-267d8127fd33","Thick-Blooded","You will bleed noticeably slower. Still\, if you don't bandage up\, you'll die eventually. You'll just have more time."
+"ca293053-bcd4-49cc-9432-68d651b2b114","Secret of Equilibrium","The brewing process will be more tolerant of minor errors\, making it easier to achieve better quality potions."
+"cb1054d9-1b0a-4d07-a7e2-c8d167377517","Bonebreaker","If you wound an opponent with a war hammer\, mace or cudgel\, their stamina will recover 15&amp;nbsp;% slower. The effect lasts for 15 seconds."
+"cbb60e47-0862-4054-9398-0b9a0e318b6f","Ordinary Man","People will forget the crimes you've committed more quickly. It'll also reduce the chance of guards wanting to search you."
+"cbc1f270-ee2c-4371-88bd-4fde0bf50a5f","Looter - extra money pickpocket",
+"cc2ad5f1-d7d3-4cf7-b52e-c68104a2123d","Hermes' Haste","You'll be 20&amp;nbsp;% faster when sprinting."
+"cc7ba94e-2ff0-430c-a24a-4db13c44b10e","One Way or Another","If an opponent defends against your attempt to stun or stealth kill them\, they will suffer penalties to their stats. This will make it easier for you to defeat them conventionally. The effect lasts for 20 seconds."
+"cd212162-1585-4669-852f-94df8ca9508b","Rock Solid","In combat\, you can maintain a steady stance and use it to your advantage. When you don't sprint or dodge for 10 seconds in battle\, you'll gain +20 to your Armour. Sprinting or dodging will cancel this buff."
+"cd8b00ab-4394-46e0-8b81-fb5db65e6b73","Well-Dressed","Your clothes and body will get dirty 20&amp;nbsp;% slower. In addition\, by washing at a tub you can get rid of all the dirt on your body\, but you still have to go to a bathhouse or a pond with your clothes."
+"ce8e8ea3-3469-41e1-9ad5-c9a6e57e81ed","Belligerent Brawler","After the first strike in combat\, subsequent unarmed attacks will cost you 20&amp;nbsp;% less stamina and will be 10&amp;nbsp;% stronger. The effect lasts for 30 seconds. &lt;p&gt;This perk will also activate after performing a stealth takedown.&lt;/p&gt;"
+"d067913a-9610-4390-8807-aa470b06670b","Strong Arm","If you stay in fully charged attack\, your stamina will slowly recover."
+"d06f2873-9661-484f-9322-4bdbbd3255e8","Jawbreaker","Each of your subsequent unarmed attacks in an unbroken line will do more damage than the last. The sequence of attacks can be interrupted if your opponent succesfully blocks or dodges the attack\, delaying too much between attacks\, or by getting hit. &lt;p&gt;This perk will also activate after performing a stealh takedown.&lt;/p&gt;"
+"d101dc3d-0403-448b-a094-51b5b5e2cea0","Fleeting Shadow II","When you're wanted for a crime\, you gain a +5 bonus on Stealth and +3 bonus on Agility and Vitality\, making it easier to escape. The effect lasts for 120 seconds."
+"d14995a3-511b-4ed8-a821-0ff5e76d2e54","Dreaded Warrior","If you use a Battle cry during a fight\, not only will it give you courage\, but it will also put fear into your enemies' veins. As a result\, their morale will decrease and they are more likely to give up\, run away or just generally find it harder to fight you."
+"d23569a9-0f9a-4328-8eb5-2bbc0d0ccdd4","Zaklady bohoslovectvi",
+"d2b560f3-249a-4424-8713-3f139cc12f37","Loyal Companion","When Mutt flees\, the time it takes for him to come back to you is a quarter shorter."
+"d2da2217-d46d-4cdb-accb-4ff860a3d83e","Perfect Block","&lt;p&gt;The Perfect Block is the best way to deflect your opponent's attack. It doesn't cost any stamina\, and certain attacks can only be blocked with a Perfect Block.&lt;/p&gt;&lt;p&gt;The shield on your combat rosette will light up green when you're able to perform a Perfect Block.&lt;/p&gt;&lt;p&gt;If you attack right after performing a Perfect Block\, you can perform a counter-attack - a riposte.&lt;/p&gt;"
+"d30dce35-a841-4642-9d9c-1774164359dc","Trample","If you charge into someone with a horse\, their morale will drop significantly and they will suddenly be an easier opponent. Unless they run for the hills."
+"d36475ee-9d83-40d4-8278-fb19a5b79420","Na zdravi - protijed",
+"d41f1b4f-51c5-4ee9-bc24-3e8b7583a3fb","Nimble Stance","Dodges cost you 40&amp;nbsp;% less stamina."
+"d543d3f3-d8aa-4a83-8313-d7ebeebeb858","Artisan","You can sell and buy weapons\, armour and clothing at a 10&amp;nbsp;% better price."
+"d66b545a-696b-416c-a4d1-2c79af725cd8","search - companion",
+"d6916a36-f36e-4f7a-947b-d54ba84726f7","Ascetic","You'll last 15% longer without food."
+"d7e411b2-c3a0-4d98-bef3-5074d6b6dfe1","Arm of Beowulf","You can use a longsword together with a shield or a torch. While its superior range can prove useful\, your attacks with such a weapon will be 30&amp;nbsp;% slower\, 20&amp;nbsp;% weaker and will cost you 20&amp;nbsp;% more stamina. You will be able to perform shortsword combos\, but not longsword combos."
+"d87495e8-b5f6-4099-8d91-89e52d383a05","Hledej-script",
+"d88c06c8-4da6-4e07-9c45-28c188c55ef8","Bark - companion",
+"d8b59369-03a5-4c53-adcf-78530a00dcca","Wanderer","The quality of beds increases for you the higher your Survival skill is. But at most this perk will improve the quality of a bed to 50&amp;nbsp;%. On higher quality beds\, the perk will have no effect."
+"d8fd45fd-3372-4b8f-abfa-537220f97761","Trample - companion",
+"da71a40a-302e-4824-b11b-cf5f78e14262","Memorable","Changes in your reputation\, good or bad\, spread more widely across the land and among different groups of people."
+"db0426a1-0026-4e74-8ad4-f5493fd8df16","Nimble Fingers","When in the time-collecting phase of the pickpocketing minigame\, you'll gain time 10&amp;nbsp;% faster."
+"dbb25349-54fe-48fe-aff9-15ee23c3f3e2","Salvo","After each shot\, you get a short-term buff during which you reload and aim faster. So you can also shoot faster and if you do it in time\, you'll regain the buff with each shot."
+"dbb78671-778a-44ff-9a29-6eb7a2d9524d","Red Herring","Herring's stats are now significantly increased."
+"dc580c15-f72c-431a-93cd-f1026cc8c21d","Rodent","You'll make 25&amp;nbsp;% less noise when you sneak indoors and the door opening will be half as loud."
+"dcdde681-5a0b-4f02-8c27-dbdf37037cf8","Frejir_dirt_decrease",
+"ddeced04-bb56-46ed-b156-ca27390831aa","Ringenmeister","When both you and your opponent are unarmed\, you you can perform a chokehold from a clinch to knock out your opponent. You can do this by attacking from the left zone while in clinch. If your attack is successful\, you will perform an arm lock\, after which you can attack again to perform a chokehold."
+"de4a1879-ca47-4272-b618-cf3aac8fe4d3","Impaler II","Pierce damage will be an additional 10&amp;nbsp;% higher."
+"de82bf42-d28c-46a7-b262-eb5b320e63d1","Brute Force","You deal 5&amp;nbsp;% more damage with Heavy weapons."
+"dea795f5-c7a1-4227-b483-b8d7c55c0ac8","Masterful Feint","You've perfected your feint to the point that it's very difficult for even an experienced warrior to respond to it."
+"debb1603-1dba-4ece-840a-757d374b912e","Skirmisher","After a shot from a bow while on foot\, your stamina will recover 25&amp;nbsp;% faster and sprinting will cost 50&amp;nbsp;% less stamina\, making it easier to move or flee. The effect lasts for 10s."
+"df13b990-8127-4a22-941d-bfa62ac21947","Sedlar - theivery",
+"e0e64fa4-2655-4375-a4a2-3cd07faa8644","Roadrunner","Your horse will use 5&amp;nbsp;% less stamina when riding on roads."
+"e1256788-29bd-4265-b055-a1df6cd9160d","Takedown","You can stealthily knock people out. To do this\, sneak up to your victim and initiate a chokehold. Then be ready to press attack to finish the action and knock out your opponent. It's a good idea to then hide the unconscious body so nobody stumbles across it. Your victim will regain consciousness after some time\, so whatever it is you're up to\, make it quick."
+"e17fcae0-5c79-41d0-90c6-c42a91825262","Towering menace - companion",
+"e2c65107-48dc-451b-b3b4-cbdc3a1b869c","Lifesaver","Mutt will defend you in battle and even attack enemies at your command."
+"e37dfc8f-e674-4d29-b114-8d037277cd1b","Good Natured - self help",
+"e4fedad5-8266-4c41-a96e-6e8c0b326a50","River","Whenever you make a dodge\, a perfect dodge or sprint during combat\, you gain a +3 bonus on Warfare skill and your stamina replenishes 15&amp;nbsp;% faster. The effect lasts for 10 seconds."
+"e6bf212f-f079-433a-8123-ee3a5a18792b","Finesse","The slashing damage of all melee weapons is increased by 5&amp;nbsp;%."
+"e85df4e4-b7b2-4f1f-a00c-1bee73440b09","Sundering Blow II","When you hit an enemy with a heavy weapon\, their armour will count as if it were 20 lower in total."
+"e8a580a7-3de4-4320-bbda-89dd511bd96a","Steak Tartare","You can consume raw meat without fear of poisoning."
+"e8ebba4b-41d0-4143-bc84-8829ff7a4bad","Iron Rain","Each subsequent attack with a polearm in an uninterrupted series will deal more damage than the previous one. The sequence can be interrupted by a Perfect block or dodge by the opponent\, a long delay between attacks\, or taking damage."
+"e97c85f8-30e2-46a6-88e0-5e375bdc3ddd","Steady Aim","If you don't move for 2 or more seconds while aiming\, your stamina will drain 20&amp;nbsp;% slower\, and your shot will be 15&amp;nbsp;% stronger."
+"e9cd4631-45d1-410e-a94b-06da6614e745","Totentanz_buff",
+"ea043ba6-d79f-4bb5-89c4-22ae6b43cdc0","Long Reach","Attacking with polearms will cost you 10&amp;nbsp;% less stamina."
+"ea25b763-4ab7-4111-8c76-02342fefe6fb","Drunk's Luck","When you're in the positive phase of drunkenness\, you got a bonus of up to +4 to Thievery."
+"eaf706c8-e8f8-4175-81de-b1c1dec4e2ba","Unarmed Master Strike","To execute a master strike\, you need to attack at the moment your opponent strikes\, but from the opposite zone of their attack. This will stop their attack and land your own hit."
+"ec4c5274-50e3-4bbf-9220-823b080647c4","Riposte","You can perform a riposte\, i.e. attack immediately after performing a Perfect Block. To perform a riposte\, press the attack key as soon as your weapon touches the opponent's during a Perfect block. A riposte can only be defended against with a Perfect Block. This technique is very effective against inexperienced swordsmen\, and a duel of two master swordsman is often a chain of Perfect Blocks followed by ripostes until one of them slips up."
+"ec84f8cc-b258-4833-9e13-b799a949a1bd","Into the Fray","Fully charged attacks made from the saddle will be 20&amp;nbsp;% stronger."
+"ec8d1e78-02db-4a88-b8a7-51518daac48d","Viper","The piercing damage of all melee weapons is increased by 5&amp;nbsp;%."
+"ec9d3bbc-d377-42ec-a9b4-bb58736dbf41","Blunt Force Trauma","Every time you fully charge your attack with a heavy melee weapon\, the attack will be 10&amp;nbsp;% stronger."
+"ecee2a90-309a-48d6-bc66-eec9b0825a63","Escape Artist","If someone is unsuccessful in their search for you\, they'll give up a little sooner."
+"ed3244fe-e663-4a34-ab1f-15d13b825ec5","Martin's Heritage","You will improve faster in Sword Fighting\, Crafting and Survival skills\, as all experience gained will be 10&amp;nbsp;% higher."
+"ed3af036-6d27-4f1a-a4ca-6a489b2fabce","Gladiator","If you fight with only a one-handed Sword weapon and keep your other hand free except for a torch\, you gain a +5 bonus on your Sword Fighting skill."
+"ee03e710-28ab-455b-b25f-8048694c3b86","Sticky Fingers","If you successfully steal any item in the thief minigame\, you will always get a few extra groschen. And if you're looting a dead person\, you know where to search\, thus you can find a bit more money on them."
+"ee4c1652-707a-4dab-8d1a-b166bb6998b7","Dominant Hand","If you use a one-handed weapon without a shield\, attacks will cost 20&amp;nbsp;% less stamina. Blocking will also cost less stamina and be more effective. This effect works even with a torch in your offhand."
+"eee4fd1d-461d-4915-997c-1d6d4ba67f5f","Kosovo Veteran","You gain +1 to Strength\, Agility and Vitality for every 15 seconds you are in combat. The maximum you can achieve is +5."
+"ef8282f1-4b61-4c57-98b9-9cda28f8fd09","Precise Strike","With a fully charged sword attack\, your Sword Fighting skill will count 3 higher. So your attack will not only be stronger\, but it will also be harder to parry."
+"effd1f5d-c9be-4bb0-a51d-4b9f73f35eed","Silver Tongue","You get a +4 Speech bonus when haggling\, making it easier to negotiate better prices."
+"f0761418-e5ed-4810-928e-2b857687286b","Artery Slasher","If you inflict a bleeding wound with a Polearm weapon\, the wounded person will bleed faster and thus fall sooner."
+"f0797a5e-338d-43de-85fc-49119170633b","In Vino Virilitas","When you're drunk\, your stamina recovers faster. And the drunker you are\, the quicker it regenerates\, up to a 50&amp;nbsp;% increase!"
+"f0967582-19e6-46ec-973f-bb05dacc9175","Hal Shot First","Your first shot will do 15&amp;nbsp;% more damage. The perk will be active again after the end of the fight in which it was used or in one minute if no fight took place."
+"f1d825fa-bff0-46db-a442-4457381c9241","Black arts apprentice - script",
+"f1e1291e-a2fa-4b81-80b1-ca96374c88df","Swordmakers wisdom - weapon usage",
+"f20d8802-6e9d-4d3d-b5eb-a3d04a8075df","Totally Legit","Stolen weapons\, armour and clothing in your inventory will lose their stolen status 20&amp;nbsp;% faster."
+"f2fddf5e-78e6-4706-894e-8d5fe12bf259","Marathon Runner","When sprinting\, you consume stamina 20&amp;nbsp;% slower."
+"f50df829-871a-4cb0-ba76-6ee90b5b8b4d","Heartseeker II","If you hit your target in the chest\, your shot will deal a total of 25&amp;nbsp;% more damage. Shots to the heart from behind will also trigger this effect."
+"f57098fe-24f5-4850-81f8-36bb0a12e4f9","Secret of Secrets","If you follow the recipe precisely and your brewing time is perfect\, you can brew potions of exceptional quality\, which the ordinary herbalist can only dream of."
+"f62a0656-661b-45e9-a57c-27d42861b598","Ironclad","The weight of the armour you wear affects your speed of movement and how much stamina sprinting depletes. Using this perk\, your armour will weigh you down 20&amp;nbsp;lbs less\, thus having a lesser effect on your stamina. Neither the actual weight of your armour nor your carrying capacity will change\, however."
+"f6688ddf-367e-40dd-90bc-60c39812185b","Back Alley Skirmisher","Using a one-handed weapon on its own\, you will deal 10&amp;nbsp;% more damage. The effect also applies if you wield a torch in your off-hand."
+"f7195791-fdfa-4461-9352-44428225f238","Spiritual guidance - bonusy",
+"f7196091-fdfa-4601-9352-444282260238","equipment_deterioration_reduction",
+"f7606b14-dea2-4b48-8057-cfd2bf7a33e7","Revenant II","Your health will slowly recover up to 75 health points continuously. The effect does not apply if you are in combat or bleeding."
+"f81ad9e1-7023-4e86-85d0-c638dd8bcfd4","Leshy","While in the forest\, your scent will be halved\, your stamina will recover 15&amp;nbsp;% faster\, your Strength\, Vitality and Agility will be increased by 1 and your Stealth skill will be increased by 2."
+"f9de0477-2f59-4eec-b522-fa943f542277","Secret of Matter","Every time you successfully brew a potion\, you get 1 extra potion of the same quality."
+"fa43b5bf-4cd9-40e4-9ebc-5d807c6c093d","Sundering Blow","When you hit an enemy with a Heavy weapon\, their armour will count as 10 lower."
+"faef0e75-4d45-4ad0-8f15-043e492dde48","Bark!","You’ve taught Mutt to create a ruckus and draw attention to himself. This can be handy\, especially when you need to sneak somewhere unnoticed. You can get him to bark by selecting the relevant command under Commands. Mutt will start barking on the spot\, so make yourself scarce quickly to pull off your ruse."
+"fb0b3025-0529-4941-8def-9c15c8d47b49","Art of Preservation","Raw food and herbs you have in your inventory will spoil 50&amp;nbsp;% slower."
+"fbc28ceb-0c7f-4609-a51f-0b22e64ec5b7","Wrestler","Your Strength will make it easier to win fights in the clinch\, because it will be harder for your opponent to react to your actions."
+"fd6ea6fd-7774-43f6-b9c1-420cd69a3e74","Spiritual Guidance","When you're drunk\, your Scholarship and Speech are increased even more than usual. The bonus will be higher the drunker you are."
+"fee40a9c-b689-485d-a94a-294d100ac5e7","Charming Companion","When you have your dog with you\, your Charisma is increased by 3."
+"00e72786-0b56-481b-995f-1ef6567293f6","Alch recipe - sneak",
+"01a77d2b-2ac9-42a6-b7c2-eda3ab98f29f","BS recipe - r_axebattle04",
+"0a545731-e870-41ce-856c-bb518d92f034","Alch recipe - hair o' dog",
+"0b822ffd-f80d-4073-9b76-1bb4cbe71bda","Alch recipe - dementia",
+"0e41c9bc-e760-479b-87bc-597d9716a581","Alch recipe - chamomileDecoction",
+"0f22d475-f795-4327-b67c-cf15cdbf1739","BS recipe - r_horseshoeMilitary",
+"113fbba6-ece5-4442-b789-e1427b35c253","BS recipe - r_kovarTrainingSword",
+"17cf675c-789a-42e0-a9b7-eca55048ec8c","Alch recipe - vitality",
+"19aa03ef-a0aa-41a6-9983-008f016c6da9","BS recipe - basic_longsword",
+"1a3d2c1d-4c99-4e1c-8df4-cedb66cc483e","BS recipe - r_shortswordbasilard",
+"1db8f4e5-dc24-48e9-a05b-3d6212576fbb","BS recipe - r_shortswordceremony",
+"24f5eb8e-8812-4c08-a7b1-d6589ce54704","Alch recipe - archer",
+"2dd0b89c-4e60-405b-8d82-04e9538f4b54","BS recipe - longswordHenry_reforged",
+"3190f739-995e-4c60-9aa7-d34ca3428494","BS recipe - r_horseshoeFarmer",
+"328b519f-4cb4-4127-a79a-27e6d3ffc4dc","BS recipe - r_huntingSwordBasic",
+"330b075a-2568-4d2d-bca1-b02cb60df582","BS recipe - r_shortswordheavy",
+"33319ecd-d246-43fa-a547-a34ef4cbc716","BS recipe - r_sabrecommon",
+"3385645f-9b90-4ecd-8693-97da184fab60","BS recipe - r_huntingswordsashka",
+"340a80aa-9952-4b5a-8c9a-f1fdf3425c0f","Alch recipe - saviourSchnapps",
+"364a361b-c447-4e14-8f87-b1964a8c5975","Alch recipe - marigoldDecoction",
+"394af9ae-46e8-4ea4-a09d-8e38e936f899","BS recipe - r_axebattle03",
+"39bf333d-47ca-43d6-9fac-32672bf32b37","Alch recipe - horseman",
+"3b8b608c-c1ce-4870-9cbb-9a652d67e225","BS recipe - r_shortswordcommon",
+"431e0ff9-5379-41d6-ba17-92f978d45c11","Alch recipe - paralysis",
+"45b43f2c-9da5-4bff-b680-39f7d3ecaf7b","BS recipe - r_longswordbroad",
+"47eaa87d-bc72-4cef-bec8-38dbf651a41c","BS recipe - r_kovaniAsiDoVezi_protectiveAxe",
+"489a6940-d6d4-4e4f-9ebf-88ae357f988f","BS recipe - r_huntingswordsword",
+"4aec1edd-07f7-486f-b974-9ba412e3109f","BS recipe - r_kovaniKopie_penitent",
+"4b730a47-4c5d-46fc-b8a0-81c80a43b973","Alch recipe - fakeBlood",
+"4cad82b4-1565-44bd-a341-77e3158e79ca","BS recipe - r_axebattle02",
+"4d061c07-c720-4122-95c5-6dd3a12ee7d8","Alch recipe - lion",
+"54b4e018-ad87-4ae5-b458-33ded951f728","BS recipe - r_poustevnik_swordForSemin",
+"54dc97e3-c51c-4eed-92db-ab7818a022f3","BS recipe - r_axefancy",
+"5f4749aa-8d38-4368-8564-e772090f2faa","BS recipe - r_kovaniSymbolSermirny_guildSwordRemake",
+"5f4d8ed9-08a2-4ff7-932b-d0c5722cb487","Alch recipe - shot scatter",
+"66df00c5-fb3e-40f2-a5be-4a9ef3903acc","BS recipe - basic_axe",
+"67dd0d01-f819-4329-8a8d-0a493743904a","BS recipe - r_shortswordcleaver",
+"6818bc12-6b78-459f-89dd-299ebd6eb31c","BS recipe - basic_horseshoe",
+"71eb98d9-b05e-4f76-b2b9-4de81a4204ca","BS recipe - r_longswordduel",
+"766b081c-8cd9-465a-b722-ae8ab356fa00","BS recipe - r_longswordcommon",
+"77c75659-e348-41e7-9ffa-12a2727e41fa","BS recipe - r_kovaniRelikvie_swordOfKnightValentin",
+"781dc8f4-3e57-4f08-b0f3-5d55a0868375","Alch recipe - mintha",
+"7e05d810-4703-410c-ac68-9cf8d714b899","Alch recipe - witch",
+"7f51650a-75fe-43ed-a555-c5511b9e086e","Alch recipe - hooch",
+"809ec8dd-39a1-413a-8512-44c2d4140c74","Alch recipe - energy",
+"844f6a78-37b7-4dbb-905d-0ca53e0c1290","Alch recipe - painkiller",
+"88accbf1-a905-422a-a4fb-e7114206f352","Alch recipe - owl",
+"8a7f9b2a-b87b-42cc-9f9e-bb61c5012d3f","BS recipe - r_axebattle01",
+"8dafcb36-4680-4d63-9e97-0611bb8802e0","BS recipe - r_shortswordbroad",
+"91de224e-9c6c-40a1-96e9-887317402362","BS recipe - r_kovaniPoklad_adornedAxe",
+"91fede06-caec-46d0-8c4a-7fa58558b268","BS recipe - r_kovaniKovarskaSoutez_huntingKnifeForContest",
+"94d62267-ff23-4a93-a301-9c818c51ce41","Alch recipe - antidote",
+"989bd500-5d82-4613-b47c-5f01fbf4a75d","Alch recipe - stamina",
+"9b6a59eb-f0aa-4d93-a71d-70dfb26b847c","Alch recipe - shot ball",
+"a0bb8587-46da-4f7d-b383-71f5357a9fe4","Alch recipe - sleep",
+"a0f2b01c-744b-4e7e-a573-9418054b33b9","BS recipe - r_huntingswordmussle",
+"a5ad2b92-a42c-49b2-b3ce-648ecf28d4bb","BS recipe - r_axework01",
+"a7573852-f294-44ca-8d3a-4ddc613c2313","Alch recipe - syrup",
+"a7f9e9a6-31e5-403b-8fcc-40b70ada86cb","BS recipe - r_axework02",
+"a819961d-e452-4909-814f-b853a193715c","Alch recipe - absintium",
+"ab2d161d-ef04-4766-b5fe-5bc3aa5ccd82","Alch recipe - mrchCureSpiritus",
+"af99aab5-de64-4a22-972e-cb5e06c86c3a","Alch recipe - tideness",
+"b58e15f5-f081-41a2-b1a0-7897202d621c","Alch recipe - respec",
+"b8a82dc8-0eea-4da6-b6ad-c3e57467e187","Alch recipe - fevertonic",
+"bc052134-4e12-4d25-8940-c6711b8505d1","BS recipe - r_polearmBruncvik",
+"c944bf20-6c76-4a5f-803f-7f87c2d69dba","BS recipe - r_huntingswordfalchion",
+"cb053d06-d5b1-4b5a-8697-f1b161a6052e","BS recipe - r_kovaniNaKovarne_smithsDefense",
+"cd9ff25b-2faa-4f78-aeb3-f108d1d7354b","BS recipe - basic_sword",
+"d1f781ad-77ef-4a4f-aba1-551266ee536b","BS recipe - longswordRadzig_reforged",
+"d6672f5f-0478-42d3-b227-22adffcc6493","BS recipe - r_kovaniVajdovaKletba_rikonaris",
+"d7f0e4a4-ebdd-4134-b249-a4810943cb64","BS recipe - r_longswordsturdy",
+"d895f6e8-492c-4d88-b19f-aa1f848feb6c","Alch recipe - hunter",
+"dabb1a66-8e04-4bd8-b149-b58a522747fd","Alch recipe - mrchCureWater",
+"e28dbe1b-38e7-4001-8f24-23a0da71663b","Alch recipe - bard",
+"e52089c9-3a88-438b-8844-13ab33e59b0f","BS recipe - r_kovaniKatuvSleh_executionersSword",
+"e6189424-44db-486a-916a-ab3200b85eea","Alch recipe - bane",
+"ea0be1c3-88f1-4ecd-bea6-83c2f62663a7","BS recipe - r_longswordold",
+"f0ff5c94-e0a6-436f-a838-6d6e8bb725ac","BS recipe - r_axecuman",
+"f36cb43a-b110-42a3-b5fd-92024f7bb6a7","Alch recipe - soap",
+"f54a514c-8fdf-46fe-9f0a-0883d07ba5a3","BS recipe - r_sabrenoble",
+"f94b552d-aafd-43be-9c6f-a938cb550548","BS recipe - r_kovaniZavodniPodkovy_caulkinHorseshoe",
