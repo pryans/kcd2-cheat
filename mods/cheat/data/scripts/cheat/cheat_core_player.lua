@@ -595,7 +595,7 @@ function Cheat:test_core_player()
     Cheat:beginTests("test_core_player")
 
     -- loc
-    local loc = Cheat:loc()
+    local loc = Cheat:cheat_loc()
     Cheat:testAssert("loc 1", loc ~= nil)
     Cheat:testAssert("loc 2", loc.x ~= nil and loc.x ~= 0)
     Cheat:testAssert("loc 3", loc.y ~= nil and loc.y ~= 0)

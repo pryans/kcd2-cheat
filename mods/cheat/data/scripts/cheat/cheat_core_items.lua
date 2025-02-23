@@ -894,24 +894,17 @@ end
 
 -- cheat_add_all_items
 -- ============================================================================
-Cheat.cheat_add_all_items_args = {
-    quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt adding quest items.") end
-}
-Cheat:createCommandLegacy("cheat_add_all_items", "Cheat:cheat_add_all_items(%line)", Cheat.cheat_add_all_items_args,
+Cheat:createCommand("cheat_add_all_items", {
+        quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt adding quest items.") end
+    },
     "Adds all items the player's inventory. Enjoy!",
     "Add all items", "cheat_add_all_items")
-function Cheat:cheat_add_all_items(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_add_all_items_args, "cheat_add_all_items")
-    local quest, questErr = Cheat:argsGet(args, "quest")
-    if questErr then
-        return false
-    end
-
+function Cheat:cheat_add_all_items(c)
     local itemsAdded = 0
     local questItemsAdded = 0
     local blockedItems = 0
     for _, item in ipairs(Cheat:findItems()) do
-        if Cheat:addItem({ exact = true, searchKey = item.id }, item.amount, 100, nil, quest, false, true) then
+        if Cheat:addItem({ exact = true, searchKey = item.id }, item.amount, 100, nil, c.quest, false, true) then
             itemsAdded = itemsAdded + 1
             if item.isquestitem then
                 questItemsAdded = questItemsAdded + 1
@@ -1732,13 +1725,13 @@ function Cheat:test_cheat_add_all_items()
 
     -- cheat_add_all_items without quest flag
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_all_items no quest 1", Cheat:cheat_add_all_items())
-    Cheat:testAssertEquals("cheat_add_all_items no quest 2", Cheat:getInventoryItemCount(), 4528)
+    Cheat:testAssert("cheat_add_all_items no quest 1", Cheat:proxy("cheat_add_all_items"))
+    Cheat:testAssertEquals("cheat_add_all_items no quest 2", Cheat:getInventoryItemCount(), 4660)
 
     -- cheat_add_all_items with quest flag
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_all_items quest 1", Cheat:cheat_add_all_items())
-    Cheat:testAssertEquals("cheat_add_all_items quest 2", Cheat:getInventoryItemCount(), 4528)
+    Cheat:testAssert("cheat_add_all_items quest 1", Cheat:proxy("cheat_add_all_items", "quest:true"))
+    Cheat:testAssertEquals("cheat_add_all_items quest 2", Cheat:getInventoryItemCount(), 4660)
 end
 
 -- ============================================================================
