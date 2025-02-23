@@ -53,9 +53,6 @@ local SOUL_CLASS = {
     SHEEP_RAM = 34
 }
 
-Cheat.g_soul_category_database = nil
-Cheat.g_soul_category_keys = Cheat:getSoulCategoryKeys()
-
 function Cheat:getSoulCategoryKeys()
     local categories = {}
     table.insert(categories, "Boar")
@@ -77,6 +74,9 @@ function Cheat:getSoulCategoryKeys()
     table.insert(categories, "Wolf")
     return categories
 end
+
+Cheat.g_soul_category_database = nil
+Cheat.g_soul_category_keys = Cheat:getSoulCategoryKeys()
 
 function Cheat:addSoulToCategory(soulKey, entityClass, soul)
     -- entityClass is the name of the Lua class to use?
