@@ -66,7 +66,20 @@ function Cheat:onInit()
     Cheat:loadFile("scripts/cheat/cheat_core_actions.lua")
 
     -- default bindings before autoexec so mod users can reset all the defaults if they want
-    Cheat:registerAction("5", "press", function () Cheat:cheat_save() end)
+    Cheat:registerAction("1", "press", function () Cheat:proxy("cheat_phys_sprint") end)
+
+    Cheat:registerAction("2", "press", function () Cheat:proxy("cheat_phys_hover") end)
+
+    Cheat:registerAction("3", "press", function () Cheat:proxy("cheat_add_buff_immortal") end)
+    Cheat:registerAction("3", "hold", function () Cheat:proxy("cheat_remove_buff_immortal") end)
+
+    Cheat:registerAction("4", "press", function () Cheat:proxy("cheat_add_buff_invisible") end)
+    Cheat:registerAction("4", "hold", function () Cheat:proxy("cheat_remove_buff_invisible") end)
+
+    Cheat:registerAction("5", "press", function () Cheat:proxy("cheat_save") end)
+
+    Cheat:registerAction("9", "press", function () Cheat:proxy("cheat_kill") end)
+    Cheat:registerAction("10", "press", function () Cheat:proxy("cheat_mass_kill") end)
 
     Cheat:logInfo("Loaded KCD2 Cheat version %s", Cheat.version)
 end

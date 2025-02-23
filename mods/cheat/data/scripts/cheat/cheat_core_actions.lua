@@ -40,7 +40,8 @@ function Cheat:publishAction(slot, type)
 
     local eventHandlers = Cheat.g_action_callbacks[key]
     if not eventHandlers or #eventHandlers == 0 then
-        Cheat:logInfo("Nothing is bound to action slot [%s] type [%s].", tostring(slot), tostring(type))
+        -- this gets spammy since most keys won't have all types registered
+        Cheat:logDebug("Nothing is bound to action slot [%s] type [%s].", tostring(slot), tostring(type))
         return false
     end
 
