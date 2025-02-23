@@ -55,14 +55,12 @@ function Cheat:onInit()
     Cheat:loadFile("scripts/cheat/cheat_core_storage.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_teleport.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_horse.lua")
-
-    -- todo next
     Cheat:loadFile("scripts/cheat/cheat_core_perks.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_skills.lua")
+    Cheat:loadFile("scripts/cheat/cheat_core_physics.lua")
 
     --Cheat:loadFile("scripts/cheat/cheat_core_factions.lua")
     --Cheat:loadFile("scripts/cheat/cheat_core_merchants.lua")
-    --Cheat:loadFile("scripts/cheat/cheat_core_physics.lua")
     --Cheat:loadFile("scripts/cheat/cheat_core_quests.lua")
 
     Cheat:logInfo("Loaded KCD2 Cheat version %s", Cheat.version)
@@ -203,6 +201,7 @@ function Cheat:onGameplayStarted()
         Cheat:runTestSuite()
     else
         Cheat:cheat_timer(true)
+        Cheat:startPhysics()
         Cheat:autoexec()
     end
 end
