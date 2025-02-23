@@ -168,7 +168,7 @@ function Cheat:cheat_add_skill_levels(c)
 
     local skill = Cheat:findSkill(searchOperation)
     if not skill then
-        Cheat:logError("Skill [%s] not found.", tostring(c.skill))
+        Cheat:logError("No skill found for query [%s].", Cheat:serializeTable(searchOperation))
         return false
     end
 
