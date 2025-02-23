@@ -1,6 +1,5 @@
-/.editorconfig
-/.vscode
-/build
-/research
-release.properties
-note.txt
+.vscode
+build
+docs/research
+docs/note.txt
+env.properties

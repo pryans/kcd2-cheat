@@ -1,6 +1,5 @@
 Cheat = {}
 Cheat.version = "__VERSION__"
-Cheat.runTests = "__RUNTESTS__"
 
 function Cheat:loadFile(file)
     System.LogAlways("Loading file [" .. tostring(file) .. "] ...")
@@ -62,6 +61,12 @@ function Cheat:onInit()
     --Cheat:loadFile("scripts/cheat/cheat_core_factions.lua")
     --Cheat:loadFile("scripts/cheat/cheat_core_merchants.lua")
     --Cheat:loadFile("scripts/cheat/cheat_core_quests.lua")
+
+    -- do last so we can setup default bindings for some console commands
+    Cheat:loadFile("scripts/cheat/cheat_core_actions.lua")
+
+    -- default bindings before autoexec so mod users can reset all the defaults if they want
+    Cheat:registerAction("5", "press", function () Cheat:cheat_save() end)
 
     Cheat:logInfo("Loaded KCD2 Cheat version %s", Cheat.version)
 end
@@ -196,14 +201,9 @@ end
 
 function Cheat:onGameplayStarted()
     Cheat:logDebug("Cheat:onGameplayStarted")
-
-    if Cheat.runTests then
-        Cheat:runTestSuite()
-    else
-        Cheat:cheat_timer(true)
-        Cheat:startPhysics()
-        Cheat:autoexec()
-    end
+    Cheat:cheat_timer(true)
+    Cheat:startPhysics()
+    Cheat:autoexec()
 end
 
 function Cheat:onGamePause()

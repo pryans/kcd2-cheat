@@ -1,0 +1,75 @@
+	<ui_group name="cheatkeys" ui_label="ui_keybinds_group_cheatkeys"/>
+	
+	<!-- CHEAT MOD BEGIN -->
+	<superaction name="cheat_action slot:1" ui_group="cheatkeys" ui_name="cheat_action1_press" ui_tooltip="" keyboard="writeable">
+		<action name="cheat_action slot:1 type:press" map="default" />
+		<action name="cheat_action slot:1 type:hold" map="default" />
+		<control input="f1" controller="keyboard" />
+	</superaction>
+
+	<superaction name="cheat_action slot:2" ui_group="cheatkeys" ui_name="cheat_action2_press" ui_tooltip="" keyboard="writeable">
+		<action name="cheat_action slot:2 type:press" map="default" />
+		<action name="cheat_action slot:2 type:hold" map="default" />
+		<control input="f2" controller="keyboard" />
+	</superaction>
+
+	<superaction name="cheat_action slot:3" ui_group="cheatkeys" ui_name="cheat_action3_press" ui_tooltip="" keyboard="writeable">
+		<action name="cheat_action slot:3 type:press" map="default" />
+		<action name="cheat_action slot:3 type:hold" map="default" />
+		<control input="f3" controller="keyboard" />
+	</superaction>
+
+	<superaction name="cheat_action slot:4" ui_group="cheatkeys" ui_name="cheat_action4_press" ui_tooltip="" keyboard="writeable">
+		<action name="cheat_action slot:4 type:press" map="default" />
+		<action name="cheat_action slot:4 type:hold" map="default" />
+		<control input="f4" controller="keyboard" />
+	</superaction>
+
+	<superaction name="cheat_action slot:5" ui_group="cheatkeys" ui_name="cheat_action5_press" ui_tooltip="" keyboard="writeable">
+		<action name="cheat_action slot:5 type:press" map="default" />
+		<action name="cheat_action slot:5 type:hold" map="default" />
+		<control input="f5" controller="keyboard" />
+	</superaction>
+
+	<superaction name="cheat_action slot:6" ui_group="cheatkeys" ui_name="cheat_action6_press" ui_tooltip="" keyboard="writeable">
+		<action name="cheat_action slot:6 type:press" map="default" />
+		<action name="cheat_action slot:6 type:hold" map="default" />
+		<control input="f6" controller="keyboard" />
+	</superaction>
+
+	<superaction name="cheat_action slot:7" ui_group="cheatkeys" ui_name="cheat_action7_press" ui_tooltip="" keyboard="writeable">
+		<action name="cheat_action slot:7 type:press" map="default" />
+		<action name="cheat_action slot:7 type:hold" map="default" />
+		<control input="f7" controller="keyboard" />
+	</superaction>
+
+	<superaction name="cheat_action slot:8" ui_group="cheatkeys" ui_name="cheat_action8_press" ui_tooltip="" keyboard="writeable">
+		<action name="cheat_action slot:8 type:press" map="default" />
+		<action name="cheat_action slot:8 type:hold" map="default" />
+		<control input="f8" controller="keyboard" />
+	</superaction>
+
+	<superaction name="cheat_action slot:9" ui_group="cheatkeys" ui_name="cheat_action9_press" ui_tooltip="" keyboard="writeable">
+		<action name="cheat_action slot:9 type:press" map="default" />
+		<action name="cheat_action slot:9 type:hold" map="default" />
+		<control input="f9" controller="keyboard" />
+	</superaction>
+
+	<superaction name="cheat_action slot:10" ui_group="cheatkeys" ui_name="cheat_action10_press" ui_tooltip="" keyboard="writeable">
+		<action name="cheat_action slot:10 type:press" map="default" />
+		<action name="cheat_action slot:10 type:hold" map="default" />
+		<control input="f10" controller="keyboard" />
+	</superaction>
+
+	<superaction name="cheat_action slot:11" ui_group="cheatkeys" ui_name="cheat_action11_press" ui_tooltip="" keyboard="writeable">
+		<action name="cheat_action slot:11 type:press" map="default" />
+		<action name="cheat_action slot:11 type:hold" map="default" />
+		<control input="f11" controller="keyboard" />
+	</superaction>
+
+	<superaction name="cheat_action slot:12" ui_group="cheatkeys" ui_name="cheat_action12_press" ui_tooltip="" keyboard="writeable">
+		<action name="cheat_action slot:12 type:press" map="default" />
+		<action name="cheat_action slot:12 type:hold" map="default" />
+		<control input="f12" controller="keyboard" />
+	</superaction>
+	<!-- CHEAT MOD END -->

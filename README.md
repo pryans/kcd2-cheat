@@ -1,9 +1,16 @@
 ## KCD2 Cheat Mod
 https://www.nexusmods.com/kingdomcomedeliverance2/mods/114
 
-Build Process
-- Edit `release.ps1`
-    - Set version number `$MOD_VERSION`
-    - Set mod directory `$KCD_MODS_DIR`
-- Run powershell script `.\release.ps1` to build and auto install the mod.
-- Mod zip will be in `build/mods/` folder for upload.
+### Build Env
+I use VSCode and WSL to build and release this mod.
+- Install VSCode
+- Install WSL
+- Install WSL VSCode plugin
+- Install the latest Ubuntu using the WLS plugin.
+- In the terminal tab of VSCode you start an Ubuntu-XX(WSL) terminal.
+- Run `./release.sh` to auto create `env.properties` then edit this file with your KCD2 path.
+
+### Build Process
+- Edit `cheat*.properties` files and bump the version numbers as needed.
+- Run `./release.sh` to rebuild all mods and install them in KCD2.
+- The mod zip files will be in the `./build/` folder for uploading.
