@@ -1,9 +1,9 @@
 # Cheat-Autoexec
+This is an example mod that houses an autoexec.txt file with console commands that will be run every time that gameplay starts; meaning when the playable character is loaded into an area.
 
-This requires KCD2 Cheat mod version 2.11+
-
-- **Note 1:** Before making changes just load this mod unchanged to make sure you know how to install a mod correctly.
-- **Note 2:** It is very easy to corrupt the pak file, if it says the file is empty or gives a read error then the pak is corrupt.
+- **Note 1:** This requires KCD2 Cheat mod version 2.11+
+- **Note 2:** Before making changes just load this mod unchanged to make sure you know how to install a mod correctly.
+- **Note 3:** It is very easy to corrupt the pak file, if it says the file is empty or gives a read error then the pak is corrupt.
 
 ## Setup
 1. Unzip cheat-autoexec mod to KingdomComeDeliverance2\Mods
