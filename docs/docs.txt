@@ -1,0 +1,1618 @@
+Documentation for KCD2 Cheat version 2.18
+
+cheat_action
+cheat_action_begin_binding
+cheat_action_bind_console_command
+cheat_action_bind_lua_code
+cheat_action_end_binding
+cheat_action_reset
+cheat_action_reset_all
+cheat_add_all_codex_perks
+cheat_add_all_items
+cheat_add_buff
+cheat_add_buff_carry_weight
+cheat_add_buff_heal
+cheat_add_buff_immortal
+cheat_add_buff_invisible
+cheat_add_buff_xp
+cheat_add_item
+cheat_add_money
+cheat_add_perk
+cheat_add_potion_buff
+cheat_add_skill_levels
+cheat_add_stat_levels
+cheat_alias
+cheat_backup_inventory
+cheat_charm
+cheat_clip
+cheat_damage_gear
+cheat_find_buffs
+cheat_find_items
+cheat_find_npc
+cheat_find_perks
+cheat_find_skills
+cheat_get_states
+cheat_get_time
+cheat_horse_info
+cheat_horse_inventory
+cheat_horse_new
+cheat_horse_own
+cheat_horse_release
+cheat_horse_teleport
+cheat_horse_wash
+cheat_inventory
+cheat_kill
+cheat_list_inventory
+cheat_loc
+cheat_localization
+cheat_mass_kill
+cheat_no_clip
+cheat_no_door_lockpicking
+cheat_no_lockpicking
+cheat_no_pickpocketing
+cheat_no_stash_lockpicking
+cheat_own_stolen_items
+cheat_phys_hover
+cheat_phys_push
+cheat_phys_sprint
+cheat_remove_all_buffs
+cheat_remove_all_perks
+cheat_remove_buff
+cheat_remove_buff_immortal
+cheat_remove_buff_invisible
+cheat_remove_item
+cheat_remove_items
+cheat_remove_perk
+cheat_remove_stolen_items
+cheat_repair_gear
+cheat_reset_perks
+cheat_restore_inventory
+cheat_reveal_map
+cheat_revive_npc
+cheat_save
+cheat_set_bow_reticle
+cheat_set_compass
+cheat_set_hud
+cheat_set_regen
+cheat_set_skill_level
+cheat_set_stat_level
+cheat_set_state
+cheat_set_statusbar
+cheat_set_third_person
+cheat_set_time
+cheat_set_time_speed
+cheat_set_weather
+cheat_spawn
+cheat_stash
+cheat_target
+cheat_teleport
+cheat_teleport_npc_to_loc
+cheat_teleport_npc_to_player
+cheat_teleport_to_checkpoint
+cheat_teleport_to_npc
+cheat_wash_dirt_and_blood
+
+
+
+ 
+ 
+[size=4][b]cheat_action[/b][/size]
+This command is used by the Cheat-Keys optional mod to publish keyboard press/hold events to Cheat mod.
+This command can be used to manually simulate a key press as well.
+
+[b]Arguments:[/b]
+	type: (required) Action Type
+	slot: (required) Action Slot
+
+[b]Examples:[/b]
+	Simulate pressing F5.:
+	cheat_action slot:1 type:press
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_action_begin_binding[/b][/size]
+Begins binding commands to the given action slot and type.
+Use cheat_action_bind_console_command and cheat_action_bind_lua_code to bind 1+ commands to the action.
+Use cheat_action_end_binding to complete the process.
+
+[b]Arguments:[/b]
+	type: (required) Action Type
+	slot: (required) Action Slot
+
+
+
+
+ 
+ 
+[size=4][b]cheat_action_bind_console_command[/b][/size]
+Binds a console command to the current action.
+
+
+
+
+ 
+ 
+[size=4][b]cheat_action_bind_lua_code[/b][/size]
+Binds lua code to the current action.
+
+
+
+
+ 
+ 
+[size=4][b]cheat_action_end_binding[/b][/size]
+Ends binding a command to the given action slot and type.
+
+
+
+
+ 
+ 
+[size=4][b]cheat_action_reset[/b][/size]
+Removes all commands bound to the given action.
+
+[b]Arguments:[/b]
+	type: (required) Action Type
+	slot: (required) Action Slot
+
+
+
+
+ 
+ 
+[size=4][b]cheat_action_reset_all[/b][/size]
+Removes all commands bound to all actions.
+
+
+
+
+ 
+ 
+[size=4][b]cheat_add_all_codex_perks[/b][/size]
+Adds all perks related to the codex.
+
+
+
+
+ 
+ 
+[size=4][b]cheat_add_all_items[/b][/size]
+Adds all items the player's inventory. Enjoy!
+
+[b]Arguments:[/b]
+	quest: (optional boolean) If true, attempt adding quest items.
+
+[b]Examples:[/b]
+	Add all items:
+	cheat_add_all_items
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_add_buff[/b][/size]
+Adds matching buffs to the player.
+
+[b]Arguments:[/b]
+	any: (optional) Matches fields partially.
+	exact: (optional) Matches fields exactly.
+
+[b]Examples:[/b]
+	Adds all bufss with 'heal' in their name:
+	cheat_add_buff any:heal
+
+	Adds the buff poor_hearing buff by ID:
+	cheat_add_buff exact:29336a21-dd76-447b-a4f0-94dd6b9db466
+
+	Adds the buff healthEatSleep_instant buff by full name:
+	cheat_add_buff exact:healthEatSleep_instant
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_add_buff_carry_weight[/b][/size]
+Applies a custom non-persistent carry weight buff. Cap 120.
+Uses carry weight per strength (CPS) derived stat. Buff visible in inventory.
+
+[b]Arguments:[/b]
+	amount: (required number) Carry weight in pounds, rounded to nearest 10 pounds.
+
+[b]Examples:[/b]
+	Adds 100 pounds per str to player's carry weight.:
+	cheat_add_buff_carry_weight amount:100
+
+	Remove the buff.:
+	cheat_add_buff_carry_weight amount:0
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_add_buff_heal[/b][/size]
+Stop bleeding, removes injuries, and restores all health, stamina, hunger, and exhaust.
+
+[b]Examples:[/b]
+	Heal bleeding and injuries:
+	cheat_add_buff_heal
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_add_buff_immortal[/b][/size]
+Adds a custom non-persistent buff to make the player immortal. Buff visible on HUD & Buffs.
+Use cheat_remove_buff_immortal to remove this buff or restart the game.
+
+[b]Examples:[/b]
+	Add immortality:
+	cheat_add_buff_immortal
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_add_buff_invisible[/b][/size]
+Adds a custom non-persistent invisible buff to player. Buff visible on HUD & Buffs.
+Set visibility, conspicuousness and noise to zero.
+Use cheat_remove_buff_invisible to remove this buff or restart the game.
+
+[b]Examples:[/b]
+	Add invisible buff to player:
+	cheat_add_buff_invisible
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_add_buff_xp[/b][/size]
+Adds a custom non-persistent XP multiplier buff. Cap 500%
+
+
+[b]Arguments:[/b]
+	amount: (required number) Percentage increase in XP gain. Rounded to nearest 50% increment.
+
+[b]Examples:[/b]
+	Uses XP multiplier (XPM) derived stat. Buff visible in inventory.:
+	Adds 200% XP multiplier.
+
+	cheat_add_buff_xp amount:200:
+	Remove the buff.
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_add_item[/b][/size]
+Adds an item to the player's inventory.
+
+[b]Arguments:[/b]
+	exact: (optional) Matches fields exactly.
+	quest: (optional boolean) If true, attempt adding quest items.
+	amount: (optional number) The number of items to add. Default 1.
+	condition: (optional number) The condition of the item added. Default 100.
+	bulk: (optional boolean) If true, all matches items are added.
+	any: (optional) Matches fields partially.
+	quality: (optional number) The quality of the item added (1-3). Defaults to item's max quality.
+
+[b]Examples:[/b]
+	Adds 1 item with 'bow' in anywhere in name:
+	cheat_add_item any:bow
+
+	Adds 1 item with 'hunting arrow' anywhere in name:
+	cheat_add_item any:hunting arrow
+
+	Adds 2 items exactly named 'military sword' with 50% condition:
+	cheat_add_item exact:military sword amount:10 condition:50
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_add_money[/b][/size]
+Adds the given amount of groschen to the player's inventory.
+
+[b]Arguments:[/b]
+	amount: (required number) The amount of groschen to add.
+
+[b]Examples:[/b]
+	Add 200 groschen:
+	cheat_add_money amount:200
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_add_perk[/b][/size]
+Adds matching perks to the player.
+NOTE: It isn't possible to know exact what perks the player has or were added/removed.
+This command will just log the perks it tried to add.
+Some perks may be part of quests or other game mechanics or not intented for the player to use.
+
+[b]Arguments:[/b]
+	i_know_what_i_am_doing: (required boolean) Enables this command.
+	any: (optional) Matches fields partially.
+	exact: (optional) Matches fields exactly.
+
+[b]Examples:[/b]
+	Adds the perk 'Deft hands II' by ID:
+	cheat_add_perk exact:b4b0c345-e8c3-4b9e-890a-e77549596131
+
+	Adds the perk 'Viper' perk by full name:
+	cheat_add_perk exact:Viper
+
+	Adds all perks with 'Hands' in their names:
+	cheat_add_perk any:Hands
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_add_potion_buff[/b][/size]
+Adds a potion buff to the player.
+
+[b]Arguments:[/b]
+	id: (required) The potion ID or all/part of potion name. Supported potions:
+      00 Saviour Schnapps
+      01 Aqua Vitalis
+      02 Embrocation
+      03 Bowman's Brew
+      04 Padfoot
+      05 Nighthawk
+      06 Bard
+      07 Aesop
+      08 Chamomile Brew
+      09 Marigold Deoction
+      10 Hair o' the Dog
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_add_skill_levels[/b][/size]
+Adds levels to a player's skill.
+ WARNING: A skill's level cannot lowered once set.
+
+[b]Arguments:[/b]
+	exact: (optional) Matches fields exactly.
+	any: (optional) Matches fields partially.
+	levels: (required number) The levels to add to the skill (max 30). Level cannot lowered.
+
+[b]Examples:[/b]
+	Add 5 levels to player's marksmanship.:
+	cheat_add_skill_levels exact:marksmanship levels:5
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_add_stat_levels[/b][/size]
+Adds levels to a player's stat.
+ WARNING: A stat's level cannot lowered once set.
+
+[b]Arguments:[/b]
+	stat: (required) One of: strength, agility, vitality, or speech.
+	levels: (required number) The levels to add to the stat (max 30). Level cannot lowered.
+
+[b]Examples:[/b]
+	Add 5 levels to player's strength.:
+	cheat_add_stat_levels stat:str levels:5
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_alias[/b][/size]
+Creates an alias for a cheat command.
+
+[b]Arguments:[/b]
+	name: (required) Name of the new command.
+	target: (required) Existing cheat command to execute.
+
+[b]Examples:[/b]
+	Alias cheat_teleport_to_checkpoint to 'cgoto':
+	cheat_alias name:cgoto target:cheat_teleport_to_checkpoint
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_backup_inventory[/b][/size]
+Saves inventory to temporary mod memory which remains even on the main menu screen.
+Use to avoid situations where game mechanics causes lose of your inventory,
+moving items between game saves, or for New Game+ item transfers.
+Use cheat_restore_inventory to restore the backup.
+WARNING: cheat_restore_inventory cannot restore quest items and quality 4 items.
+
+
+[b]Examples:[/b]
+	Saves all items:
+	cheat_backup_inventory
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_charm[/b][/size]
+Automates your morning routine of bath-haircut-sex for maximum Charisma bonus.
+Washes all dirt and blood and applies Fresh Cut and Smitten buffs.
+
+[b]Examples:[/b]
+	Wash yourself and add Charisma buffs:
+	cheat_charm
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_clip[/b][/size]
+Turns on player collision detection.
+
+[b]Examples:[/b]
+	Turn On:
+	cheat_clip
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_damage_gear[/b][/size]
+Damages weapons and armor.
+This can uneqip items so don't do this in combat.
+
+[b]Arguments:[/b]
+	quest: (optional boolean) If true, attempt damaging quest items.
+	condition: (optional number) The item condition to apply between 0 and 100. Default 50.
+	quality: (optional number) The item quality. Defaults to, and cannot exceed, the item's max quality or quality 3.
+
+[b]Examples:[/b]
+	Damage gear to 25%:
+	cheat_damage_gear condition:25
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_find_buffs[/b][/size]
+Find, and logs, all matching buffs.
+
+[b]Arguments:[/b]
+	any: (optional) Matches fields partially.
+	exact: (optional) Matches fields exactly.
+
+[b]Examples:[/b]
+	Show all buffs:
+	cheat_find_buffs
+
+	Show all buffs with 'heal' in their name:
+	cheat_find_buffs any:heal
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_find_items[/b][/size]
+Perform case-insensitive search for items by ID and localized name.
+
+[b]Arguments:[/b]
+	any: (optional) Matches fields partially.
+	exact: (optional) Matches fields exactly.
+
+[b]Examples:[/b]
+	Show all items:
+	cheat_find_items
+
+	Matches items with 'long-range arrow' in their names:
+	cheat_find_items any:long-range arrow
+
+	Matches item named 'long-range arrow':
+	cheat_find_items exact:long-range arrow
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_find_npc[/b][/size]
+Finds NPCs loaded into the world.
+
+[b]Arguments:[/b]
+	exact: (optional) Matches fields exactly.
+	any: (optional) Matches fields partially.
+	radius: (optional number) The search radius around player.
+
+[b]Examples:[/b]
+	Find any NPC with 'hunt' in name:
+	cheat_find_npc any:hunt
+
+	Find NPC with name exact matching 'Bara':
+	cheat_find_npc exact:bara
+
+	Find all NPCs near player.:
+	cheat_find_npc radius:5
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_find_perks[/b][/size]
+Displays all perks that match the given query.
+NOTE: This command shows all perks in the database.
+Some perks may be part of quests or other game
+mechanics or not intented for the player to use.
+
+[b]Arguments:[/b]
+	any: (optional) Matches fields partially.
+	exact: (optional) Matches fields exactly.
+
+[b]Examples:[/b]
+	Show all perks:
+	cheat_find_perks
+
+	Shows all perks with 'Hands' in their names:
+	cheat_find_perks any:Hands
+
+	Shows the perk named 'Viper II':
+	cheat_find_perks exact:Viper II
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_find_skills[/b][/size]
+Displays skills matching the given query.
+
+[b]Arguments:[/b]
+	any: (optional) Matches fields partially.
+	exact: (optional) Matches fields exactly.
+
+[b]Examples:[/b]
+	Show all skills:
+	cheat_find_skills
+
+	Shows all skills with '?' in their names:
+	cheat_find_skills any:?
+
+	Shows the skill named '?':
+	cheat_find_skills exact:?
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_get_states[/b][/size]
+Displays the player's states.
+
+
+
+
+ 
+ 
+[size=4][b]cheat_get_time[/b][/size]
+Logs information about game time.
+
+[b]Examples:[/b]
+	Get game time:
+	cheat_get_time
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_horse_info[/b][/size]
+Shows information about targeted or owned horse.
+
+[b]Examples:[/b]
+	Show horse info:
+	cheat_horse_info
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_horse_inventory[/b][/size]
+Opens inventory of targeted or owned horse.
+
+[b]Examples:[/b]
+	Open horse inventory:
+	cheat_horse_inventory
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_horse_new[/b][/size]
+Create a horse for you if you don't already have one.
+
+[b]Examples:[/b]
+	A new horse:
+	cheat_horse_new
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_horse_own[/b][/size]
+Makes the currently targeted horse the player's horse.
+
+[b]Examples:[/b]
+	Takes ownership of the horse:
+	cheat_horse_own
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_horse_release[/b][/size]
+Releases your currently owned horse.
+
+[b]Examples:[/b]
+	Release horse:
+	cheat_horse_release
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_horse_teleport[/b][/size]
+Teleports your horse to you.
+
+[b]Examples:[/b]
+	Teleport your horse to you:
+	cheat_horse_teleport
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_horse_wash[/b][/size]
+Washes targeted or owned horse.
+
+[b]Examples:[/b]
+	Wash the horse:
+	cheat_horse_wash
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_inventory[/b][/size]
+Opens the targeted or matching NPC's inventory.
+
+[b]Arguments:[/b]
+	any: (optional) Matches fields partially.
+	exact: (optional) Matches fields exactly.
+
+[b]Examples:[/b]
+	Open a random horse's inventory:
+	cheat_inventory any:horse
+
+	Open Bara's inventory:
+	cheat_inventory exact:bara
+
+	Open inventory of current target:
+	cheat_inventory
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_kill[/b][/size]
+Kills the player's current target.
+
+
+
+
+ 
+ 
+[size=4][b]cheat_list_inventory[/b][/size]
+Lists your inventory.
+
+
+
+
+ 
+ 
+[size=4][b]cheat_loc[/b][/size]
+Shows player's world location.
+
+[b]Examples:[/b]
+	Type to console:
+	cheat_loc
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_localization[/b][/size]
+Controls localization of names.
+
+[b]Arguments:[/b]
+	enable: (required boolean) If true, localized naming will be used.
+
+[b]Examples:[/b]
+	Enable localized names:
+	cheat_localization enable:true
+
+	Disable localized names:
+	cheat_localization enable:false
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_mass_kill[/b][/size]
+Kills all the killable entities within the given radius of the player.
+
+[b]Arguments:[/b]
+	exact: (optional) Matches fields exactly.
+	any: (optional) Matches fields partially.
+	radius: (optional number) The kill radius around player. Default 10.
+
+[b]Examples:[/b]
+	Kill everything within 200 units of player:
+	cheat_mass_kill radius:200
+
+	Kill Bara:
+	cheat_mass_kill exact:bara
+
+	Kills all bandits near the player:
+	cheat_mass_kill any:bandit radius:20
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_no_clip[/b][/size]
+Turns off player collision detection.
+
+[b]Examples:[/b]
+	Turn Off:
+	cheat_no_clip
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_no_door_lockpicking[/b][/size]
+Bypass door lockpicking but consumes a lockpick.
+Restarting the game reverts this effect.
+
+[b]Arguments:[/b]
+	nolockpicks: (optional boolean) If true, lockpicks are not required to bypass minigamee.
+
+[b]Examples:[/b]
+	Turn off lockpicking minigame on doors:
+	cheat_no_door_lockpicking
+
+	Turn off lockpicking minigame on doors and disable lockpick requirement:
+	cheat_no_door_lockpicking nolockpicks:true
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_no_lockpicking[/b][/size]
+Bypass door and stash lockpicking but consumes a lockpick.
+Restarting the game reverts this effect.
+
+[b]Arguments:[/b]
+	nolockpicks: (optional boolean) If true, lockpicks are not required to bypass minigamee.
+
+[b]Examples:[/b]
+	Turn off lockpicking minigames on doors and stashes:
+	cheat_no_lockpicking
+
+	Turn off lockpicking minigames on doors and stashes and disable lockpick requirement:
+	cheat_no_lockpicking nolockpicks:true
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_no_pickpocketing[/b][/size]
+Bypass pickpocketing minigame, however NPCs can still notice you committing a crime.
+Restarting the game reverts this effect.
+
+[b]Examples:[/b]
+	Turn off pickpocketing minigame:
+	cheat_no_pickpocketing
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_no_stash_lockpicking[/b][/size]
+Bypass stash lockpicking but consumes a lockpick.
+Restarting the game reverts this effect.
+
+[b]Arguments:[/b]
+	nolockpicks: (optional boolean) If true, lockpicks are not required to bypass minigamee.
+
+[b]Examples:[/b]
+	Turn off lockpicking minigame on stashes:
+	cheat_no_stash_lockpicking
+
+	Turn off lockpicking minigame on stashes and disable lockpick requirement:
+	cheat_no_stash_lockpicking nolockpicks:true
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_own_stolen_items[/b][/size]
+Makes you the owner of all stolen items in your inventory.
+This removes the stolen flag from the item.
+
+[b]Examples:[/b]
+	Take ownership of stolen items:
+	cheat_own_stolen_items
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_phys_hover[/b][/size]
+Uses the physics system to make the player hover.
+This is a toggle command.
+This command is intended to be bound to a key.
+
+
+
+
+ 
+ 
+[size=4][b]cheat_phys_push[/b][/size]
+Uses the physics system to push the player in the direction they are looking.
+This is a toggle command.
+This command is intended to be bound to a key.
+
+
+
+
+ 
+ 
+[size=4][b]cheat_phys_sprint[/b][/size]
+Uses the physics system to push the player in the direction they are looking (and down for friction).
+This is a toggle command.
+This command is intended to be bound to a key.
+
+
+
+
+ 
+ 
+[size=4][b]cheat_remove_all_buffs[/b][/size]
+Removes all buffs from the player.
+
+[b]Examples:[/b]
+	Remove all buffs:
+	cheat_remove_all_buffs
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_remove_all_perks[/b][/size]
+Removes all possible perks from the player.
+This commands 1st calls cheat_reset_perks to remove visible perks and refund perk points.
+Then we attempt to remove each perk from the perk database from the player.
+There is no way to know what perks were removed.
+Some perks may be part of quests or other game mechanics or not intented for the player to use.
+
+[b]Arguments:[/b]
+	i_know_what_i_am_doing: (required boolean) Enables this command.
+
+[b]Examples:[/b]
+	Remove all perks:
+	cheat_remove_all_perks
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_remove_buff[/b][/size]
+Removes matching buffs from the player.
+
+[b]Arguments:[/b]
+	any: (optional) Matches fields partially.
+	exact: (optional) Matches fields exactly.
+
+[b]Examples:[/b]
+	Removes all buffs with 'heal' in the name:
+	cheat_remove_buff any:heal
+
+	Removes the buff poor_hearing buff by ID:
+	cheat_remove_buff exact:29336a21-dd76-447b-a4f0-94dd6b9db466
+
+	Removes the buff healthEatSleep_instant buff by full name:
+	cheat_remove_buff exact:healthEatSleep_instant
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_remove_buff_immortal[/b][/size]
+Removes the buffs making the player immortal.
+
+[b]Examples:[/b]
+	Remove immortality:
+	cheat_remove_buff_immortal
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_remove_buff_invisible[/b][/size]
+Removes invisible buff from player.
+
+[b]Examples:[/b]
+	Remove invisible buff from player:
+	cheat_remove_buff_invisible
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_remove_item[/b][/size]
+Removes an item to the player's inventory.
+
+[b]Arguments:[/b]
+	exact: (optional) Matches fields exactly.
+	amount: (optional number) The number of items to remove. Default 1.
+	bulk: (optional boolean) If true, all matches items are removed.
+	any: (optional) Matches fields partially.
+	quest: (optional boolean) If true, attempt removing quest items.
+
+[b]Examples:[/b]
+	Removes the last item with 'bow' in its name:
+	cheat_remove_item id:bow
+
+	Removes the item ui_nm_arrow_hunter by ID:
+	cheat_remove_item id:802507e9-d620-47b5-ae66-08fcc314e26a
+
+	Removes 10 items ui_nm_arrow_hunter by fullname:
+	cheat_remove_item id:ui_nm_arrow_hunter amount:10
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_remove_items[/b][/size]
+Removes all items in the player's inventory.
+THIS DELETES YOUR INVENTORY! Move items you want to a stash first.
+
+[b]Arguments:[/b]
+	quest: (optional boolean) If true, attempt removing quest items.
+
+[b]Examples:[/b]
+	Delete your inventory.:
+	cheat_remove_items
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_remove_perk[/b][/size]
+Removes matching perks from the player.
+NOTE: It isn't possible to know exact what perks the player has or were added/removed.
+This command will just log the perks it tried to remove.
+Some perks may be part of quests or other game mechanics or not intented for the player to use.
+
+[b]Arguments:[/b]
+	i_know_what_i_am_doing: (required boolean) Enables this command.
+	any: (optional) Matches fields partially.
+	exact: (optional) Matches fields exactly.
+
+[b]Examples:[/b]
+	Removes the perk 'Deft hands II' by ID:
+	cheat_remove_perk exact:b4b0c345-e8c3-4b9e-890a-e77549596131
+
+	Removes the perk 'Viper' perk by full name:
+	cheat_remove_perk exact:Viper
+
+	Removes all perks with 'Hands' in their names:
+	cheat_remove_perk any:Hands
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_remove_stolen_items[/b][/size]
+Removes all stolen items from your inventory.
+
+[b]Examples:[/b]
+	Remove stolen items.:
+	cheat_remove_stolen_items
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_repair_gear[/b][/size]
+Repairs weapons and armor.
+This can uneqip items so don't do this in combat.
+
+[b]Arguments:[/b]
+	quest: (optional boolean) If true, attempt repairing quest items.
+	condition: (optional number) The item condition to apply between 0 and 100. Default 100.
+	quality: (optional number) The item quality. Defaults to, and cannot exceed, the item's max quality or quality 3.
+
+[b]Examples:[/b]
+	Repair gear to 75%.:
+	cheat_repair_gear condition:75
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_reset_perks[/b][/size]
+Added a buff that will removed all perks visible on the player's perk sheet.
+This will refund perk points, up to the max you're earned.
+
+
+
+
+ 
+ 
+[size=4][b]cheat_restore_inventory[/b][/size]
+Loads all items stored by cheat_backup_inventory in this game session.
+WARNING: cheat_restore_inventory cannot restore quest items and quality 4 items.
+
+
+[b]Examples:[/b]
+	Load all items:
+	cheat_restore_inventory
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_reveal_map[/b][/size]
+Add a perk to reveal the entire map.
+
+[b]Examples:[/b]
+	Reveal the entire map:
+	cheat_reveal_map
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_revive_npc[/b][/size]
+(Does not work yet) Revives dead NPCs by name or within the given radius of the player.
+
+[b]Arguments:[/b]
+	exact: (optional) Matches fields exactly.
+	any: (optional) Matches fields partially.
+	radius: (optional number) The resurrection radius around player. Default 5.
+
+[b]Examples:[/b]
+	Revive everything.:
+	cheat_revive_npc radius:200
+
+	Revive Father Godwin.:
+	cheat_revive_npc exact:bara
+
+	Revives all bandits near the player.:
+	cheat_revive_npc any:bandit radius:10
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_save[/b][/size]
+This instantly saves your game. No item requirements or save limits.
+
+[b]Examples:[/b]
+	Save your game:
+	cheat_save
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_set_bow_reticle[/b][/size]
+Enables or disables the bow reticle. Won't take effect if bow is drawn.
+
+[b]Arguments:[/b]
+	enable: (required boolean) true or false
+
+[b]Examples:[/b]
+	Turn it on:
+	cheat_set_bow_reticle enable:true
+
+	Turn it off:
+	cheat_set_bow_reticle enable:false
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_set_compass[/b][/size]
+Enables or disables the compass.
+
+[b]Arguments:[/b]
+	enable: (required boolean) true or false
+
+[b]Examples:[/b]
+	Turn it on:
+	cheat_set_compass enable:true
+
+	Turn it off:
+	cheat_set_compass enable:false
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_set_hud[/b][/size]
+Enables or disables the hud.
+
+[b]Arguments:[/b]
+	enable: (required boolean) true or false
+
+[b]Examples:[/b]
+	Turn it on:
+	cheat_set_hud enable:true
+
+	Turn it off:
+	cheat_set_hud enable:false
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_set_regen[/b][/size]
+Regenerates player health, stamina, hunger, or exhaust over time; pulses once per second.
+
+[b]Arguments:[/b]
+	enable: (required boolean) true to enable state regen; false to disable
+	state: (required) The state to regen: all, health, stamina, or exhaust.
+	amount: (optional number) The amount to regen every second. (Default 1)
+
+[b]Examples:[/b]
+	Adds 5 to all states every second.:
+	cheat_set_regen enable:true state:all amount:5
+
+	Adds 5 to player's health every second.:
+	cheat_set_regen enable:true state:health amount:5
+
+	Disable all state regeneration.:
+	cheat_set_regen enable:false state:all
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_set_skill_level[/b][/size]
+Sets player's skill to the given level.
+
+[b]Arguments:[/b]
+	exact: (optional) Matches fields exactly.
+	any: (optional) Matches fields partially.
+	level: (required number) The desired level for the given skill (max 30).
+
+[b]Examples:[/b]
+	Set player's lockpicking skill to level 20:
+	cheat_set_skill_level exact:lockpicking level:20
+
+	Set player's bow skill to level 20:
+	cheat_set_skill_level exact:18 level:20
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_set_stat_level[/b][/size]
+Sets one of the player's stats to the given level.
+ WARNING: A stat's level cannot lowered once set.
+
+[b]Arguments:[/b]
+	stat: (required) One of: strength, agility, vitality, or speech.
+	level: (required number) The desired level for the given stat (max 30).
+
+[b]Examples:[/b]
+	Set player's strength to level 20:
+	cheat_set_stat_level stat:strength level:20
+
+	Set player's agility to level 5:
+	cheat_set_stat_level stat:agility level:5
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_set_state[/b][/size]
+Sets one of the player's states to the given value.
+Valid states are: health, stamina, exhaust, hunger, and alcoholism.
+
+[b]Arguments:[/b]
+	state: (required) The state to set.
+	value: (required number) The number to assign to the given state.
+
+[b]Examples:[/b]
+	Set health to 100 points:
+	cheat_set_state state:health value:100
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_set_statusbar[/b][/size]
+Enables or disables the statusbar.
+
+[b]Arguments:[/b]
+	enable: (required boolean) true or false
+
+[b]Examples:[/b]
+	Turn it on:
+	cheat_set_statusbar enable:true
+
+	Turn it off:
+	cheat_set_statusbar enable:false
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_set_third_person[/b][/size]
+Enables or disables the third person view.
+
+[b]Arguments:[/b]
+	enable: (required boolean) true or false
+
+[b]Examples:[/b]
+	Turn it on:
+	cheat_set_third_person enable:true
+
+	Turn it off:
+	cheat_set_third_person enable:false
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_set_time[/b][/size]
+Moved time forward the given number of hours.
+
+[b]Arguments:[/b]
+	hours: (required number) The number of hours.
+
+[b]Examples:[/b]
+	Move 5 hours forward:
+	cheat_set_time hours:5
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_set_time_speed[/b][/size]
+Set the game time speed as a ratio between real time and game time.
+A high ratio, like 1000, is faster. Default is 15.
+
+[b]Arguments:[/b]
+	ratio: (required number) The ratio between real time and game time. Default 15.
+
+[b]Examples:[/b]
+	Speed up game time:
+	cheat_set_time_speed ratio:1000
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_set_weather[/b][/size]
+Sets the weather to the given weather ID.
+ 1 = cloudless_sunny         2 = cloudless_sunny_B             3 = semicloudy_clear          
+ 4 = semicloudy_clear_B      5 = cloudy_no_rain                6 = cloudy_no_rain_B          
+ 7 = cloudy_no_rain_C        8 = cloudy_frequent_showers       9 = cloudy_frequent_showers_B 
+10 = foggy_drizzly_light    11 = foggy_drizzly                12 = foggy_drizzly_B           
+13 = foggy_storm            14 = foggy_storm_B                15 = foggy_storm_no_rain       
+16 = dream                  17 = x_enviro_probe_burnin        18 = q_M01_M02_dreamy_moonlight
+19 = q_M02_dark_woods       20 = q_M10_Godwin_intermission    21 = q_M12_Apolena_night       
+22 = q_M12_Trosky           23 = q_M31_Suchdol_arrival        24 = q_M44_Burning_Maleshov    
+25 = q_M48_foggy_no_rain    26 = q_M50_desperate_defence      27 = q_S31_storm_no_rain       
+28 = q_S50_Tonies           29 = q_dream                      30 = x_UI_tod                  
+31 = summer_overcast        32 = summer_overcast_B            33 = summer_overcast_B_no_rain 
+
+
+[b]Arguments:[/b]
+	id: (required number) The weather type ID.
+	transition: (optional number) The number of real world seconds to transition the weather. Default 30.
+
+[b]Examples:[/b]
+	Set weather to foggy storm:
+	cheat_set_weather id:6
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_spawn[/b][/size]
+(Working in progress) Spawns entities. Enter the ID (number) from this list:
+ 1 = Boar        2 = Pig          3 = Bull    
+ 4 = Cow         5 = Hare         6 = Horse   
+ 7 = Men         8 = Women        9 = Red Doe 
+10 = Roe Doe    11 = Red Stag    12 = Roe Buck
+13 = Sheep      14 = Ram         15 = Wild Dog
+16 = Dog        17 = Wolf        
+
+
+[b]Arguments:[/b]
+	id: (required number) The spawn type ID.
+	radius: (optional number) The spawn radius around the player. Default 10.
+	count: (optional number) Number of things to spawn. Default 1.
+
+[b]Examples:[/b]
+	Spawn 10 bandits:
+	cheat_spawn id:pig count:10
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_stash[/b][/size]
+Opens your master stash by default. Can open any stash.
+
+[b]Arguments:[/b]
+	index: (optional number) The stash index.
+	exact: (optional) Matches fields exactly.
+	any: (optional) Matches fields partially.
+	type: (optional number) The stash type: 1=master(default), 2=owned, 3=world
+
+[b]Examples:[/b]
+	Open your master stash:
+	cheat_stash
+
+	Open your 1st owned stash:
+	cheat_stash type:2 index:1
+
+	Open 1st world stash:
+	cheat_stash type:3 index:1
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_target[/b][/size]
+shows information about your current target.
+
+
+
+
+ 
+ 
+[size=4][b]cheat_teleport[/b][/size]
+Teleports the player to the given (x,y,z) coordinates.
+Save and use immortality to avoid instant death when teleporting to unknow locations.
+Supports any format in x,y,z order. 1 2 3 | 1,2,3 | x:1 y:2 z:3
+
+[b]Examples:[/b]
+	Type to console:
+	cheat_teleport 2460 1995 112
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_teleport_npc_to_loc[/b][/size]
+Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locations.
+
+[b]Arguments:[/b]
+	y: (required number) Y coordinate.
+	exact: (optional) Matches fields exactly.
+	z: (required number) Z coordinate.
+	max: (optional number) The maximum NPCs to teleport. Default 1.
+	radius: (optional number) The teleport radius around the x,y,z target. Default 1.5.
+	any: (optional) Matches fields partially.
+	x: (required number) X coordinate.
+
+[b]Examples:[/b]
+	Teleport Bara to somewhere...:
+	cheat_teleport_npc_to_loc exact:Bara x:2344 y:2052 z:108
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_teleport_npc_to_player[/b][/size]
+Teleports one or more NPCs to the player's location.
+
+[b]Arguments:[/b]
+	max: (optional number) The maximum NPCs to teleport. Default 1.
+	exact: (optional) Matches fields exactly.
+	any: (optional) Matches fields partially.
+	radius: (optional number) The teleport radius around the player. Default 1.5
+
+[b]Examples:[/b]
+	Teleport Bara to the player.:
+	cheat_teleport_npc_to_player exact:bara
+
+	Teleport all bandits to the player.:
+	cheat_teleport_npc_to_player any:bandit radius:50
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_teleport_to_checkpoint[/b][/size]
+Teleport to your map checkpoint. Open your map and right click to place a checkpoint (red flag).
+
+
+
+
+ 
+ 
+[size=4][b]cheat_teleport_to_npc[/b][/size]
+Finds an NPC or list of NPCs and teleports to any of them.
+This only works if the NPC has been loaded into the world.
+Defaults to last NPC in the list if no num argument received.
+
+[b]Arguments:[/b]
+	any: (optional) Matches fields partially.
+	exact: (optional) Matches fields exactly.
+
+[b]Examples:[/b]
+	Teleport to Bara:
+	cheat_teleport_to_npc exact:bara
+
+
+
+
+
+ 
+ 
+[size=4][b]cheat_wash_dirt_and_blood[/b][/size]
+Washes all blood and dirt from the player.
+
+[b]Examples:[/b]
+	Wash yourself and your horse:
+	cheat_wash_dirt_and_blood
