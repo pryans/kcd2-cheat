@@ -1482,8 +1482,8 @@ Sets the weather to the given weather ID.
 	count: (optional number) Number of things to spawn. Default 1.
 
 [b]Examples:[/b]
-	Spawn 10 bandits:
-	cheat_spawn id:pig count:10
+	Spawn 5 pigs within radius 3 of player:
+	cheat_spawn id:2 count:5 radius:3
 
 
 

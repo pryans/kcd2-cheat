@@ -645,7 +645,7 @@ Cheat:createCommand("cheat_spawn", {
         radius = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 10, showHelp, "The spawn radius around the player. Default 10.") end
     },
     "(Working in progress) Spawns entities. Enter the ID (number) from this list:\n" .. Cheat:formatArrayAsList(Cheat.g_soul_category_keys, 3),
-    "Spawn 10 bandits", "cheat_spawn id:pig count:10")
+    "Spawn 5 pigs within radius 3 of player", "cheat_spawn id:2 count:5 radius:3")
 function Cheat:cheat_spawn(c)
     if not Cheat.g_soul_category_keys[c.id] then
         Cheat:logError("Spawn type ID [%s] does not exist.", tostring(c.id))
