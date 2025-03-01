@@ -59,6 +59,8 @@ Cheat.g_item_database_lookup = nil
 Cheat.g_item_database_search_fields = { "id", "lname", "name" }
 Cheat.g_item_database_skip_tags = { Image = true, DocumentContent = true, Phase = true, ItemClasses = true, NPCTool = true, database = true }
 Cheat.g_item_database_errors = 0
+Cheat.g_item_database_warnings = 0
+Cheat.g_item_database_initializing = false
 Cheat.g_item_database_aliases = {}
 
 Cheat.g_item_category_map = {
@@ -148,52 +150,48 @@ Cheat.g_item_health_quality_ranges[4] = {
     { min = (6 / 10) + 0.00000001, max = 10 / 10 },
 }
 
-function Cheat:initItemDatabase()
-    Cheat.g_item_database = {}
-    Cheat.g_item_database_lookup = {}
+local p_func = function (tag, attributes)
+    if not Cheat.g_item_database_skip_tags[tag] then
+        if tag and attributes and attributes["Id"] and attributes["Name"] then
+            -- Xml DB uses init caps, lowercase all the keys
+            local item = Cheat:lowercaseTableKeys(attributes)
 
-    local p_func = function (tag, attributes)
-        if not Cheat.g_item_database_skip_tags[tag] then
-            if tag and attributes and attributes["Id"] and attributes["Name"] then
-                -- Xml DB uses init caps, lowercase all the keys
-                local item = Cheat:lowercaseTableKeys(attributes)
-
-                -- ensure we haven't loaded this iteam already
-                if not Cheat.g_item_database_lookup[item.id] then
-                    local category_id = Cheat.g_item_category_map[tag]
-                    if category_id then
-                        item["category_name"] = tag
-                        item["category_id"] = category_id
-                        table.insert(Cheat.g_item_database, item)
-                        --Cheat:logDebug("Adding item: %s:: %s", tag, Cheat:serializeTable(item))
-                        Cheat.g_item_database_lookup[item.id] = item
-                        return true
-                    else
-                        Cheat:logError("Item id [%s] has no category_id for [%s]", item.id, tag)
-                        Cheat.g_item_database_errors = Cheat.g_item_database_errors + 1
+            -- ensure we haven't loaded this iteam already
+            if not Cheat.g_item_database_lookup[item.id] then
+                local category_id = Cheat.g_item_category_map[tag]
+                if category_id then
+                    item["category_name"] = tag
+                    item["category_id"] = category_id
+                    table.insert(Cheat.g_item_database, item)
+                    if not Cheat.g_item_database_initializing then
+                        Cheat:logInfo("Adding item: %s:: %s", tag, Cheat:serializeTable(item))
                     end
+                    Cheat.g_item_database_lookup[item.id] = item
+                    return true
                 else
-                    Cheat:logError("Item id [%s] is duplicated.", item.id)
+                    Cheat:logError("Item id [%s] has no category_id for [%s]", item.id, tag)
                     Cheat.g_item_database_errors = Cheat.g_item_database_errors + 1
                 end
             else
-                Cheat:logError("Skipping item: %s:: %s", tag, Cheat:serializeTable(attributes))
-                Cheat.g_item_database_errors = Cheat.g_item_database_errors + 1
+                Cheat:logWarn("Skipping duplicated item id [%s].", item.id)
+                Cheat.g_item_database_warnings = Cheat.g_item_database_warnings + 1
             end
+        else
+            Cheat:logWarn("Skipping item: %s:: %s", tag, Cheat:serializeTable(attributes))
+            Cheat.g_item_database_warnings = Cheat.g_item_database_warnings + 1
         end
-        return false
+    end
+    return false
+end
+
+function Cheat:loadItemDatabaseFile(filename)
+    if Cheat.g_item_database_initializing then
+        Cheat:logDebug("Loading item database file [%s] ...", filename)
+    else
+        Cheat:logInfo("Loading item database file [%s] ...", filename)
     end
 
-    -- seems like there are bunch of items in different xml files now ...
-    Cheat:xmlLoadDatabase("libs/tables/item/item.xml", p_func)
-    Cheat:xmlLoadDatabase("libs/tables/item/item__system.xml", p_func)
-    Cheat:xmlLoadDatabase("libs/tables/item/item__rewards.xml", p_func)
-    Cheat:xmlLoadDatabase("libs/tables/item/item__horse.xml", p_func)
-    Cheat:xmlLoadDatabase("libs/tables/item/item__aux.xml", p_func)
-    Cheat:xmlLoadDatabase("libs/tables/item/item__alchemy.xml", p_func)
-    --Cheat:xmlLoadDatabase("libs/tables/item/item__autotests.xml", p_func)
-    Cheat:xmlLoadDatabase("libs/tables/item/item__test.xml", p_func) -- Tin Doppelganger Badge part of normal gameplay
-    Cheat:xmlLoadDatabase("libs/tables/item/item__unique.xml", p_func)
+    Cheat:xmlLoadDatabase(filename, p_func)
 
     for _, item in pairs(Cheat.g_item_database) do
         -- Resolve ItemAlias to real items
@@ -242,11 +240,41 @@ function Cheat:initItemDatabase()
         item["lname"] = Cheat:getLocalizedItemName(item)
     end
 
-    if Cheat.g_item_database_errors == 0 then
-        Cheat:logDebug("Done loading XML item databases.")
+    if Cheat.g_item_database_initializing then
+        Cheat:logDebug("Done loading item database file [%s].", filename)
     else
-        Cheat:logError("Found [%d] errors while loading item XML databases.", Cheat.g_item_database_errors)
+        Cheat:logInfo("Done loading item database file [%s].", filename)
     end
+end
+
+function Cheat:initItemDatabase()
+    Cheat.g_item_database = {}
+    Cheat.g_item_database_lookup = {}
+    Cheat.g_item_database_errors = 0
+    Cheat.g_item_database_warnings = 0
+    Cheat.g_item_database_initializing = true
+
+    Cheat:loadItemDatabaseFile("libs/tables/item/item.xml")
+    Cheat:loadItemDatabaseFile("libs/tables/item/item__system.xml")
+    Cheat:loadItemDatabaseFile("libs/tables/item/item__rewards.xml")
+    Cheat:loadItemDatabaseFile("libs/tables/item/item__horse.xml")
+    Cheat:loadItemDatabaseFile("libs/tables/item/item__aux.xml")
+    Cheat:loadItemDatabaseFile("libs/tables/item/item__alchemy.xml")
+    Cheat:loadItemDatabaseFile("libs/tables/item/item__test.xml") -- Tin Doppelganger Badge part of normal gameplay
+    Cheat:loadItemDatabaseFile("libs/tables/item/item__unique.xml")
+
+    if Cheat.g_item_database_warnings > 0 then
+        Cheat:logWarn("Found [%d] warnings while loading item XML databases.", Cheat.g_item_database_warnings)
+        Cheat.g_item_database_warnings = 0
+    end
+
+    if Cheat.g_item_database_errors > 0 then
+        Cheat:logError("Found [%d] errors while loading item XML databases.", Cheat.g_item_database_errors)
+        Cheat.g_item_database_errors = 0
+    end
+
+    Cheat.g_item_database_initializing = false
+    Cheat:logDebug("Done loading XML item databases.")
 end
 
 ---Converts condition to health.
@@ -823,6 +851,18 @@ function Cheat:cheat_find_items(c)
 
     Cheat:logInfo("Found [%s] items for search [%s].", tostring(#items), Cheat:serializeTable(searchOperation))
     return true, items
+end
+
+-- ============================================================================
+-- cheat_load_mod_items
+-- ============================================================================
+Cheat:createCommand("cheat_load_mod_items", {
+        file = function (args, name, showHelp) return Cheat:argsGetRequired(args, name, showHelp, "The item XML file to load.") end
+    },
+    "Loads an item XML file from an another mod's pak file.",
+    "Load 'Equippable Lantern' mod's item XML file", "cheat_load_mod_items file:libs/tables/item/item__equippablelantern.xml")
+function Cheat:cheat_load_mod_items(c)
+    Cheat:loadItemDatabaseFile(c.file)
 end
 
 -- ============================================================================
