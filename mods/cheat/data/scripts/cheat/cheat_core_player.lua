@@ -350,11 +350,12 @@ Cheat:createCommand("cheat_wash", nil,
 function Cheat:cheat_wash()
     local target = Cheat:getTargetedEntity()
     if target and target.actor then
+        Cheat:logInfo("Washing targeted: %s", Cheat:getEntityDisplayText(target))
         target.actor:WashDirtAndBlood(1, 1)
     else
         player.actor:WashDirtAndBlood(1, 1)
+        Cheat:logInfo("Washing self, All Clean!")
     end
-    Cheat:logInfo("All Clean!")
     return true
 end
 
@@ -538,11 +539,13 @@ function Cheat:test_core_player()
     Cheat:beginTests("test_core_player")
 
     -- cheat_loc
-    local loc = Cheat:cheat_loc()
+    local loc = Cheat:proxy("cheat_loc")
     Cheat:testAssert("loc 1", loc ~= nil)
-    Cheat:testAssert("loc 2", loc.x ~= nil and loc.x ~= 0)
-    Cheat:testAssert("loc 3", loc.y ~= nil and loc.y ~= 0)
-    Cheat:testAssert("loc 4", loc.z ~= nil)
+    if loc then
+        Cheat:testAssert("loc 2", loc.x ~= nil and loc.x ~= 0)
+        Cheat:testAssert("loc 3", loc.y ~= nil and loc.y ~= 0)
+        Cheat:testAssert("loc 4", loc.z ~= nil)
+    end
 
     -- cheat_add_money
     Cheat:testAssertFalse("money invalid 1", Cheat:proxy("cheat_add_money", ""))
@@ -634,10 +637,10 @@ function Cheat:test_core_player()
     Cheat:testAssert("cheat_set_regen enable all", Cheat:proxy("cheat_set_regen", "enable:true state:all amount:5"))
 
     -- cheat_wash
-    Cheat:testAssert("cheat_wash", Cheat:cheat_wash())
+    Cheat:testAssert("cheat_wash", Cheat:proxy("cheat_wash"))
 
     -- cheat_charm
-    Cheat:testAssert("cheat_charm", Cheat:cheat_charm())
+    Cheat:testAssert("cheat_charm", Cheat:proxy("cheat_charm"))
 
     Cheat:endTests()
 end
