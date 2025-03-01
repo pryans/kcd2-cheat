@@ -795,29 +795,21 @@ end
 -- ============================================================================
 -- cheat_find_items
 -- ============================================================================
-Cheat.cheat_find_items_args = {
-    any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
-    exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
-}
-Cheat:createCommandLegacy("cheat_find_items", "Cheat:cheat_find_items(%line)", Cheat.cheat_find_items_args,
+Cheat:createCommand("cheat_find_items", {
+        any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+        exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
+    },
     "Perform case-insensitive search for items by ID and localized name.",
     "Show all items", "cheat_find_items",
     "Matches items with 'long-range arrow' in their names", "cheat_find_items any:long-range arrow",
     "Matches item named 'long-range arrow'", "cheat_find_items exact:long-range arrow"
 )
-function Cheat:cheat_find_items(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_find_items_args)
-    local any, anyErr = Cheat:argsGet(args, "any")
-    local exact, exactErr = Cheat:argsGet(args, "exact")
-    if anyErr or exactErr then
-        return false, nil
-    end
-
+function Cheat:cheat_find_items(c)
     local searchOperation = nil
-    if exact then
-        searchOperation = { exact = true, searchKey = exact }
-    elseif any then
-        searchOperation = { exact = false, searchKey = any }
+    if c.exact then
+        searchOperation = { exact = true, searchKey = c.exact }
+    elseif c.any then
+        searchOperation = { exact = false, searchKey = c.any }
     end
 
     local items = Cheat:findItems(searchOperation)
@@ -836,38 +828,25 @@ end
 -- ============================================================================
 -- cheat_add_item
 -- ============================================================================
-Cheat.cheat_add_item_args = {
-    any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
-    exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
-    amount = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The number of items to add. Default 1.") end,
-    condition = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 100, showHelp, "The condition of the item added. Default 100.") end,
-    quality = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The quality of the item added (1-3). Defaults to item's max quality.") end,
-    bulk = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, all matches items are added.") end,
-    quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt adding quest items.") end
-}
-Cheat:createCommandLegacy("cheat_add_item", "Cheat:cheat_add_item(%line)", Cheat.cheat_add_item_args,
+Cheat:createCommand("cheat_add_item", {
+        any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+        exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
+        amount = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The number of items to add. Default 1.") end,
+        condition = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 100, showHelp, "The condition of the item added. Default 100.") end,
+        quality = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The quality of the item added (1-3). Defaults to item's max quality.") end,
+        bulk = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, all matches items are added.") end,
+        quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt adding quest items.") end
+    },
     "Adds an item to the player's inventory.",
     "Adds 1 item with 'bow' in anywhere in name", "cheat_add_item any:bow",
     "Adds 1 item with 'hunting arrow' anywhere in name", "cheat_add_item any:hunting arrow",
     "Adds 2 items exactly named 'military sword' with 50% condition", "cheat_add_item exact:military sword amount:10 condition:50")
-function Cheat:cheat_add_item(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_add_item_args, "cheat_add_item")
-    local any, anyErr = Cheat:argsGet(args, "any")
-    local exact, exactErr = Cheat:argsGet(args, "exact")
-    local amount, amountErr = Cheat:argsGet(args, "amount")
-    local condition, conditionErr = Cheat:argsGet(args, "condition")
-    local quality, qualityErr = Cheat:argsGet(args, "quality")
-    local bulk, bulkErr = Cheat:argsGet(args, "bulk")
-    local quest, questErr = Cheat:argsGet(args, "quest")
-    if anyErr or exactErr or amountErr or conditionErr or qualityErr or bulkErr or questErr then
-        return false
-    end
-
+function Cheat:cheat_add_item(c)
     local searchOperation = nil
-    if exact then
-        searchOperation = { exact = true, searchKey = exact }
-    elseif any then
-        searchOperation = { exact = false, searchKey = any }
+    if c.exact then
+        searchOperation = { exact = true, searchKey = c.exact }
+    elseif c.any then
+        searchOperation = { exact = false, searchKey = c.any }
     end
 
     if not searchOperation then
@@ -876,7 +855,7 @@ function Cheat:cheat_add_item(line)
         return false
     end
 
-    if bulk then
+    if c.bulk then
         local items = Cheat:findItems(searchOperation)
         if not items then
             Cheat:logError("Item [%s] not found.", Cheat:serializeTable(searchOperation))
@@ -884,11 +863,11 @@ function Cheat:cheat_add_item(line)
         end
 
         for _, item in ipairs(items) do
-            Cheat:addItem({ exact = true, searchKey = item.id }, amount, condition, quality, quest, true, true)
+            Cheat:addItem({ exact = true, searchKey = item.id }, c.amount, c.condition, c.quality, c.quest, true, true)
         end
         return true
     else
-        return Cheat:addItem(searchOperation, amount, condition, quality, quest, true, true)
+        return Cheat:addItem(searchOperation, c.amount, c.condition, c.quality, c.quest, true, true)
     end
 end
 
@@ -920,34 +899,23 @@ end
 -- ============================================================================
 -- cheat_remove_item
 -- ============================================================================
-Cheat.cheat_remove_item_args = {
-    any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
-    exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
-    amount = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The number of items to remove. Default 1.") end,
-    quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt removing quest items.") end,
-    bulk = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, all matches items are removed.") end,
-}
-Cheat:createCommandLegacy("cheat_remove_item", "Cheat:cheat_remove_item(%line)", Cheat.cheat_remove_item_args,
+Cheat:createCommand("cheat_remove_item", {
+        any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
+        exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
+        amount = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The number of items to remove. Default 1.") end,
+        quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt removing quest items.") end,
+        bulk = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, all matches items are removed.") end,
+    },
     "Removes an item to the player's inventory.",
     "Removes the last item with 'bow' in its name", "cheat_remove_item id:bow",
     "Removes the item ui_nm_arrow_hunter by ID", "cheat_remove_item id:802507e9-d620-47b5-ae66-08fcc314e26a",
     "Removes 10 items ui_nm_arrow_hunter by fullname", "cheat_remove_item id:ui_nm_arrow_hunter amount:10")
-function Cheat:cheat_remove_item(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_remove_item_args, "cheat_remove_item")
-    local any, anyErr = Cheat:argsGet(args, "any")
-    local exact, exactErr = Cheat:argsGet(args, "exact")
-    local amount, amountErr = Cheat:argsGet(args, "amount")
-    local bulk, bulkErr = Cheat:argsGet(args, "bulk")
-    local quest, questErr = Cheat:argsGet(args, "quest")
-    if anyErr or exactErr or amountErr or bulkErr or questErr then
-        return false
-    end
-
+function Cheat:cheat_remove_item(c)
     local searchOperation = nil
-    if exact then
-        searchOperation = { exact = true, searchKey = exact }
-    elseif any then
-        searchOperation = { exact = false, searchKey = any }
+    if c.exact then
+        searchOperation = { exact = true, searchKey = c.exact }
+    elseif c.any then
+        searchOperation = { exact = false, searchKey = c.any }
     end
 
     if not searchOperation then
@@ -956,7 +924,7 @@ function Cheat:cheat_remove_item(line)
         return false
     end
 
-    if bulk then
+    if c.bulk then
         local items = Cheat:findItems(searchOperation)
         if not items then
             Cheat:logError("Item [%s] not found.", Cheat:serializeTable(searchOperation))
@@ -964,36 +932,29 @@ function Cheat:cheat_remove_item(line)
         end
 
         for _, item in pairs(items) do
-            if Cheat:getItemCount(item.id) >= amount then
-                Cheat:removeItem({ exact = true, searchKey = item.id }, amount, quest, true, true)
+            if Cheat:getItemCount(item.id) >= c.amount then
+                Cheat:removeItem({ exact = true, searchKey = item.id }, c.amount, c.quest, true, true)
             end
         end
         return true
     else
-        return Cheat:removeItem(searchOperation, amount, quest, true, true)
+        return Cheat:removeItem(searchOperation, c.amount, c.quest, true, true)
     end
 end
 
 -- ============================================================================
 -- cheat_remove_items
 -- ============================================================================
-Cheat.cheat_remove_items_args = {
-    quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt removing quest items.") end
-}
-Cheat:createCommandLegacy("cheat_remove_items", "Cheat:cheat_remove_items(%line)", Cheat.cheat_remove_items_args,
+Cheat:createCommand("cheat_remove_items", {
+        quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt removing quest items.") end
+    },
     "Removes all items in the player's inventory.\n$4THIS DELETES YOUR INVENTORY! Move items you want to a stash first.",
     "Delete your inventory.", "cheat_remove_items")
-function Cheat:cheat_remove_items(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_add_item_args, "cheat_remove_items")
-    local quest, questErr = Cheat:argsGet(args, "quest")
-    if questErr then
-        return false
-    end
-
+function Cheat:cheat_remove_items(c)
     local itemsRemoved = 0
     local questItemsRemoved = 0
     for _, item in ipairs(Cheat:getUserItems()) do
-        if Cheat:removeItem({ exact = true, searchKey = item.id }, item.amount, quest, false, true) then
+        if Cheat:removeItem({ exact = true, searchKey = item.id }, item.amount, c.quest, false, true) then
             itemsRemoved = itemsRemoved + 1
             if item.isquestitem then
                 questItemsRemoved = questItemsRemoved + 1
@@ -1007,7 +968,7 @@ end
 -- ============================================================================
 -- cheat_remove_stolen_items
 -- ============================================================================
-Cheat:createCommandLegacy("cheat_remove_stolen_items", "Cheat:cheat_remove_stolen_items()", nil,
+Cheat:createCommand("cheat_remove_stolen_items", nil,
     "Removes all stolen items from your inventory.",
     "Remove stolen items.", "cheat_remove_stolen_items")
 function Cheat:cheat_remove_stolen_items()
@@ -1019,7 +980,7 @@ end
 -- ============================================================================
 -- cheat_own_stolen_items
 -- ============================================================================
-Cheat:createCommandLegacy("cheat_own_stolen_items", "Cheat:cheat_own_stolen_items()", nil,
+Cheat:createCommand("cheat_own_stolen_items", nil,
     "Makes you the owner of all stolen items in your inventory.\n$8This removes the stolen flag from the item.",
     "Take ownership of stolen items", "cheat_own_stolen_items")
 function Cheat:cheat_own_stolen_items()
@@ -1031,50 +992,34 @@ end
 -- ============================================================================
 -- cheat_repair_gear
 -- ============================================================================
-Cheat.cheat_repair_gear_args = {
-    condition = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 100, showHelp, "The item condition to apply between 0 and 100. Default 100.") end,
-    quality = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The item quality. Defaults to, and cannot exceed, the item's max quality or quality 3.") end,
-    quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt repairing quest items.") end
-}
-Cheat:createCommandLegacy("cheat_repair_gear", "Cheat:cheat_repair_gear(%line)", Cheat.cheat_repair_gear_args,
+Cheat:createCommand("cheat_repair_gear", {
+        condition = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 100, showHelp, "The item condition to apply between 0 and 100. Default 100.") end,
+        quality = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The item quality. Defaults to, and cannot exceed, the item's max quality or quality 3.") end,
+        quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt repairing quest items.") end
+    },
     "Repairs weapons and armor." ..
     "\n$4This can uneqip items so don't do this in combat.",
     "Repair gear to 75%.", "cheat_repair_gear condition:75")
-function Cheat:cheat_repair_gear(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_repair_gear_args, "cheat_repair_gear")
-    local condition, conditionErr = Cheat:argsGet(args, "condition")
-    local quality, qualityErr = Cheat:argsGet(args, "quality")
-    local quest, questErr = Cheat:argsGet(args, "quest")
-    if conditionErr or qualityErr or questErr then
-        return false
-    end
-    Cheat:recreateItems(Cheat:getUserItems(), "repairall", condition, quality, quest)
-    Cheat:logInfo("All items repaired to at least [%d] condition and [%s] quality.", condition, quality or "default")
+function Cheat:cheat_repair_gear(c)
+    Cheat:recreateItems(Cheat:getUserItems(), "repairall", c.condition, c.quality, c.quest)
+    Cheat:logInfo("All items repaired to at least [%d] condition and [%s] quality.", c.condition, c.quality or "default")
     return true
 end
 
 -- ============================================================================
 -- cheat_damage_gear
 -- ============================================================================
-Cheat.cheat_damage_gear_args = {
-    condition = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 50, showHelp, "The item condition to apply between 0 and 100. Default 50.") end,
-    quality = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The item quality. Defaults to, and cannot exceed, the item's max quality or quality 3.") end,
-    quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt damaging quest items.") end
-}
-Cheat:createCommandLegacy("cheat_damage_gear", "Cheat:cheat_damage_gear(%line)", Cheat.cheat_damage_gear_args,
+Cheat:createCommand("cheat_damage_gear", {
+        condition = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 50, showHelp, "The item condition to apply between 0 and 100. Default 50.") end,
+        quality = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, nil, showHelp, "The item quality. Defaults to, and cannot exceed, the item's max quality or quality 3.") end,
+        quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt damaging quest items.") end
+    },
     "Damages weapons and armor." ..
     "\n$4This can uneqip items so don't do this in combat.",
     "Damage gear to 25%", "cheat_damage_gear condition:25")
-function Cheat:cheat_damage_gear(line)
-    local args = Cheat:argsProcess(line, Cheat.cheat_damage_gear_args, "cheat_damage_gear")
-    local condition, conditionErr = Cheat:argsGet(args, "condition")
-    local quality, qualityErr = Cheat:argsGet(args, "quality")
-    local quest, questErr = Cheat:argsGet(args, "quest")
-    if conditionErr or qualityErr or questErr then
-        return false
-    end
-    Cheat:recreateItems(Cheat:getUserItems(), "damageall", condition, quality, quest)
-    Cheat:logInfo("All items damaged to at most [%d] condition and [%s] quality.", condition, quality or "default")
+function Cheat:cheat_damage_gear(c)
+    Cheat:recreateItems(Cheat:getUserItems(), "damageall", c.condition, c.quality, c.quest)
+    Cheat:logInfo("All items damaged to at most [%d] condition and [%s] quality.", c.condition, c.quality or "default")
     return true
 end
 
@@ -1095,7 +1040,7 @@ end
 -- ============================================================================
 -- cheat_backup_inventory
 -- ============================================================================
-Cheat:createCommandLegacy("cheat_backup_inventory", "Cheat:cheat_backup_inventory()", nil,
+Cheat:createCommand("cheat_backup_inventory", nil,
     "Saves inventory to temporary mod memory which remains even on the main menu screen.\n" ..
     "Use to avoid situations where game mechanics causes lose of your inventory,\n" ..
     "moving items between game saves, or for New Game+ item transfers.\n" ..
@@ -1129,7 +1074,7 @@ end
 -- ============================================================================
 -- cheat_restore_inventory
 -- ============================================================================
-Cheat:createCommandLegacy("cheat_restore_inventory", "Cheat:cheat_restore_inventory()", nil,
+Cheat:createCommand("cheat_restore_inventory", nil,
     "Loads all items stored by cheat_backup_inventory in this game session.\n" ..
     "$4WARNING: cheat_restore_inventory cannot restore quest items and quality 4 items.\n",
     "Load all items", "cheat_restore_inventory")
@@ -1238,34 +1183,34 @@ function Cheat:test_cheat_find_items()
     Cheat:testAssert("remove all items before testing", Cheat:getInventoryItemCount() == 0)
 
     -- cheat_find_items - no args
-    result, items = Cheat:cheat_find_items(nil)
+    result, items = Cheat:proxy("cheat_find_items", nil)
     Cheat:testAssert("cheat_find_items 1.1", result and items and #items > 0)
 
-    result, items = Cheat:cheat_find_items(" ")
+    result, items = Cheat:proxy("cheat_find_items", " ")
     Cheat:testAssert("cheat_find_items 1.2", result and items and #items > 0)
 
     -- cheat_find_items - any name
     Cheat:removeAllItems()
-    result, items = Cheat:cheat_find_items("any:long-range arrow")
+    result, items = Cheat:proxy("cheat_find_items", "any:long-range arrow")
     Cheat:testAssert("cheat_find_items any name 2.1", result and items and #items == 2)
     Cheat:testAssert("cheat_find_items any name 2.2", result and items and items[1].id == Cheat.g_enhanced_long_range_arrow_id)
     Cheat:testAssert("cheat_find_items any name 2.3", result and items and items[2].id == Cheat.g_long_ranged_arrow_id)
 
     -- cheat_find_items - any id
     Cheat:removeAllItems()
-    result, items = Cheat:cheat_find_items("any:" .. Cheat.g_enhanced_long_range_arrow_id)
+    result, items = Cheat:proxy("cheat_find_items", "any:" .. Cheat.g_enhanced_long_range_arrow_id)
     Cheat:testAssert("cheat_find_items any id 3.1", result and items and #items == 1)
     Cheat:testAssert("cheat_find_items any id 3.2", result and items and items[1].id == Cheat.g_enhanced_long_range_arrow_id)
 
     -- cheat_find_items - exact name
     Cheat:removeAllItems()
-    result, items = Cheat:cheat_find_items("exact:long-range arrow")
+    result, items = Cheat:proxy("cheat_find_items", "exact:long-range arrow")
     Cheat:testAssert("cheat_find_items exact name 4.1", result and items and #items == 1)
     Cheat:testAssert("cheat_find_items exact name 4.2", result and items and items[1].id == Cheat.g_long_ranged_arrow_id)
 
     -- cheat_find_items - exact id
     Cheat:removeAllItems()
-    result, items = Cheat:cheat_find_items("exact:" .. Cheat.g_enhanced_long_range_arrow_id)
+    result, items = Cheat:proxy("cheat_find_items", "exact:" .. Cheat.g_enhanced_long_range_arrow_id)
     Cheat:testAssert("cheat_find_items exact id 5.1", result and items and #items == 1)
     Cheat:testAssert("cheat_find_items exact id 5.2", result and items and items[1].id == Cheat.g_enhanced_long_range_arrow_id)
 end
@@ -1275,23 +1220,23 @@ function Cheat:test_cheat_add_item()
 
     -- cheat_add_item
     Cheat:removeAllItems()
-    Cheat:testAssertFalse("cheat_add_item invalid 1", Cheat:cheat_add_item())
-    Cheat:testAssertFalse("cheat_add_item invalid 2", Cheat:cheat_add_item(nil))
-    Cheat:testAssertFalse("cheat_add_item invalid 3", Cheat:cheat_add_item(""))
+    Cheat:testAssertFalse("cheat_add_item invalid 1", Cheat:proxy("cheat_add_item"))
+    Cheat:testAssertFalse("cheat_add_item invalid 2", Cheat:proxy("cheat_add_item", nil))
+    Cheat:testAssertFalse("cheat_add_item invalid 3", Cheat:proxy("cheat_add_item", ""))
 
     -- cheat_add_item defaults
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item bread id 1.1", Cheat:cheat_add_item("exact:" .. Cheat.g_bread_id .. ""))
+    Cheat:testAssert("cheat_add_item bread id 1.1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_bread_id .. ""))
     Cheat:testAssertEquals("cheat_add_item bread id 1.2", Cheat:getItemCount(Cheat.g_bread_id), 1)
 
     -- cheat_add_item with amount
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item bread id 2.1", Cheat:cheat_add_item("exact:" .. Cheat.g_bread_id .. " amount:2"))
+    Cheat:testAssert("cheat_add_item bread id 2.1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_bread_id .. " amount:2"))
     Cheat:testAssertEquals("cheat_add_item bread id 2.2", Cheat:getItemCount(Cheat.g_bread_id), 2)
 
     -- cheat_add_item with condition
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item bread id 3.1", Cheat:cheat_add_item("exact:" .. Cheat.g_bread_id .. " condition:50"))
+    Cheat:testAssert("cheat_add_item bread id 3.1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_bread_id .. " condition:50"))
     item = Cheat:getUserItem(Cheat.g_bread_id)
     Cheat:testAssert("cheat_add_item bread id 3.2", item and item.id == Cheat.g_bread_id)
     Cheat:testAssert("cheat_add_item bread id 3.3", item and item.amount == 1)
@@ -1299,49 +1244,49 @@ function Cheat:test_cheat_add_item()
 
     -- cheat_add_item with quality 1-4 items
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item quality1 1", Cheat:cheat_add_item("exact:" .. Cheat.g_quality1_item_1_id))
+    Cheat:testAssert("cheat_add_item quality1 1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_quality1_item_1_id))
     item = Cheat:getUserItem(Cheat.g_quality1_item_1_id)
     Cheat:testAssert("cheat_add_item quality1 2", item and item.amount == 1 and item.condition == 100 and item.quality == 1)
 
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item quality2 1", Cheat:cheat_add_item("exact:" .. Cheat.g_quality2_item_1_id))
+    Cheat:testAssert("cheat_add_item quality2 1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_quality2_item_1_id))
     item = Cheat:getUserItem(Cheat.g_quality2_item_1_id)
     Cheat:testAssert("cheat_add_item quality2 2", item and item.amount == 1 and item.condition == 100 and item.quality == 2)
 
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item quality3 1", Cheat:cheat_add_item("exact:" .. Cheat.g_quality3_item_1_id))
+    Cheat:testAssert("cheat_add_item quality3 1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_quality3_item_1_id))
     item = Cheat:getUserItem(Cheat.g_quality3_item_1_id)
     Cheat:testAssert("cheat_add_item quality3 2", item and item.amount == 1 and item.condition == 100 and item.quality == 3)
 
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item quality4 1", Cheat:cheat_add_item("exact:" .. Cheat.g_quality4_item_1_id))
+    Cheat:testAssert("cheat_add_item quality4 1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_quality4_item_1_id))
     item = Cheat:getUserItem(Cheat.g_quality4_item_1_id)
     Cheat:testAssert("cheat_add_item quality4 2", item and item.amount == 1 and item.condition == 100 and item.quality == 3)
 
     -- cheat_add_item with quality itemsd 1-4 and custom quality 1 condition 50
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item quality1 q1 c50 1", Cheat:cheat_add_item("exact:" .. Cheat.g_quality1_item_1_id .. " quality:1 condition:50"))
+    Cheat:testAssert("cheat_add_item quality1 q1 c50 1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_quality1_item_1_id .. " quality:1 condition:50"))
     item = Cheat:getUserItem(Cheat.g_quality1_item_1_id)
     Cheat:testAssert("cheat_add_item quality1 q1 c50 1", item and item.amount == 1 and item.condition == 50 and item.quality == 1)
 
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item quality2 q1 c50 1", Cheat:cheat_add_item("exact:" .. Cheat.g_quality2_item_1_id .. " quality:1 condition:50"))
+    Cheat:testAssert("cheat_add_item quality2 q1 c50 1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_quality2_item_1_id .. " quality:1 condition:50"))
     item = Cheat:getUserItem(Cheat.g_quality2_item_1_id)
     Cheat:testAssert("cheat_add_item quality2 q1 c50 2", item and item.amount == 1 and item.condition == 50 and item.quality == 1)
 
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item quality3 q1 c50 1", Cheat:cheat_add_item("exact:" .. Cheat.g_quality3_item_1_id .. " quality:1 condition:50"))
+    Cheat:testAssert("cheat_add_item quality3 q1 c50 1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_quality3_item_1_id .. " quality:1 condition:50"))
     item = Cheat:getUserItem(Cheat.g_quality3_item_1_id)
     Cheat:testAssert("cheat_add_item quality3 q1 c50 2", item and item.amount == 1 and item.condition == 50 and item.quality == 1)
 
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item quality4 q1 c50 1", Cheat:cheat_add_item("exact:" .. Cheat.g_quality4_item_1_id .. " quality:1 condition:50"))
+    Cheat:testAssert("cheat_add_item quality4 q1 c50 1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_quality4_item_1_id .. " quality:1 condition:50"))
     item = Cheat:getUserItem(Cheat.g_quality4_item_1_id)
     Cheat:testAssert("cheat_add_item quality4 q1 c50 2", item and item.amount == 1 and item.condition == 50 and item.quality == 1)
 
     -- cheat_add_item using localized name
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item lockpick name 5.1", Cheat:cheat_add_item("exact:lockpick"))
+    Cheat:testAssert("cheat_add_item lockpick name 5.1", Cheat:proxy("cheat_add_item", "exact:lockpick"))
     item = Cheat:getUserItem(Cheat.g_lockpick_id)
     Cheat:testAssert("cheat_add_item lockpick name 5.2", item and item.id == Cheat.g_lockpick_id)
     Cheat:testAssert("cheat_add_item lockpick name 5.3", item and item.amount == 1)
@@ -1349,47 +1294,47 @@ function Cheat:test_cheat_add_item()
 
     -- cheat_add_item - any name
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item any name 19.1", Cheat:cheat_add_item("any:long-range arrow"))
+    Cheat:testAssert("cheat_add_item any name 19.1", Cheat:proxy("cheat_add_item", "any:long-range arrow"))
     Cheat:testAssert("cheat_add_item any name 19.2", Cheat:getItemCount(Cheat.g_long_ranged_arrow_id) == 1)
 
     -- cheat_add_item - any id
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item any id 20.1", Cheat:cheat_add_item("any:" .. Cheat.g_long_ranged_arrow_id))
+    Cheat:testAssert("cheat_add_item any id 20.1", Cheat:proxy("cheat_add_item", "any:" .. Cheat.g_long_ranged_arrow_id))
     Cheat:testAssert("cheat_add_item any id 20.2", Cheat:getItemCount(Cheat.g_long_ranged_arrow_id) == 1)
 
     -- cheat_add_item - exact name
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item exact name 21.1", Cheat:cheat_add_item("exact:enhanced long-range arrow"))
+    Cheat:testAssert("cheat_add_item exact name 21.1", Cheat:proxy("cheat_add_item", "exact:enhanced long-range arrow"))
     Cheat:testAssert("cheat_add_item exact name 21.2", Cheat:getItemCount(Cheat.g_enhanced_long_range_arrow_id) == 1)
 
     -- cheat_add_item - exact id
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item exact id 22.1", Cheat:cheat_add_item("exact:" .. Cheat.g_enhanced_long_range_arrow_id))
+    Cheat:testAssert("cheat_add_item exact id 22.1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_enhanced_long_range_arrow_id))
     Cheat:testAssert("cheat_add_item exact id 22.2", Cheat:getItemCount(Cheat.g_enhanced_long_range_arrow_id) == 1)
 
     -- cheat_add_item - blocked quest item
     Cheat:removeAllItems()
     Cheat:testAssert("cheat_add_item add quest items 27.2", Cheat:getInventoryItemCount() == 0)
-    Cheat:testAssertFalse("cheat_add_item add quest items 27.1", Cheat:cheat_add_item("exact:2cf06381-7692-4f3c-b917-e98dd3b5f8e3 quest:true"))
+    Cheat:testAssertFalse("cheat_add_item add quest items 27.1", Cheat:proxy("cheat_add_item", "exact:2cf06381-7692-4f3c-b917-e98dd3b5f8e3 quest:true"))
     Cheat:testAssert("cheat_add_item add quest items 27.2", Cheat:getInventoryItemCount() == 0)
 
     -- cheat_add_item - quest item with quest flag
     --[[ won't work until i find addable quest item
     Cheat:removeAllItems()
     Cheat:testAssert("cheat_add_item add quest items 27.2", Cheat:getInventoryItemCount() == 0)
-    Cheat:testAssert("cheat_add_item add quest items 27.1", Cheat:cheat_add_item("exact:" .. Cheat.g_quest_item_1_id .. " quest:true"))
+    Cheat:testAssert("cheat_add_item add quest items 27.1", Cheat:proxy("cheat_add_item","exact:" .. Cheat.g_quest_item_1_id .. " quest:true"))
     Cheat:testAssert("cheat_add_item add quest items 27.2", Cheat:getInventoryItemCount() == 1)
 
     -- cheat_add_item - quest item without quest flag
     Cheat:removeAllItems()
     Cheat:testAssert("cheat_add_item add quest items 27.2", Cheat:getInventoryItemCount() == 0)
-    Cheat:testAssertFalse("cheat_add_item add quest items 27.1", Cheat:cheat_add_item("exact:" .. Cheat.g_quest_item_1_id))
+    Cheat:testAssertFalse("cheat_add_item add quest items 27.1", Cheat:proxy("cheat_add_item","exact:" .. Cheat.g_quest_item_1_id))
     Cheat:testAssert("cheat_add_item add quest items 27.2", Cheat:getInventoryItemCount() == 0)
     ]]
 
     -- cheat_add_item - bulk
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_add_item bulk 1", Cheat:cheat_add_item("any:long-range amount:10 bulk:true"))
+    Cheat:testAssert("cheat_add_item bulk 1", Cheat:proxy("cheat_add_item", "any:long-range amount:10 bulk:true"))
     Cheat:testAssert("cheat_add_item bulk 2", Cheat:getInventoryItemCount() == 2)
     for _, userItem in pairs(Cheat:getUserItems()) do
         Cheat:testAssert("cheat_add_item bulk 3", userItem.amount == 10)
@@ -1401,50 +1346,50 @@ end
 function Cheat:test_cheat_remove_item()
     -- cheat_remove_item invalid
     Cheat:removeAllItems()
-    Cheat:testAssertFalse("cheat_remove_item invalid 1", Cheat:cheat_remove_item())
-    Cheat:testAssertFalse("cheat_remove_item invalid 2", Cheat:cheat_remove_item(nil))
-    Cheat:testAssertFalse("cheat_remove_item invalid 3", Cheat:cheat_remove_item(""))
-    Cheat:testAssertFalse("cheat_remove_item invalid 4", Cheat:cheat_remove_item("exact:"))
+    Cheat:testAssertFalse("cheat_remove_item invalid 1", Cheat:proxy("cheat_remove_item"))
+    Cheat:testAssertFalse("cheat_remove_item invalid 2", Cheat:proxy("cheat_remove_item", nil))
+    Cheat:testAssertFalse("cheat_remove_item invalid 3", Cheat:proxy("cheat_remove_item", ""))
+    Cheat:testAssertFalse("cheat_remove_item invalid 4", Cheat:proxy("cheat_remove_item", "exact:"))
 
     -- cheat_remove_item with partial amount
-    Cheat:testAssert("cheat_remove_item partial amount 1", Cheat:cheat_add_item("exact:" .. Cheat.g_bread_id .. " amount:3"))
-    Cheat:testAssert("cheat_remove_item partial amount 2", Cheat:cheat_remove_item("exact:" .. Cheat.g_bread_id))
+    Cheat:testAssert("cheat_remove_item partial amount 1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_bread_id .. " amount:3"))
+    Cheat:testAssert("cheat_remove_item partial amount 2", Cheat:proxy("cheat_remove_item", "exact:" .. Cheat.g_bread_id))
     Cheat:testAssert("cheat_remove_item partial amount 3", Cheat:getItemCount(Cheat.g_bread_id) == 2)
-    Cheat:testAssert("cheat_remove_item partial amount 4", Cheat:cheat_remove_item("exact:" .. Cheat.g_bread_id .. " amount:2"))
+    Cheat:testAssert("cheat_remove_item partial amount 4", Cheat:proxy("cheat_remove_item", "exact:" .. Cheat.g_bread_id .. " amount:2"))
     Cheat:testAssert("cheat_remove_item partial amount 5", Cheat:getItemCount(Cheat.g_bread_id) == 0)
 
     -- cheat_remove_item - any name
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_remove_item any name 1", Cheat:cheat_add_item("any:" .. Cheat.g_long_ranged_arrow_id))
-    Cheat:testAssert("cheat_remove_item any name 2", Cheat:cheat_add_item("any:" .. Cheat.g_enhanced_long_range_arrow_id))
+    Cheat:testAssert("cheat_remove_item any name 1", Cheat:proxy("cheat_add_item", "any:" .. Cheat.g_long_ranged_arrow_id))
+    Cheat:testAssert("cheat_remove_item any name 2", Cheat:proxy("cheat_add_item", "any:" .. Cheat.g_enhanced_long_range_arrow_id))
     Cheat:testAssert("cheat_remove_item any name 3", Cheat:getInventoryItemCount() == 2)
-    Cheat:testAssert("cheat_remove_item any name 4", Cheat:cheat_remove_item("any:long-range arrow"))
+    Cheat:testAssert("cheat_remove_item any name 4", Cheat:proxy("cheat_remove_item", "any:long-range arrow"))
     Cheat:testAssert("cheat_remove_item any name 5", Cheat:getInventoryItemCount() == 1) -- removes the last one
 
     -- cheat_remove_item - any id
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_remove_item any id 1", Cheat:cheat_add_item("any:" .. Cheat.g_long_ranged_arrow_id))
-    Cheat:testAssert("cheat_remove_item any id 2", Cheat:cheat_add_item("any:" .. Cheat.g_enhanced_long_range_arrow_id))
+    Cheat:testAssert("cheat_remove_item any id 1", Cheat:proxy("cheat_add_item", "any:" .. Cheat.g_long_ranged_arrow_id))
+    Cheat:testAssert("cheat_remove_item any id 2", Cheat:proxy("cheat_add_item", "any:" .. Cheat.g_enhanced_long_range_arrow_id))
     Cheat:testAssert("cheat_remove_item any id 3", Cheat:getInventoryItemCount() == 2)
-    Cheat:testAssert("cheat_remove_item any id 4", Cheat:cheat_remove_item("any:" .. Cheat.g_long_ranged_arrow_id))
+    Cheat:testAssert("cheat_remove_item any id 4", Cheat:proxy("cheat_remove_item", "any:" .. Cheat.g_long_ranged_arrow_id))
     Cheat:testAssert("cheat_remove_item any id 5", Cheat:getItemCount(Cheat.g_long_ranged_arrow_id) == 0)
     Cheat:testAssert("cheat_remove_item any id 6", Cheat:getItemCount(Cheat.g_enhanced_long_range_arrow_id) == 1)
 
     -- cheat_remove_item - exact name
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_remove_item exact name 1", Cheat:cheat_add_item("any:" .. Cheat.g_long_ranged_arrow_id))
-    Cheat:testAssert("cheat_remove_item exact name 2", Cheat:cheat_add_item("any:" .. Cheat.g_enhanced_long_range_arrow_id))
+    Cheat:testAssert("cheat_remove_item exact name 1", Cheat:proxy("cheat_add_item", "any:" .. Cheat.g_long_ranged_arrow_id))
+    Cheat:testAssert("cheat_remove_item exact name 2", Cheat:proxy("cheat_add_item", "any:" .. Cheat.g_enhanced_long_range_arrow_id))
     Cheat:testAssert("cheat_remove_item exact name 3", Cheat:getInventoryItemCount() == 2)
-    Cheat:testAssert("cheat_remove_item exact name 4", Cheat:cheat_remove_item("exact:enhanced long-range arrow"))
+    Cheat:testAssert("cheat_remove_item exact name 4", Cheat:proxy("cheat_remove_item", "exact:enhanced long-range arrow"))
     Cheat:testAssert("cheat_remove_item exact name 5", Cheat:getItemCount(Cheat.g_long_ranged_arrow_id) == 1)
     Cheat:testAssert("cheat_remove_item exact name 6", Cheat:getItemCount(Cheat.g_enhanced_long_range_arrow_id) == 0)
 
     -- cheat_remove_item - exact id
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_remove_item exact id 1", Cheat:cheat_add_item("any:" .. Cheat.g_long_ranged_arrow_id))
-    Cheat:testAssert("cheat_remove_item exact id 2", Cheat:cheat_add_item("any:" .. Cheat.g_enhanced_long_range_arrow_id))
+    Cheat:testAssert("cheat_remove_item exact id 1", Cheat:proxy("cheat_add_item", "any:" .. Cheat.g_long_ranged_arrow_id))
+    Cheat:testAssert("cheat_remove_item exact id 2", Cheat:proxy("cheat_add_item", "any:" .. Cheat.g_enhanced_long_range_arrow_id))
     Cheat:testAssert("cheat_remove_item exact id 3", Cheat:getInventoryItemCount() == 2)
-    Cheat:testAssert("cheat_remove_item exact id 4", Cheat:cheat_remove_item("exact:" .. Cheat.g_enhanced_long_range_arrow_id))
+    Cheat:testAssert("cheat_remove_item exact id 4", Cheat:proxy("cheat_remove_item", "exact:" .. Cheat.g_enhanced_long_range_arrow_id))
     Cheat:testAssert("cheat_remove_item exact id 5", Cheat:getItemCount(Cheat.g_long_ranged_arrow_id) == 1)
     Cheat:testAssert("cheat_remove_item exact id 6", Cheat:getItemCount(Cheat.g_enhanced_long_range_arrow_id) == 0)
 
@@ -1456,47 +1401,47 @@ function Cheat:test_cheat_remove_item()
     --[[ won't work until i find addable quest item
     Cheat:removeAllItems()
     Cheat:testAssert("cheat_remove_item quest item 1", Cheat:getInventoryItemCount() == 0)
-    Cheat:testAssert("cheat_remove_item quest item 2", Cheat:cheat_add_item("exact:" .. Cheat.g_quest_item_1_id .. " quest:true"))
+    Cheat:testAssert("cheat_remove_item quest item 2", Cheat:proxy("cheat_add_item","exact:" .. Cheat.g_quest_item_1_id .. " quest:true"))
     Cheat:testAssert("cheat_remove_item quest item 3", Cheat:getInventoryItemCount() == 1)
 
     -- cheat_remove_item quest item with no flag
-    Cheat:testAssertFalse("cheat_remove_item quest item 4", Cheat:cheat_remove_item("exact:" .. Cheat.g_quest_item_1_id))
+    Cheat:testAssertFalse("cheat_remove_item quest item 4", Cheat:proxy("cheat_remove_item","exact:" .. Cheat.g_quest_item_1_id))
     Cheat:testAssert("cheat_remove_item quest item 5", Cheat:getInventoryItemCount() == 1)
 
     -- cheat_remove_item quest item with flag
-    Cheat:testAssertFalse("cheat_remove_item quest item 6", Cheat:cheat_remove_item("exact:" .. Cheat.g_quest_item_1_id .. " quest:true"))
+    Cheat:testAssertFalse("cheat_remove_item quest item 6", Cheat:proxy("cheat_remove_item","exact:" .. Cheat.g_quest_item_1_id .. " quest:true"))
     Cheat:testAssert("cheat_remove_item quest item 7", Cheat:getInventoryItemCount() == 0)
     ]]
 
     -- cheat_remove_item bulk
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_remove_item bulk 0", Cheat:cheat_add_item("exact:" .. Cheat.g_bread_id .. " amount:3"))
-    Cheat:testAssert("cheat_remove_item bulk 1", Cheat:cheat_add_item("any:" .. Cheat.g_long_ranged_arrow_id .. " amount:10"))
-    Cheat:testAssert("cheat_remove_item bulk 2", Cheat:cheat_add_item("any:" .. Cheat.g_enhanced_long_range_arrow_id .. " amount:10"))
+    Cheat:testAssert("cheat_remove_item bulk 0", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_bread_id .. " amount:3"))
+    Cheat:testAssert("cheat_remove_item bulk 1", Cheat:proxy("cheat_add_item", "any:" .. Cheat.g_long_ranged_arrow_id .. " amount:10"))
+    Cheat:testAssert("cheat_remove_item bulk 2", Cheat:proxy("cheat_add_item", "any:" .. Cheat.g_enhanced_long_range_arrow_id .. " amount:10"))
     Cheat:testAssert("cheat_remove_item bulk 3", Cheat:getInventoryItemCount() == 3)
-    Cheat:testAssert("cheat_remove_item bulk 4", Cheat:cheat_remove_item("any:arrow amount:5 bulk:true"))
+    Cheat:testAssert("cheat_remove_item bulk 4", Cheat:proxy("cheat_remove_item", "any:arrow amount:5 bulk:true"))
     Cheat:testAssert("cheat_remove_item bulk 5", Cheat:getInventoryItemCount() == 3)
-    Cheat:testAssert("cheat_remove_item bulk 6", Cheat:cheat_remove_item("any:arrow amount:5 bulk:true"))
+    Cheat:testAssert("cheat_remove_item bulk 6", Cheat:proxy("cheat_remove_item", "any:arrow amount:5 bulk:true"))
     Cheat:testAssert("cheat_remove_item bulk 7", Cheat:getInventoryItemCount() == 1)
 end
 
 function Cheat:test_cheat_remove_items()
     -- cheat_remove_items
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_remove_items 1", Cheat:cheat_add_item("exact:" .. Cheat.g_bread_id .. " amount:10"))
-    Cheat:testAssert("cheat_remove_items 2", Cheat:cheat_remove_items())
+    Cheat:testAssert("cheat_remove_items 1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_bread_id .. " amount:10"))
+    Cheat:testAssert("cheat_remove_items 2", Cheat:proxy("cheat_remove_items"))
     Cheat:testAssert("cheat_remove_items 3", Cheat:getInventoryItemCount() == 0)
 
     --[[ won't work until i find addable quest item
     -- cheat_remove_items with quest flag
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_remove_items quest 1", Cheat:cheat_add_item("exact:" .. Cheat.g_quest_item_1_id))
+    Cheat:testAssert("cheat_remove_items quest 1", Cheat:proxy("cheat_add_item","exact:" .. Cheat.g_quest_item_1_id))
     Cheat:testAssert("cheat_remove_items quest 2", Cheat:cheat_remove_items("quest:true"))
     Cheat:testAssert("cheat_remove_items quest 3", Cheat:getInventoryItemCount() == 0)
 
     -- cheat_remove_items without quest flag
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_remove_items quest 1", Cheat:cheat_add_item("exact:" .. Cheat.g_quest_item_1_id))
+    Cheat:testAssert("cheat_remove_items quest 1", Cheat:proxy("cheat_add_item","exact:" .. Cheat.g_quest_item_1_id))
     Cheat:testAssert("cheat_remove_items quest 2", Cheat:cheat_remove_items())
     Cheat:testAssert("cheat_remove_items quest 3", Cheat:getInventoryItemCount() == 1)
     ]]
@@ -1505,35 +1450,35 @@ end
 function Cheat:test_cheat_damage_gear()
     -- cheat_damage_gear (default 50)
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_damage_gear 8.1", Cheat:cheat_add_item("exact:" .. Cheat.g_dagger1_id .. " amount:1 condition:100"))
-    Cheat:testAssert("cheat_damage_gear 8.2", Cheat:cheat_add_item("exact:" .. Cheat.g_shield1_id .. " amount:1 condition:100"))
+    Cheat:testAssert("cheat_damage_gear 8.1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_dagger1_id .. " amount:1 condition:100"))
+    Cheat:testAssert("cheat_damage_gear 8.2", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_shield1_id .. " amount:1 condition:100"))
     Cheat:testAssert("cheat_damage_gear 8.3", Cheat:getUserItem(Cheat.g_dagger1_id, 1, 100))
     Cheat:testAssert("cheat_damage_gear 8.4", Cheat:getUserItem(Cheat.g_shield1_id, 1, 100))
-    Cheat:testAssert("cheat_damage_gear 8.5", Cheat:cheat_damage_gear())
+    Cheat:testAssert("cheat_damage_gear 8.5", Cheat:proxy("cheat_damage_gear"))
     Cheat:testAssert("cheat_damage_gear 8.6", Cheat:getInventoryItemCount() == 2)
     Cheat:testAssert("cheat_damage_gear 8.7", Cheat:getUserItem(Cheat.g_dagger1_id, 1, 50))
     Cheat:testAssert("cheat_damage_gear 8.8", Cheat:getUserItem(Cheat.g_shield1_id, 1, 50))
 
     -- cheat_damage_gear (custom condition)
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_damage_gear 9.1", Cheat:cheat_add_item("exact:" .. Cheat.g_dagger1_id .. " amount:1 condition:100"))
-    Cheat:testAssert("cheat_damage_gear 9.2", Cheat:cheat_add_item("exact:" .. Cheat.g_shield1_id .. " amount:1 condition:20"))
-    Cheat:testAssert("cheat_damage_gear 9.3", Cheat:cheat_damage_gear("condition:25"))
+    Cheat:testAssert("cheat_damage_gear 9.1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_dagger1_id .. " amount:1 condition:100"))
+    Cheat:testAssert("cheat_damage_gear 9.2", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_shield1_id .. " amount:1 condition:20"))
+    Cheat:testAssert("cheat_damage_gear 9.3", Cheat:proxy("cheat_damage_gear", "condition:25"))
     Cheat:testAssert("cheat_damage_gear 9.4", Cheat:getInventoryItemCount() == 2)
     Cheat:testAssert("cheat_damage_gear 9.5", Cheat:getUserItem(Cheat.g_dagger1_id, 1, 25))
     Cheat:testAssert("cheat_damage_gear 9.6", Cheat:getUserItem(Cheat.g_shield1_id, 1, 20))
 
     -- cheat_damage_gear quest setup
     Cheat:removeAllItems()
-    --Cheat:testAssert("cheat_damage_gear quest 1", Cheat:cheat_add_item("exact:" .. Cheat.g_quest_item_1_id))
-    Cheat:testAssert("cheat_damage_gear quest 2", Cheat:cheat_add_item("exact:" .. Cheat.g_quality1_item_1_id))
-    Cheat:testAssert("cheat_damage_gear quest 3", Cheat:cheat_add_item("exact:" .. Cheat.g_quality2_item_1_id))
-    Cheat:testAssert("cheat_damage_gear quest 4", Cheat:cheat_add_item("exact:" .. Cheat.g_quality3_item_1_id))
-    Cheat:testAssert("cheat_damage_gear quest 5", Cheat:cheat_add_item("exact:" .. Cheat.g_quality4_item_1_id))
+    --Cheat:testAssert("cheat_damage_gear quest 1", Cheat:proxy("cheat_add_item","exact:" .. Cheat.g_quest_item_1_id))
+    Cheat:testAssert("cheat_damage_gear quest 2", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_quality1_item_1_id))
+    Cheat:testAssert("cheat_damage_gear quest 3", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_quality2_item_1_id))
+    Cheat:testAssert("cheat_damage_gear quest 4", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_quality3_item_1_id))
+    Cheat:testAssert("cheat_damage_gear quest 5", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_quality4_item_1_id))
     Cheat:testAssert("cheat_damage_gear quest 6", Cheat:getInventoryItemCount() == 4)
 
     -- cheat_damage_gear no quest flag
-    Cheat:testAssert("cheat_damage_gear quest 07", Cheat:cheat_damage_gear())
+    Cheat:testAssert("cheat_damage_gear quest 07", Cheat:proxy("cheat_damage_gear"))
     --Cheat:testAssert("cheat_damage_gear quest 8", Cheat:getUserItem(Cheat.g_quest_item_1_id, 1, 100))
     Cheat:testAssert("cheat_damage_gear quest 09", Cheat:getUserItem(Cheat.g_quality1_item_1_id, 1, 50))
     Cheat:testAssert("cheat_damage_gear quest 10", Cheat:getUserItem(Cheat.g_quality2_item_1_id, 1, 50))
@@ -1541,7 +1486,7 @@ function Cheat:test_cheat_damage_gear()
     Cheat:testAssert("cheat_damage_gear quest 12", Cheat:getUserItem(Cheat.g_quality4_item_1_id, 1, 50))
 
     -- cheat_damage_gear quest flag
-    Cheat:testAssert("cheat_damage_gear quest 13", Cheat:cheat_damage_gear("quest:true"))
+    Cheat:testAssert("cheat_damage_gear quest 13", Cheat:proxy("cheat_damage_gear", "quest:true"))
     --Cheat:testAssert("cheat_damage_gear quest 14", Cheat:getUserItem(Cheat.g_quest_item_1_id, 1, 50))
     Cheat:testAssert("cheat_damage_gear quest 15", Cheat:getUserItem(Cheat.g_quality1_item_1_id, 1, 50))
     Cheat:testAssert("cheat_damage_gear quest 16", Cheat:getUserItem(Cheat.g_quality2_item_1_id, 1, 50))
@@ -1552,20 +1497,20 @@ end
 function Cheat:test_cheat_repair_gear()
     -- cheat_repair_gear (default condition of 100)
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_repair_gear 10.1", Cheat:cheat_add_item("exact:" .. Cheat.g_dagger1_id .. " amount:1 condition:25"))
-    Cheat:testAssert("cheat_repair_gear 10.2", Cheat:cheat_add_item("exact:" .. Cheat.g_shield1_id .. " amount:1 condition:25"))
+    Cheat:testAssert("cheat_repair_gear 10.1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_dagger1_id .. " amount:1 condition:25"))
+    Cheat:testAssert("cheat_repair_gear 10.2", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_shield1_id .. " amount:1 condition:25"))
     Cheat:testAssert("cheat_repair_gear 10.3", Cheat:getInventoryItemCount() == 2)
     Cheat:testAssert("cheat_repair_gear 10.4", Cheat:getUserItem(Cheat.g_dagger1_id, 1, 25))
     Cheat:testAssert("cheat_repair_gear 10.5", Cheat:getUserItem(Cheat.g_shield1_id, 1, 25))
-    Cheat:testAssert("cheat_repair_gear 10.6", Cheat:cheat_repair_gear())
+    Cheat:testAssert("cheat_repair_gear 10.6", Cheat:proxy("cheat_repair_gear"))
     Cheat:testAssert("cheat_repair_gear 10.7", Cheat:getUserItem(Cheat.g_dagger1_id, 1, 100))
     Cheat:testAssert("cheat_repair_gear 10.8", Cheat:getUserItem(Cheat.g_shield1_id, 1, 100))
 
     -- cheat_repair_gear (custom conditions)
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_repair_gear 11.1", Cheat:cheat_add_item("exact:" .. Cheat.g_dagger1_id .. " amount:1 condition:25"))
-    Cheat:testAssert("cheat_repair_gear 11.2", Cheat:cheat_add_item("exact:" .. Cheat.g_shield1_id .. " amount:1 condition:80"))
-    Cheat:testAssert("cheat_repair_gear 11.3", Cheat:cheat_repair_gear("condition:75"))
+    Cheat:testAssert("cheat_repair_gear 11.1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_dagger1_id .. " amount:1 condition:25"))
+    Cheat:testAssert("cheat_repair_gear 11.2", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_shield1_id .. " amount:1 condition:80"))
+    Cheat:testAssert("cheat_repair_gear 11.3", Cheat:proxy("cheat_repair_gear", "condition:75"))
     Cheat:testAssert("cheat_repair_gear 11.4", Cheat:getInventoryItemCount() == 2)
     Cheat:testAssert("cheat_repair_gear 11.5", Cheat:getUserItem(Cheat.g_dagger1_id, 1, 75))
     Cheat:testAssert("cheat_repair_gear 11.6", Cheat:getUserItem(Cheat.g_shield1_id, 1, 80))
@@ -1573,22 +1518,22 @@ function Cheat:test_cheat_repair_gear()
     -- repair and alias weapon
     Cheat:removeAllItems()
     Cheat:testAssert("cheat_repair_gear alias 28.1", Cheat.g_item_database_lookup["b867dd0e-1bfe-40e9-b114-4b126a3ff1b0"].wasAlias)
-    Cheat:testAssert("cheat_repair_gear alias 28.1", Cheat:cheat_add_item("exact:b867dd0e-1bfe-40e9-b114-4b126a3ff1b0 condition:50"))
+    Cheat:testAssert("cheat_repair_gear alias 28.1", Cheat:proxy("cheat_add_item", "exact:b867dd0e-1bfe-40e9-b114-4b126a3ff1b0 condition:50"))
     Cheat:testAssert("cheat_repair_gear alias 28.2", Cheat:getUserItem("b867dd0e-1bfe-40e9-b114-4b126a3ff1b0", 1, 50))
-    Cheat:testAssert("cheat_repair_gear alias 28.3", Cheat:cheat_repair_gear("condition:100"))
+    Cheat:testAssert("cheat_repair_gear alias 28.3", Cheat:proxy("cheat_repair_gear", "condition:100"))
     Cheat:testAssert("cheat_repair_gear alias 28.4", Cheat:getUserItem("b867dd0e-1bfe-40e9-b114-4b126a3ff1b0", 1, 100))
 
     -- cheat_repair_gear quest setup
     Cheat:removeAllItems()
-    --Cheat:testAssert("cheat_repair_gear quest 1", Cheat:cheat_add_item("exact:" .. Cheat.g_quest_item_1_id .. " condition:0"))
-    Cheat:testAssert("cheat_repair_gear quest 2", Cheat:cheat_add_item("exact:" .. Cheat.g_quality1_item_1_id .. " condition:0"))
-    Cheat:testAssert("cheat_repair_gear quest 3", Cheat:cheat_add_item("exact:" .. Cheat.g_quality2_item_1_id .. " condition:0"))
-    Cheat:testAssert("cheat_repair_gear quest 4", Cheat:cheat_add_item("exact:" .. Cheat.g_quality3_item_1_id .. " condition:0"))
-    Cheat:testAssert("cheat_repair_gear quest 5", Cheat:cheat_add_item("exact:" .. Cheat.g_quality4_item_1_id .. " condition:0")) -- can't add a q4, will become q3
+    --Cheat:testAssert("cheat_repair_gear quest 1", Cheat:proxy("cheat_add_item","exact:" .. Cheat.g_quest_item_1_id .. " condition:0"))
+    Cheat:testAssert("cheat_repair_gear quest 2", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_quality1_item_1_id .. " condition:0"))
+    Cheat:testAssert("cheat_repair_gear quest 3", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_quality2_item_1_id .. " condition:0"))
+    Cheat:testAssert("cheat_repair_gear quest 4", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_quality3_item_1_id .. " condition:0"))
+    Cheat:testAssert("cheat_repair_gear quest 5", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_quality4_item_1_id .. " condition:0")) -- can't add a q4, will become q3
     Cheat:testAssert("cheat_repair_gear quest 6", Cheat:getInventoryItemCount() == 4)
 
     -- cheat_repair_gear no quest flag
-    Cheat:testAssert("cheat_repair_gear quest 7", Cheat:cheat_repair_gear())
+    Cheat:testAssert("cheat_repair_gear quest 7", Cheat:proxy("cheat_repair_gear"))
     --Cheat:testAssert("cheat_repair_gear quest 8", Cheat:getUserItem(Cheat.g_quest_item_1_id, 1, 0))
     Cheat:testAssert("cheat_repair_gear quest 9", Cheat:getUserItem(Cheat.g_quality1_item_1_id, 1, 100))
     Cheat:testAssert("cheat_repair_gear quest 10", Cheat:getUserItem(Cheat.g_quality2_item_1_id, 1, 100))
@@ -1596,7 +1541,7 @@ function Cheat:test_cheat_repair_gear()
     Cheat:testAssert("cheat_repair_gear quest 12", Cheat:getUserItem(Cheat.g_quality4_item_1_id, 1, 100))
 
     -- cheat_repair_gear quest flag
-    Cheat:testAssert("cheat_repair_gear quest 13", Cheat:cheat_repair_gear("quest:true"))
+    Cheat:testAssert("cheat_repair_gear quest 13", Cheat:proxy("cheat_repair_gear", "quest:true"))
     --Cheat:testAssert("cheat_repair_gear quest 14", Cheat:getUserItem(Cheat.g_quest_item_1_id, 1, 100))
     Cheat:testAssert("cheat_repair_gear quest 15", Cheat:getUserItem(Cheat.g_quality1_item_1_id, 1, 100))
     Cheat:testAssert("cheat_repair_gear quest 16", Cheat:getUserItem(Cheat.g_quality2_item_1_id, 1, 100))
@@ -1615,7 +1560,7 @@ function Cheat:test_cheat_remove_stolen_items()
 
     -- mock item list with stolen item q4 item
     -- Add a dagger1, which is in g_removestolen_cat_ids
-    Cheat:testAssert("cheat_remove_stolen_items setup 2", Cheat:cheat_add_item("exact:" .. Cheat.g_dagger1_id))
+    Cheat:testAssert("cheat_remove_stolen_items setup 2", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_dagger1_id))
     mockItems = Cheat:getUserItems()
     for _, item in ipairs(mockItems) do
         item.owner = __null
@@ -1645,7 +1590,7 @@ function Cheat:test_cheat_own_stolen_items()
 
     -- mock item list with stolen item
     -- Add a dagger1, which is in g_ownstolen_cat_ids
-    Cheat:testAssert("cheat_own_stolen_items setup 2", Cheat:cheat_add_item("exact:" .. Cheat.g_dagger1_id))
+    Cheat:testAssert("cheat_own_stolen_items setup 2", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_dagger1_id))
     mockItems = Cheat:getUserItems()
     for _, item in ipairs(mockItems) do item.owner = __null end
 
@@ -1663,7 +1608,7 @@ function Cheat:test_cheat_own_stolen_items()
 
     -- test quest item and quest items skipped
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_own_stolen_items setup quest", Cheat:cheat_add_item("exact:" .. Cheat.g_dagger1_id))
+    Cheat:testAssert("cheat_own_stolen_items setup quest", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_dagger1_id))
     mockItems = Cheat:getUserItems()
     for _, item in ipairs(mockItems) do item.isquestitem = true end
 
@@ -1674,7 +1619,7 @@ function Cheat:test_cheat_own_stolen_items()
 
     -- test quest item and quest items not skipped
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_own_stolen_items setup quest", Cheat:cheat_add_item("exact:" .. Cheat.g_dagger1_id))
+    Cheat:testAssert("cheat_own_stolen_items setup quest", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_dagger1_id))
     mockItems = Cheat:getUserItems()
     for _, item in ipairs(mockItems) do item.isquestitem = true end
 
@@ -1685,7 +1630,7 @@ function Cheat:test_cheat_own_stolen_items()
 
     -- test quality 4 item
     Cheat:removeAllItems()
-    Cheat:testAssert("cheat_own_stolen_items setup q4", Cheat:cheat_add_item("exact:" .. Cheat.g_dagger1_id))
+    Cheat:testAssert("cheat_own_stolen_items setup q4", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_dagger1_id))
     mockItems = Cheat:getUserItems()
     for _, item in ipairs(mockItems) do item.quality = 4 end
 
@@ -1701,13 +1646,13 @@ function Cheat:test_cheat_inventory_backup_restore()
     -- delete any existing backup
     Cheat.g_user_items = nil
 
-    Cheat:testAssert("cheat_backup_inventory 14.1", Cheat:cheat_add_item("exact:" .. Cheat.g_cheesecake .. " amount:2 condition:10"))
-    Cheat:testAssert("cheat_backup_inventory 14.2", Cheat:cheat_add_item("exact:" .. Cheat.g_bread_id .. " amount:3 condition:90"))
-    Cheat:testAssert("cheat_backup_inventory 14.3", Cheat:cheat_backup_inventory())
+    Cheat:testAssert("cheat_backup_inventory 14.1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_cheesecake .. " amount:2 condition:10"))
+    Cheat:testAssert("cheat_backup_inventory 14.2", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_bread_id .. " amount:3 condition:90"))
+    Cheat:testAssert("cheat_backup_inventory 14.3", Cheat:proxy("cheat_backup_inventory"))
 
     Cheat:removeAllItems()
 
-    Cheat:testAssert("cheat_restore_inventory 14.4", Cheat:cheat_restore_inventory())
+    Cheat:testAssert("cheat_restore_inventory 14.4", Cheat:proxy("cheat_restore_inventory"))
     Cheat:testAssert("cheat_restore_inventory 14.5", Cheat:getInventoryItemCount() == 2)
     Cheat:testAssert("cheat_restore_inventory 14.6", Cheat:getUserItem(Cheat.g_cheesecake, 2, 10))
     Cheat:testAssert("cheat_restore_inventory 14.7", Cheat:getUserItem(Cheat.g_bread_id, 3, 90))
