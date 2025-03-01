@@ -72,6 +72,8 @@ function Cheat:getSoulCategoryKeys()
     table.insert(categories, "Wild Dog")
     table.insert(categories, "Dog")
     table.insert(categories, "Wolf")
+    table.insert(categories, "Bandit")
+    table.insert(categories, "Soldier")
     return categories
 end
 
@@ -128,12 +130,38 @@ function Cheat:initSoulsDatabase()
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.NPC then
             -- NPC_none 19
             -- NPC_? 6054
-            Cheat:addSoulToCategory("Men", "NPC", soul)
+
+            -- social_class_id="104" social_class_name="banditLeader"
+
+            -- social_class_id="105" social_class_name="cumanLeader"
+            -- social_class_id="43" social_class_name="cuman"
+
+            -- social_class_id="106" social_class_name="ruffianLeader"
+            -- social_class_id="51" social_class_name="ruffian"
+
+            if soul.social_class_id == 38 then
+                -- social_class_id="38" social_class_name="bandit"
+                Cheat:addSoulToCategory("Bandit", "NPC", soul)
+            elseif soul.social_class_id == 33 then
+                -- social_class_id="33" social_class_name="soldier"
+                Cheat:addSoulToCategory("Soldier", "NPC", soul)
+            else
+                Cheat:addSoulToCategory("Men", "NPC", soul)
+            end
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.NPC_FEMALE then
             -- NPC_Female_? 961
             -- NPC_Female_herbalist 1
             -- NPC_Female_none 4
-            Cheat:addSoulToCategory("Women", "NPC_Female", soul)
+
+            if soul.social_class_id == 55 then
+                -- social_class_id="55" social_class_name="bathhouseMaid"
+                Cheat:addSoulToCategory("Maid", "NPC_Female", soul)
+            elseif soul.social_class_id == 62 then
+                -- social_class_id="62" social_class_name="bathhouseAbbess"
+                Cheat:addSoulToCategory("Abbess", "NPC_Female", soul)
+            else
+                Cheat:addSoulToCategory("Women", "NPC_Female", soul)
+            end
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.RED_DEER_DOE then
             -- RedDeerDoe_red_deer_doe 3
             Cheat:addSoulToCategory("Red Doe", "RedDeerDoe", soul)
@@ -156,7 +184,11 @@ function Cheat:initSoulsDatabase()
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.WILD_DOG or soul.soul_class_id == SOUL_CLASS.WILD_DOG then
             -- Dog_wilddog 153
             -- WildDog_dog 11
-            Cheat:addSoulToCategory("Wild Dog", "WildDog", soul)
+
+            if soul.social_class_id == 120 then
+                -- dog_aggressive
+                Cheat:addSoulToCategory("Wild Dog", "WildDog", soul)
+            end
         elseif soul.soul_archetype_id == SOUL_ARCHETYPE.DOG or soul.soul_class_id == SOUL_CLASS.DOG then
             -- Dog_dog 3
             Cheat:addSoulToCategory("Dog", "Dog", soul)
@@ -427,8 +459,8 @@ function Cheat:spawnEntity(entityName, entityClass, entitySoulId, avoidSpawnCent
 
     -- non of these put the correct soul on the entity
     params.soul = entitySoulId
-    params.sharedSoulGuid = entitySoulId            -- XGenAIModule.SpawnEntity(spawnParams)
-    params.properties.sharedSoulGuid = entitySoulId -- System.SpawnEntity / horse.Properties.sharedSoulGuid /Not on pebbles
+    params.SharedSoulGuid = entitySoulId            -- XGenAIModule.SpawnEntity(spawnParams)
+    params.properties.SharedSoulGuid = entitySoulId -- System.SpawnEntity / horse.Properties.sharedSoulGuid /Not on pebbles
 
     Cheat:logDebug("== spawn params ======================")
     Cheat:tprint(params)
