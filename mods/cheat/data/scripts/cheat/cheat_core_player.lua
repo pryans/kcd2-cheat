@@ -345,7 +345,7 @@ end
 -- cheat_wash
 -- ============================================================================
 Cheat:createCommand("cheat_wash", nil,
-    "Washes all blood and dirt from current target or the player.",
+    "Washes all blood and dirt from current target or the player and their inventory.",
     "Wash yourself or your current target", "cheat_wash")
 function Cheat:cheat_wash()
     local target = Cheat:getTargetedEntity()
@@ -354,6 +354,7 @@ function Cheat:cheat_wash()
         target.actor:WashDirtAndBlood(1, 1)
     else
         player.actor:WashDirtAndBlood(1, 1)
+        player.actor:WashItems(1)
         Cheat:logInfo("Washing self, All Clean!")
     end
     return true
