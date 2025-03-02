@@ -57,6 +57,9 @@
 
 		<buff buff_class_id="13" buff_exclusivity_id="1" buff_id="df36eb08-a2b4-4cbc-8a8e-737eb51904bc" buff_lifetime_id="0" buff_ui_type_id="1" buff_ui_visibility_id="3" duration="3600" icon_id="sex_time_well_spent" implementation="Cpp:NonHealingPotionBasicTimed" is_persistent="false" buff_ui_order="200" 
 			buff_name="cheat_charm" buff_ui_name="Cheat Charm" buff_params="charisma+100" />
+
+		<buff buff_class_id="13" buff_exclusivity_id="1" buff_id="abafd49a-c4f1-4077-b7f6-0f97e694e2ad" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="3" duration="-1" icon_id="sex_time_well_spent" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_buff_preset_01" buff_ui_name="Cheat Buff Preset 1" buff_params="itd*0.5,brm*0.5,grm*2,xpm*2,fsm*1.5,con*0.75,noi*.75,sco*0.50" />
 		
 		<!-- stacking -->
 		<buff buff_class_id="13" buff_exclusivity_id="1" buff_id="e4fc62ef-683d-4f8d-0010-cca23d364f35" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
