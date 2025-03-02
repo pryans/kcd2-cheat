@@ -208,6 +208,18 @@ function Cheat:entityDumper(entity)
     grm = perk_sympatak grm*1.1 | crime_punishment_brand grm*0.5  (good reputation multiplier)
     brm = perk_oportunista brm-0.1 = If you lose your Reputation, the drop will be 10% less. (bad reputation multiplier)
     itd = perk_art_of_preservation itd*0.5 = The raw food and herbs you have in your inventory will spoil 50% slower. (item decary)
+
+    itd*0.5,brm*0.5,grm*2,xpm*2,fsm*1.5,con*0.75,noi*.75,sco*0.75
+
+    fsm = movement speed?
+    vib = visibility
+            item_torch: vision+5,vib+3.5
+            invisibility: vib=-10,con=-10
+
+    crouch	vib-0.5,fsm*0.3,con-0.5,noi*0.5
+    sprint	fsm*2,noi+0.1,noi*1.5
+    cheat_invisible con=-100,evi=-100,lpv=-100,nbi=-10,noi=-100,ors=-10
+
     # wud
 WeaponUsageDamageMod
 -- lerp(1, MaxFencingWeaponUsageMod, Fencing / SkillCap)
