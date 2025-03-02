@@ -1,7 +1,11 @@
 # Commands in this file will run onGameplayStarted
 
+#cheat_reveal_map
+#cheat_alias name:go target:cheat_teleport_to_checkpoint
+
 cheat_no_lockpicking
 cheat_no_pickpocketing
-cheat_reveal_map
-cheat_alias name:go target:cheat_teleport_to_checkpoint
+
 cheat_set_regen enable:true state:all amount:0.5
+
+cheat_add_buff exact:abafd49a-c4f1-4077-b7f6-0f97e694e2ad
