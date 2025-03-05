@@ -1,3 +1,37 @@
+--[[
+
+wh_rpg_undiscoverAll
+Undiscover all POI and locations.
+
+wh_rpg_discoverLocation
+Discover a named RPG location.
+
+wh_rpg_discoverAll
+Reveal and discover all POI and locations.
+
+wh_rpg_dumpLocations
+Dump all RPG locations.
+
+wh_rpg_resetLocations
+Reset all RPG locations.
+
+wh_rpg_getLocation
+Get current RPG location.
+
+wh_rpg_removePOI
+Remove procedural POI.
+
+wh_rpg_discoverPOI
+Discover all POI.
+
+wh_rpg_discover
+Reveal only positions of all POI and locations.
+
+player_revealFow
+Reveals fog of war over the entire map.
+
+]]
+
 -- ============================================================================
 -- cheat_reveal_map
 -- ============================================================================
