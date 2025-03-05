@@ -3,6 +3,7 @@
 -- ============================================================================
 Cheat.g_command_registry = {}
 Cheat.g_command_proxies = {}
+Cheat.g_aliases = {}
 
 function Cheat:proxy(cmdName, line)
     Cheat:logDebug("commandProxy: name[%s], line[%s]", tostring(cmdName), tostring(line))
@@ -95,6 +96,7 @@ function Cheat:createCommandAlias(aliasName, aliasTarget)
         return false
     end
 
+    Cheat.g_aliases[aliasName] = aliasTarget
     Cheat.g_command_registry[aliasName] = target
     local proxyFunctionName = "g_command_proxies_" .. target.cmdName
     local proxyFunction = "Cheat:" .. proxyFunctionName .. "(%line)"
@@ -136,6 +138,22 @@ Cheat:createCommand("cheat_alias", {
     "Alias cheat_teleport_to_checkpoint to 'cgoto'", "cheat_alias name:cgoto target:cheat_teleport_to_checkpoint")
 function Cheat:cheat_alias(c)
     Cheat:createCommandAlias(c.name, c.target)
+end
+
+-- ============================================================================
+-- cheat_aliases
+-- ============================================================================
+Cheat:createCommand("cheat_aliases", nil, "Shows the current list of aliases.")
+function Cheat:cheat_aliases()
+    local alias_keys = Cheat:getSortedKeys(Cheat.g_aliases)
+    if #alias_keys > 0 then
+        Cheat:logInfo("Current Aliases:")
+        for _, alias in ipairs(alias_keys) do
+            Cheat:logInfo("    %s = %s", alias, Cheat.g_aliases[alias])
+        end
+    else
+        Cheat:logInfo("No aliases found.")
+    end
 end
 
 -- ============================================================================
