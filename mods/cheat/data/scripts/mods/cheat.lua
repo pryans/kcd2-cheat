@@ -58,10 +58,6 @@ function Cheat:onInit()
     Cheat:loadFile("scripts/cheat/cheat_core_skills.lua")
     Cheat:loadFile("scripts/cheat/cheat_core_physics.lua")
 
-    --Cheat:loadFile("scripts/cheat/cheat_core_factions.lua")
-    --Cheat:loadFile("scripts/cheat/cheat_core_merchants.lua")
-    --Cheat:loadFile("scripts/cheat/cheat_core_quests.lua")
-
     -- do last so we can setup default bindings for some console commands
     Cheat:loadFile("scripts/cheat/cheat_core_actions.lua")
 
