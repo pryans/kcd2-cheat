@@ -1,11 +1,12 @@
-# Commands in this file will run onGameplayStarted
+# Lines that start with # are ignored.
+# Commands in this file will run via the onGameplayStarted event.
 
 #cheat_reveal_map
 #cheat_alias name:go target:cheat_teleport_to_checkpoint
 
-cheat_no_lockpicking
-cheat_no_pickpocketing
+#cheat_no_lockpicking
+#cheat_no_pickpocketing
 
-cheat_set_regen enable:true state:all amount:0.5
+#cheat_set_regen enable:true state:all amount:0.5
 
-cheat_add_buff exact:abafd49a-c4f1-4077-b7f6-0f97e694e2ad
+#cheat_add_buff exact:abafd49a-c4f1-4077-b7f6-0f97e694e2ad
