@@ -255,13 +255,14 @@ function Cheat:initItemDatabase()
     Cheat.g_item_database_initializing = true
 
     Cheat:loadItemDatabaseFile("libs/tables/item/item.xml")
-    Cheat:loadItemDatabaseFile("libs/tables/item/item__system.xml")
-    Cheat:loadItemDatabaseFile("libs/tables/item/item__rewards.xml")
-    Cheat:loadItemDatabaseFile("libs/tables/item/item__horse.xml")
-    Cheat:loadItemDatabaseFile("libs/tables/item/item__aux.xml")
-    Cheat:loadItemDatabaseFile("libs/tables/item/item__alchemy.xml")
-    Cheat:loadItemDatabaseFile("libs/tables/item/item__test.xml") -- Tin Doppelganger Badge part of normal gameplay
-    Cheat:loadItemDatabaseFile("libs/tables/item/item__unique.xml")
+
+    -- load all item_*.xml files
+    -- this allows us to see items created by other mods
+    for _, file in pairs(System.ScanDirectory("libs/tables/item/", SCANDIR_FILES)) do
+        if file ~= "item__deprecated.xml" and file ~= "item__reward.xml" and Cheat:startsWith(file, "item__") and Cheat:endsWith(file, ".xml") then
+            Cheat:loadItemDatabaseFile("libs/tables/item/" .. file)
+        end
+    end
 
     if Cheat.g_item_database_warnings > 0 then
         Cheat:logWarn("Found [%d] warnings while loading item XML databases.", Cheat.g_item_database_warnings)
