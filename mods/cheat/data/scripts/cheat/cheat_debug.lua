@@ -300,6 +300,15 @@ function Cheat:entityDumper(entity)
     ser = Sleeping increases Energy two times faster ser*2
     prs = persuade (max_persuade prs=30)
 
+    dmt = dominate
+    prs = persuade
+    bad = badassness
+    mgt = might
+    crc = coerce
+    mor = morale
+    imp = impress
+    drd = dread
+
     cheate preset 1
         itd*0.5,brm*0.5,grm*2,xpm*2,fsm*1.5,con*0.75,noi*.75,sco*0.25
     combat tutorial
