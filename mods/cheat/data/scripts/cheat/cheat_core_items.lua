@@ -38,6 +38,7 @@ ItemUtils = {
 -- ============================================================================
 -- helpers
 -- ============================================================================
+Cheat.g_cheese_id = "b2f8f5e3-8e5e-4600-a4bb-be17e2d4a058"
 Cheat.g_lockpick_id = "8d76f58e-a521-4205-a7e8-9ac077eee5f0"
 Cheat.g_bread_id = "86e4ff24-88db-4024-abe6-46545fa0fbd1"
 Cheat.g_cheesecake = "2a2ac072-a7eb-42f5-8757-776c02647559"
@@ -99,6 +100,7 @@ Cheat.g_repairall_cat_ids = Cheat:createLookupTable(
     Cheat.g_item_category_map.MissileWeapon
 )
 Cheat.g_damageall_cat_ids = Cheat.g_repairall_cat_ids -- probably just keep these the same?
+Cheat.g_freshfood_cat_ids = Cheat:createLookupTable(Cheat.g_item_category_map.Food, Cheat.g_item_category_map.Herb)
 
 Cheat.g_user_items = nil
 
@@ -759,6 +761,13 @@ function Cheat:recreateItems(items, mode, condition, quality, quest)
             end
         end
 
+        if mode == "freshfood" then
+            if item.condition < condition and Cheat.g_freshfood_cat_ids[item.category_id] then
+                shouldDelete = true
+                shouldRecreate = true
+            end
+        end
+
         -- some items, like certain quest items, cannot be created
         -- we don't want to delete an item we can't recreate
         if shouldRecreate and not Cheat:canCreateItem(item.id) then
@@ -1065,6 +1074,21 @@ function Cheat:cheat_damage_gear(c)
 end
 
 -- ============================================================================
+-- cheat_fresh_food
+-- ============================================================================
+Cheat:createCommand("cheat_fresh_food", {
+        condition = function (args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 100, showHelp, "The condition to set, from 0 and 100. Default 100.") end,
+        quest = function (args, name, showHelp) return Cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true, attempt to set condition of quest items.") end
+    },
+    "Set the codition of food and herbs.",
+    "Set condition to 75%.", "cheat_fresh_food condition:75")
+function Cheat:cheat_fresh_food(c)
+    Cheat:recreateItems(Cheat:getUserItems(), "freshfood", c.condition, nil, c.quest)
+    Cheat:logInfo("All food set to [%d] condition.", c.condition)
+    return true
+end
+
+-- ============================================================================
 -- cheat_list_inventory
 -- ============================================================================
 Cheat:createCommand("cheat_list_inventory", nil, "Lists your inventory.")
@@ -1153,6 +1177,7 @@ function Cheat:test_core_items()
     self:test_cheat_remove_items()
     self:test_cheat_damage_gear()
     self:test_cheat_repair_gear()
+    self:test_cheat_fresh_food()
     self:test_cheat_remove_stolen_items()
     self:test_cheat_own_stolen_items()
     self:test_cheat_inventory_backup_restore()
@@ -1590,6 +1615,25 @@ function Cheat:test_cheat_repair_gear()
     Cheat:testAssert("cheat_repair_gear quest 18", Cheat:getUserItem(Cheat.g_quality4_item_1_id, 1, 100))
 end
 
+function Cheat:test_cheat_fresh_food()
+    -- cheat_fresh_food (default condition of 100)
+    Cheat:removeAllItems()
+    Cheat:testAssert("cheat_fresh_food 1.1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_cheese_id .. " amount:1 condition:25"))
+    Cheat:testAssert("cheat_fresh_food 1.3", Cheat:getInventoryItemCount() == 1)
+    Cheat:testAssert("cheat_fresh_food 1.4", Cheat:getUserItem(Cheat.g_cheese_id, 1, 25))
+    Cheat:testAssert("cheat_fresh_food 1.6", Cheat:proxy("cheat_fresh_food"))
+    Cheat:testAssert("cheat_fresh_food 1.7", Cheat:getUserItem(Cheat.g_cheese_id, 1, 100))
+
+    -- cheat_fresh_food (custom conditions)
+    Cheat:removeAllItems()
+    Cheat:testAssert("cheat_fresh_food 2.1", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_cheese_id .. " amount:1 condition:25"))
+    Cheat:testAssert("cheat_fresh_food 2.2", Cheat:proxy("cheat_add_item", "exact:" .. Cheat.g_cheese_id .. " amount:1 condition:80"))
+    Cheat:testAssert("cheat_fresh_food 2.3", Cheat:proxy("cheat_fresh_food", "condition:75"))
+    Cheat:testAssert("cheat_fresh_food 2.4", Cheat:getInventoryItemCount() == 2)
+    Cheat:testAssert("cheat_fresh_food 2.5", Cheat:getUserItem(Cheat.g_cheese_id, 1, 75))
+    Cheat:testAssert("cheat_fresh_food 2.6", Cheat:getUserItem(Cheat.g_cheese_id, 1, 80))
+end
+
 function Cheat:test_cheat_remove_stolen_items()
     local mockItems = nil
 
@@ -1712,12 +1756,12 @@ function Cheat:test_cheat_add_all_items()
     -- cheat_add_all_items without quest flag
     Cheat:removeAllItems()
     Cheat:testAssert("cheat_add_all_items no quest 1", Cheat:proxy("cheat_add_all_items"))
-    Cheat:testAssertEquals("cheat_add_all_items no quest 2", Cheat:getInventoryItemCount(), 4660)
+    Cheat:testAssertEquals("cheat_add_all_items no quest 2", Cheat:getInventoryItemCount(), 4735)
 
     -- cheat_add_all_items with quest flag
     Cheat:removeAllItems()
     Cheat:testAssert("cheat_add_all_items quest 1", Cheat:proxy("cheat_add_all_items", "quest:true"))
-    Cheat:testAssertEquals("cheat_add_all_items quest 2", Cheat:getInventoryItemCount(), 4660)
+    Cheat:testAssertEquals("cheat_add_all_items quest 2", Cheat:getInventoryItemCount(), 4735)
 end
 
 -- ============================================================================
