@@ -45,17 +45,11 @@ function CheatDebugger:DrawText(x, y, text)
 end
 
 function CheatDebugger:OnUpdate(dt)
-    local currentEntity = nil -- Cheat:getTargetedEntity()
+    Cheat:logOff()
+    local currentEntity = Cheat:getTargetedEntity()
+    Cheat:logOn()
     if not currentEntity then
         currentEntity = player
-    end
-
-    if currentEntity ~= lastEntity then
-        currentEntityStats = {}
-        lastEntityStats = {}
-    else
-        lastEntityStats = currentEntityStats
-        currentEntityStats = {}
     end
 
     local x = 100
