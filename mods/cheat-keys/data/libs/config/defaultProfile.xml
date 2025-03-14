@@ -120,6 +120,7 @@
 		<action name="use_other" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.25" holdRepeatDelay="-1" keyboard="_keybinds_ref_" xboxpad="xi_a" pspad="pad_cross" />
 		<action name="use_horse" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.25" holdRepeatDelay="-1" keyboard="_keybinds_ref_" xboxpad="xi_y" pspad="pad_triangle" />
 		<action name="pickpocketing" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.25" holdRepeatDelay="-1" keyboard="_keybinds_ref_" xboxpad="xi_a" pspad="pad_cross" />
+		<action name="butcher" onPress="1" onRelease="1" onHold="1" keyboard="_keybinds_ref_" xboxpad="xi_triggerl_btn" pspad="pad_l2" holdTriggerDelay="0.25" holdRepeatDelay="-1" />
 		<include actionmap="call" />
 	</actionmap>	
 
@@ -392,8 +393,20 @@
 		<action name="read_next" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_shoulderr" pspad="pad_r1"/>
 	</actionmap>
 
-	<actionmap name="open_web" priority="pure_include" exclusivity="0">
+	<actionmap name="open_web" priority="pure_include" exclusivity="0">		<!-- only for include -->
 		<action name="open_web" keyboard="_keybinds_ref_" onPress="1" onRelease="1" xboxpad="xi_x" pspad="pad_square" />
+	</actionmap>
+
+	<actionmap name="dialog_minigame" priority="pure_include" exclusivity="0">		<!-- only for include -->
+		<include actionmap="apse_focus" />
+		<action name="scroll_up" onPress="1" onRelease="1" keyboard="_keybinds_ref_" />
+		<action name="scroll_down" onPress="1" onRelease="1" keyboard="_keybinds_ref_" />
+		<action name="move_left" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_triggerl_btn" pspad="pad_l2" noModifiers="1" />
+		<action name="move_right" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_triggerr_btn" pspad="pad_r2" noModifiers="1" />
+		<action name="confirm" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.5"  keyboard="_keybinds_ref_" holdRepeatDelay="-1" xboxpad="xi_x" pspad="pad_square" />
+		<action name="cancel" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.5" keyboard="_keybinds_ref_" holdRepeatDelay="-1" xboxpad="xi_b" pspad="pad_circle" />
+		<action name="next_step" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_a" pspad="pad_cross" />
+		<action name="next_step_mouse" keyboard="_keybinds_ref_" onPress="1" onRelease="1" />
 	</actionmap>
 
 	<!-- default -->
@@ -522,8 +535,8 @@
 	<!-- gameplay -->
 	<actionmap name="photomode_enable" priority="minigames" exclusivity="0">
 		<action name="photomode_enable" onPress="1" onRelease="1" keyboard="_keybinds_ref_"/>
-		<action name="photomode_enable_l3" onPress="1" onRelease="1" xboxpad="xi_thumbl" pspad="pad_l3"/>
-		<action name="photomode_enable_r3" onPress="1" onRelease="1" xboxpad="xi_thumbr" pspad="pad_r3"/>
+		<action name="photomode_enable_l3" onPress="1" onRelease="1" xboxpad="xi_back" pspad="pad_touch"/>
+		<action name="photomode_enable_r3" onPress="1" onRelease="1" xboxpad="xi_start" pspad="pad_start"/>
 	</actionmap>
 
 	<actionmap name="sitting_chair" priority="gameplay" exclusivity="1">
@@ -1036,6 +1049,16 @@
 		<action name="skip_time_skipping_cancel" keyboard="_keybinds_ref_" onPress="1" onRelease="1" xboxpad="xi_b" pspad="pad_circle"/>
 	</actionmap>
 
+	<actionmap name="barber_interaction" priority="minigames_over" exclusivity="1">
+		<include actionmap="open_pause_menu" />
+		<include actionmap="dialog_minigame" />
+		<include actionmap="help_dialog" />    <!-- Because we need override class in defaultActionHelp.xml -->
+		<action name="mouse_looking_x" keyboard="maxis_x" />
+		<action name="mouse_looking_y" keyboard="maxis_y" />
+		<action name="xi_looking_x" xboxpad="xi_thumbrx" pspad="pad_stickrx"/>
+		<action name="xi_looking_y" xboxpad="xi_thumbry" pspad="pad_stickry"/>
+	</actionmap>
+
 	<!-- qam -->
 	<actionmap name="qam_interaction" priority="pure_include" exclusivity="0">
 		<include actionmap="movement_x" />
@@ -1201,8 +1224,8 @@
 		<action name="move_prev" onPress="1" onRelease="1" xboxpad="xi_triggerl_btn" pspad="pad_l2" noModifiers="1" />
 		<action name="move_next" onPress="1" onRelease="1" xboxpad="xi_triggerr_btn" pspad="pad_r2" noModifiers="1" />
 
-		<action name="move_inventory" onPress="1" onRelease="1" keyboard="_keybinds_ref_" noModifiers="1" />
-		<action name="move_trader" onPress="1" onRelease="1" keyboard="_keybinds_ref_" noModifiers="1" />
+		<action name="move_shop_inventory_btn" onPress="1" onRelease="1" keyboard="_keybinds_ref_" noModifiers="1" />
+		<action name="move_shop_trader_btn" onPress="1" onRelease="1" keyboard="_keybinds_ref_" noModifiers="1" />
 
 		<action name="close_deal" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_x" pspad="pad_square" />
 		<action name="haggle" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.25" keyboard="_keybinds_ref_" xboxpad="xi_x" pspad="pad_square" />
@@ -1517,16 +1540,16 @@
 	</actionmap>
 
 	<actionmap name="haste" priority="cheats_haste" exclusivity="1">
-		<action name="haste_key0" onPress="1" noModifiers="1" onRelease="0" keyboard="np_0" />
-		<action name="haste_key1" onPress="1" noModifiers="1" onRelease="0" keyboard="np_1" />
-		<action name="haste_key2" onPress="1" noModifiers="1" onRelease="0" keyboard="np_2" />
-		<action name="haste_key3" onPress="1" noModifiers="1" onRelease="0" keyboard="np_3" />
-		<action name="haste_key4" onPress="1" noModifiers="1" onRelease="0" keyboard="np_4" />
-		<action name="haste_key5" onPress="1" noModifiers="1" onRelease="0" keyboard="np_5" />
-		<action name="haste_key6" onPress="1" noModifiers="1" onRelease="0" keyboard="np_6" />
-		<action name="haste_key7" onPress="1" noModifiers="1" onRelease="0" keyboard="np_7" />
-		<action name="haste_key8" onPress="1" noModifiers="1" onRelease="0" keyboard="np_8" />
-		<action name="haste_key9" onPress="1" noModifiers="1" onRelease="0" keyboard="np_9" />
+		<action name="haste_key0" onPress="1" noModifiers="1" onRelease="0" keyboard="_keybinds_ref_" />
+		<action name="haste_key1" onPress="1" noModifiers="1" onRelease="0" keyboard="_keybinds_ref_" />
+		<action name="haste_key2" onPress="1" noModifiers="1" onRelease="0" keyboard="_keybinds_ref_" />
+		<action name="haste_key3" onPress="1" noModifiers="1" onRelease="0" keyboard="_keybinds_ref_" />
+		<action name="haste_key4" onPress="1" noModifiers="1" onRelease="0" keyboard="_keybinds_ref_" />
+		<action name="haste_key5" onPress="1" noModifiers="1" onRelease="0" keyboard="_keybinds_ref_" />
+		<action name="haste_key6" onPress="1" noModifiers="1" onRelease="0" keyboard="_keybinds_ref_" />
+		<action name="haste_key7" onPress="1" noModifiers="1" onRelease="0" keyboard="_keybinds_ref_" />
+		<action name="haste_key8" onPress="1" noModifiers="1" onRelease="0" keyboard="_keybinds_ref_" />
+		<action name="haste_key9" onPress="1" noModifiers="1" onRelease="0" keyboard="_keybinds_ref_" />
 		<action name="haste_keya" onPress="1" noModifiers="1" onRelease="0" keyboard="a" />
 		<action name="haste_keyb" onPress="1" noModifiers="1" onRelease="0" keyboard="b" />
 		<action name="haste_keyc" onPress="1" noModifiers="1" onRelease="0" keyboard="c" />
@@ -1769,6 +1792,14 @@
 		<action name="toggle_torch" />
 		<action name="xi_toggle_torch" />
 	</actionfilter>
+	
+	<actionfilter name="no_crouch">
+		<action name="toggle_crouch" />
+	</actionfilter>
+
+	<actionfilter name="no_horse_magnetism_activate">
+		<action name="horse_magnetism_activate" />
+	</actionfilter>
 
 	<actionfilter name="no_interaction">
 		<action name="use" />
@@ -1780,10 +1811,6 @@
 		<action name="talk" />
 		<action name="trigger_use" />
 		<action name="trigger_use_hold" />
-	</actionfilter>
-
-	<actionfilter name="no_horse_magnetism_activate">
-		<action name="horse_magnetism_activate" />
 	</actionfilter>
 
 	<controllerlayouts>

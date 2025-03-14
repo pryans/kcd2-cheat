@@ -1,37 +1,49 @@
 <!-- CHEAT MOD BEGIN -->
-<action name="cheat_action slot:1 type:press" onPress="1" keyboard="_keybinds_ref_"/>
-<action name="cheat_action slot:1 type:hold" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:1 type:press" onPress="1" onRelease="0" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:1 type:release" onPress="0" onRelease="1" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:1 type:hold" onPress="0" onRelease="0" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
 
-<action name="cheat_action slot:2 type:press" onPress="1" keyboard="_keybinds_ref_"/>
-<action name="cheat_action slot:2 type:hold" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:2 type:press" onPress="1" onRelease="0" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:2 type:release" onPress="0" onRelease="1" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:2 type:hold" onPress="0" onRelease="0" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
 
-<action name="cheat_action slot:3 type:press" onPress="1" keyboard="_keybinds_ref_"/>
-<action name="cheat_action slot:3 type:hold" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:3 type:press" onPress="1" onRelease="0" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:3 type:release" onPress="0" onRelease="1" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:3 type:hold" onPress="0" onRelease="0" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
 
-<action name="cheat_action slot:4 type:press" onPress="1" keyboard="_keybinds_ref_"/>
-<action name="cheat_action slot:4 type:hold" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:4 type:press" onPress="1" onRelease="0" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:4 type:release" onPress="0" onRelease="1" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:4 type:hold" onPress="0" onRelease="0" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
 
-<action name="cheat_action slot:5 type:press" onPress="1" keyboard="_keybinds_ref_"/>
-<action name="cheat_action slot:5 type:hold" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:5 type:press" onPress="1" onRelease="0" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:5 type:release" onPress="0" onRelease="1" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:5 type:hold" onPress="0" onRelease="0" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
 
-<action name="cheat_action slot:6 type:press" onPress="1" keyboard="_keybinds_ref_"/>
-<action name="cheat_action slot:6 type:hold" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:6 type:press" onPress="1" onRelease="0" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:6 type:release" onPress="0" onRelease="1" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:6 type:hold" onPress="0" onRelease="0" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
 
-<action name="cheat_action slot:7 type:press" onPress="1" keyboard="_keybinds_ref_"/>
-<action name="cheat_action slot:7 type:hold" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:7 type:press" onPress="1" onRelease="0" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:7 type:release" onPress="0" onRelease="1" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:7 type:hold" onPress="0" onRelease="0" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
 
-<action name="cheat_action slot:8 type:press" onPress="1" keyboard="_keybinds_ref_"/>
-<action name="cheat_action slot:8 type:hold" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:8 type:press" onPress="1" onRelease="0" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:8 type:release" onPress="0" onRelease="1" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:8 type:hold" onPress="0" onRelease="0" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
 
-<action name="cheat_action slot:9 type:press" onPress="1" keyboard="_keybinds_ref_"/>
-<action name="cheat_action slot:9 type:hold" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:9 type:press" onPress="1" onRelease="0" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:9 type:release" onPress="0" onRelease="1" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:9 type:hold" onPress="0" onRelease="0" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
 
-<action name="cheat_action slot:10 type:press" onPress="1" keyboard="_keybinds_ref_"/>
-<action name="cheat_action slot:10 type:hold" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:10 type:press" onPress="1" onRelease="0" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:10 type:release" onPress="0" onRelease="1" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:10 type:hold" onPress="0" onRelease="0" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
 
-<action name="cheat_action slot:11 type:press" onPress="1" keyboard="_keybinds_ref_"/>
-<action name="cheat_action slot:11 type:hold" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:11 type:press" onPress="1" onRelease="0" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:11 type:release" onPress="0" onRelease="1" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:11 type:hold" onPress="0" onRelease="0" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
 
-<action name="cheat_action slot:12 type:press" onPress="1" keyboard="_keybinds_ref_"/>
-<action name="cheat_action slot:12 type:hold" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:12 type:press" onPress="1" onRelease="0" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:12 type:release" onPress="0" onRelease="1" onHold="0" keyboard="_keybinds_ref_"/>
+<action consoleCMD="1" name="cheat_action slot:12 type:hold" onPress="0" onRelease="0" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.25" keyboard="_keybinds_ref_"/>
 <!-- CHEAT MOD END -->
