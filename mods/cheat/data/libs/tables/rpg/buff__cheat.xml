@@ -58,16 +58,64 @@
 		<buff buff_class_id="13" buff_exclusivity_id="1" buff_id="df36eb08-a2b4-4cbc-8a8e-737eb51904bc" buff_lifetime_id="0" buff_ui_type_id="1" buff_ui_visibility_id="3" duration="3600" icon_id="sex_time_well_spent" implementation="Cpp:NonHealingPotionBasicTimed" is_persistent="false" buff_ui_order="200" 
 			buff_name="cheat_charm" buff_ui_name="Cheat Charm" buff_params="charisma+100" />
 
-		<!--
-		<buff buff_class_id="13" buff_exclusivity_id="1" buff_id="abafd49a-c4f1-4077-b7f6-0f97e694e2ad" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="3" duration="-1" icon_id="sex_time_well_spent" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
-			buff_name="cheat_buff_preset_01" buff_ui_name="Cheat Buff Preset 1" buff_params="itd*0.5,brm*0.5,grm*2,xpm*2,fsm*1.5,con*0.75,noi*.75,sco*0.50,slh=0" />
-		
-		<buff buff_class_id="13" buff_exclusivity_id="1" buff_id="abafd49a-c4f1-9999-b7f6-0f97e694e2ad" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="3" duration="-1" icon_id="perk_strider" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
-			buff_name="cheat_move" buff_ui_name="Cheat Move" buff_params="Run+15,Walk+5" />
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="f6c71e94-8a32-4aca-93fb-472047d72177" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_horse" buff_ui_name="Cheat Horse" buff_params="strength=100,agility=100,vitality=100,courage=100,cap=1000,mst+1000," />
+
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="6b672f8b-ca6e-4d25-8cff-3f125f1e7502" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_speed_2" buff_ui_name="Cheat Speed 2x" buff_params="rms*2" />
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="6b672f8b-ca6e-4d25-8cff-3f125f1e7504" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_speed_4" buff_ui_name="Cheat Speed 4x" buff_params="rms*4" />
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="6b672f8b-ca6e-4d25-8cff-3f125f1e7506" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_speed_6" buff_ui_name="Cheat Speed 6x" buff_params="rms*6" />
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="6b672f8b-ca6e-4d25-8cff-3f125f1e7508" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_speed_8" buff_ui_name="Cheat Speed 8x" buff_params="rms*8" />
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="6b672f8b-ca6e-4d25-8cff-3f125f1e7510" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_speed_10" buff_ui_name="Cheat Speed 10x" buff_params="rms*10" />
+
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="67639b88-5e61-4668-ae47-b2de4b4b2501" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_offence_1" buff_ui_name="Cheat Damage 1" buff_params="wat*2,wac*0.5,asp*2" />
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="67639b88-5e61-4668-ae47-b2de4b4b2502" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_offence_2" buff_ui_name="Cheat Damage 1" buff_params="wat*4,wac*0.25,asp*4" />
+
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="80d153ad-595c-473f-91a3-8ca1b4a82325" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_item_decay_25" buff_ui_name="Cheat Item Decay 25" buff_params="itd*0.75" />
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="80d153ad-595c-473f-91a3-8ca1b4a82350" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_item_decay_50" buff_ui_name="Cheat Item Decay 50" buff_params="itd*0.50" />
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="80d153ad-595c-473f-91a3-8ca1b4a82375" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_item_decay_75" buff_ui_name="Cheat Item Decay 75" buff_params="itd*0.25" />
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="80d153ad-595c-473f-91a3-8ca1b4a82300" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_item_decay_off" buff_ui_name="Cheat Item Decay Off" buff_params="itd=0,itd*0" />
+
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="7cc5465f-2f3d-490d-bb89-3ff724b43201" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_reputation_1" buff_ui_name="Cheat Reputation 1" buff_params="grm*1.5,brm*0.75" />
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="7cc5465f-2f3d-490d-bb89-3ff724b43202" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_reputation_2" buff_ui_name="Cheat Reputation 2" buff_params="grm*2,brm*0.50" />
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="7cc5465f-2f3d-490d-bb89-3ff724b43203" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_reputation_3" buff_ui_name="Cheat Reputation 1" buff_params="grm*5,brm*0.25" />
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="7cc5465f-2f3d-490d-bb89-3ff724b43204" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_reputation_4" buff_ui_name="Cheat Reputation 1" buff_params="grm*10,brm*0" />
+
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="96b7e7d0-cb43-41f5-b1d6-48a24a5d0b26" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_hero" buff_ui_name="Cheat Hero" buff_params="strength=100,agility=100,vitality=100,speech=100,vision=100,hearing=100,barter=100,courage=100,prestige=100" />
+
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="42aa256e-3fa0-40af-969f-d4d92a103f8e" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_1punch" buff_ui_name="Cheat 1 Punch" buff_params="uat*1000" />		
+
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="e6565039-1e19-4260-9371-196bdc088d0d" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_hardmode_25" buff_ui_name="Cheat Antihero" buff_params="strength*0.75,agility=*0.75,vitality=*0.75,speech=*0.75,vision=*0.75,hearing=*0.75,barter=*0.75,courage=*0.75,prestige*0.75" />
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="1c3a579c-c620-49b7-80fc-a48387b38b8e" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_hardmode_50" buff_ui_name="Cheat Antihero" buff_params="strength*0.5,agility=*0.5,vitality=*0.5,speech=*0.5,vision=*0.5,hearing=*0.5,barter=*0.5,courage=*0.5,prestige*0.5" />
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="95cee907-61bc-4848-9203-51cd47b82c26" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_hardmode_75" buff_ui_name="Cheat Antihero" buff_params="strength*0.25,agility=*0.25,vitality=*0.25,speech=*0.25,vision=*0.25,hearing=*0.25,barter=*0.25,courage=*0.25,prestige*0.25" />
+
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="d718c929-a57f-4ded-859a-6a83eb344423" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_bloody" buff_ui_name="Cheat Bloody" buff_params="bld=100" />
+
+		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="e35ffa13-ff5b-48d7-ae00-fe678528a709" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
+			buff_name="cheat_knockout" buff_ui_name="Cheat Knockout" buff_params="kko=1" />
 
 		<buff buff_class_id="13" buff_exclusivity_id="1" buff_id="abafd49a-c4f1-8888-b7f6-0f97e694e2ad" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="3" duration="-1" icon_id="perk_leg_day" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
-			buff_name="cheat_stamina" buff_ui_name="Cheat Stamina" buff_params="rst%2,slh=0,StaminaCooldownDefault=0,StaminaCooldownAttack=0,StaminaCooldownDodge=0,StaminaCooldownHit=0,StaminaCooldownBlock=0,StaminaCooldownWeaponRaised=0" />
-		-->
+			buff_name="cheat_stamina" buff_ui_name="Cheat Stamina" buff_params="sco*0.50,slh=0,StaminaCooldownDefault=0,StaminaCooldownAttack=0,StaminaCooldownDodge=0,StaminaCooldownHit=0,StaminaCooldownBlock=0,StaminaCooldownWeaponRaised=0" />
 
 		<!-- stacking -->
 		<buff buff_class_id="13" buff_exclusivity_id="1" buff_id="e4fc62ef-683d-4f8d-0010-cca23d364f35" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
