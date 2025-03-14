@@ -108,12 +108,6 @@
 		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="95cee907-61bc-4848-9203-51cd47b82c26" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
 			buff_name="cheat_hardmode_75" buff_ui_name="Cheat Antihero" buff_params="strength*0.25,agility=*0.25,vitality=*0.25,speech=*0.25,vision=*0.25,hearing=*0.25,barter=*0.25,courage=*0.25,prestige*0.25" />
 
-		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="d718c929-a57f-4ded-859a-6a83eb344423" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
-			buff_name="cheat_bloody" buff_ui_name="Cheat Bloody" buff_params="bld=100" />
-
-		<buff buff_class_id="1" buff_exclusivity_id="1" buff_id="e35ffa13-ff5b-48d7-ae00-fe678528a709" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="2" duration="-1" icon_id="star" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
-			buff_name="cheat_knockout" buff_ui_name="Cheat Knockout" buff_params="kko=1" />
-
 		<buff buff_class_id="13" buff_exclusivity_id="1" buff_id="abafd49a-c4f1-8888-b7f6-0f97e694e2ad" buff_lifetime_id="1" buff_ui_type_id="1" buff_ui_visibility_id="3" duration="-1" icon_id="perk_leg_day" implementation="Cpp:Constant" is_persistent="false" buff_ui_order="200" 
 			buff_name="cheat_stamina" buff_ui_name="Cheat Stamina" buff_params="sco*0.50,slh=0,StaminaCooldownDefault=0,StaminaCooldownAttack=0,StaminaCooldownDodge=0,StaminaCooldownHit=0,StaminaCooldownBlock=0,StaminaCooldownWeaponRaised=0" />
 
