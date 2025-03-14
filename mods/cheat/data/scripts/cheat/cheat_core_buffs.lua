@@ -90,7 +90,7 @@ Cheat:createCommand("cheat_add_buff", {
         any = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields partially.") end,
         exact = function (args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Matches fields exactly.") end,
     },
-    "Adds matching buffs to the player.",
+    "Adds matching buffs to the current target or, if nothing is targeted, the player.",
     "Adds all bufss with 'heal' in their name", "cheat_add_buff any:heal",
     "Adds the buff poor_hearing buff by ID", "cheat_add_buff exact:29336a21-dd76-447b-a4f0-94dd6b9db466",
     "Adds the buff healthEatSleep_instant buff by full name", "cheat_add_buff exact:healthEatSleep_instant")
@@ -114,9 +114,16 @@ function Cheat:cheat_add_buff(c)
         return false
     end
 
+    local target = Cheat:getTargetedEntity()
+    if target and target.soul then
+        Cheat:logInfo("Detected target [%s].", tostring(Cheat:getEntityName(target)))
+    else
+        target = player
+    end
+
     local buffsAdded = 0
     for _, buff in pairs(buffs) do
-        if player.soul:AddBuff(buff.buff_id) then
+        if target.soul:AddBuff(buff.buff_id) then
             Cheat:logInfo("Buff Added: %s", Cheat:getBuffDisplayText(buff))
             buffsAdded = buffsAdded + 1
         else
@@ -124,7 +131,11 @@ function Cheat:cheat_add_buff(c)
         end
     end
 
-    Cheat:logInfo("Added [%s] buffs to player.", tostring(buffsAdded))
+    if target == player then
+        Cheat:logInfo("Added [%s] buffs to player.", tostring(buffsAdded))
+    else
+        Cheat:logInfo("Added [%s] buffs to target [%s].", tostring(buffsAdded), tostring(Cheat:getEntityName(target)))
+    end
     return true
 end
 
@@ -195,9 +206,16 @@ function Cheat:cheat_remove_buff(c)
         return false
     end
 
+    local target = Cheat:getTargetedEntity()
+    if target and target.soul then
+        Cheat:logInfo("Detected target [%s].", tostring(Cheat:getEntityName(target)))
+    else
+        target = player
+    end
+
     local buffsRemoved = 0
     for _, buff in pairs(buffs) do
-        if player.soul:RemoveAllBuffsByGuid(buff.buff_id) > 0 then
+        if target.soul:RemoveAllBuffsByGuid(buff.buff_id) > 0 then
             Cheat:logInfo("Buff Removed: %s", Cheat:getBuffDisplayText(buff))
             buffsRemoved = buffsRemoved + 1
         else
@@ -205,7 +223,12 @@ function Cheat:cheat_remove_buff(c)
         end
     end
 
-    Cheat:logInfo("Removed [%s] buffs from player.", tostring(buffsRemoved))
+    if target == player then
+        Cheat:logInfo("Removed [%s] buffs from player.", tostring(buffsRemoved))
+    else
+        Cheat:logInfo("Removed [%s] buffs from target [%s].", tostring(buffsRemoved), tostring(Cheat:getEntityName(target)))
+    end
+
     return true
 end
 
