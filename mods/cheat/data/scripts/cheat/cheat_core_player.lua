@@ -3,7 +3,7 @@
 -- ============================================================================
 Cheat.g_money_id = "5ef63059-322e-4e1b-abe8-926e100c770e"
 Cheat.g_player_states = { health = true, stamina = true, hunger = true, exhaust = true, karma = false, alcoholism = true }
-Cheat.g_player_stats = { strength = true, agility = true, vitality = true, speech = true }
+Cheat.g_player_stats = { strength = true, agility = true, vitality = true, speech = true, vision = true, hearing = true, barter = true, courage = true, prestige = true }
 
 function Cheat:getStrength()
     return player.soul:GetStatLevel("strength")
@@ -157,8 +157,7 @@ Cheat:createCommand("cheat_set_stat_level", {
     "Set player's strength to level 20", "cheat_set_stat_level stat:strength level:20",
     "Set player's agility to level 5", "cheat_set_stat_level stat:agility level:5")
 function Cheat:cheat_set_stat_level(c)
-    local values = { strength = true, agility = true, vitality = true, speech = true }
-    if not values[Cheat:toLower(c.stat)] then
+    if not Cheat.g_player_stats[c.stat] then
         Cheat:logError("Invalid stat [%s].", tostring(c.stat))
         return false
     end
