@@ -191,6 +191,8 @@ function Cheat:entityDumper(entity)
     end
 
     --[[
+    https://warhorse.youtrack.cloud/articles/KM-A-21/Stats-and-skills#title
+
     alp = potion/consumables all have alp+1?
     cnp = horse_price (cnp * 10)
     xpm = xp multiplier
@@ -266,7 +268,7 @@ function Cheat:entityDumper(entity)
     Run = run speed  (overloaded:Run-1)
     Walk = walk speed (overloaded:Walk-0.1)
     fsm = movement speed? doesn't seem to work (sprint fsm*2) (crouch fsm*0.3)s
-    rms = run movemeent speed multiplier
+    rms = RealMoveSpeedMod
 
     --Reputation--------------------------
     grm = good reputation multiplier (perk_sympatak grm*1.1 | crime_punishment_brand grm*0.5)
