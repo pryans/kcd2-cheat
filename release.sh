@@ -90,6 +90,7 @@ EOF
 releaseMod mods/cheat/release.properties env.properties
 releaseMod mods/cheat-autoexec/release.properties env.properties
 releaseMod mods/cheat-keys/release.properties env.properties
+releaseMod mods/cheat-quest/release.properties env.properties
 
 # Launch KCD2
 cmd.exe /C start steam://rungameid/1771300
