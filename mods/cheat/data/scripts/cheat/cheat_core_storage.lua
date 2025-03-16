@@ -90,6 +90,10 @@ function Cheat:getStashes(searchOperation)
     return stashDatabase
 end
 
+function Cheat:core_storage_reset()
+    Cheat.g_stash_last_opened = nil
+end
+
 -- ============================================================================
 -- cheat_stash
 -- ============================================================================

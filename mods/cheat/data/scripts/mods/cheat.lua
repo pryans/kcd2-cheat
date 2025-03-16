@@ -212,6 +212,7 @@ function Cheat:onGameplayStarted()
     Cheat:logDebug("Cheat:onGameplayStarted")
     Cheat:cheat_timer(true)
     Cheat:startPhysics()
+    Cheat:core_storage_reset()
     Cheat:autoexec()
 end
 
