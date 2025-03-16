@@ -709,6 +709,107 @@ function Cheat:cheat_spawn(c)
 end
 
 -- ============================================================================
+-- cheat_transfer_items
+-- ============================================================================
+Cheat:createCommand("cheat_transfer_items", {
+    any = function(args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Partial Match NPC Name") end,
+    exact = function(args, name, showHelp) return Cheat:argsGetOptional(args, name, nil, showHelp, "Accurate matching of NPC names") end,
+    to = function(args, name, showHelp) return Cheat:argsGetOptionalNumber(args, name, 0, showHelp, "Transfer items to self(0), horse(1), stash(2) or delete(-1). Default 0.") end
+    },
+    "Transfer all items of the target or matching NPC to the player.",
+    "Transfer all items from current target to the player", "cheat_transfer_items",
+    "Transfer all items from Bara to the player", "cheat_transfer_items exact:bara",
+    "Transfer all items from current target to the horse", "cheat_transfer_items to:1",
+    "Transfer all items from current target to the stash", "cheat_transfer_items to:2",
+    "Delete all items from current target", "cheat_transfer_items to:-1")
+function Cheat:cheat_transfer_items(c)
+    local search = c.exact and { exact = true, searchKey = c.exact } or
+        c.any and { exact = false, searchKey = c.any } or nil
+
+    local npcs = search and Cheat:findNpcs(search, nil) or { Cheat:getTargetedEntity() }
+
+    local to = c.to
+    if to < -1 or to > 2 then
+        Cheat:logWarn("Invalid transfer target [%s]. Must be 0, 1, 2, or -1.", tostring(to))
+        return false
+    end
+    Cheat:logInfo("Transfer target: %s", to == 0 and "Player" or to == 1 and "Horse" or to == 2 and "Stash" or "Delete")
+
+    if not npcs or #npcs == 0 then
+        Cheat:logWarn("Target NPC not found")
+        return false
+    end
+
+    local target
+    local targetInventory
+    if to ~= -1 then
+        if to == 0 then
+            target = player
+        elseif to == 1 then
+            target = Cheat:getPlayerHorse()
+        elseif to == 2 then
+            local stashDatabase = Cheat:getStashes({ exact = false, searchKey = nil })
+            if not stashDatabase or #stashDatabase == 0 then
+                Cheat:logWarn("No stash found.")
+                return false
+            end
+            local stashesInfo = stashDatabase[1]
+            if not stashesInfo.stashes or #stashesInfo.stashes == 0 then
+                Cheat:logWarn("Stash inventory not found.")
+                return false
+            end
+            local stashInfo = stashesInfo.stashes[1]
+            Cheat:logInfo("Opening [%s Stash] (owner=%s type=%s index=%s).", tostring(stashesInfo.name), tostring(stashInfo.stashOwnerName), tostring(c.type), tostring(c.index))
+            target = XGenAIModule.GetEntityByWUID(stashInfo.stash:GetInventoryToOpen())
+        end
+
+        if not target or not target.inventory or not target.inventory.CreateItem then
+            Cheat:logWarn("Target inventory is invalid or does not exist.")
+            return false
+        end
+        targetInventory = target.inventory
+    end
+
+    for _, npc in ipairs(npcs) do
+        if npc.actor then
+            Cheat:logInfo("Processing NPC: %s", Cheat:getEntityDisplayText(npc))
+            local inventory = npc.inventory
+            if inventory then
+                local currentItems = {}
+                for _, userdata in pairs(inventory:GetInventoryTable() or {}) do
+                    table.insert(currentItems, userdata)
+                end
+
+                for _, userdata in ipairs(currentItems) do
+                    local itemInstance = ItemManager.GetItem(userdata)
+                    if itemInstance then
+                        local itemDefinition = Cheat:getItem(itemInstance.class)
+                        if itemDefinition then
+                            if to ~= -1 then
+                                if targetInventory:CreateItem(itemInstance.class, itemInstance.health, itemInstance.amount) then
+                                    ItemManager.RemoveItem(userdata)
+                                    Cheat:logInfo("Transferred item: %s *%s", itemDefinition.name, itemInstance.amount)
+                                    Game.ShowItemsTransfer(itemInstance.class, itemInstance.amount)
+                                end
+                            else
+                                ItemManager.RemoveItem(userdata)
+                                Cheat:logInfo("Deleted item: %s *%s", itemDefinition.name, itemInstance.amount)
+                            end
+                        end
+                    end
+                end
+            else
+                Cheat:logWarn("No inventory system for this NPC")
+            end
+        else
+            Cheat:logWarn("Invalid NPC entity: %s", npc.name or "?")
+        end
+    end
+    Cheat:logInfo("All items have been processed.")
+    return true
+end
+
+-- ============================================================================
 -- end
 -- ============================================================================
 Cheat:logDebug("cheat_core_npc.lua loaded")
