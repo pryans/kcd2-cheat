@@ -8,9 +8,10 @@
 	<ui_group name="gui" ui_label="ui_keybinds_group_inventory" />
 	<ui_group name="photomode" ui_label="ui_keybinds_group_photomode"/>
 	<ui_group name="other" ui_label="ui_keybinds_group_other"/>
-	<ui_group name="cheatkeys" ui_label="ui_keybinds_group_cheatkeys"/>
 	
 	<!-- CHEAT MOD BEGIN -->
+	<ui_group name="cheatkeys" ui_label="ui_keybinds_group_cheatkeys"/>
+
 	<superaction name="cheat_action slot:1" ui_group="cheatkeys" ui_name="cheat_action1_press" ui_tooltip="" keyboard="writeable">
 		<action consoleCMD="1" name="cheat_action slot:1 type:press" map="player" />
 		<action consoleCMD="1" name="cheat_action slot:1 type:release" map="player" />
