@@ -397,16 +397,28 @@
 		<action name="open_web" keyboard="_keybinds_ref_" onPress="1" onRelease="1" xboxpad="xi_x" pspad="pad_square" />
 	</actionmap>
 
-	<actionmap name="dialog_minigame" priority="pure_include" exclusivity="0">		<!-- only for include -->
+	<actionmap name="dialog_minigame_move" priority="pure_include" exclusivity="0">		<!-- only for include -->
 		<include actionmap="apse_focus" />
 		<action name="scroll_up" onPress="1" onRelease="1" keyboard="_keybinds_ref_" />
 		<action name="scroll_down" onPress="1" onRelease="1" keyboard="_keybinds_ref_" />
-		<action name="move_left" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_triggerl_btn" pspad="pad_l2" noModifiers="1" />
-		<action name="move_right" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_triggerr_btn" pspad="pad_r2" noModifiers="1" />
+		<action name="dialog_move_prev" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_triggerl_btn" pspad="pad_l2" noModifiers="1" />
+		<action name="dialog_move_next" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_triggerr_btn" pspad="pad_r2" noModifiers="1" />
+	</actionmap>
+
+	<actionmap name="dialog_minigame" priority="pure_include" exclusivity="0">		<!-- only for include -->
+		<include actionmap="dialog_minigame_move" />
+		<include actionmap="help_dialog" />    <!-- Because we need override class in defaultActionHelp.xml -->
 		<action name="confirm" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.5"  keyboard="_keybinds_ref_" holdRepeatDelay="-1" xboxpad="xi_x" pspad="pad_square" />
 		<action name="cancel" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.5" keyboard="_keybinds_ref_" holdRepeatDelay="-1" xboxpad="xi_b" pspad="pad_circle" />
 		<action name="next_step" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_a" pspad="pad_cross" />
 		<action name="next_step_mouse" keyboard="_keybinds_ref_" onPress="1" onRelease="1" />
+	</actionmap>
+
+	<actionmap name="forge_builder" priority="pure_include" exclusivity="0">
+    	<include actionmap="dialog_minigame_move" />
+		<action name="dialog_move_prev_alt" onPress="1" onRelease="1" xboxpad="xi_thumbl_left" pspad="pad_stickl_left" noModifiers="1" />
+		<action name="dialog_move_next_alt" onPress="1" onRelease="1" xboxpad="xi_thumbl_right" pspad="pad_stickl_right" noModifiers="1" />
+    	<include actionmap="help_dialog" />    <!-- Because we need override class in defaultActionHelp.xml -->
 	</actionmap>
 
 	<!-- default -->
@@ -825,12 +837,13 @@
 		<action name="horse_inspect_close" keyboard="_keybinds_ref_" onPress="1" onRelease="1" xboxpad="xi_b" pspad="pad_circle"/>
 	</actionmap>
 
-	<actionmap name="help_dialog" priority="minigames" exclusivity="0">		<!-- set only from C_UIHUDElements -->
+	<actionmap name="help_dialog" priority="minigames_over" exclusivity="0">		<!-- set only from C_UIHelpOverlay -->
 		<action name="open_help_screen" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_back" pspad="pad_touch" noModifiers="1"/>
 	</actionmap>
 
 	<actionmap name="minigame" priority="minigames" exclusivity="1">		<!-- used only as include -->
 		<include actionmap="open_pause_menu" />
+		<include actionmap="help_dialog" />
 		<include actionmap="minigame_exit"/>
 	</actionmap>
 
@@ -958,6 +971,13 @@
 		<include actionmap="minigame" />
 	</actionmap>
 
+	<actionmap name="blacksmithing_forge_basic" priority="minigames" exclusivity="1">
+		<include actionmap="blacksmithing" />
+		<action name="blacksmith_to_anvil" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_a" pspad="pad_cross"/>
+		<action name="blacksmith_inspection" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_x" pspad="pad_square"/>
+		<action name="blacksmith_use_forgebag" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_triggerr_btn" pspad="pad_r2"/>
+	</actionmap>
+
 	<actionmap name="blacksmithing_forge" priority="minigames" exclusivity="1">
 		<include actionmap="blacksmithing" />
 		<include actionmap="blacksmithing_move" />
@@ -1023,6 +1043,19 @@
 		<include actionmap="toggle_helmet" />
 	</actionmap>
 
+	<actionmap name="forge_builder_slots" priority="minigames" exclusivity="1">
+		<include actionmap="forge_builder" />
+		<include actionmap="minigame_exit"/>
+		<action name="edit" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_a" pspad="pad_cross" />
+	</actionmap>
+	
+	<actionmap name="forge_builder_assets" priority="minigames_over" exclusivity="1">
+		<include actionmap="forge_builder" />
+		<action name="equipp" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_a" pspad="pad_cross" />
+		<action name="buy" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.5" keyboard="_keybinds_ref_" xboxpad="xi_a" pspad="pad_cross" />
+		<action name="back" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_b" pspad="pad_circle"/>
+	</actionmap>
+	
 	<!-- minigames_over -->
 	<actionmap name="alchemy_reading" priority="minigames_over" exclusivity="1">
 		<include actionmap="reading_base" />
@@ -1052,11 +1085,15 @@
 	<actionmap name="barber_interaction" priority="minigames_over" exclusivity="1">
 		<include actionmap="open_pause_menu" />
 		<include actionmap="dialog_minigame" />
-		<include actionmap="help_dialog" />    <!-- Because we need override class in defaultActionHelp.xml -->
 		<action name="mouse_looking_x" keyboard="maxis_x" />
 		<action name="mouse_looking_y" keyboard="maxis_y" />
 		<action name="xi_looking_x" xboxpad="xi_thumbrx" pspad="pad_stickrx"/>
 		<action name="xi_looking_y" xboxpad="xi_thumbry" pspad="pad_stickry"/>
+	</actionmap>
+
+	<actionmap name="shield_painting_interaction" priority="minigames_over" exclusivity="1">
+		<include actionmap="open_pause_menu" />
+		<include actionmap="dialog_minigame" />
 	</actionmap>
 
 	<!-- qam -->
@@ -1289,6 +1326,16 @@
 	<actionmap name="item_selection_multiselect" priority="apse" exclusivity="1">
 		<include actionmap="inventory_base" />
 		<include actionmap="apse_selection" />
+		<include actionmap="apse_selection_all" />
+		<include actionmap="apse_confirm" />
+		<include actionmap="apse_close" />
+		<include actionmap="apse_toggle_info" />
+		<include actionmap="apse_toggle_category" />
+	</actionmap>
+
+	<actionmap name="item_selection_minigame" priority="apse" exclusivity="1">
+		<include actionmap="inventory_base" />
+		<include actionmap="apse_selection" />
 		<include actionmap="apse_confirm" />
 		<include actionmap="apse_close" />
 		<include actionmap="apse_toggle_info" />
@@ -1410,7 +1457,14 @@
 		<action name="first_time_overlay_decline" keyboard="_keybinds_ref_" onPress="1" onRelease="1" xboxpad="xi_b" pspad="pad_circle" />
 	</actionmap>
 
-	<actionmap name="photomode" priority="overlays" exclusivity="1">		<!-- set only from C_PhotomodeManager -->
+	<actionmap name="photomode_base" priority="overlays" exclusivity="1">		<!-- set only from C_PhotomodeManager -->
+		<action name="take_screenshot" keyboard="_keybinds_ref_" onPress="1" onRelease="1" xboxpad="xi_a" pspad="pad_cross" />
+		<action name="toggle_hints_visibility" keyboard="_keybinds_ref_" onPress="1" onRelease="1" xboxpad="xi_x" pspad="pad_square" />
+		<action name="toggle_mode" keyboard="_keybinds_ref_" onPress="1" onRelease="1" xboxpad="xi_start" pspad="pad_start" />
+		<action name="close_photomode" keyboard="_keybinds_ref_" onPress="1" onRelease="1" xboxpad="xi_b" pspad="pad_circle" />
+	</actionmap>
+
+	<actionmap name="photomode_camera" priority="overlays" exclusivity="1">		<!-- set only from C_PhotomodeManager -->
 		<action name="photomode_moveleft" onPress="1" onRelease="1" retriggerable="1" keyboard="_keybinds_ref_" />
 		<action name="photomode_moveright" onPress="1" onRelease="1" retriggerable="1" keyboard="_keybinds_ref_" />
 		<action name="photomode_xi_movex" retriggerable="1" xboxpad="xi_thumblx" pspad="pad_sticklx"/>
@@ -1423,11 +1477,12 @@
 		<action name="photomode_rotatepitch" keyboard="maxis_y" />
 		<action name="photomode_xi_rotateyaw" retriggerable="1" xboxpad="xi_thumbrx" pspad="pad_stickrx"/>
 		<action name="photomode_xi_rotatepitch" retriggerable="1" xboxpad="xi_thumbry" pspad="pad_stickry"/>
-		<action name="take_screenshot" keyboard="_keybinds_ref_" onPress="1" onRelease="1" xboxpad="xi_a" pspad="pad_cross" />
-		<action name="toggle_hints_visibility" keyboard="_keybinds_ref_" onPress="1" onRelease="1" xboxpad="xi_x" pspad="pad_square" />
-		<action name="close_photomode" keyboard="_keybinds_ref_" onPress="1" onRelease="1" xboxpad="xi_b" pspad="pad_circle" />
-		<action name="slow_movement" keyboard="_keybinds_ref_" onPress="1" onRelease="1" />
 		<action name="fast_movement" keyboard="_keybinds_ref_" onPress="1" onRelease="1" />
+	</actionmap>
+
+	<actionmap name="photomode_menu" priority="overlays" exclusivity="1">		<!-- set only from C_PhotomodeManager -->
+		<include actionmap="navigation" />
+		<action name="photomode_reset_menu" keyboard="_keybinds_ref_" onPress="1" onRelease="1" xboxpad="xi_y" pspad="pad_triangle" />
 	</actionmap>
 
 	<!-- cheats -->
@@ -1637,6 +1692,13 @@
 		<action name="jump" />
 		<action name="sprint" />
 		<action name="toggle_run" />
+	</actionfilter>
+
+	<actionfilter name="no_standUp">
+		<action name="sitting_exit_left" />
+		<action name="sitting_exit_right" />
+		<action name="sitting_exit_up" />
+		<action name="sitting_exit_down" />
 	</actionfilter>
 
 	<actionfilter name="no_camera">

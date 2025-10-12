@@ -101,14 +101,14 @@
 	<!-- GENERAL -->
 	<superaction name="left" ui_group="general" ui_name="ui_keybinds_left" ui_tooltip="" keyboard="writeable">
 		<action name="moveleft" map="movement_x" />
-		<action name="photomode_moveleft" map="photomode" />
+		<action name="photomode_moveleft" map="photomode_camera" />
 		<action name="left" map="navigation_left" />
 		<action name="move_left" map="apse_move_horizontal" />
 		<action name="sword_position_left" map="sharpening" />
 		<action name="read_prev" map="reading_base" />
 		<action name="dice_left" map="dice_interaction" />
 		<action name="sitting_exit_left" map="sitting" />
-		<action name="move_left" map="dialog_minigame" />
+		<action name="dialog_move_prev" map="dialog_minigame_move" />
 
 		<control input="a" controller="keyboard" />
 		<control input="left" controller="keyboard" />
@@ -116,7 +116,7 @@
 
 	<superaction name="right" ui_group="general" ui_name="ui_keybinds_right" ui_tooltip="" keyboard="writeable">
 		<action name="moveright" map="movement_x" />
-		<action name="photomode_moveright" map="photomode" />
+		<action name="photomode_moveright" map="photomode_camera" />
 		<action name="right" map="navigation_right" />
 		<action name="move_right" map="apse_move_horizontal" />
 		<action name="sword_position_right" map="sharpening" />
@@ -124,7 +124,7 @@
 		<action name="dice_right" map="dice_interaction" />
 		<action name="lock_dir_fwd" map="lockpicking" />
 		<action name="sitting_exit_right" map="sitting" />
-		<action name="move_right" map="dialog_minigame" />
+		<action name="dialog_move_next" map="dialog_minigame_move" />
 
 		<control input="d" controller="keyboard" />
 		<control input="right" controller="keyboard" />
@@ -132,7 +132,7 @@
 
 	<superaction name="up" ui_group="general" ui_name="ui_keybinds_up" ui_tooltip="" keyboard="writeable">
 		<action name="moveforward" map="movement_y" />
-		<action name="photomode_moveforward" map="photomode" />
+		<action name="photomode_moveforward" map="photomode_camera" />
 		<action name="up" map="navigation_up" />
 		<action name="focus_prev" map="apse_focus" />
 		<action name="sword_rotation_up" map="sharpening" />
@@ -145,7 +145,7 @@
 
 	<superaction name="down" ui_group="general" ui_name="ui_keybinds_down" ui_tooltip="" keyboard="writeable">
 		<action name="moveback" map="movement_y" />
-		<action name="photomode_moveback" map="photomode" />
+		<action name="photomode_moveback" map="photomode_camera" />
 		<action name="down" map="navigation_down" />
 		<action name="focus_next" map="apse_focus" />
 		<action name="sword_rotation_down" map="sharpening" />
@@ -199,10 +199,13 @@
 		<action name="secondary_action" map="apse_item_actions" />
 		<action name="mount_horse" map="interaction" />
 		<action name="start_fast_travel" map="apse_map_interaction" />
-		<action name="take_screenshot" map="photomode" />
+		<action name="take_screenshot" map="photomode_base" />
 		<action name="map_focus_objective" map="apse_questlog_map" />
 		<action name="first_time_overlay_confirm" map="first_time_overlay" />
 		<action name="next_step" map="dialog_minigame" />
+		<action name="buy" map="forge_builder_assets" />
+		<action name="edit" map="forge_builder_slots" />
+		<action name="equipp" map="forge_builder_assets" />
 
 		<control input="e" controller="keyboard" />
 		<control input="enter" controller="keyboard" />
@@ -256,10 +259,11 @@
 		<action name="minigame_exit" map="minigame_exit" />
 		<action name="loading_video_esc" map="loading" />
 		<action name="close_crime_list" map="dialog_crime_list" />
-		<action name="close_photomode" map="photomode" />
+		<action name="close_photomode" map="photomode_base" />
 		<action name="close_tutorial" map="close_tutorial" />
 		<action name="first_time_overlay_decline" map="first_time_overlay" />
 		<action name="cancel" map="dialog_minigame" />
+		<action name="back" map="forge_builder_assets" />
 
 		<control input="escape" controller="keyboard" />
 		<control input="backspace" controller="keyboard" />
@@ -269,7 +273,7 @@
 	<superaction name="jump" ui_group="movement" ui_name="ui_keybinds_jump" ui_tooltip="" keyboard="writeable">
 		<action name="jump" map="movement" />
 		<action name="xi_pedaling" map="sharpening" />
-		<action name="photomode_moveup" map="photomode" />
+		<action name="photomode_moveup" map="photomode_camera" />
 		<control input="space" controller="keyboard" />
 	</superaction>
 
@@ -282,7 +286,7 @@
 
 	<superaction name="toggle_crouch" ui_group="movement" ui_name="ui_keybinds_toggle_crouch" ui_tooltip="" keyboard="writeable">
 		<action name="toggle_crouch" map="movement" />
-		<action name="photomode_movedown" map="photomode" />
+		<action name="photomode_movedown" map="photomode_camera" />
 		<control input="c" controller="keyboard" />
 	</superaction>
 
@@ -510,7 +514,7 @@
 		<action name="haggle" map="item_selection_repair" />
 		<action name="close_deal" map="shop" />
 		<action name="haggle" map="shop" />
-		<action name="toggle_hints_visibility" map="photomode" />
+		<action name="toggle_hints_visibility" map="photomode_base" />
 		<action name="toggle_track_quest" map="apse_questlog" />
 		<action name="toggle_track_poi" map="apse_map_legend" />
 		<action name="toggle_track_poi_all" map="apse_map_legend" />
@@ -531,14 +535,19 @@
 		<control input="f1" controller="keyboard" />
 	</superaction>
 
-	<superaction name="photomode_slow_movement" ui_group="photomode" ui_name="ui_keybinds_photomode_slow_movement" ui_tooltip="" keyboard="writeable">
-		<action name="slow_movement" map="photomode" />
-		<control input="capslock" controller="keyboard" />
+	<superaction name="photomode_fast_movement" ui_group="photomode" ui_name="ui_keybinds_photomode_fast_movement" ui_tooltip="" keyboard="writeable">
+		<action name="fast_movement" map="photomode_camera" />
+		<control input="lshift" controller="keyboard" />
 	</superaction>
 
-	<superaction name="photomode_fast_movement" ui_group="photomode" ui_name="ui_keybinds_photomode_fast_movement" ui_tooltip="" keyboard="writeable">
-		<action name="fast_movement" map="photomode" />
-		<control input="lshift" controller="keyboard" />
+	<superaction name="photomode_toggle_mode" ui_group="photomode" ui_name="ui_keybinds_photomode_toggle_mode" ui_tooltip="" keyboard="writeable">
+		<action name="toggle_mode" map="photomode_base" />
+		<control input="m" controller="keyboard" />
+	</superaction>
+
+	<superaction name="photomode_reset" ui_group="photomode" ui_name="ui_keybinds_photomode_reset_menu" ui_tooltip="" keyboard="writeable">
+		<action name="photomode_reset_menu" map="photomode_menu" />
+		<control input="r" controller="keyboard" />
 	</superaction>
 
 	<!-- OTHER / MINIGAMES -->
@@ -548,6 +557,7 @@
 		<action name="open_crime_list" map="dialog_crime_list_open" />
 		<action name="close_crime_list_alt" map="dialog_crime_list" />
 		<action name="blacksmith_inspection" map="blacksmithing_forge" />
+		<action name="blacksmith_inspection" map="blacksmithing_forge_basic" />
 		<action name="blacksmith_inspection_stop" map="blacksmithing_inspection" />
 		<action name="blacksmith_swap_workpiece" map="blacksmithing_anvil" />
 		<control input="f" controller="keyboard" />
@@ -558,6 +568,7 @@
 		<action name="read_toggle" map="alchemy_reading" />
 		<action name="alch_use_bag" map="alchemy" />
 		<action name="blacksmith_use_forgebag" map="blacksmithing_forge" />
+		<action name="blacksmith_use_forgebag" map="blacksmithing_forge_basic" />
 		<control input="q" controller="keyboard" />
 	</superaction>
 
@@ -567,6 +578,7 @@
 		<action name="alch_back" map="alchemy" />
 		<action name="read_back" map="alchemy_reading" />
 		<action name="blacksmith_to_anvil" map="blacksmithing_forge" />
+		<action name="blacksmith_to_anvil" map="blacksmithing_forge_basic" />
 		<action name="blacksmith_to_forge" map="blacksmithing_anvil" />
 		<control input="r" controller="keyboard" />
 	</superaction>
@@ -613,7 +625,7 @@
 	<superaction name="ui_and_dialog_wheel_down" ui_group="">
 		<action name="map_zoom_down" map="apse_map_move" />
 		<action name="scroll_down" map="navigation_down" />
-		<action name="scroll_down" map="dialog_minigame" />
+		<action name="scroll_down" map="dialog_minigame_move" />
 		<action name="chat_down" map="chat_interaction" />
 		<control input="mwheel_down" controller="keyboard" />
 	</superaction>
@@ -621,7 +633,7 @@
 	<superaction name="ui_and_dialog_wheel_up" ui_group="">
 		<action name="map_zoom_up" map="apse_map_move" />
 		<action name="scroll_up" map="navigation_up" />
-		<action name="scroll_up" map="dialog_minigame" />
+		<action name="scroll_up" map="dialog_minigame_move" />
 		<action name="chat_up" map="chat_interaction" />
 		<control input="mwheel_up" controller="keyboard" />
 	</superaction>
@@ -986,6 +998,11 @@
 		<superaction name="skiptime" />
 	</conflict>
 
+	<conflict name="shield_painting">
+		<superaction name="minigame_action_4"/>
+		<superaction name="move_item" />
+	</conflict>
+
 	<!-- sharpening -->
 	<conflict>
 		<superaction name="jump" />
@@ -998,11 +1015,13 @@
 	<!-- photomode -->
 	<conflict>
 		<superaction name="tobii_enable" />
-		<superaction name="photomode_slow_movement" />
 		<superaction name="photomode_fast_movement" />
+		<superaction name="photomode_toggle_mode" />
+		<superaction name="photomode_reset" />
 		<superaction name="back" />
 		<superaction name="primary_action" />
 		<superaction name="move_item" />
+		<include conflict="directions_in_ui"/>
 	</conflict>
 
 	<!--===========================================================================-->
