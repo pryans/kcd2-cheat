@@ -112,7 +112,7 @@ function run() {
     exit 0
 }
 
-MODS="mods/cheat/release.properties mods/cheat-autoexec/release.properties mods/cheat-keys/release.properties "
+MODS="mods/cheat/release.properties mods/cheat-autoexec/release.properties mods/cheat-keys/release.properties mods/cheat-quest/release.properties"
 COMMANDS="${1:-build install run}"
 
 for MOD in ${MODS}; do
