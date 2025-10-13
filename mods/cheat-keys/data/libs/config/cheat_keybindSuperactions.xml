@@ -1,6 +1,6 @@
+	<!-- CHEAT MOD BEGIN -->
 	<ui_group name="cheatkeys" ui_label="ui_keybinds_group_cheatkeys"/>
 
-	<!-- CHEAT MOD BEGIN -->
 	<superaction name="cheat_action slot:1" ui_group="cheatkeys" ui_name="cheat_action1_press" ui_tooltip="" keyboard="writeable">
 		<action consoleCMD="1" name="cheat_action slot:1 type:press" map="player" />
 		<action consoleCMD="1" name="cheat_action slot:1 type:release" map="player" />

@@ -8,9 +8,9 @@ I use VSCode and WSL to build and release this mod.
 - Install WSL VSCode plugin
 - Install the latest Ubuntu using the WLS plugin.
 - In the terminal tab of VSCode you start an Ubuntu-XX(WSL) terminal.
-- Run `./release.sh` to auto create `env.properties` then edit this file with your KCD2 path.
+- Run `./mods.sh` to auto create `env.properties` then edit this file with your KCD2 path.
 
 ### Build Process
 - Edit `cheat*.properties` files and bump the version numbers as needed.
-- Run `./release.sh` to rebuild all mods and install them in KCD2.
+- Run `./mods.sh` to rebuild all mods and install them in KCD2.
 - The mod zip files will be in the `./build/` folder for uploading.
