@@ -217,7 +217,7 @@
 		<control input="g" controller="keyboard" />
 	</superaction>
 	
-	<superaction name="companion_bond" ui_group="general" ui_name="ui_keybinds_companion_bond" ui_tooltip="ui_keybinds_companion_desc" keyboard="writeable">
+	<superaction name="companion_bond" ui_group="general" ui_name="ui_keybinds_companion_bond" ui_tooltip="" keyboard="writeable">
 		<action name="companion_bond" map="interaction" />
 		<action name="horse_saddle_bond" map="horse_mounted" />
 		<control input="v" controller="keyboard" />
@@ -237,7 +237,6 @@
 	<superaction name="skip_dialog" ui_group="general" ui_name="ui_keybinds_skip_dialog" ui_tooltip="ui_keybinds_skip_dialog_desc" keyboard="writeable">
 		<action name="cutscene_skip" map="cutscene" />
 		<action name="dialog_skip" map="dialog" />
-		<action name="dialog_cancel" map="dialog" />
 		<action name="chat_cancel" map="chat_interaction" />
 		<action name="cutscene_abort" map="cutscene" />
 		<action name="loading_video_skip" map="loading" />
@@ -262,6 +261,7 @@
 		<action name="close_photomode" map="photomode_base" />
 		<action name="close_tutorial" map="close_tutorial" />
 		<action name="first_time_overlay_decline" map="first_time_overlay" />
+		<action name="dialog_cancel" map="dialog" /><!-- enabled/disabled only from C_DialogInteraction::AddHaggleOption -->
 		<action name="cancel" map="dialog_minigame" />
 		<action name="back" map="forge_builder_assets" />
 
@@ -300,7 +300,7 @@
 		<control input="lctrl" controller="keyboard" />
 	</superaction>
 	
-	<superaction name="companion_interaction" ui_group="movement" ui_name="ui_keybinds_companion" ui_tooltip="" keyboard="writeable">
+	<superaction name="companion_interaction" ui_group="movement" ui_name="ui_keybinds_companion" ui_tooltip="ui_keybinds_companion_desc" keyboard="writeable">
 		<action name="use_horse" map="interaction" />
 		<action name="horse_dismount" map="horse_mounted" />
 		<action name="cart_dismount" map="cart" />
@@ -591,23 +591,21 @@
 
 	<!-- hidden (unchangable) -->
 	<!-- extra actions -->
-	<superaction name="confirm_dialog_extra" ui_group="">
+	<superaction name="confirm_dialog_extra" ui_group="" keyboard="hidden">
 		<action name="dialog_confirm_mouse" map="dialog" />
 		<action name="next_step_mouse" map="dialog_minigame" />
 		<action name="chat_confirm_mouse" map="chat_interaction" />
 		<control input="mouse1" controller="keyboard" />
 	</superaction>
 
-	<superaction name="accept_game_over" ui_group="">
-		<action name="accept_game_over" map="game_over" />
-		<control input="e" controller="keyboard" />
-		<control input="enter" controller="keyboard" />
-		<control input="np_enter" controller="keyboard" />
-	</superaction>
-
 	<superaction name="ui_clear" ui_group="" keyboard="hidden">
 		<action name="menu_clear" map="menu" />
 		<control input="delete" controller="keyboard" />
+	</superaction>
+
+	<superaction name="ui_reset_keybind" ui_group="" keyboard="hidden">
+		<action name="menu_reset_keybind" map="menu" />
+		<control input="home" controller="keyboard" />
 	</superaction>
 
 	<superaction name="menu_pros" ui_group="" keyboard="hidden">
@@ -622,15 +620,7 @@
 	</superaction>
 
 	<!-- mouse in UI -->
-	<superaction name="ui_and_dialog_wheel_down" ui_group="">
-		<action name="map_zoom_down" map="apse_map_move" />
-		<action name="scroll_down" map="navigation_down" />
-		<action name="scroll_down" map="dialog_minigame_move" />
-		<action name="chat_down" map="chat_interaction" />
-		<control input="mwheel_down" controller="keyboard" />
-	</superaction>
-
-	<superaction name="ui_and_dialog_wheel_up" ui_group="">
+	<superaction name="ui_and_dialog_wheel_up" ui_group="general" ui_name="ui_keybinds_wheel_up" ui_tooltip="ui_keybinds_wheel_up_tt" keyboard="writeable">
 		<action name="map_zoom_up" map="apse_map_move" />
 		<action name="scroll_up" map="navigation_up" />
 		<action name="scroll_up" map="dialog_minigame_move" />
@@ -638,41 +628,49 @@
 		<control input="mwheel_up" controller="keyboard" />
 	</superaction>
 
-	<superaction name="checkpoint_mouse" ui_group="">
+	<superaction name="ui_and_dialog_wheel_down" ui_group="general" ui_name="ui_keybinds_wheel_down" ui_tooltip="ui_keybinds_wheel_down_tt" keyboard="writeable">
+		<action name="map_zoom_down" map="apse_map_move" />
+		<action name="scroll_down" map="navigation_down" />
+		<action name="scroll_down" map="dialog_minigame_move" />
+		<action name="chat_down" map="chat_interaction" />
+		<control input="mwheel_down" controller="keyboard" />
+	</superaction>
+
+	<superaction name="checkpoint_mouse" ui_group="gui" ui_name="ui_keybinds_map_checkpoint" keyboard="writeable">
 		<action name="checkpoint" map="apse_map_checkpoint" />
 		<control input="mouse2" controller="keyboard" />
 	</superaction>
 
 	<!-- qam -->
-	<superaction name="qam_1" ui_group="qam" ui_name="ui_keybinds_qam_1" keyboard="readable">
+	<superaction name="qam_1" ui_group="qam" ui_name="ui_keybinds_qam_1" keyboard="writeable">
 		<action name="action_qam_1" map="qam_init" />
 		<action name="weapon_slot_1" map="apse_qam_slots" />
 		<control input="1" controller="keyboard" />
 		<control input="np_1" controller="keyboard" />
 	</superaction>
 
-	<superaction name="qam_2" ui_group="qam" ui_name="ui_keybinds_qam_2" keyboard="readable">
+	<superaction name="qam_2" ui_group="qam" ui_name="ui_keybinds_qam_2" keyboard="writeable">
 		<action name="action_qam_2" map="qam_init" />
 		<action name="weapon_slot_2" map="apse_qam_slots" />
 		<control input="2" controller="keyboard" />
 		<control input="np_2" controller="keyboard" />
 	</superaction>
 
-	<superaction name="qam_3" ui_group="qam" ui_name="ui_keybinds_qam_3" keyboard="readable">
+	<superaction name="qam_3" ui_group="qam" ui_name="ui_keybinds_qam_3" keyboard="writeable">
 		<action name="action_qam_3" map="qam_init" />
 		<action name="weapon_slot_3" map="apse_qam_slots" />
 		<control input="3" controller="keyboard" />
 		<control input="np_3" controller="keyboard" />
 	</superaction>
 
-	<superaction name="qam_4" ui_group="qam" ui_name="ui_keybinds_qam_4" keyboard="readable">
+	<superaction name="qam_4" ui_group="qam" ui_name="ui_keybinds_qam_4" keyboard="writeable">
 		<action name="action_qam_4" map="qam_init" />
 		<action name="weapon_slot_4" map="apse_qam_slots" />
 		<control input="4" controller="keyboard" />
 		<control input="np_4" controller="keyboard" />
 	</superaction>
 
-	<superaction name="qam_5" ui_group="qam" ui_name="ui_keybinds_qam_5" keyboard="readable">
+	<superaction name="qam_5" ui_group="qam" ui_name="ui_keybinds_qam_5" keyboard="writeable">
 		<action name="action_qam_5" map="qam_init" />
 		<action name="action_qam_5_hold" map="qam_init" />
 		<action name="food_slot_1" map="apse_qam_slots" />
@@ -680,7 +678,7 @@
 		<control input="np_5" controller="keyboard" />
 	</superaction>
 
-	<superaction name="qam_6" ui_group="qam" ui_name="ui_keybinds_qam_6" keyboard="readable">
+	<superaction name="qam_6" ui_group="qam" ui_name="ui_keybinds_qam_6" keyboard="writeable">
 		<action name="action_qam_6" map="qam_init" />
 		<action name="action_qam_6_hold" map="qam_init" />
 		<action name="food_slot_2" map="apse_qam_slots" />
@@ -688,7 +686,7 @@
 		<control input="np_6" controller="keyboard" />
 	</superaction>
 
-	<superaction name="qam_7" ui_group="qam" ui_name="ui_keybinds_qam_7" keyboard="readable">
+	<superaction name="qam_7" ui_group="qam" ui_name="ui_keybinds_qam_7" keyboard="writeable">
 		<action name="action_qam_7" map="qam_init" />
 		<action name="action_qam_7_hold" map="qam_init" />
 		<action name="food_slot_3" map="apse_qam_slots" />
@@ -696,7 +694,7 @@
 		<control input="np_7" controller="keyboard" />
 	</superaction>
 
-	<superaction name="qam_8" ui_group="qam" ui_name="ui_keybinds_qam_8" keyboard="readable">
+	<superaction name="qam_8" ui_group="qam" ui_name="ui_keybinds_qam_8" keyboard="writeable">
 		<action name="action_qam_8" map="qam_init" />
 		<action name="action_qam_8_hold" map="qam_init" />
 		<action name="food_slot_4" map="apse_qam_slots" />
@@ -947,6 +945,7 @@
 	<!-- ui_clear -->
 	<conflict>
 		<superaction name="ui_clear" />
+		<superaction name="ui_reset_keybind" />
 
 		<include conflict="directions_in_ui"/>
 		<include conflict="actions"/>

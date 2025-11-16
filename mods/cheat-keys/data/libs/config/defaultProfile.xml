@@ -1431,6 +1431,7 @@
 		<action name="menu_back" keyboard="_keybinds_ref_" onPress="1" onRelease="1" xboxpad="xi_b" pspad="pad_circle"/>
 		<action name="menu_confirm" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="1" holdRepeatDelay="-1" keyboard="_keybinds_ref_" xboxpad="xi_y" pspad="pad_triangle"/>
 		<action name="menu_reset" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.5" keyboard="_keybinds_ref_" xboxpad="xi_x" pspad="pad_square"/>
+		<action name="menu_reset_keybind" keyboard="_keybinds_ref_" onPress="1" onRelease="1"/>
 		<action name="menu_clear" keyboard="_keybinds_ref_" onPress="1" onRelease="1"/>
 		<action name="menu_pros" onPress="1" onRelease="1" keyboard="_keybinds_ref_" noModifiers="1" xboxpad="xi_start" pspad="pad_start"/>
 		<action name="menu_support" onPress="1" onRelease="1" keyboard="_keybinds_ref_" noModifiers="1" xboxpad="xi_start" pspad="pad_start"/>
