@@ -461,6 +461,7 @@ function Cheat:spawnEntity(entityName, entityClass, entitySoulId, avoidSpawnCent
     params.soul = entitySoulId
     params.SharedSoulGuid = entitySoulId            -- XGenAIModule.SpawnEntity(spawnParams)
     params.properties.SharedSoulGuid = entitySoulId -- System.SpawnEntity / horse.Properties.sharedSoulGuid /Not on pebbles
+    params.properties.guidSharedSoulId = entitySoulId
 
     Cheat:logDebug("== spawn params ======================")
     Cheat:tprint(params)
